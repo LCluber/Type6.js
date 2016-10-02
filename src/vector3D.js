@@ -1,5 +1,6 @@
 /**
-
+* @class
+* @classdesc A class that represents a three dimension vector.
 */
 TYPE6JS.Vector3D = {
   /**
