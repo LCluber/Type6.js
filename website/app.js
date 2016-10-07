@@ -10,8 +10,7 @@ var route_root    = require('./routes/root');
 var route_examples= require('./routes/examples');
 var route_doc     = require('./routes/doc');
 
-data              = fs.readFileSync('website/config/data.json', 'utf-8');
-data              = JSON.parse(data);
+data              = JSON.parse(fs.readFileSync(__dirname + '/config/data.json', 'utf-8'));
 
 var app = express();
 // view engine setup
