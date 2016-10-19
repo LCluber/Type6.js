@@ -4,10 +4,10 @@ window.onload = function() {
   var width   = canvas.width = window.innerWidth;
   var height  = canvas.height = window.innerHeight;
 
-  var p0      = TYPE6JS.Vector2D.create(TYPE6JS.MathUtils.randomInteger(0, width), TYPE6JS.MathUtils.randomInteger(0, height));
-  var p1      = TYPE6JS.Vector2D.create(TYPE6JS.MathUtils.randomInteger(0, width), TYPE6JS.MathUtils.randomInteger(0, height));
-  var p2      = TYPE6JS.Vector2D.create(TYPE6JS.MathUtils.randomInteger(0, width), TYPE6JS.MathUtils.randomInteger(0, height));
-  var p3      = TYPE6JS.Vector2D.create(TYPE6JS.MathUtils.randomInteger(0, width), TYPE6JS.MathUtils.randomInteger(0, height));
+  var p0      = TYPE6JS.Vector2D.create(TYPE6JS.Random.integer(0, width), TYPE6JS.Random.integer(0, height));
+  var p1      = TYPE6JS.Vector2D.create(TYPE6JS.Random.integer(0, width), TYPE6JS.Random.integer(0, height));
+  var p2      = TYPE6JS.Vector2D.create(TYPE6JS.Random.integer(0, width), TYPE6JS.Random.integer(0, height));
+  var p3      = TYPE6JS.Vector2D.create(TYPE6JS.Random.integer(0, width), TYPE6JS.Random.integer(0, height));
   var pFinal  = TYPE6JS.Vector2D.create();
   var t       = 0;
   var t2      = 0;
