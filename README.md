@@ -6,7 +6,7 @@ Because of the massive work involved, it's not the complete library yet. I'm rel
 
 ## Code Example
 
-[See basic examples on the dedicated website](http://orbisjs.lcluber.com/#example).
+[See basic examples on the dedicated website](http://type6js.lcluber.com/#example).
 
 ## Motivation
 
