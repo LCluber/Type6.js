@@ -7,8 +7,9 @@ module.exports = function(grunt){
 
   //console.log('in gruntfile : ' + grunt.config('env'));
   //grunt.config('jshint', grunt.config('env') === 'development');
+  var projectName = 'Type6';
 
-  var src = [ 'src/type6.js',
+  var src = [ 'src/' + projectName.toLowerCase() + '.js',
               'src/mathUtils.js',
               'src/random.js',
               'src/bezier.js',
@@ -16,9 +17,11 @@ module.exports = function(grunt){
               'src/geometry.js',
               'src/trigonometry.js'
             ];
+  var distDir   = 'dist/';
   var webDir    = 'website/';
   var publicDir = webDir + 'public/';
   var nodeDir   = 'node_modules/';
+
   var banner    = '/** MIT License\n' +
     '* \n' +
     '* Copyright (c) 2011 Ludovic CLUBER \n' +
@@ -41,15 +44,15 @@ module.exports = function(grunt){
     '* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n' +
     '* SOFTWARE.\n' +
     '*\n' +
-    '* http://type6js.lcluber.com\n' +
+    '* http://' + projectName.toLowerCase() + '.lcluber.com\n' +
     '*/\n';
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      dist     : ['dist/'],
-      doc      : ['doc/'],
+      dist     : distDir,
+      doc      : 'doc/',
       static   : webDir + 'static/',
       js       : publicDir + 'js/',
       css      : publicDir + 'css/',
@@ -129,7 +132,7 @@ module.exports = function(grunt){
         config: 'config/jsdoc-conf.json'
       }
     },
-    jade: {
+    pug: {
       compile: {
         options: {
           namespace   : 'JST',
@@ -145,7 +148,7 @@ module.exports = function(grunt){
         },
         files: [ {
           cwd: webDir + 'views',
-          src: ['**/*.jade', '!**/_*.jade'],
+          src: ['**/*.pug', '!**/_*.pug'],
           dest: webDir + 'static',
           expand: true,
           ext: '.htm'
@@ -160,9 +163,8 @@ module.exports = function(grunt){
           mangle: false,
           compress:false,
         },
-        files: {
-          'dist/type6.js': src
-        }
+        src: src,
+        dest: distDir + projectName.toLowerCase() + '.js'
       },
       libmin: {
         options: {
@@ -170,7 +172,7 @@ module.exports = function(grunt){
           sourceMapName: 'src/sourcemap.map',
           banner: banner,
           mangle: {
-            except: ['TYPE6'],
+            except: [projectName.toUpperCase()],
           },
           compress: {
             sequences: true,
@@ -192,9 +194,8 @@ module.exports = function(grunt){
             keep_fnames: false
           }
         },
-        files: {
-          'dist/type6.min.js': src
-        }
+        src: src,
+        dest: distDir + projectName.toLowerCase() + '.min.js'
       },
       web: {
         options: {
@@ -242,6 +243,8 @@ module.exports = function(grunt){
         },
         src: [nodeDir + 'jquery/dist/jquery.min.js',
               nodeDir + 'bootstrap/dist/js/bootstrap.min.js',
+              // distDir + 'taipan.js',
+              distDir + 'taipan.min.js',
               publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
@@ -262,10 +265,10 @@ module.exports = function(grunt){
     compress: {
       main: {
         options: {
-          archive: 'zip/type6js.zip'
+          archive: 'zip/' + projectName.toLowerCase() + 'js.zip'
         },
         files: [
-          {src: ['dist/*'], dest: '/', filter: 'isFile'},
+          {src: [distDir + '*'], dest: '/', filter: 'isFile'},
           {src: ['doc/**'], dest: '/', filter: 'isFile'},
           {expand: true, cwd: webDir + 'static/', src: '**', dest: '/'},
           {expand: true, cwd: publicDir, src: '**', dest: '/public'},
@@ -283,20 +286,22 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-pug');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-jsdoc');
 
 
-  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'jade', 'uglify', 'concat', 'compress' ]); //build all
+  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'concat', 'compress' ]); //build all
+
+  grunt.registerTask('prod', [ 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'concat', 'compress' ]); //build all
 
   grunt.registerTask('doc', [ 'jsdoc' ]); //build jsdoc into /doc
   grunt.registerTask('src', [ 'jshint:lib', 'uglify:lib', 'uglify:libmin' ]); //build orbis into /dist
   //website
   grunt.registerTask('js', [ 'jshint:web', 'uglify:web', 'concat:webjs', 'copy:web' ]); //build js into /website/public/js
   grunt.registerTask('css', [ 'sass', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
-  grunt.registerTask('static', [ 'jade' ]); //build static site into /website/static
+  grunt.registerTask('static', [ 'pug' ]); //build static site into /website/static
 
   grunt.registerTask('zip', ['compress']); //compress the project in a downloadable static package
 
