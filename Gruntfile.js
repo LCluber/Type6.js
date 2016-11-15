@@ -9,19 +9,21 @@ module.exports = function(grunt){
   //grunt.config('jshint', grunt.config('env') === 'development');
   var projectName = 'Type6';
 
-  var src = [ 'src/' + projectName.toLowerCase() + '.js',
-              'src/mathUtils.js',
-              'src/random.js',
-              'src/bezier.js',
-              'src/vector2D.js',
-              'src/geometry.js',
-              'src/trigonometry.js'
-            ];
+  var srcDir    = 'src/';
   var distDir   = 'dist/';
   var webDir    = 'website/';
   var publicDir = webDir + 'public/';
   var nodeDir   = 'node_modules/';
 
+  var src = [ srcDir + projectName.toLowerCase() + '.js',
+              srcDir + 'mathUtils.js',
+              srcDir + 'random.js',
+              srcDir + 'bezier.js',
+              srcDir + 'vector2D.js',
+              srcDir + 'geometry.js',
+              srcDir + 'trigonometry.js'
+            ];
+  
   var banner    = '/** MIT License\n' +
     '* \n' +
     '* Copyright (c) 2011 Ludovic CLUBER \n' +
@@ -92,7 +94,7 @@ module.exports = function(grunt){
       options: {
         jshintrc: 'config/.jshintrc'
       },
-      lib: [ 'Gruntfile.js', 'src/**/*.js'],
+      lib: [ 'Gruntfile.js', srcDir + '**/*.js'],
       web: [ webDir + 'js/**/*.js'],
     },
     sass: {
@@ -107,6 +109,14 @@ module.exports = function(grunt){
           dest: webDir + 'sass/build/',
           ext: '.css'
         }]
+      }
+    },
+    csslint: {
+      dist: {
+        options: {
+          import: false
+        },
+        src: [webDir + 'sass/build/**/*.css']
       }
     },
     cssmin:{
@@ -155,6 +165,18 @@ module.exports = function(grunt){
         } ]
       }
     },
+    htmlmin: {
+      static: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        expand: true,
+        cwd: webDir + 'static',
+        src: ['**/*.htm'],
+        dest: webDir + 'static/'
+      }
+    },
     uglify: {
       lib: {
         options: {
@@ -169,7 +191,7 @@ module.exports = function(grunt){
       libmin: {
         options: {
           sourceMap: false,
-          sourceMapName: 'src/sourcemap.map',
+          sourceMapName: srcDir + 'sourcemap.map',
           banner: banner,
           mangle: {
             except: [projectName.toUpperCase()],
@@ -200,7 +222,7 @@ module.exports = function(grunt){
       web: {
         options: {
           sourceMap: false,
-          sourceMapName: 'src/sourcemap.map',
+          sourceMapName: srcDir + 'sourcemap.map',
           banner: '',
           mangle: {
             except: ['jQuery']
@@ -243,8 +265,6 @@ module.exports = function(grunt){
         },
         src: [nodeDir + 'jquery/dist/jquery.min.js',
               nodeDir + 'bootstrap/dist/js/bootstrap.min.js',
-              // distDir + 'taipan.js',
-              distDir + 'taipan.min.js',
               publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
@@ -260,6 +280,24 @@ module.exports = function(grunt){
               publicDir + 'css/style.min.css'
             ],
         dest: publicDir + 'css/style.min.css'
+      }
+    },
+    symlink: {
+      options: {
+        overwrite: false,
+        force: false
+      },
+      public: {
+        expand: true,
+        cwd: publicDir,
+        src: ['**/*'],
+        dest: webDir + 'static/public/'
+      },
+      doc: {
+        expand: true,
+        cwd: 'doc/',
+        src: ['**/*'],
+        dest: webDir + 'static/doc/'
       }
     },
     compress: {
@@ -284,10 +322,13 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-pug');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-symlink');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-jsdoc');
 
