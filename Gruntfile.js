@@ -298,6 +298,12 @@ module.exports = function(grunt){
         cwd: 'doc/',
         src: ['**/*'],
         dest: webDir + 'static/doc/'
+      },
+      dist: {
+        expand: true,
+        cwd: 'dist/',
+        src: ['**/*'],
+        dest: webDir + 'static/dist/'
       }
     },
     compress: {
@@ -333,16 +339,16 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-jsdoc');
 
 
-  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'concat', 'compress' ]); //build all
+  grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'concat', 'symlink', 'compress' ]); //build all
 
-  grunt.registerTask('prod', [ 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'concat', 'compress' ]); //build all
+  grunt.registerTask('prod', [ 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'concat', 'htmlmin', 'compress' ]); //build all
 
   grunt.registerTask('doc', [ 'jsdoc' ]); //build jsdoc into /doc
   grunt.registerTask('src', [ 'jshint:lib', 'uglify:lib', 'uglify:libmin' ]); //build orbis into /dist
   //website
   grunt.registerTask('js', [ 'jshint:web', 'uglify:web', 'concat:webjs', 'copy:web' ]); //build js into /website/public/js
-  grunt.registerTask('css', [ 'sass', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
-  grunt.registerTask('static', [ 'pug' ]); //build static site into /website/static
+  grunt.registerTask('css', [ 'sass', 'csslint', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
+  grunt.registerTask('static', [ 'pug', 'htmlmin', 'symlink' ]); //build static site into /website/static
 
   grunt.registerTask('zip', ['compress']); //compress the project in a downloadable static package
 
