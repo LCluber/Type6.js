@@ -302,13 +302,21 @@ TYPE6JS.Vector2D = {
         this.x += scalar;
         this.y += scalar;
     },
-    addScaledVectorTo: function(vector2D, value) {
-        this.x += vector2D.x * value;
-        this.y += vector2D.y * value;
+    addScaledVectorTo: function(vector2D, scalar) {
+        this.x += vector2D.x * scalar;
+        this.y += vector2D.y * scalar;
+    },
+    copyScaledVectorTo: function(vector2D, scalar) {
+        this.x = vector2D.x * scalar;
+        this.y = vector2D.y * scalar;
     },
     subtractFrom: function(vector2D) {
         this.x -= vector2D.getX();
         this.y -= vector2D.getY();
+    },
+    copySubtractFromTo: function(vector2DA, vector2DB) {
+        this.x = vector2DA.getX() - vector2DB.getX();
+        this.y = vector2DA.getY() - vector2DB.getY();
     },
     subtractScalarFrom: function(scalar) {
         this.x -= scalar;
