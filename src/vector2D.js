@@ -328,7 +328,7 @@ TYPE6JS.Vector2D = {
   * @since 0.0.3
   * @method
   * @param {Vector2} vector2D The vector to scale.
-  * @param {float} scalar The scalar the vector.
+  * @param {float} scalar The scale amount.
   * @returns {Vector2} A new vector with the scaled vector added
   */
   addScaledVector:function(vector2D, scalar){
@@ -647,23 +647,47 @@ TYPE6JS.Vector2D = {
   * Add scaled vector to.
   * @since 0.0.1
   * @method
-  * @param {Vector2} value The number of decimals.
-  * @param {value} value The number of decimals.
+  * @param {Vector2} value The vector to scale.
+  * @param {value} value The scale amount.
   */
-  addScaledVectorTo:function(vector2D, value){
-    this.x += vector2D.x * value;
-    this.y += vector2D.y * value;
+  addScaledVectorTo:function(vector2D, scalar){
+    this.x += vector2D.x * scalar;
+    this.y += vector2D.y * scalar;
+  },
+  
+  /**
+  * copy scaled vector to.
+  * @since 0.2.1
+  * @method
+  * @param {Vector2} value The vector to scale.
+  * @param {value} value The the scale amount.
+  */
+  copyScaledVectorTo:function(vector2D, scalar){
+    this.x = vector2D.x * scalar;
+    this.y = vector2D.y * scalar;
   },
 
   /**
   * Subtract from.
   * @since 0.0.1
   * @method
-  * @param {Vector2} value The number of decimals.
+  * @param {Vector2} value The subtracted vector.
   */
   subtractFrom: function(vector2D) {
     this.x -= vector2D.getX();
     this.y -= vector2D.getY();
+  },
+  
+  /**
+  * Subtract from.
+  * @since 0.2.1
+  * @method
+  * @param {Vector2} value The base vector.
+  * @param {Vector2} value The subtracted vector.
+  */
+  copySubtractFromTo: function(vector2DA, vector2DB) {
+    this.x = vector2DA.getX() - vector2DB.getX();
+    this.y = vector2DA.getY() - vector2DB.getY();
   },
 
   /**
