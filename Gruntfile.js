@@ -14,6 +14,8 @@ module.exports = function(grunt){
   var webDir    = 'website/';
   var publicDir = webDir + 'public/';
   var nodeDir   = 'node_modules/';
+  var docDir    = 'doc/';
+  var zipDir    = 'zip/';
 
   var src = [ srcDir + projectName.toLowerCase() + '.js',
               srcDir + 'mathUtils.js',
@@ -46,7 +48,7 @@ module.exports = function(grunt){
     '* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n' +
     '* SOFTWARE.\n' +
     '*\n' +
-    '* http://' + projectName.toLowerCase() + '.lcluber.com\n' +
+    '* http://' + projectName.toLowerCase() + 'js.lcluber.com\n' +
     '*/\n';
 
   // Project configuration.
@@ -57,13 +59,13 @@ module.exports = function(grunt){
         src: distDir + '*'
       },
       web:{
-        src: [  'doc/*',
+        src: [  docDir    + '*',
                 webDir    + 'static/*',
                 publicDir + 'js/*',
                 publicDir + 'css/*',
                 webDir    + 'sass/build/*',
                 publicDir + 'fonts/*',
-                'zip/*'
+                zipDir    + '*'
         ]
       }
     },
@@ -300,9 +302,9 @@ module.exports = function(grunt){
       },
       doc: {
         expand: true,
-        cwd: 'doc/',
+        cwd: docDir,
         src: ['**/*'],
-        dest: webDir + 'static/doc/'
+        dest: webDir + 'static/' + docDir
       },
       dist: {
         expand: true,
@@ -314,11 +316,11 @@ module.exports = function(grunt){
     compress: {
       main: {
         options: {
-          archive: 'zip/' + projectName.toLowerCase() + 'js.zip'
+          archive: zipDir + projectName.toLowerCase() + 'js.zip'
         },
         files: [
           {src: [distDir + '*'], dest: '/', filter: 'isFile'},
-          {src: ['doc/**'], dest: '/', filter: 'isFile'},
+          {src: [docDir + '**'], dest: '/', filter: 'isFile'},
           {expand: true, cwd: webDir + 'static/', src: '**', dest: '/'},
           {expand: true, cwd: publicDir, src: '**', dest: '/public'},
           {src: ['LICENCE.txt'], dest: '/'},
