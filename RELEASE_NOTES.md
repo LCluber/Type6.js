@@ -7,8 +7,11 @@ Version 0.3.0 (incoming)
 
 Version 0.2.1 (November 26th 2016)
 ------------------------------
- * Added copyScaledVectorTo() function in vector2D class
- * Added copySubtractFromTo() function in vector2D class
+ * vector2D class
+  * Added copyScaledVectorTo() method merging copy and scale methods into one
+  * Added copySubtractFromTo() method merging copy and subtract methods into one
+  * Added isPositive() and isNegative methods
+  * Added bottomRightCorner and halfSize properties to rectangle geometry class
 
 Version 0.2.0 (September 21st 2016)
 ------------------------------

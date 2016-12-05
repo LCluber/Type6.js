@@ -332,8 +332,8 @@ TYPE6JS.Vector2D = {
   * @returns {Vector2} A new vector with the scaled vector added
   */
   addScaledVector:function(vector2D, scalar){
-    return this.create( this.x + vector2D.x * scalar,
-                        this.y + vector2D.y * scalar
+    return this.create( this.x + vector2D.getX() * scalar,
+                        this.y + vector2D.getY() * scalar
                       );
   },
 
@@ -385,8 +385,8 @@ TYPE6JS.Vector2D = {
   */
   //component product
   multiply:function(vector2D){
-    return this.create( this.x * vector2D.x,
-                        this.y * vector2D.y
+    return this.create( this.x * vector2D.getX(),
+                        this.y * vector2D.getY()
                       );
   },
 
@@ -398,8 +398,8 @@ TYPE6JS.Vector2D = {
   * @returns {Vector2} a new vector with the new coordinates
   */
   divide: function(vector2D) {
-    return this.create( this.x / vector2D.x,
-                        this.y / vector2D.y
+    return this.create( this.x / vector2D.getX(),
+                        this.y / vector2D.getY()
                       );
   },
 
@@ -651,8 +651,8 @@ TYPE6JS.Vector2D = {
   * @param {value} value The scale amount.
   */
   addScaledVectorTo:function(vector2D, scalar){
-    this.x += vector2D.x * scalar;
-    this.y += vector2D.y * scalar;
+    this.x += vector2D.getX() * scalar;
+    this.y += vector2D.getY() * scalar;
   },
   
   /**
@@ -663,8 +663,8 @@ TYPE6JS.Vector2D = {
   * @param {value} value The the scale amount.
   */
   copyScaledVectorTo:function(vector2D, scalar){
-    this.x = vector2D.x * scalar;
-    this.y = vector2D.y * scalar;
+    this.x = vector2D.getX() * scalar;
+    this.y = vector2D.getY() * scalar;
   },
 
   /**
@@ -721,8 +721,8 @@ TYPE6JS.Vector2D = {
   */
   //component product
   multiplyBy: function(vector2D){
-    this.x *= vector2D.x;
-    this.y *= vector2D.y;
+    this.x *= vector2D.getX();
+    this.y *= vector2D.getY();
   },
 
   /**
@@ -733,8 +733,8 @@ TYPE6JS.Vector2D = {
   */
   //Prefer scale by value inferior to 1 if possible
   divideBy: function(vector2D) {
-    this.x /= vector2D.x;
-    this.y /= vector2D.y;
+    this.x /= vector2D.getX();
+    this.y /= vector2D.getY();
   },
 
   /**
@@ -841,7 +841,7 @@ TYPE6JS.Vector2D = {
   * @returns {float}
   */
   dotProduct: function(vector2D){ //scalar product
-    return this.x * vector2D.x + this.y * vector2D.y;
+    return this.x * vector2D.getX() + this.y * vector2D.getY();
   },
 
   /**
@@ -859,7 +859,31 @@ TYPE6JS.Vector2D = {
   },
 
   /**
-  * Check if voector is not origin
+  * Check if the two components of the vector are greater then zero
+  * @since 0.2.1
+  * @method
+  * @returns {boolean}
+  */
+  isPositive: function(){
+    if( this.getX() > 0 && this.getY() > 0 )
+      return true;
+    return false;
+  },
+  
+  /**
+  * Check if the two components of the vector are smaller then zero
+  * @since 0.2.1
+  * @method
+  * @returns {boolean}
+  */
+  isNegative: function(){
+    if( this.getX() < 0 && this.getY() < 0 )
+      return true;
+    return false;
+  },
+
+  /**
+  * Check if vector is not origin
   * @since 0.0.5
   * @method
   * @returns {boolean}

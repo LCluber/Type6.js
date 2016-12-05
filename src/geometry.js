@@ -267,7 +267,7 @@ TYPE6JS.Geometry = {
     */
     getSquaredDistance: function(vector2) {
       return this.position.getSquaredDistance( vector2 );
-    },
+    }
 
   },
 
@@ -281,13 +281,31 @@ TYPE6JS.Geometry = {
     * @since 0.2.0
     * @access private
     */
-    topLeftCorner : {},
+    position : {},
 
     /**
     * @since 0.2.0
     * @access private
     */
-    size          : {},
+    topLeftCorner : {},
+    
+    /**
+    * @since 0.2.1
+    * @access private
+    */
+    bottomRightCorner : {},
+
+    /**
+    * @since 0.2.0
+    * @access private
+    */
+    size : {},
+    
+    /**
+    * @since 0.2.1
+    * @access private
+    */
+    halfSize : {},
 
     /**
     * Create a rectangle.
@@ -296,26 +314,23 @@ TYPE6JS.Geometry = {
     * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
     * @returns {Vector2D}
     */
-    create : function(topLeftCornerX, topLeftCornerY, sizeX, sizeY) {
-      var obj = Object.create(this);
-      obj.init();
-      obj.setSizeXY(sizeX, sizeY);
-      obj.setTopLeftCornerXY(topLeftCornerX, topLeftCornerY);
+    create : function( positionX, positionY, sizeX, sizeY ) {
+      var obj               = Object.create( this );
+      obj.initSize(sizeX, sizeY);
+      obj.setPositionXY()
       return obj;
     },
 
-    /**
-    * initialize a rectangle.
-    * @since 0.2.0
-    * @method
-    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
-    * @returns {Vector2D}
-    */
-    init: function(){
-      this.size          = TYPE6JS.Vector2D.create();
-      this.topLeftCorner = TYPE6JS.Vector2D.create();
+    initSize: function( sizeX, sizeY ){
+      this.size     = TYPE6JS.Vector2D.create( sizeX, sizeY );
+      this.halfSize = TYPE6JS.Vector2D.create( sizeX * 0.5, sizeY * 0.5 );
     },
 
+    initPosition: function( positionX, positionY ){
+      this.position          = TYPE6JS.Vector2D.create( positionX, positionY );
+      this.topLeftCorner     = TYPE6JS.Vector2D.create( positionX - this.halfSize.getX(), positionY - this.halfSize.getY() );
+      this.bottomRightCorner = TYPE6JS.Vector2D.create( positionX + this.halfSize.getX(), positionY + this.halfSize.getY() );
+    },
     /**
     * Copy the rectangle.
     * @since 0.2.0
@@ -324,9 +339,9 @@ TYPE6JS.Geometry = {
     * @param {float} [y = 0.0] y The value on the y axis.
     * @returns {Vector2D}
     */
-    copy: function(rectangle) {
+    copy: function( rectangle ) {
       return this.create(
-        rectangle.getTopLeftCornerX(), rectangle.getTopLeftCornerY(),
+        rectangle.getPositionX(), rectangle.getPositionY(),
         rectangle.getSizeX(), rectangle.getSizeY()
       );
     },
@@ -339,10 +354,43 @@ TYPE6JS.Geometry = {
     * @param {float} [y = 0.0] y The value on the y axis.
     * @returns {Vector2D}
     */
-    copyTo: function(rectangle) {
-      this.setTopLeftCornerFromVector2D(rectangle.getTopLeftCorner());
+    copyTo: function( rectangle ) {
+      this.setPositionFromVector2D(rectangle.getPosition());
       this.setSizeFromVector2D(rectangle.getSize());
     },
+
+    /**
+    * set position XY.
+    * @since 0.2.0
+    * @method
+    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+    * @returns {Vector2D}
+    */
+    setPositionXY: function( positionX, positionY ){
+      this.position.setXY( positionX, positionY );
+      this.setTopLeftCornerXY( positionX - this.getHalfSizeX(),
+                               positionY - this.getHalfSizeY() );
+      this.setBottomRightCornerXY( positionX + this.getHalfSizeX(),
+                                   positionY + this.getHalfSizeY() );
+      return this.position;
+    },
+    
+    /**
+    * set position from 2D vector.
+    * @since 0.2.0
+    * @method
+    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+    * @returns {Vector2D}
+    */
+    setPositionFromVector2D: function( position ){
+      this.position.copyTo( position );
+      this.setTopLeftCornerXY( position.getX() - this.getHalfSizeX(),
+                               position.getY() - this.getHalfSizeY() );
+      this.setBottomRightCornerXY( position.getX() + this.getHalfSizeX(),
+                                   position.getY() + this.getHalfSizeY() );
+      return this.position;
+    },
+
 
     /**
     * set top left corner XY.
@@ -351,7 +399,7 @@ TYPE6JS.Geometry = {
     * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
     * @returns {Vector2D}
     */
-    setTopLeftCornerXY: function(topLeftCornerX, topLeftCornerY){
+    setTopLeftCornerXY: function( topLeftCornerX, topLeftCornerY ){
       this.topLeftCorner.setXY( topLeftCornerX, topLeftCornerY );
       return this.topLeftCorner;
     },
@@ -363,16 +411,69 @@ TYPE6JS.Geometry = {
     * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
     * @returns {Vector2D}
     */
-    setTopLeftCornerFromVector2D: function(topLeftCorner){
+    setTopLeftCornerFromVector2D: function( topLeftCorner ){
       this.topLeftCorner.copyTo( topLeftCorner );
       return this.topLeftCorner;
+    },
+    
+    /**
+    * set top left corner XY.
+    * @since 0.2.0
+    * @method
+    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+    * @returns {Vector2D}
+    */
+    setBottomRightCornerXY: function( bottomRightCornerX, bottomRightCornerY ){
+      this.bottomRightCorner.setXY( bottomRightCornerX, bottomRightCornerY );
+      return this.bottomRightCorner;
+    },
+
+    /**
+    * set top left corner from 2D vector.
+    * @since 0.2.0
+    * @method
+    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+    * @returns {Vector2D}
+    */
+    setBottomRightCornerFromVector2D: function( bottomRightCorner ){
+      this.bottomRightCorner.copyTo( bottomRightCorner );
+      return this.bottomRightCorner;
+    },
+
+    /**
+    * get the position.
+    * @since 0.2.0
+    * @method
+    * @returns {Vector2D}
+    */
+    getPosition: function(){
+      return this.position;
+    },
+    
+    /**
+    * get position X.
+    * @since 0.2.0
+    * @method
+    * @returns {float}
+    */
+    getPositionX: function(){
+      return this.position.getX();
+    },
+
+    /**
+    * get position Y.
+    * @since 0.2.0
+    * @method
+    * @returns {float}
+    */
+    getPositionY: function(){
+      return this.position.getY();
     },
 
     /**
     * get top left corner.
     * @since 0.2.0
     * @method
-    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
     * @returns {Vector2D}
     */
     getTopLeftCorner: function(){
@@ -383,8 +484,7 @@ TYPE6JS.Geometry = {
     * get top left corner X.
     * @since 0.2.0
     * @method
-    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
-    * @returns {Vector2D}
+    * @returns {float}
     */
     getTopLeftCornerX: function(){
       return this.topLeftCorner.getX();
@@ -394,11 +494,40 @@ TYPE6JS.Geometry = {
     * get top left corner Y.
     * @since 0.2.0
     * @method
-    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
-    * @returns {Vector2D}
+    * @returns {float}
     */
     getTopLeftCornerY: function(){
       return this.topLeftCorner.getY();
+    },
+
+    /**
+    * get top left corner.
+    * @since 0.2.0
+    * @method
+    * @returns {Vector2D}
+    */
+    getBottomRightCorner: function(){
+      return this.bottomRightCorner;
+    },
+
+    /**
+    * get top left corner X.
+    * @since 0.2.0
+    * @method
+    * @returns {float}
+    */
+    getBottomRightCornerX: function(){
+      return this.bottomRightCorner.getX();
+    },
+
+    /**
+    * get top left corner Y.
+    * @since 0.2.0
+    * @method
+    * @returns {float}
+    */
+    getBottomRightCornerY: function(){
+      return this.bottomRightCorner.getY();
     },
 
     /**
@@ -408,8 +537,8 @@ TYPE6JS.Geometry = {
     * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
     * @returns {Vector2D}
     */
-    setSizeXY: function(sizeX, sizeY){
-      this.size.setXY(sizeX, sizeY);
+    setSizeXY: function( sizeX, sizeY ){
+      this.size.setXY( sizeX, sizeY );
       return this.size;
     },
 
@@ -420,8 +549,8 @@ TYPE6JS.Geometry = {
     * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
     * @returns {Vector2D}
     */
-    setSizeFromVector2D: function(size){
-      this.size.copyTo(size);
+    setSizeFromVector2D: function( size ){
+      this.size.copyTo( size );
       return this.size;
     },
 
