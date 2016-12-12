@@ -876,9 +876,8 @@ TYPE6JS.Vector2D = {
   */
   //true if vector is equal to (0;0)
   isOrigin: function(){
-    if( !this.x || !this.y ){
+    if( this.x === 0 || this.y === 0 )
       return true;
-    }
     return false;
   },
 
