@@ -31,6 +31,20 @@ TYPE6JS.Geometry = {
     */
     diameter: 0.0,
 
+    shape: 'circle',
+    
+    /**
+    * @since 0.2.1
+    * @access private
+    */
+    size : {},
+    
+    /**
+    * @since 0.2.1
+    * @access private
+    */
+    halfSize : {},
+
     /**
     * create a circle
     * @since 0.2.0
@@ -41,8 +55,10 @@ TYPE6JS.Geometry = {
     create : function(positionX, positionY, radius) {
       var obj = Object.create(this);
       obj.init();
-      obj.setPositionXY(positionX, positionY);
       obj.setRadius(radius);
+      obj.initSize();
+      obj.setPositionXY(positionX, positionY);
+      
       return obj;
     },
 
@@ -55,6 +71,11 @@ TYPE6JS.Geometry = {
       this.position = TYPE6JS.Vector2D.create();
       this.radius   = 0.0;
       this.diameter = 0.0;
+    },
+    
+    initSize: function(){
+      this.size     = TYPE6JS.Vector2D.create( this.diameter, this.diameter );
+      this.halfSize = TYPE6JS.Vector2D.create( this.radius, this.radius );
     },
 
     /**
@@ -173,6 +194,7 @@ TYPE6JS.Geometry = {
     setRadius: function( radius ){
       this.radius   = radius;
       this.diameter = this.radius * 2;
+      this.initSize();
       return this.radius;
     },
 
@@ -197,6 +219,7 @@ TYPE6JS.Geometry = {
     setDiameter: function( diameter ){
       this.diameter = diameter;
       this.radius   = this.diameter * 0.5;
+      this.initSize();
       return this.diameter;
     },
 
@@ -209,6 +232,17 @@ TYPE6JS.Geometry = {
     */
     getDiameter: function(){
       return this.diameter;
+    },
+    
+    /**
+    * get size.
+    * @since 0.2.0
+    * @method
+    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+    * @returns {Vector2D}
+    */
+    getHalfSize: function(){
+      return this.halfSize;
     },
 
     /**
@@ -307,6 +341,8 @@ TYPE6JS.Geometry = {
     */
     halfSize : {},
 
+    shape: 'aabb',
+
     /**
     * Create a rectangle.
     * @since 0.2.0
@@ -315,9 +351,9 @@ TYPE6JS.Geometry = {
     * @returns {Vector2D}
     */
     create : function( positionX, positionY, sizeX, sizeY ) {
-      var obj               = Object.create( this );
-      obj.initSize(sizeX, sizeY);
-      obj.setPositionXY()
+      var obj = Object.create( this );
+      obj.initSize( sizeX, sizeY );
+      obj.initPosition( positionX, positionY );
       return obj;
     },
 
@@ -354,9 +390,9 @@ TYPE6JS.Geometry = {
     * @param {float} [y = 0.0] y The value on the y axis.
     * @returns {Vector2D}
     */
-    copyTo: function( rectangle ) {
-      this.setPositionFromVector2D(rectangle.getPosition());
-      this.setSizeFromVector2D(rectangle.getSize());
+    copyTo: function( rectangle ){
+      this.setSizeFromVector2D( rectangle.getSize() );
+      this.setPositionFromVector2D( rectangle.getPosition() );
     },
 
     /**
@@ -586,6 +622,39 @@ TYPE6JS.Geometry = {
     getSizeY: function(){
       return this.size.getY();
     },
+    
+    /**
+    * get size.
+    * @since 0.2.0
+    * @method
+    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+    * @returns {Vector2D}
+    */
+    getHalfSize: function(){
+      return this.halfSize;
+    },
+
+    /**
+    * get size X
+    * @since 0.2.0
+    * @method
+    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+    * @returns {Vector2D}
+    */
+    getHalfSizeX: function(){
+      return this.halfSize.getX();
+    },
+
+    /**
+    * get size Y
+    * @since 0.2.0
+    * @method
+    * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+    * @returns {Vector2D}
+    */
+    getHalfSizeY: function(){
+      return this.halfSize.getY();
+    }
 
     // clampTo:function(rectangle){
     //   this.position.clampTo(rectangle);

@@ -162,6 +162,30 @@ TYPE6JS.Vector2D = {
     this.y = 0.0;
     //return this.toString() ;
   },
+  
+  /**
+  * Set to Origin
+  * @since 0.2.1
+  * @method
+  * @param {float} [x = 0.0] x The new value of the x coordinate.
+  * @param {float} [y = 0.0] y The new value of the y coordinate.
+  */
+  setXToOrigin: function() {
+    this.x = 0.0;
+    //return this.toString() ;
+  },
+  
+  /**
+  * Set to Origin
+  * @since 0.2.1
+  * @method
+  * @param {float} [x = 0.0] x The new value of the x coordinate.
+  * @param {float} [y = 0.0] y The new value of the y coordinate.
+  */
+  setYToOrigin: function() {
+    this.y = 0.0;
+    //return this.toString() ;
+  },
 
   /**
   * set X and Y coordinates from the given angle.

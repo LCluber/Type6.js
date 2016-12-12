@@ -159,6 +159,12 @@ TYPE6JS.Vector2D = {
         this.x = 0;
         this.y = 0;
     },
+    setXToOrigin: function() {
+        this.x = 0;
+    },
+    setYToOrigin: function() {
+        this.y = 0;
+    },
     setAngle: function(angle) {
         if (this.valueValidation(angle)) {
             var length = this.getMagnitude();
@@ -214,7 +220,7 @@ TYPE6JS.Vector2D = {
         return this.create(this.x + scalar, this.y + scalar);
     },
     addScaledVector: function(vector2D, scalar) {
-        return this.create(this.x + vector2D.x * scalar, this.y + vector2D.y * scalar);
+        return this.create(this.x + vector2D.getX() * scalar, this.y + vector2D.getY() * scalar);
     },
     subtract: function(vector2D) {
         return this.create(this.x - vector2D.getX(), this.y - vector2D.getY());
@@ -226,10 +232,10 @@ TYPE6JS.Vector2D = {
         return this.create(this.x * value, this.y * value);
     },
     multiply: function(vector2D) {
-        return this.create(this.x * vector2D.x, this.y * vector2D.y);
+        return this.create(this.x * vector2D.getX(), this.y * vector2D.getY());
     },
     divide: function(vector2D) {
-        return this.create(this.x / vector2D.x, this.y / vector2D.y);
+        return this.create(this.x / vector2D.getX(), this.y / vector2D.getY());
     },
     halve: function() {
         return this.create(this.x * .5, this.y * .5);
@@ -303,12 +309,12 @@ TYPE6JS.Vector2D = {
         this.y += scalar;
     },
     addScaledVectorTo: function(vector2D, scalar) {
-        this.x += vector2D.x * scalar;
-        this.y += vector2D.y * scalar;
+        this.x += vector2D.getX() * scalar;
+        this.y += vector2D.getY() * scalar;
     },
     copyScaledVectorTo: function(vector2D, scalar) {
-        this.x = vector2D.x * scalar;
-        this.y = vector2D.y * scalar;
+        this.x = vector2D.getX() * scalar;
+        this.y = vector2D.getY() * scalar;
     },
     subtractFrom: function(vector2D) {
         this.x -= vector2D.getX();
@@ -327,12 +333,12 @@ TYPE6JS.Vector2D = {
         this.y *= value;
     },
     multiplyBy: function(vector2D) {
-        this.x *= vector2D.x;
-        this.y *= vector2D.y;
+        this.x *= vector2D.getX();
+        this.y *= vector2D.getY();
     },
     divideBy: function(vector2D) {
-        this.x /= vector2D.x;
-        this.y /= vector2D.y;
+        this.x /= vector2D.getX();
+        this.y /= vector2D.getY();
     },
     halveBy: function() {
         this.x *= .5;
@@ -367,7 +373,7 @@ TYPE6JS.Vector2D = {
         this.y = TYPE6JS.MathUtils.lerp(normal, min.getY(), max.getY());
     },
     dotProduct: function(vector2D) {
-        return this.x * vector2D.x + this.y * vector2D.y;
+        return this.x * vector2D.getX() + this.y * vector2D.getY();
     },
     isOrigin: function() {
         if (!this.x || !this.y) {
@@ -399,17 +405,25 @@ TYPE6JS.Geometry = {
         position: {},
         radius: 0,
         diameter: 0,
+        shape: "circle",
+        size: {},
+        halfSize: {},
         create: function(positionX, positionY, radius) {
             var obj = Object.create(this);
             obj.init();
-            obj.setPositionXY(positionX, positionY);
             obj.setRadius(radius);
+            obj.initSize();
+            obj.setPositionXY(positionX, positionY);
             return obj;
         },
         init: function() {
             this.position = TYPE6JS.Vector2D.create();
             this.radius = 0;
             this.diameter = 0;
+        },
+        initSize: function() {
+            this.size = TYPE6JS.Vector2D.create(this.diameter, this.diameter);
+            this.halfSize = TYPE6JS.Vector2D.create(this.radius, this.radius);
         },
         copy: function(circle) {
             return this.create(circle.getPositionX(), circle.getPositionY(), circle.getRadius());
@@ -446,6 +460,7 @@ TYPE6JS.Geometry = {
         setRadius: function(radius) {
             this.radius = radius;
             this.diameter = this.radius * 2;
+            this.initSize();
             return this.radius;
         },
         getRadius: function() {
@@ -454,10 +469,14 @@ TYPE6JS.Geometry = {
         setDiameter: function(diameter) {
             this.diameter = diameter;
             this.radius = this.diameter * .5;
+            this.initSize();
             return this.diameter;
         },
         getDiameter: function() {
             return this.diameter;
+        },
+        getHalfSize: function() {
+            return this.halfSize;
         },
         clampTo: function(rectangle) {
             this.position.clampTo(rectangle);
@@ -479,29 +498,42 @@ TYPE6JS.Geometry = {
     Rectangle: {
         position: {},
         topLeftCorner: {},
+        bottomRightCorner: {},
         size: {},
+        halfSize: {},
+        shape: "aabb",
         create: function(positionX, positionY, sizeX, sizeY) {
             var obj = Object.create(this);
-            obj.position = TYPE6JS.Vector2D.create(positionX, positionY);
-            obj.size = TYPE6JS.Vector2D.create(sizeX, sizeY);
-            obj.topLeftCorner = TYPE6JS.Vector2D.create(positionX - sizeX * .5, positionY - sizeY * .5);
+            obj.initSize(sizeX, sizeY);
+            obj.initPosition(positionX, positionY);
             return obj;
+        },
+        initSize: function(sizeX, sizeY) {
+            this.size = TYPE6JS.Vector2D.create(sizeX, sizeY);
+            this.halfSize = TYPE6JS.Vector2D.create(sizeX * .5, sizeY * .5);
+        },
+        initPosition: function(positionX, positionY) {
+            this.position = TYPE6JS.Vector2D.create(positionX, positionY);
+            this.topLeftCorner = TYPE6JS.Vector2D.create(positionX - this.halfSize.getX(), positionY - this.halfSize.getY());
+            this.bottomRightCorner = TYPE6JS.Vector2D.create(positionX + this.halfSize.getX(), positionY + this.halfSize.getY());
         },
         copy: function(rectangle) {
             return this.create(rectangle.getPositionX(), rectangle.getPositionY(), rectangle.getSizeX(), rectangle.getSizeY());
         },
         copyTo: function(rectangle) {
-            this.setPositionFromVector2D(rectangle.getPosition());
             this.setSizeFromVector2D(rectangle.getSize());
+            this.setPositionFromVector2D(rectangle.getPosition());
         },
         setPositionXY: function(positionX, positionY) {
             this.position.setXY(positionX, positionY);
-            this.setTopLeftCornerXY(positionX - this.getTopLeftCornerX() * .5, positionY - this.getTopLeftCornerY() * .5);
+            this.setTopLeftCornerXY(positionX - this.getHalfSizeX(), positionY - this.getHalfSizeY());
+            this.setBottomRightCornerXY(positionX + this.getHalfSizeX(), positionY + this.getHalfSizeY());
             return this.position;
         },
         setPositionFromVector2D: function(position) {
             this.position.copyTo(position);
-            this.setTopLeftCornerXY(position.getX() - this.getTopLeftCornerX() * .5, position.getY() - this.getTopLeftCornerY() * .5);
+            this.setTopLeftCornerXY(position.getX() - this.getHalfSizeX(), position.getY() - this.getHalfSizeY());
+            this.setBottomRightCornerXY(position.getX() + this.getHalfSizeX(), position.getY() + this.getHalfSizeY());
             return this.position;
         },
         setTopLeftCornerXY: function(topLeftCornerX, topLeftCornerY) {
@@ -511,6 +543,14 @@ TYPE6JS.Geometry = {
         setTopLeftCornerFromVector2D: function(topLeftCorner) {
             this.topLeftCorner.copyTo(topLeftCorner);
             return this.topLeftCorner;
+        },
+        setBottomRightCornerXY: function(bottomRightCornerX, bottomRightCornerY) {
+            this.bottomRightCorner.setXY(bottomRightCornerX, bottomRightCornerY);
+            return this.bottomRightCorner;
+        },
+        setBottomRightCornerFromVector2D: function(bottomRightCorner) {
+            this.bottomRightCorner.copyTo(bottomRightCorner);
+            return this.bottomRightCorner;
         },
         getPosition: function() {
             return this.position;
@@ -530,6 +570,15 @@ TYPE6JS.Geometry = {
         getTopLeftCornerY: function() {
             return this.topLeftCorner.getY();
         },
+        getBottomRightCorner: function() {
+            return this.bottomRightCorner;
+        },
+        getBottomRightCornerX: function() {
+            return this.bottomRightCorner.getX();
+        },
+        getBottomRightCornerY: function() {
+            return this.bottomRightCorner.getY();
+        },
         setSizeXY: function(sizeX, sizeY) {
             this.size.setXY(sizeX, sizeY);
             return this.size;
@@ -546,6 +595,15 @@ TYPE6JS.Geometry = {
         },
         getSizeY: function() {
             return this.size.getY();
+        },
+        getHalfSize: function() {
+            return this.halfSize;
+        },
+        getHalfSizeX: function() {
+            return this.halfSize.getX();
+        },
+        getHalfSizeY: function() {
+            return this.halfSize.getY();
         }
     }
 };
