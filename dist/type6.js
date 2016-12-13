@@ -228,6 +228,9 @@ TYPE6JS.Vector2D = {
     subtractScalar: function(scalar) {
         return this.create(this.x - scalar, this.y - scalar);
     },
+    subtractScaledVector: function(vector2D, scalar) {
+        return this.create(this.x - vector2D.getX() * scalar, this.y - vector2D.getY() * scalar);
+    },
     scale: function(value) {
         return this.create(this.x * value, this.y * value);
     },
@@ -328,6 +331,10 @@ TYPE6JS.Vector2D = {
         this.x -= scalar;
         this.y -= scalar;
     },
+    subtractScaledVectorFrom: function(vector2D, scalar) {
+        this.x -= vector2D.getX() * scalar;
+        this.y -= vector2D.getY() * scalar;
+    },
     scaleBy: function(value) {
         this.x *= value;
         this.y *= value;
@@ -376,9 +383,7 @@ TYPE6JS.Vector2D = {
         return this.x * vector2D.getX() + this.y * vector2D.getY();
     },
     isOrigin: function() {
-        if (!this.x || !this.y) {
-            return true;
-        }
+        if (this.x === 0 || this.y === 0) return true;
         return false;
     },
     isPositive: function() {

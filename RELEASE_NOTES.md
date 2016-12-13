@@ -10,6 +10,7 @@ Version 0.2.1 (November 26th 2016)
  * vector2D class
   * Added copyScaledVectorTo() method merging copy and scale methods into one
   * Added copySubtractFromTo() method merging copy and subtract methods into one
+  * Added subtractScaledVector() and subtractScaledVectorFrom() methods
   * Added isPositive() and isNegative methods
   * Added setXToOrigin() and setYToOrigin() methods
  * Geometry class

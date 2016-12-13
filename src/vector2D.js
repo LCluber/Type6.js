@@ -388,6 +388,20 @@ TYPE6JS.Vector2D = {
   },
 
   /**
+  * scale the given vector by the given scalar, subtract it to this vector and creates a new vector.
+  * @since 0.0.3
+  * @method
+  * @param {Vector2} vector2D The vector to scale.
+  * @param {float} scalar The scale amount.
+  * @returns {Vector2} A new vector with the scaled vector subtracted
+  */
+  subtractScaledVector:function(vector2D, scalar){
+    return this.create( this.x - vector2D.getX() * scalar,
+                        this.y - vector2D.getY() * scalar
+                      );
+  },
+
+  /**
   * scale this vector by the given scalar and create a new vector
   * @since 0.0.3
   * @method
@@ -724,6 +738,18 @@ TYPE6JS.Vector2D = {
   subtractScalarFrom: function(scalar) {
     this.x -= scalar;
     this.y -= scalar;
+  },
+  
+  /**
+  * Subtract scaled vector to.
+  * @since 0.0.1
+  * @method
+  * @param {Vector2} value The vector to scale.
+  * @param {value} value The scale amount.
+  */
+  subtractScaledVectorFrom:function(vector2D, scalar){
+    this.x -= vector2D.getX() * scalar;
+    this.y -= vector2D.getY() * scalar;
   },
 
   /**
