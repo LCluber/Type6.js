@@ -29,6 +29,11 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/zip', express.static(path.join(__dirname, '../zip')));
 
+// add <script src="//localhost:35729/livereload.js?snipver=1" async="" defer=""></script>
+// for livereload of grunt-contrib-watch
+app.use(require('connect-livereload')({
+  port: 35729
+}));
 
 app.use('/examples', route_examples);
 app.use('/doc', route_doc);

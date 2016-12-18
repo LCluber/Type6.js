@@ -29,14 +29,16 @@ You just cloned Type6.js : git clone https://github.com/LCluber/Type6.js.git
 
 
 ### Workflow
-  - Run **grunt** to build the app. Check **Gruntfile.js** to learn specific commands :
-    - **grunt doc** builds the static documentation,
-    - **grunt src** builds the library in the dist folder,
-    - **grunt js** builds Javascript for the website only,
-    - **grunt css** builds CSS for the website,
-    - **grunt static** builds the static version of the website,
-    - **grunt zip** builds the downloadable zip.
+- You can use those commands if you don't like grunt-watch :
+  - **grunt doc** builds the static documentation,
+  - **grunt src** builds the library in the dist folder,
+  - **grunt js** builds javascript for the website,
+  - **grunt css** builds CSS for the website,
+  - **grunt static** builds the static version of the website,
+  - **grunt zip** builds the downloadable zip.
+  - **grunt watch** builds the library automatically on files modifications.
   - Start Express server :
-    - Windows : Run **set DEBUG=myapp:* & npm start**
-    - Linux / OSX : Run **DEBUG=myapp:* npm start**
+    - Windows : Run **set DEBUG=Type6js:* & npm start**
+    - Linux / OSX : Run **DEBUG=Type6js:* npm start**
   - Go to **http://localhost:3002/** to test the app.
+  - Keep in mind running **grunt serve** once will do all this automatically.

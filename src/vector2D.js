@@ -527,12 +527,12 @@ TYPE6JS.Vector2D = {
     return this.create( TYPE6JS.MathUtils.clamp(
                           this.x,
                           rectangle.topLeftCorner.getX(),
-                          rectangle.topLeftCorner.getX() + rectangle.size.getX()
+                          rectangle.bottomRightCorner.getX()
                         ),
                         TYPE6JS.MathUtils.clamp(
                           this.y,
                           rectangle.topLeftCorner.getY(),
-                          rectangle.topLeftCorner.getY() + rectangle.size.getY()
+                          rectangle.bottomRightCorner.getY()
                         )
                       );
   },
@@ -862,12 +862,12 @@ TYPE6JS.Vector2D = {
     this.x = TYPE6JS.MathUtils.clamp(
               this.x,
               rectangle.topLeftCorner.getX(),
-              rectangle.topLeftCorner.getX() + rectangle.size.getX()
+              rectangle.bottomRightCorner.getX()
             );
     this.y = TYPE6JS.MathUtils.clamp(
               this.y,
               rectangle.topLeftCorner.getY(),
-              rectangle.topLeftCorner.getY() + rectangle.size.getY()
+              rectangle.bottomRightCorner.getY()
             );
   },
 

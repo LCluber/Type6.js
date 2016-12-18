@@ -9,6 +9,10 @@ module.exports = function(grunt){
   //grunt.config('jshint', grunt.config('env') === 'development');
   var projectName = 'Type6';
 
+  var port      = 3002;
+  var host      = 'localhost';
+  var browser   = 'Google Chrome';
+
   var srcDir    = 'src/';
   var distDir   = 'dist/';
   var webDir    = 'website/';
@@ -23,6 +27,8 @@ module.exports = function(grunt){
               srcDir + 'bezier.js',
               srcDir + 'vector2D.js',
               srcDir + 'geometry.js',
+              srcDir + 'geometry/circle.js',
+              srcDir + 'geometry/rectangle.js',
               srcDir + 'trigonometry.js'
             ];
   
@@ -56,7 +62,9 @@ module.exports = function(grunt){
     pkg: grunt.file.readJSON('package.json'),
     clean: {
       lib:{
-        src: distDir + '*'
+        src: [  distDir + '*',
+                publicDir + 'js/*'
+              ]
       },
       web:{
         src: [  docDir    + '*',
@@ -66,7 +74,7 @@ module.exports = function(grunt){
                 webDir    + 'sass/build/*',
                 publicDir + 'fonts/*',
                 zipDir    + '*'
-        ]
+              ]
       }
     },
     copy: {
@@ -270,8 +278,8 @@ module.exports = function(grunt){
           stripBanners: true,
           banner: ''
         },
-        src: [nodeDir + 'jquery/dist/jquery.min.js',
-              nodeDir + 'bootstrap/dist/js/bootstrap.min.js',
+        src: [nodeDir   + 'jquery/dist/jquery.min.js',
+              nodeDir   + 'bootstrap/dist/js/bootstrap.min.js',
               publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
@@ -282,8 +290,8 @@ module.exports = function(grunt){
           stripBanners: true,
           banner: ''
         },
-        src: [nodeDir + 'font-awesome/css/font-awesome.min.css',
-              nodeDir + 'bootstrap/dist/css/bootstrap.min.css',
+        src: [nodeDir   + 'font-awesome/css/font-awesome.min.css',
+              nodeDir   + 'bootstrap/dist/css/bootstrap.min.css',
               publicDir + 'css/style.min.css'
             ],
         dest: publicDir + 'css/style.min.css'
@@ -328,6 +336,50 @@ module.exports = function(grunt){
           {src: ['RELEASE_NOTES.md'], dest: '/'},
         ]
       }
+    },
+    nodemon: {
+      dev: {
+        script: 'bin/www',
+        options: {
+          //nodeArgs: ['--debug'],
+          delay:1000,
+          watch: ['website/routes', 'website/app.js'],
+          ext: 'js,scss'
+        }
+      }
+    },
+    open: {
+      all: {
+        path: 'http://' + host + ':' + port,
+        app: browser
+      }
+    },
+    watch: {
+      lib: {
+        files: srcDir + '**/*.js',
+        tasks: ['src', 'doc'],  
+      },
+      webjs: {
+        files: webDir + 'js/**/*.js',
+        tasks: ['js'],
+      },
+      webcss: {
+        files: webDir + 'sass/**/*.scss',
+        tasks: ['css', 'static'],
+      },
+      options: {
+        interrupt: true,
+        spawn: false,
+        livereload: true,
+        livereloadOnError:false
+      }
+    },
+    // run watch and nodemon at the same time
+    concurrent: {
+      options: {
+        logConcurrentOutput: true
+      },
+      tasks: ['nodemon', 'watch', 'open' ]
     }
   });
 
@@ -343,15 +395,21 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-contrib-htmlmin' );
   grunt.loadNpmTasks( 'grunt-contrib-symlink' );
   grunt.loadNpmTasks( 'grunt-contrib-compress' );
+  grunt.loadNpmTasks( 'grunt-contrib-watch' );
   grunt.loadNpmTasks( 'grunt-jsdoc' );
+  grunt.loadNpmTasks( 'grunt-concurrent' );
+  grunt.loadNpmTasks( 'grunt-nodemon' );
+  grunt.loadNpmTasks( 'grunt-open' );
 
 
   grunt.registerTask('default', [ 'jshint', 'clean', 'copy', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'concat', 'symlink', 'compress' ]); //build all for release
 
   grunt.registerTask('prod', [ 'clean:web', 'copy', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify:web', 'concat', 'htmlmin', 'compress' ]); //build for prod on the server
+  
+  grunt.registerTask('serve', [ 'concurrent' ]); //serve files, open website watch for changes and.
 
   grunt.registerTask('doc', [ 'jsdoc' ]); //build jsdoc into /doc
-  grunt.registerTask('src', [ 'jshint:lib', 'clean:lib', 'uglify:lib', 'uglify:libmin' ]); //build library into /dist
+  grunt.registerTask('src', [ 'jshint:lib', 'clean:lib', 'uglify', 'concat:webjs' ]); //build library into /dist
   //website
   grunt.registerTask('js', [ 'jshint:web', 'uglify:web', 'concat:webjs', 'copy:web' ]); //build js into /website/public/js
   grunt.registerTask('css', [ 'sass', 'csslint', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
