@@ -29,6 +29,8 @@ You just cloned Type6.js : git clone https://github.com/LCluber/Type6.js.git
 
 
 ### Workflow
+- Run **grunt** to build the app.
+- Run **grunt serve** to serve files, open the website and watch for changes
 - You can use those commands if you don't like grunt-watch :
   - **grunt doc** builds the static documentation,
   - **grunt src** builds the library in the dist folder,

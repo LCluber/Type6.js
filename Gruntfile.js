@@ -11,7 +11,6 @@ module.exports = function(grunt){
 
   var port      = 3002;
   var host      = 'localhost';
-  var browser   = 'Google Chrome';
 
   var srcDir    = 'src/';
   var distDir   = 'dist/';
@@ -344,14 +343,13 @@ module.exports = function(grunt){
           //nodeArgs: ['--debug'],
           delay:1000,
           watch: ['website/routes', 'website/app.js'],
-          ext: 'js,scss'
+          ext: 'js'
         }
       }
     },
     open: {
       all: {
-        path: 'http://' + host + ':' + port,
-        app: browser
+        path: 'http://' + host + ':' + port
       }
     },
     watch: {
