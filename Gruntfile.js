@@ -357,6 +357,9 @@ module.exports = function(grunt){
         files: srcDir + '**/*.js',
         tasks: ['src', 'doc'],  
       },
+      webpug:{
+        files: webDir + 'views/**/*.pug'
+      },
       webjs: {
         files: webDir + 'js/**/*.js',
         tasks: ['js'],
