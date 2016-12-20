@@ -285,13 +285,12 @@ TYPE6JS.Vector2D = {
   * copy the given vector2D values.
   * @since 0.2.0
   * @method
-  * @param {vector2D} vector2D The vector2D you need to copy.
-  * @returns {Vector2} A new vector2D identical to the vector2D given in paramters
+  * @returns {Vector2} A new vector2D identical to this vector2D
   */
-  copy: function(vector2D) {
+  copy: function() {
     return this.create(
-      vector2D.getX(),
-      vector2D.getY()
+      this.getX(),
+      this.getY()
     );
   },
 

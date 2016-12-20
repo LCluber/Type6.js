@@ -204,8 +204,8 @@ TYPE6JS.Vector2D = {
         this.addTo(vector2D);
         return squaredMagnitude;
     },
-    copy: function(vector2D) {
-        return this.create(vector2D.getX(), vector2D.getY());
+    copy: function() {
+        return this.create(this.getX(), this.getY());
     },
     add: function(vector2D) {
         return this.create(this.x + vector2D.getX(), this.y + vector2D.getY());

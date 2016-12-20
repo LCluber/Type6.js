@@ -13,6 +13,7 @@ Version 0.2.1 (November 26th 2016)
   * Added subtractScaledVector() and subtractScaledVectorFrom() methods
   * Added isPositive() and isNegative methods
   * Added setXToOrigin() and setYToOrigin() methods
+  * Fixed copy() method
  * Geometry class
   * Added bottomRightCorner and halfSize properties to rectangle class with getters and setters
   * Added size and halfSize Properties to circle class
