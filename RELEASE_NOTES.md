@@ -5,7 +5,7 @@ Version 0.3.0 (incoming)
  * 3D vectors
  * documentation updates
 
-Version 0.2.1 (November 26th 2016)
+Version 0.2.1 (December 21th 2016)
 ------------------------------
  * vector2D class
   * Added copyScaledVectorTo() method merging copy and scale methods into one
