@@ -5,10 +5,18 @@ Version 0.3.0 (incoming)
  * 3D vectors
  * documentation updates
 
-Version 0.2.1 (November 26th 2016)
+Version 0.2.1 (December 21th 2016)
 ------------------------------
- * Added copyScaledVectorTo() function in vector2D class
- * Added copySubtractFromTo() function in vector2D class
+ * vector2D class
+  * Added copyScaledVectorTo() method merging copy and scale methods into one
+  * Added copySubtractFromTo() method merging copy and subtract methods into one
+  * Added subtractScaledVector() and subtractScaledVectorFrom() methods
+  * Added isPositive() and isNegative methods
+  * Added setXToOrigin() and setYToOrigin() methods
+  * Fixed copy() method
+ * Geometry class
+  * Added bottomRightCorner and halfSize properties to rectangle class with getters and setters
+  * Added size and halfSize Properties to circle class
 
 Version 0.2.0 (September 21st 2016)
 ------------------------------

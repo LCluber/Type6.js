@@ -1,24 +1,17 @@
 window.onload = function() {
   var canvas  = document.getElementById("canvas");
   var context = canvas.getContext("2d");
-  var width   = canvas.width = window.innerWidth;
+  var width   = canvas.width  = window.innerWidth;
   var height  = canvas.height = window.innerHeight;
+  var hWidth  = width  * 0.5;
+  var hHeight = height * 0.5;
 
-  var rect = TYPE6JS.Geometry.Rectangle.create(
-              (width - 400) * 0.5, (height - 300) * 0.5,
-              400, 300
-            );
-
-  var circle = TYPE6JS.Geometry.Circle.create( 0, 0, 40 );
-
-  var innerRect = TYPE6JS.Geometry.Rectangle.create(
-                    (width - 400) * 0.5 + circle.getRadius(), (height - 300) * 0.5 + circle.getRadius(),
-                    400 - circle.getDiameter(), 300 - circle.getDiameter()
-                  );
+  var circle    = TYPE6JS.Geometry.Circle.create( 0, 0, 40 );
+  var rect      = TYPE6JS.Geometry.Rectangle.create( hWidth, hHeight, hWidth, hHeight );
+  var innerRect = TYPE6JS.Geometry.Rectangle.create( hWidth, hHeight, hWidth - circle.getDiameter(), hHeight - circle.getDiameter());
 
   //initial rendering
-  drawRectangle(rect, "#cccccc");
-  drawRectangle(innerRect, "#999999");
+  drawRectangles();
 
   document.body.addEventListener("mousemove", function(event) {
     circle.setPositionXY(event.clientX, event.clientY);
@@ -26,16 +19,20 @@ window.onload = function() {
 
     context.clearRect(0, 0, width, height);
 
-    drawRectangle(rect, "#cccccc");
-    drawRectangle(innerRect, "#999999");
+    drawRectangles();
     drawCircle(circle, "#CC0000");
 
     context.fill();
   });
 
+  function drawRectangles(){
+    drawRectangle(rect, "#cccccc");
+    drawRectangle(innerRect, "#999999");
+  }
+
   function drawRectangle(rectangle, color){
     context.fillStyle = color;
-    context.fillRect(rectangle.topLeftCorner.getX(), rectangle.topLeftCorner.getY(), rectangle.size.getX(), rectangle.size.getY());
+    context.fillRect(rectangle.getTopLeftCornerX(), rectangle.getTopLeftCornerY(), rectangle.getSizeX(), rectangle.getSizeY());
   }
 
   function drawCircle(circle, color){
