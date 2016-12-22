@@ -13,6 +13,9 @@ var route_doc     = require('./routes/doc');
 data              = JSON.parse(fs.readFileSync(__dirname + '/config/data.json', 'utf-8'));
 
 var app = express();
+
+var environment = process.env.NODE_ENV;
+
 // view engine setup
 //app.locals.basedir = path.join(__dirname, 'views');
 app.set('views', path.join(__dirname, 'views'));
@@ -31,9 +34,10 @@ app.use('/zip', express.static(path.join(__dirname, '../zip')));
 
 // add <script src="//localhost:35729/livereload.js?snipver=1" async="" defer=""></script>
 // for livereload of grunt-contrib-watch
-app.use(require('connect-livereload')({
-  port: 35729
-}));
+if (environment === 'development')
+  app.use(require('connect-livereload')({
+    port: 35729
+  }));
 
 app.use('/examples', route_examples);
 app.use('/doc', route_doc);
@@ -51,7 +55,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
+if (environment === 'development')
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('_error', {
