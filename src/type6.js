@@ -5,7 +5,7 @@ var TYPE6JS = {
   /**
   * @author Ludovic Cluber <http://www.lcluber.com/contact>
   * @file maths library.
-  * @version 0.2.0
+  * @version 0.2.1
   * @copyright (c) 2011 Ludovic Cluber
   * @global
   * @license
@@ -31,4 +31,4 @@ var TYPE6JS = {
   *
   */
 
-  Revision: '0.2.0' };
+  Revision: '0.2.1' };
