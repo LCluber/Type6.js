@@ -3,8 +3,8 @@ window.onload = function() {
   var context       = canvas.getContext("2d");
   var width         = canvas.width = window.innerWidth;
   var height        = canvas.height = window.innerHeight;
-  var circle        = TYPE6JS.Geometry.Circle.create( width * 0.5, height * 0.5, 100 );
-  var mousePosition = TYPE6JS.Vector2D.create();
+  var circle        = TYPE6.Geometry.Circle.create( width * 0.5, height * 0.5, 100 );
+  var mousePosition = TYPE6.Vector2D.create();
 
   context.fillStyle = "#66FF66";
   drawCircle();
@@ -25,7 +25,7 @@ window.onload = function() {
 
   function drawCircle(){
     context.beginPath();
-    context.arc(circle.getPositionX(), circle.getPositionY(), circle.getRadius(), 0, TYPE6JS.Trigonometry.TWOPI, false);
+    context.arc(circle.getPositionX(), circle.getPositionY(), circle.getRadius(), 0, TYPE6.Trigonometry.TWOPI, false);
   }
 
 };

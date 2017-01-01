@@ -6,9 +6,9 @@ window.onload = function() {
   var hWidth  = width  * 0.5;
   var hHeight = height * 0.5;
 
-  var circle    = TYPE6JS.Geometry.Circle.create( 0, 0, 40 );
-  var rect      = TYPE6JS.Geometry.Rectangle.create( hWidth, hHeight, hWidth, hHeight );
-  var innerRect = TYPE6JS.Geometry.Rectangle.create( hWidth, hHeight, hWidth - circle.getDiameter(), hHeight - circle.getDiameter());
+  var circle    = TYPE6.Geometry.Circle.create( 0, 0, 40 );
+  var rect      = TYPE6.Geometry.Rectangle.create( hWidth, hHeight, hWidth, hHeight );
+  var innerRect = TYPE6.Geometry.Rectangle.create( hWidth, hHeight, hWidth - circle.getDiameter(), hHeight - circle.getDiameter());
 
   //initial rendering
   drawRectangles();
@@ -38,7 +38,7 @@ window.onload = function() {
   function drawCircle(circle, color){
     context.fillStyle = color;
     context.beginPath();
-    context.arc(circle.getPositionX(), circle.getPositionY(), circle.getRadius(), 0, TYPE6JS.Trigonometry.TWOPI, false);
+    context.arc(circle.getPositionX(), circle.getPositionY(), circle.getRadius(), 0, TYPE6.Trigonometry.TWOPI, false);
   }
 
 };

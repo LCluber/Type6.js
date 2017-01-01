@@ -1,5 +1,5 @@
 // /** @namespace */
-TYPE6JS.Bezier = {
+TYPE6.Bezier = {
 
   /**
   * Quadratic
