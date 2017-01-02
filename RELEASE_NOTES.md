@@ -5,6 +5,10 @@ Version 0.3.0 (incoming)
  * 3D vectors
  * documentation updates
 
+Version 0.2.2 (January 2nd 2017)
+------------------------------
+* TYPE6JS namespace becomes TYPE6
+
 Version 0.2.1 (December 21th 2016)
 ------------------------------
  * vector2D class
