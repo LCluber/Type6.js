@@ -3,12 +3,12 @@ window.onload = function() {
   var context   = canvas.getContext("2d");
   var width     = canvas.width = window.innerWidth;
   var height    = canvas.height = window.innerHeight;
-  var p0        = TYPE6JS.Vector2D.create(100, 500);
-  var p1        = TYPE6JS.Vector2D.create(200, 100);
-  var p2        = TYPE6JS.Vector2D.create(1000,400);
-  var pA        = TYPE6JS.Vector2D.create();
-  var pB        = TYPE6JS.Vector2D.create();
-  var pFinal    = TYPE6JS.Vector2D.create();
+  var p0        = TYPE6.Vector2D.create(100, 500);
+  var p1        = TYPE6.Vector2D.create(200, 100);
+  var p2        = TYPE6.Vector2D.create(1000,400);
+  var pA        = TYPE6.Vector2D.create();
+  var pB        = TYPE6.Vector2D.create();
+  var pFinal    = TYPE6.Vector2D.create();
   var t         = 0;
   var maxT      = 0;
   var step      = 0.1;
@@ -28,15 +28,15 @@ window.onload = function() {
     context.stroke();
 
     context.beginPath();
-    context.arc(p0.getX(), p0.getY(), 4, 0, TYPE6JS.Trigonometry.TWOPI, false);
+    context.arc(p0.getX(), p0.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
     context.fill();
 
     context.beginPath();
-    context.arc(p1.getX(), p1.getY(), 4, 0, TYPE6JS.Trigonometry.TWOPI, false);
+    context.arc(p1.getX(), p1.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
     context.fill();
 
     context.beginPath();
-    context.arc(p2.getX(), p2.getY(), 4, 0, TYPE6JS.Trigonometry.TWOPI, false);
+    context.arc(p2.getX(), p2.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
     context.fill();
 
     context.strokeStyle = "red";
@@ -59,16 +59,16 @@ window.onload = function() {
     context.stroke();
 
     context.beginPath();
-    context.arc(pA.getX(), pA.getY(), 4, 0, TYPE6JS.Trigonometry.TWOPI, false);
+    context.arc(pA.getX(), pA.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
     context.fill();
 
     context.beginPath();
-    context.arc(pB.getX(), pB.getY(), 4, 0, TYPE6JS.Trigonometry.TWOPI, false);
+    context.arc(pB.getX(), pB.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
     context.fill();
 
     context.fillStyle = "red";
     context.beginPath();
-    context.arc(pFinal.getX(), pFinal.getY(), 4, 0, TYPE6JS.Trigonometry.TWOPI, false);
+    context.arc(pFinal.getX(), pFinal.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
     context.fill();
     context.fillStyle = "black";
 
@@ -81,7 +81,7 @@ window.onload = function() {
 
     maxT += step * sign;
     if( maxT > 1 || maxT < 0 ){
-      sign = TYPE6JS.MathUtils.getOppositeSign(sign);
+      sign = TYPE6.MathUtils.getOppositeSign(sign);
       maxT += step * sign;
     }
 
@@ -93,6 +93,6 @@ window.onload = function() {
   }
 
   function labelT() {
-    context.fillText("t = " + TYPE6JS.MathUtils.round(maxT, 1), 400, 400);
+    context.fillText("t = " + TYPE6.MathUtils.round(maxT, 1), 400, 400);
   }
 };

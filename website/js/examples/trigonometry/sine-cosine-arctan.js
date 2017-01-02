@@ -7,17 +7,17 @@ window.onload = function() {
   context.translate( width * 0.5, height * 0.5 );
   context.scale( 1, -1 );
 
-  for(var angle = -TYPE6JS.Trigonometry.PI; angle <= TYPE6JS.Trigonometry.PI; angle += 0.04) {
+  for(var angle = -TYPE6.Trigonometry.PI; angle <= TYPE6.Trigonometry.PI; angle += 0.04) {
 
     var x = angle * 200;
 
-    var y = TYPE6JS.Trigonometry.sineEquation(240, angle, 0, 40);
+    var y = TYPE6.Trigonometry.sineEquation(240, angle, 0, 40);
     draw("black", 5);
 
-    y = TYPE6JS.Trigonometry.cosineEquation(240, angle, 0, 0);
+    y = TYPE6.Trigonometry.cosineEquation(240, angle, 0, 0);
     draw("red", 5);
 
-    y = TYPE6JS.Trigonometry.arctanEquation(240, angle, 0, 0);
+    y = TYPE6.Trigonometry.arctanEquation(240, angle, 0, 0);
     draw("green", 5);
 
   }

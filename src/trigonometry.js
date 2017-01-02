@@ -3,28 +3,28 @@
 * @namespace
 *
 */
-TYPE6JS.Trigonometry = {
+TYPE6.Trigonometry = {
   /**
   * @access public
   * @constant
   * @type {bool}
   * @default
   */
-  PI             : TYPE6JS.MathUtils.round( Math.PI, 2 ),//3.1415926535897932384626433832795
+  PI             : TYPE6.MathUtils.round( Math.PI, 2 ),//3.1415926535897932384626433832795
   /**
   * @access public
   * @constant
   * @type {bool}
   * @default
   */
-  TWOPI          : TYPE6JS.MathUtils.round( Math.PI * 2, 2 ),//6.283185307179586
+  TWOPI          : TYPE6.MathUtils.round( Math.PI * 2, 2 ),//6.283185307179586
   /**
   * @access public
   * @constant
   * @type {bool}
   * @default
   */
-  HALFPI         : TYPE6JS.MathUtils.round( Math.PI * 0.5, 2 ),//1.57079632679
+  HALFPI         : TYPE6.MathUtils.round( Math.PI * 0.5, 2 ),//1.57079632679
 
   /**
   * precision needed for sine computation
@@ -323,7 +323,7 @@ TYPE6JS.Trigonometry = {
       x            *= squaredAngle;
       denominator   = needFactorial ? this.factorialArray[start] : start ;
       result       += x / denominator * sign;
-      sign          = TYPE6JS.MathUtils.getOppositeSign(sign);
+      sign          = TYPE6.MathUtils.getOppositeSign(sign);
     }
     return result;
   },
@@ -369,8 +369,8 @@ TYPE6JS.Trigonometry = {
   },
 
 };
-TYPE6JS.Trigonometry.createFactorialArray();
-//console.log(TYPE6JS.Trigonometry.factorialArray);
+TYPE6.Trigonometry.createFactorialArray();
+//console.log(TYPE6.Trigonometry.factorialArray);
 
 
 // function radi(a){//radian

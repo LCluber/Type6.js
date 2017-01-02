@@ -2,7 +2,7 @@
 * @class
 * @classdesc A class that represents a two dimension rectangle.
 */
-TYPE6JS.Geometry.Rectangle = {
+TYPE6.Geometry.Rectangle = {
 
   /**
   * @since 0.2.0
@@ -51,14 +51,14 @@ TYPE6JS.Geometry.Rectangle = {
   },
 
   initSize: function( sizeX, sizeY ){
-    this.size     = TYPE6JS.Vector2D.create( sizeX, sizeY );
-    this.halfSize = TYPE6JS.Vector2D.create( sizeX * 0.5, sizeY * 0.5 );
+    this.size     = TYPE6.Vector2D.create( sizeX, sizeY );
+    this.halfSize = TYPE6.Vector2D.create( sizeX * 0.5, sizeY * 0.5 );
   },
 
   initPosition: function( positionX, positionY ){
-    this.position          = TYPE6JS.Vector2D.create( positionX, positionY );
-    this.topLeftCorner     = TYPE6JS.Vector2D.create( positionX - this.halfSize.getX(), positionY - this.halfSize.getY() );
-    this.bottomRightCorner = TYPE6JS.Vector2D.create( positionX + this.halfSize.getX(), positionY + this.halfSize.getY() );
+    this.position          = TYPE6.Vector2D.create( positionX, positionY );
+    this.topLeftCorner     = TYPE6.Vector2D.create( positionX - this.halfSize.getX(), positionY - this.halfSize.getY() );
+    this.bottomRightCorner = TYPE6.Vector2D.create( positionX + this.halfSize.getX(), positionY + this.halfSize.getY() );
   },
   /**
   * Copy the rectangle.

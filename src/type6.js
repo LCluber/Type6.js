@@ -1,6 +1,6 @@
 /** @namespace */
 
-var TYPE6JS = {
+var TYPE6 = {
 
   /**
   * @author Ludovic Cluber <http://www.lcluber.com/contact>

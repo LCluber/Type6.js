@@ -4,8 +4,8 @@ window.onload = function() {
   var width   = canvas.width = window.innerWidth;
   var height  = canvas.height = window.innerHeight;
 
-  var arrowPosition = TYPE6JS.Vector2D.create(width, height).scale(0.5);
-  var mousePosition = TYPE6JS.Vector2D.create();
+  var arrowPosition = TYPE6.Vector2D.create(width, height).scale(0.5);
+  var mousePosition = TYPE6.Vector2D.create();
   var angle = 0.0;
   var a = 0.0;
 
@@ -39,7 +39,7 @@ window.onload = function() {
       event.clientY
     );
     mousePosition.subtractFrom(arrowPosition);
-    angle = TYPE6JS.Trigonometry.arctan2fromVector2D(mousePosition);
+    angle = TYPE6.Trigonometry.arctan2fromVector2D(mousePosition);
   });
 
 
