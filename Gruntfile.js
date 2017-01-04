@@ -58,7 +58,7 @@ module.exports = function(grunt){
       lib:{
         src: [  
                 distDir + '*',
-                publicDir + 'js/*'
+                //publicDir + 'js/*'
               ]
       },
       web:{
@@ -399,7 +399,7 @@ module.exports = function(grunt){
   grunt.registerTask('serve', [ 'concurrent' ]); //serve files, open website watch for changes and.
 
   grunt.registerTask('doc', [ 'jsdoc' ]); //build jsdoc into /doc
-  grunt.registerTask('src', [ 'jshint:lib', 'clean:lib', 'uglify', 'concat:webjs' ]); //build library into /dist
+  grunt.registerTask('src', [ 'jshint:lib', 'clean:lib', 'uglify' ]); //build library into /dist
   //website
   grunt.registerTask('js', [ 'jshint:web', 'uglify:web', 'concat:webjs', 'symlink:examples' ]); //build js into /website/public/js
   grunt.registerTask('css', [ 'sass', 'csslint', 'cssmin', 'concat:webcss' ]); //build sass into /website/public/css
