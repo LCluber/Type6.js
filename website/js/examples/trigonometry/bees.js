@@ -36,14 +36,14 @@ window.onload = function() {
 
       this.circle.position.addTo(center);
       this.angle.addTo( this.speed );
-      this.circle.draw( context, 'rgba(0,0,0,1)');
+      this.draw();
     },
 
-    // draw: function(){
-    //   context.beginPath();
-    //   context.arc( this.circle.getPositionX(), this.circle.getPositionY(), 2, 0, TYPE6.Trigonometry.TWOPI, false );
-    //   context.fill();
-    // },
+    draw: function(){
+      context.beginPath();
+      context.arc( this.circle.getPositionX(), this.circle.getPositionY(), 2, 0, TYPE6.Trigonometry.TWOPI, false );
+      context.fill();
+    },
 
     randomSpeedGenerator: function(){
       var sign = TYPE6.Random.pick(-1,1);
