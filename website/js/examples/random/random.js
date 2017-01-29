@@ -13,20 +13,8 @@ window.onload = function() {
                   TYPE6.Random.float( 10, 40 )
                 );
 
-    drawCircle(circle, colors[ iMod3 ]);
+    circle.draw( context, colors[ iMod3 ] );
 
-  }
-
-  function drawCircle(circle, color){
-    context.beginPath();
-    context.fillStyle = color;
-    context.arc(
-      circle.getPositionX(),
-      circle.getPositionY(),
-      circle.getRadius(),
-      0, TYPE6.Trigonometry.TWOPI, false
-    );
-    context.fill();
   }
 
 };

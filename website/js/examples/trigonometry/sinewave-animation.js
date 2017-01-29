@@ -19,24 +19,17 @@ window.onload = function() {
 
   function render() {
     //amplitude, period, shiftX, shiftY
-    alpha  = TYPE6.Trigonometry.sineEquation(amplitude, period, 0, baseAlpha);
+    alpha = TYPE6.Trigonometry.sineEquation(amplitude, period, 0, baseAlpha);
     circle.setPositionY(TYPE6.Trigonometry.sineEquation(amplitude * 600, period, 0, height * 0.5));
     circle.setRadius(TYPE6.Trigonometry.sineEquation(amplitude * 20, period, 0, baseRadius));
 
     context.clearRect(0, 0, width, height);
 
-    draw();
+    circle.draw( context, 'rgba(0, 0, 0, ' + alpha + ')' );
 
     period += speed;
 
     requestAnimationFrame( render );
-  }
-
-  function draw(){
-    context.fillStyle = "rgba(0, 0, 0, " + alpha + ")";
-    context.beginPath();
-    context.arc( circle.getPositionX(), circle.getPositionY(), circle.getRadius(), 0, TYPE6.Trigonometry.TWOPI, false );
-    context.fill();
   }
 
 };

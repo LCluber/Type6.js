@@ -52,7 +52,7 @@ TYPE6.Geometry.Rectangle = {
 
   initSize: function( sizeX, sizeY ){
     this.size     = TYPE6.Vector2D.create( sizeX, sizeY );
-    this.halfSize = TYPE6.Vector2D.create( sizeX * 0.5, sizeY * 0.5 );
+    this.halfSize = this.size.halve();
   },
 
   initPosition: function( positionX, positionY ){
@@ -347,6 +347,23 @@ TYPE6.Geometry.Rectangle = {
   */
   getHalfSizeY: function(){
     return this.halfSize.getY();
+  },
+  
+  /**
+  * draw the rectangle in a canvas.
+  * @since 0.2.3
+  * @method
+  * @param {context} context The context of the canvas.
+  * @param {string} color The color of the rectangle.
+  * @returns {Vector2D}
+  */
+  draw : function( context, color ){
+    context.fillStyle = color;
+    context.fillRect( this.topLeftCorner.getX(),
+                      this.topLeftCorner.getY(),
+                      this.size.getX(),
+                      this.size.getY()
+                    );
   }
 
   // clampTo:function(rectangle){

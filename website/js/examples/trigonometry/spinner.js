@@ -50,7 +50,7 @@ window.onload = function() {
       }else {
         circle.majAlpha();
       }
-      draw(smallCircles[i]);
+      circle.draw( context, 'rgba(0, 200, 100, ' + circle.alpha + ')');
     }
 
     step += 0.25;
@@ -59,12 +59,5 @@ window.onload = function() {
     }
     requestAnimationFrame( render );
 
-  }
-
-  function draw(circle){
-    context.fillStyle = "rgba(0, 200, 100, " + circle.alpha + ")";
-    context.beginPath();
-    context.arc( circle.getPositionX(), circle.getPositionY(), circle.getRadius(), 0, TYPE6.Trigonometry.TWOPI, false);
-    context.fill();
   }
 };

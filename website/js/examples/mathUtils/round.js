@@ -16,14 +16,9 @@ window.onload = function() {
       TYPE6.MathUtils.roundToNearest(event.clientY, gridSize)
     );
 
-    drawCircle();
+    circle.draw( context, 'rgba(0,0,0,1)' );
     context.fill();
   });
-
-  function drawCircle(){
-    context.beginPath();
-    context.arc(circle.getPositionX(), circle.getPositionY(), circle.getRadius(), 0, TYPE6.Trigonometry.TWOPI, false);
-  }
 
   function drawGrid() {
     context.beginPath();

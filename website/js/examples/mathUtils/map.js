@@ -5,7 +5,7 @@ window.onload = function() {
   var height  = canvas.height = window.innerHeight;
   var circle  = TYPE6.Geometry.Circle.create( width * 0.5, height * 0.5, 20 );
 
-  drawCircle();
+  circle.draw( context, 'rgba(0,0,0,1)' );
   context.fill();
 
   document.body.addEventListener("mousemove", function(event) {
@@ -16,13 +16,8 @@ window.onload = function() {
                     ));
 
     context.clearRect(0, 0, width, height);
-    drawCircle();
+    circle.draw( context, 'rgba(0,0,0,1)' );
     context.fill();
   });
-
-  function drawCircle(){
-    context.beginPath();
-    context.arc(circle.getPositionX(), circle.getPositionY(), circle.getRadius(), 0, TYPE6.Trigonometry.TWOPI, false);
-  }
 
 };

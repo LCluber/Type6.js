@@ -292,6 +292,27 @@ TYPE6.Geometry.Circle = {
   */
   getSquaredDistance: function(vector2) {
     return this.position.getSquaredDistance( vector2 );
+  },
+  
+  /**
+  * draw the circle in a canvas.
+  * @since 0.2.3
+  * @method
+  * @param {context} context The context of the canvas.
+  * @param {string} color The color of the circle.
+  * @returns {Vector2D}
+  */
+  draw: function( context, color ){
+    context.fillStyle = color;
+    context.beginPath();
+    context.arc(  this.getPositionX(),
+                  this.getPositionY(),
+                  this.getRadius(),
+                  0,
+                  TYPE6.Trigonometry.TWOPI,
+                  false
+                );
+    context.fill();
   }
 
 };

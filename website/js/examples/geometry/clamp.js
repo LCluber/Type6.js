@@ -20,25 +20,14 @@ window.onload = function() {
     context.clearRect(0, 0, width, height);
 
     drawRectangles();
-    drawCircle(circle, "#CC0000");
+    circle.draw( context, "#CC0000" );
 
     context.fill();
   });
 
   function drawRectangles(){
-    drawRectangle(rect, "#cccccc");
-    drawRectangle(innerRect, "#999999");
-  }
-
-  function drawRectangle(rectangle, color){
-    context.fillStyle = color;
-    context.fillRect(rectangle.getTopLeftCornerX(), rectangle.getTopLeftCornerY(), rectangle.getSizeX(), rectangle.getSizeY());
-  }
-
-  function drawCircle(circle, color){
-    context.fillStyle = color;
-    context.beginPath();
-    context.arc(circle.getPositionX(), circle.getPositionY(), circle.getRadius(), 0, TYPE6.Trigonometry.TWOPI, false);
+    rect.draw( context, "#cccccc" );
+    innerRect.draw( context, "#999999" );
   }
 
 };
