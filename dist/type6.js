@@ -23,7 +23,7 @@
 * http://type6js.lcluber.com
 */
 var TYPE6 = {
-    Revision: "0.2.2"
+    Revision: "0.2.3"
 };
 
 TYPE6.MathUtils = {
