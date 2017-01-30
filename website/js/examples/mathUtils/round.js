@@ -4,7 +4,7 @@ window.onload = function() {
   var width     = canvas.width = window.innerWidth;
   var height    = canvas.height = window.innerHeight;
   var gridSize  = 40;
-  var circle    = TYPE6JS.Geometry.Circle.create( 0, 0, 20 );
+  var circle    = TYPE6.Geometry.Circle.create( 0, 0, 20 );
 	drawGrid();
 
   document.body.addEventListener("mousemove", function(event) {
@@ -12,18 +12,13 @@ window.onload = function() {
     drawGrid();
 
     circle.setPositionXY(
-      TYPE6JS.MathUtils.roundToNearest(event.clientX, gridSize),
-      TYPE6JS.MathUtils.roundToNearest(event.clientY, gridSize)
+      TYPE6.MathUtils.roundToNearest(event.clientX, gridSize),
+      TYPE6.MathUtils.roundToNearest(event.clientY, gridSize)
     );
 
-    drawCircle();
+    circle.draw( context, 'rgba(0,0,0,1)' );
     context.fill();
   });
-
-  function drawCircle(){
-    context.beginPath();
-    context.arc(circle.getPositionX(), circle.getPositionY(), circle.getRadius(), 0, TYPE6JS.Trigonometry.TWOPI, false);
-  }
 
   function drawGrid() {
     context.beginPath();

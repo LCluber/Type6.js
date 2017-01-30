@@ -1,5 +1,5 @@
 /** @namespace */
-TYPE6JS.Geometry = {
+TYPE6.Geometry = {
 
   
 };

@@ -1,5 +1,5 @@
 /** @namespace */
-TYPE6JS.Random = {
+TYPE6.Random = {
 
   /**
   * Random float.

@@ -1,5 +1,5 @@
 /** @namespace */
-TYPE6JS.MathUtils = {
+TYPE6.MathUtils = {
 
   /**
   * Round number with decimals.

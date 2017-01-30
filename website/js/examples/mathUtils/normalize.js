@@ -14,8 +14,8 @@ window.onload = function() {
 
   //compute positions
   for ( var i = 0; i <= qty; i++ ) {
-    var normValue = TYPE6JS.MathUtils.normalize(values[i], min, max);
-    positions[i]  = TYPE6JS.Vector2D.create(
+    var normValue = TYPE6.MathUtils.normalize(values[i], min, max);
+    positions[i]  = TYPE6.Vector2D.create(
       slice * i,
       height - height * normValue
     );
@@ -39,7 +39,7 @@ window.onload = function() {
   for(i = 0; i <= qty; i++) {
     position = positions[i];
     context.beginPath();
-    context.arc(position.getX(), position.getY(), 4, 0, TYPE6JS.Trigonometry.TWOPI, false);
+    context.arc(position.getX(), position.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
     context.fill();
   }
 

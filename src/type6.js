@@ -1,11 +1,11 @@
 /** @namespace */
 
-var TYPE6JS = {
+var TYPE6 = {
 
   /**
   * @author Ludovic Cluber <http://www.lcluber.com/contact>
   * @file maths library.
-  * @version 0.2.1
+  * @version 0.2.3
   * @copyright (c) 2011 Ludovic Cluber
   * @global
   * @license
@@ -31,4 +31,4 @@ var TYPE6JS = {
   *
   */
 
-  Revision: '0.2.1' };
+  Revision: '0.2.3' };

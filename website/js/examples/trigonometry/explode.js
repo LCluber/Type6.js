@@ -16,8 +16,8 @@ window.onload = function() {
       return obj;
     },
     init: function(){
-      this.position = TYPE6JS.Vector2D.create();
-      this.velocity = TYPE6JS.Vector2D.create();
+      this.position = TYPE6.Vector2D.create();
+      this.velocity = TYPE6.Vector2D.create();
     },
     update: function(){
       this.position.addTo(this.velocity);
@@ -25,13 +25,13 @@ window.onload = function() {
   };
 
 	for (var i = 0; i < 200; i += 1) {
-    var radius    = TYPE6JS.Random.float(0, 3);
-    var angle     = TYPE6JS.Random.float(0, TYPE6JS.Trigonometry.TWOPI);
+    var radius    = TYPE6.Random.float(0, 3);
+    var angle     = TYPE6.Random.float(0, TYPE6.Trigonometry.TWOPI);
     particles[i]  = particle.create(
                       width * 0.5,
                       height * 0.5,
-                      TYPE6JS.Trigonometry.cosineEquation( radius, angle, 0, 0 ),
-                      TYPE6JS.Trigonometry.sineEquation( radius, angle, 0, 0 )
+                      TYPE6.Trigonometry.cosineEquation( radius, angle, 0, 0 ),
+                      TYPE6.Trigonometry.sineEquation( radius, angle, 0, 0 )
                     );
   }
 
@@ -43,7 +43,7 @@ window.onload = function() {
       var p = particles[i];
       p.update();
       context.beginPath();
-      context.arc(p.position.getX(), p.position.getY(), 3, 0, TYPE6JS.Trigonometry.TWOPI, false);
+      context.arc(p.position.getX(), p.position.getY(), 3, 0, TYPE6.Trigonometry.TWOPI, false);
       context.fill();
     }
     requestAnimationFrame(update);

@@ -6,7 +6,7 @@ window.onload = function() {
 
   var bees    = [];
   var numBees = 30;
-  var center  = TYPE6JS.Vector2D.create(width, height).scale(0.5);
+  var center  = TYPE6.Vector2D.create(width, height).halve();
 
   var bee = {
     create: function() {
@@ -16,22 +16,22 @@ window.onload = function() {
     },
 
     init: function() {
-      this.angle = TYPE6JS.Vector2D.create(
-        TYPE6JS.Random.float(0, TYPE6JS.Trigonometry.TWOPI),
-        TYPE6JS.Random.float(0, TYPE6JS.Trigonometry.TWOPI)
+      this.angle = TYPE6.Vector2D.create(
+        TYPE6.Random.float(0, TYPE6.Trigonometry.TWOPI),
+        TYPE6.Random.float(0, TYPE6.Trigonometry.TWOPI)
       );
-      this.speed = TYPE6JS.Vector2D.create(
+      this.speed = TYPE6.Vector2D.create(
         this.randomSpeedGenerator(),
         this.randomSpeedGenerator()
       );
-      this.circle = TYPE6JS.Geometry.Circle.create( 0, 0, TYPE6JS.Random.integer(100,200) );
+      this.circle = TYPE6.Geometry.Circle.create( 0, 0, TYPE6.Random.integer(100,200) );
 
     },
 
     update: function() {
       this.circle.setPositionXY(
-        TYPE6JS.Trigonometry.cosineEquation( this.circle.getRadius(), this.angle.getX(), 0, 0 ),
-        TYPE6JS.Trigonometry.sineEquation( this.circle.getRadius(), this.angle.getY(), 0, 0 )
+        TYPE6.Trigonometry.cosineEquation( this.circle.getRadius(), this.angle.getX(), 0, 0 ),
+        TYPE6.Trigonometry.sineEquation( this.circle.getRadius(), this.angle.getY(), 0, 0 )
       );
 
       this.circle.position.addTo(center);
@@ -41,13 +41,13 @@ window.onload = function() {
 
     draw: function(){
       context.beginPath();
-      context.arc( this.circle.getPositionX(), this.circle.getPositionY(), 2, 0, TYPE6JS.Trigonometry.TWOPI, false );
+      context.arc( this.circle.getPositionX(), this.circle.getPositionY(), 2, 0, TYPE6.Trigonometry.TWOPI, false );
       context.fill();
     },
 
     randomSpeedGenerator: function(){
-      var sign = TYPE6JS.Random.pick(-1,1);
-      var randNumber = TYPE6JS.Random.float(0.0125, 0.05, 4);
+      var sign = TYPE6.Random.pick(-1,1);
+      var randNumber = TYPE6.Random.float(0.0125, 0.05, 4);
       return randNumber * sign;
     }
 

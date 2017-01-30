@@ -5,8 +5,8 @@ window.onload = function() {
   var height  = canvas.height = window.innerHeight;
 
   for(var i = 0; i < 100000; i++) {
-    var x = TYPE6JS.Random.distribution(0, width, 5);
-    var y = TYPE6JS.Random.distribution(0, height, 5);
+    var x = TYPE6.Random.distribution(0, width, 5);
+    var y = TYPE6.Random.distribution(0, height, 5);
 
     context.fillRect(x, y, 1, 1);
   }

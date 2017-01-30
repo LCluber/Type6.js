@@ -2,7 +2,7 @@
 * @class
 * @classdesc A class that represents a two dimension vector.
 */
-TYPE6JS.Vector2D = {
+TYPE6.Vector2D = {
   /**
   * @since 0.0.1
   * @access private
@@ -197,8 +197,8 @@ TYPE6JS.Vector2D = {
   setAngle: function(angle) {
     if(this.valueValidation(angle)){
       var length = this.getMagnitude();
-      this.x = TYPE6JS.Trigonometry.cosinus( angle ) * length;
-      this.y = TYPE6JS.Trigonometry.sinus( angle ) * length;
+      this.x = TYPE6.Trigonometry.cosinus( angle ) * length;
+      this.y = TYPE6.Trigonometry.sinus( angle ) * length;
       return true;
     }
     return false;
@@ -224,8 +224,8 @@ TYPE6JS.Vector2D = {
   setMagnitude: function(length) {
     if(this.valueValidation(length)){
       var angle = this.getAngle();
-      this.x = TYPE6JS.Trigonometry.cosinus( angle ) * length;
-      this.y = TYPE6JS.Trigonometry.sinus( angle ) * length;
+      this.x = TYPE6.Trigonometry.cosinus( angle ) * length;
+      this.y = TYPE6.Trigonometry.sinus( angle ) * length;
       return true;
     }
     return false;
@@ -523,12 +523,12 @@ TYPE6JS.Vector2D = {
   * @returns {Vector2} a new vector clamped in the rectangle
   */
   clamp: function(rectangle){
-    return this.create( TYPE6JS.MathUtils.clamp(
+    return this.create( TYPE6.MathUtils.clamp(
                           this.x,
                           rectangle.topLeftCorner.getX(),
                           rectangle.bottomRightCorner.getX()
                         ),
-                        TYPE6JS.MathUtils.clamp(
+                        TYPE6.MathUtils.clamp(
                           this.y,
                           rectangle.topLeftCorner.getY(),
                           rectangle.bottomRightCorner.getY()
@@ -544,8 +544,8 @@ TYPE6JS.Vector2D = {
   * @returns {Vector2} a new vector
   */
   lerp: function(normal, min, max){
-    return this.create( TYPE6JS.MathUtils.lerp( normal, min.getX(), max.getX() ),
-                        TYPE6JS.MathUtils.lerp( normal, min.getY(), max.getY() )
+    return this.create( TYPE6.MathUtils.lerp( normal, min.getX(), max.getX() ),
+                        TYPE6.MathUtils.lerp( normal, min.getY(), max.getY() )
                       );
   },
 
@@ -564,8 +564,8 @@ TYPE6JS.Vector2D = {
     var oneMinusT           = 1 - t;
     var powerOf2            = Math.pow(oneMinusT, 2);
     var oneMinusTByTwo2ByT  = oneMinusT * 2 * t;
-    return this.create( TYPE6JS.Bezier.quadratic( p0.getX(), p1.getX(), p2.getX(), t, tt, oneMinusT, powerOf2, oneMinusTByTwo2ByT ),
-                        TYPE6JS.Bezier.quadratic( p0.getY(), p1.getY(), p2.getY(), t, tt, oneMinusT, powerOf2, oneMinusTByTwo2ByT )
+    return this.create( TYPE6.Bezier.quadratic( p0.getX(), p1.getX(), p2.getX(), t, tt, oneMinusT, powerOf2, oneMinusTByTwo2ByT ),
+                        TYPE6.Bezier.quadratic( p0.getY(), p1.getY(), p2.getY(), t, tt, oneMinusT, powerOf2, oneMinusTByTwo2ByT )
                       );
   },
 
@@ -583,8 +583,8 @@ TYPE6JS.Vector2D = {
   cubicBezier: function(p0, p1, p2, p3, t){
     var tt                  = t * t;
     var oneMinusT           = 1 - t;
-    return this.create( TYPE6JS.Bezier.cubic( p0.getX(), p1.getX(), p2.getX(), p3.getX(), t, tt, oneMinusT ),
-                        TYPE6JS.Bezier.cubic( p0.getY(), p1.getY(), p2.getY(), p3.getY(), t, tt, oneMinusT )
+    return this.create( TYPE6.Bezier.cubic( p0.getX(), p1.getX(), p2.getX(), p3.getX(), t, tt, oneMinusT ),
+                        TYPE6.Bezier.cubic( p0.getY(), p1.getY(), p2.getY(), p3.getY(), t, tt, oneMinusT )
                       );
   },
 
@@ -603,8 +603,8 @@ TYPE6JS.Vector2D = {
     var oneMinusT           = 1 - t;
     var powerOf2            = Math.pow(oneMinusT, 2);
     var oneMinusTByTwo2ByT  = oneMinusT * 2 * t;
-    this.x = TYPE6JS.Bezier.quadratic(p0.getX(), p1.getX(), p2.getX(), t, tt, oneMinusT, powerOf2, oneMinusTByTwo2ByT );
-    this.y = TYPE6JS.Bezier.quadratic(p0.getY(), p1.getY(), p2.getY(), t, tt, oneMinusT, powerOf2, oneMinusTByTwo2ByT  );
+    this.x = TYPE6.Bezier.quadratic(p0.getX(), p1.getX(), p2.getX(), t, tt, oneMinusT, powerOf2, oneMinusTByTwo2ByT );
+    this.y = TYPE6.Bezier.quadratic(p0.getY(), p1.getY(), p2.getY(), t, tt, oneMinusT, powerOf2, oneMinusTByTwo2ByT  );
   },
 
   /**
@@ -621,8 +621,8 @@ TYPE6JS.Vector2D = {
   cubicBezierTo: function(p0, p1, p2, p3, t){
     var tt                  = t * t;
     var oneMinusT           = 1 - t;
-    this.x = TYPE6JS.Bezier.cubic( p0.getX(), p1.getX(), p2.getX(), p3.getX(), t, tt, oneMinusT );
-    this.y = TYPE6JS.Bezier.cubic( p0.getY(), p1.getY(), p2.getY(), p3.getY(), t, tt, oneMinusT );
+    this.x = TYPE6.Bezier.cubic( p0.getX(), p1.getX(), p2.getX(), p3.getX(), t, tt, oneMinusT );
+    this.y = TYPE6.Bezier.cubic( p0.getY(), p1.getY(), p2.getY(), p3.getY(), t, tt, oneMinusT );
   },
 
   //modifiy current vector
@@ -858,12 +858,12 @@ TYPE6JS.Vector2D = {
   * @method
   */
   clampTo: function( rectangle ){
-    this.x = TYPE6JS.MathUtils.clamp(
+    this.x = TYPE6.MathUtils.clamp(
               this.x,
               rectangle.topLeftCorner.getX(),
               rectangle.bottomRightCorner.getX()
             );
-    this.y = TYPE6JS.MathUtils.clamp(
+    this.y = TYPE6.MathUtils.clamp(
               this.y,
               rectangle.topLeftCorner.getY(),
               rectangle.bottomRightCorner.getY()
@@ -878,8 +878,8 @@ TYPE6JS.Vector2D = {
   * @returns {float}
   */
   lerpTo: function(normal, min, max){
-    this.x = TYPE6JS.MathUtils.lerp( normal, min.getX(), max.getX() );
-    this.y = TYPE6JS.MathUtils.lerp( normal, min.getY(), max.getY() );
+    this.x = TYPE6.MathUtils.lerp( normal, min.getX(), max.getX() );
+    this.y = TYPE6.MathUtils.lerp( normal, min.getY(), max.getY() );
   },
 
   /**

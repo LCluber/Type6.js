@@ -2,7 +2,7 @@
 * @class
 * @classdesc A class that represents a two dimension cicle.
 */
-TYPE6JS.Geometry.Circle = {
+TYPE6.Geometry.Circle = {
 
   /**
   * @since 0.2.0
@@ -59,14 +59,14 @@ TYPE6JS.Geometry.Circle = {
   * @method
   */
   init: function(){
-    this.position = TYPE6JS.Vector2D.create();
+    this.position = TYPE6.Vector2D.create();
     this.radius   = 0.0;
     this.diameter = 0.0;
   },
   
   initSize: function(){
-    this.size     = TYPE6JS.Vector2D.create( this.diameter, this.diameter );
-    this.halfSize = TYPE6JS.Vector2D.create( this.radius, this.radius );
+    this.size     = TYPE6.Vector2D.create( this.diameter, this.diameter );
+    this.halfSize = TYPE6.Vector2D.create( this.radius, this.radius );
   },
 
   /**
@@ -292,6 +292,27 @@ TYPE6JS.Geometry.Circle = {
   */
   getSquaredDistance: function(vector2) {
     return this.position.getSquaredDistance( vector2 );
+  },
+  
+  /**
+  * draw the circle in a canvas.
+  * @since 0.2.3
+  * @method
+  * @param {context} context The context of the canvas.
+  * @param {string} color The color of the circle.
+  * @returns {Vector2D}
+  */
+  draw: function( context, color ){
+    context.fillStyle = color;
+    context.beginPath();
+    context.arc(  this.getPositionX(),
+                  this.getPositionY(),
+                  this.getRadius(),
+                  0,
+                  TYPE6.Trigonometry.TWOPI,
+                  false
+                );
+    context.fill();
   }
 
 };

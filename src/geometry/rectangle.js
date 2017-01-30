@@ -2,7 +2,7 @@
 * @class
 * @classdesc A class that represents a two dimension rectangle.
 */
-TYPE6JS.Geometry.Rectangle = {
+TYPE6.Geometry.Rectangle = {
 
   /**
   * @since 0.2.0
@@ -51,14 +51,14 @@ TYPE6JS.Geometry.Rectangle = {
   },
 
   initSize: function( sizeX, sizeY ){
-    this.size     = TYPE6JS.Vector2D.create( sizeX, sizeY );
-    this.halfSize = TYPE6JS.Vector2D.create( sizeX * 0.5, sizeY * 0.5 );
+    this.size     = TYPE6.Vector2D.create( sizeX, sizeY );
+    this.halfSize = this.size.halve();
   },
 
   initPosition: function( positionX, positionY ){
-    this.position          = TYPE6JS.Vector2D.create( positionX, positionY );
-    this.topLeftCorner     = TYPE6JS.Vector2D.create( positionX - this.halfSize.getX(), positionY - this.halfSize.getY() );
-    this.bottomRightCorner = TYPE6JS.Vector2D.create( positionX + this.halfSize.getX(), positionY + this.halfSize.getY() );
+    this.position          = TYPE6.Vector2D.create( positionX, positionY );
+    this.topLeftCorner     = TYPE6.Vector2D.create( positionX - this.halfSize.getX(), positionY - this.halfSize.getY() );
+    this.bottomRightCorner = TYPE6.Vector2D.create( positionX + this.halfSize.getX(), positionY + this.halfSize.getY() );
   },
   /**
   * Copy the rectangle.
@@ -347,6 +347,23 @@ TYPE6JS.Geometry.Rectangle = {
   */
   getHalfSizeY: function(){
     return this.halfSize.getY();
+  },
+  
+  /**
+  * draw the rectangle in a canvas.
+  * @since 0.2.3
+  * @method
+  * @param {context} context The context of the canvas.
+  * @param {string} color The color of the rectangle.
+  * @returns {Vector2D}
+  */
+  draw : function( context, color ){
+    context.fillStyle = color;
+    context.fillRect( this.topLeftCorner.getX(),
+                      this.topLeftCorner.getY(),
+                      this.size.getX(),
+                      this.size.getY()
+                    );
   }
 
   // clampTo:function(rectangle){
