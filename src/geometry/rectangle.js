@@ -89,6 +89,34 @@ TYPE6.Geometry.Rectangle = {
   },
 
   /**
+  * set position X axis.
+  * @since 0.2.0
+  * @method
+  * @param {float} A floating number.
+  * @returns {float}
+  */
+  setPositionX: function( x ){
+    this.position.setX( x );
+    this.setTopLeftCornerX( x - this.getHalfSizeX() );
+    this.setBottomRightCornerX( x + this.getHalfSizeX() );
+    return this.position.getX();
+  },
+
+  /**
+  * set position Y axis.
+  * @since 0.2.0
+  * @method
+  * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+  * @returns {Vector2D}
+  */
+  setPositionY: function( y ){
+    this.position.setY( y );
+    this.setTopLeftCornerY( y - this.getHalfSizeY() );
+    this.setBottomRightCornerY( y + this.getHalfSizeY() );
+    return this.position.getY();
+  },
+
+  /**
   * set position XY.
   * @since 0.2.0
   * @method
