@@ -197,7 +197,31 @@ TYPE6.Geometry.Rectangle = {
   },
   
   /**
-  * set top left corner XY.
+  * set bottom right corner X.
+  * @since 0.2.4
+  * @method
+  * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+  * @returns {Vector2D}
+  */
+  setBottomRightCornerX: function( bottomRightCornerX ){
+    this.bottomRightCorner.setX( bottomRightCornerX );
+    return this.getBottomRightCornerX();
+  },
+  
+  /**
+  * set bottom right corner Y.
+  * @since 0.2.4
+  * @method
+  * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+  * @returns {Vector2D}
+  */
+  setBottomRightCornerY: function( bottomRightCornerY ){
+    this.bottomRightCorner.setY( bottomRightCornerY );
+    return this.getBottomRightCornerY();
+  },
+  
+  /**
+  * set bottom right corner XY.
   * @since 0.2.0
   * @method
   * @param {array(2)} An array of floats with array[0] as x and array[1] as y.

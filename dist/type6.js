@@ -23,7 +23,7 @@
 * http://type6js.lcluber.com
 */
 var TYPE6 = {
-    Revision: "0.2.3"
+    Revision: "0.2.4"
 };
 
 TYPE6.MathUtils = {
@@ -541,19 +541,19 @@ TYPE6.Geometry.Rectangle = {
         this.position.setX(x);
         this.setTopLeftCornerX(x - this.getHalfSizeX());
         this.setBottomRightCornerX(x + this.getHalfSizeX());
-        return this.position.getX();
+        return this.getPositionX();
     },
     setPositionY: function(y) {
         this.position.setY(y);
         this.setTopLeftCornerY(y - this.getHalfSizeY());
         this.setBottomRightCornerY(y + this.getHalfSizeY());
-        return this.position.getY();
+        return this.getPositionY();
     },
     setPositionXY: function(positionX, positionY) {
         this.position.setXY(positionX, positionY);
         this.setTopLeftCornerXY(positionX - this.getHalfSizeX(), positionY - this.getHalfSizeY());
         this.setBottomRightCornerXY(positionX + this.getHalfSizeX(), positionY + this.getHalfSizeY());
-        return this.position;
+        return this.getPosition();
     },
     setPositionFromVector2D: function(position) {
         this.position.copyTo(position);
@@ -561,17 +561,33 @@ TYPE6.Geometry.Rectangle = {
         this.setBottomRightCornerXY(position.getX() + this.getHalfSizeX(), position.getY() + this.getHalfSizeY());
         return this.position;
     },
+    setTopLeftCornerX: function(topLeftCornerX) {
+        this.topLeftCorner.setX(topLeftCornerX);
+        return this.getTopLeftCornerX();
+    },
+    setTopLeftCornerY: function(topLeftCornerY) {
+        this.topLeftCorner.setY(topLeftCornerY);
+        return this.getTopLeftCornerY();
+    },
     setTopLeftCornerXY: function(topLeftCornerX, topLeftCornerY) {
         this.topLeftCorner.setXY(topLeftCornerX, topLeftCornerY);
-        return this.topLeftCorner;
+        return this.getTopLeftCorner();
     },
     setTopLeftCornerFromVector2D: function(topLeftCorner) {
         this.topLeftCorner.copyTo(topLeftCorner);
         return this.topLeftCorner;
     },
+    setBottomRightCornerX: function(bottomRightCornerX) {
+        this.bottomRightCorner.setX(bottomRightCornerX);
+        return this.getBottomRightCornerX();
+    },
+    setBottomRightCornerY: function(bottomRightCornerY) {
+        this.bottomRightCorner.setY(bottomRightCornerY);
+        return this.getBottomRightCornerY();
+    },
     setBottomRightCornerXY: function(bottomRightCornerX, bottomRightCornerY) {
         this.bottomRightCorner.setXY(bottomRightCornerX, bottomRightCornerY);
-        return this.bottomRightCorner;
+        return this.getBottomRightCorner();
     },
     setBottomRightCornerFromVector2D: function(bottomRightCorner) {
         this.bottomRightCorner.copyTo(bottomRightCorner);
