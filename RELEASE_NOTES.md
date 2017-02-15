@@ -5,26 +5,33 @@ Version 0.3.0 (incoming)
  * 3D vectors
  * documentation updates
 
+Version 0.2.4 (February 15th 2017)
+------------------------------
+ * added setPositionX() and setPositionY() methods to Geometry.Rectangle class
+ * added setTopLeftCornerX() and setTopLeftCornerY() methods to Geometry.Rectangle class
+ * added setBottomRightCornerX() and setBottomRightCornerY() methods to Geometry.Rectangle class
+ * documentation updates
+
 Version 0.2.3 (January 29th 2017)
 ------------------------------
  * added draw() method to Geometry.Circle and Geometry.Rectangle classes to draw those forms in a HTML canvas
 
 Version 0.2.2 (January 2nd 2017)
 ------------------------------
-* TYPE6JS namespace becomes TYPE6
+ * TYPE6JS namespace becomes TYPE6
 
 Version 0.2.1 (December 21th 2016)
 ------------------------------
  * vector2D class
-  * Added copyScaledVectorTo() method merging copy and scale methods into one
-  * Added copySubtractFromTo() method merging copy and subtract methods into one
-  * Added subtractScaledVector() and subtractScaledVectorFrom() methods
-  * Added isPositive() and isNegative methods
-  * Added setXToOrigin() and setYToOrigin() methods
-  * Fixed copy() method
- * Geometry class
-  * Added bottomRightCorner and halfSize properties to rectangle class with getters and setters
-  * Added size and halfSize Properties to circle class
+  * added copyScaledVectorTo() method merging copy and scale methods into one
+  * added copySubtractFromTo() method merging copy and subtract methods into one
+  * added subtractScaledVector() and subtractScaledVectorFrom() methods
+  * added isPositive() and isNegative methods
+  * added setXToOrigin() and setYToOrigin() methods
+  * fixed copy() method
+ * geometry class
+  * added bottomRightCorner and halfSize properties to rectangle class with getters and setters
+  * added size and halfSize Properties to circle class
 
 Version 0.2.0 (September 21st 2016)
 ------------------------------

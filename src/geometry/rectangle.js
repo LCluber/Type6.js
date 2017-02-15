@@ -89,8 +89,8 @@ TYPE6.Geometry.Rectangle = {
   },
 
   /**
-  * set position X axis.
-  * @since 0.2.0
+  * set position on X axis.
+  * @since 0.2.4
   * @method
   * @param {float} A floating number.
   * @returns {float}
@@ -99,12 +99,12 @@ TYPE6.Geometry.Rectangle = {
     this.position.setX( x );
     this.setTopLeftCornerX( x - this.getHalfSizeX() );
     this.setBottomRightCornerX( x + this.getHalfSizeX() );
-    return this.position.getX();
+    return this.getPositionX();
   },
 
   /**
-  * set position Y axis.
-  * @since 0.2.0
+  * set position on Y axis.
+  * @since 0.2.4
   * @method
   * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
   * @returns {Vector2D}
@@ -113,7 +113,7 @@ TYPE6.Geometry.Rectangle = {
     this.position.setY( y );
     this.setTopLeftCornerY( y - this.getHalfSizeY() );
     this.setBottomRightCornerY( y + this.getHalfSizeY() );
-    return this.position.getY();
+    return this.getPositionY();
   },
 
   /**
@@ -129,7 +129,7 @@ TYPE6.Geometry.Rectangle = {
                              positionY - this.getHalfSizeY() );
     this.setBottomRightCornerXY( positionX + this.getHalfSizeX(),
                                  positionY + this.getHalfSizeY() );
-    return this.position;
+    return this.getPosition();
   },
   
   /**
@@ -148,6 +148,29 @@ TYPE6.Geometry.Rectangle = {
     return this.position;
   },
 
+  /**
+  * set top left corner on X axis.
+  * @since 0.2.4
+  * @method
+  * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+  * @returns {Vector2D}
+  */
+  setTopLeftCornerX: function( topLeftCornerX ){
+    this.topLeftCorner.setX( topLeftCornerX );
+    return this.getTopLeftCornerX();
+  },
+  
+  /**
+  * set top left corner on Y axis.
+  * @since 0.2.4
+  * @method
+  * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+  * @returns {Vector2D}
+  */
+  setTopLeftCornerY: function( topLeftCornerY ){
+    this.topLeftCorner.setY( topLeftCornerY );
+    return this.getTopLeftCornerY();
+  },
 
   /**
   * set top left corner XY.
@@ -158,7 +181,7 @@ TYPE6.Geometry.Rectangle = {
   */
   setTopLeftCornerXY: function( topLeftCornerX, topLeftCornerY ){
     this.topLeftCorner.setXY( topLeftCornerX, topLeftCornerY );
-    return this.topLeftCorner;
+    return this.getTopLeftCorner();
   },
 
   /**
@@ -182,7 +205,7 @@ TYPE6.Geometry.Rectangle = {
   */
   setBottomRightCornerXY: function( bottomRightCornerX, bottomRightCornerY ){
     this.bottomRightCorner.setXY( bottomRightCornerX, bottomRightCornerY );
-    return this.bottomRightCorner;
+    return this.getBottomRightCorner();
   },
 
   /**
