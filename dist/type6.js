@@ -537,6 +537,18 @@ TYPE6.Geometry.Rectangle = {
         this.setSizeFromVector2D(rectangle.getSize());
         this.setPositionFromVector2D(rectangle.getPosition());
     },
+    setPositionX: function(x) {
+        this.position.setX(x);
+        this.setTopLeftCornerX(x - this.getHalfSizeX());
+        this.setBottomRightCornerX(x + this.getHalfSizeX());
+        return this.position.getX();
+    },
+    setPositionY: function(y) {
+        this.position.setY(y);
+        this.setTopLeftCornerY(y - this.getHalfSizeY());
+        this.setBottomRightCornerY(y + this.getHalfSizeY());
+        return this.position.getY();
+    },
     setPositionXY: function(positionX, positionY) {
         this.position.setXY(positionX, positionY);
         this.setTopLeftCornerXY(positionX - this.getHalfSizeX(), positionY - this.getHalfSizeY());

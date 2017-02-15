@@ -95,7 +95,7 @@ TYPE6.Geometry.Circle = {
   },
 
   /**
-  * set position X axis.
+  * set position on X axis.
   * @since 0.2.0
   * @method
   * @param {float} A floating number.
@@ -107,7 +107,7 @@ TYPE6.Geometry.Circle = {
   },
 
   /**
-  * set position Y axis.
+  * set position on Y axis.
   * @since 0.2.0
   * @method
   * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
