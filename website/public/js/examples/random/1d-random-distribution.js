@@ -1,0 +1,1 @@
+../../../../js/examples/random/1d-random-distribution.js

@@ -1,0 +1,1 @@
+../../../../js/examples/trigonometry/spinner.js

@@ -1,0 +1,1 @@
+../../../../js/examples/trigonometry/following-arrow.js

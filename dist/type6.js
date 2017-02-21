@@ -76,7 +76,7 @@ TYPE6.MathUtils = {
 };
 
 TYPE6.Random = {
-    "float": function(min, max) {
+    float: function(min, max) {
         return min + Math.random() * (max - min);
     },
     integer: function(min, max) {
