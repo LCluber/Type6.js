@@ -4,6 +4,11 @@ Version 0.3.0 (incoming)
  * matrices
  * 3D vectors
  * documentation updates
+ 
+ Version 0.2.5 (February 25th 2017)
+ ------------------------------
+  * added subtractFromX() and subtractFromY() methods to the vector2D class.
+  * documentation updates
 
 Version 0.2.4 (February 15th 2017)
 ------------------------------

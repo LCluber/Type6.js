@@ -23,7 +23,7 @@
 * http://type6js.lcluber.com
 */
 var TYPE6 = {
-    Revision: "0.2.4"
+    Revision: "0.2.5"
 };
 
 TYPE6.MathUtils = {
@@ -322,6 +322,12 @@ TYPE6.Vector2D = {
     subtractFrom: function(vector2D) {
         this.x -= vector2D.getX();
         this.y -= vector2D.getY();
+    },
+    subtractFromX: function(x) {
+        this.x -= x;
+    },
+    subtractFromY: function(y) {
+        this.y -= y;
     },
     copySubtractFromTo: function(vector2DA, vector2DB) {
         this.x = vector2DA.getX() - vector2DB.getX();

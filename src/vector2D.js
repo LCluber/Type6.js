@@ -653,7 +653,7 @@ TYPE6.Vector2D = {
   * Add a X component to this vector
   * @since 0.0.3
   * @method
-  * @param {Vector2} vector2D The vector you want to add.
+  * @param {float} x The amount you want to add.
   */
   addToX: function(x) {
     this.x += x;
@@ -663,7 +663,7 @@ TYPE6.Vector2D = {
   * Add a Y component to this vector
   * @since 0.0.3
   * @method
-  * @param {Vector2} vector2D The vector you want to add.
+  * @param {float} y The amount you want to add.
   */
   addToY: function(y) {
     this.y += y;
@@ -713,6 +713,26 @@ TYPE6.Vector2D = {
   subtractFrom: function(vector2D) {
     this.x -= vector2D.getX();
     this.y -= vector2D.getY();
+  },
+  
+  /**
+  * subtract a X component to this vector.
+  * @since 0.2.5
+  * @method
+  * @param {float} y The value to subtract.
+  */
+  subtractFromX: function(x) {
+    this.x -= x;
+  },
+  
+  /**
+  * subtract a Y component to this vector.
+  * @since 0.2.5
+  * @method
+  * @param {float} y The value to subtract.
+  */
+  subtractFromY: function(y) {
+    this.y -= y;
   },
   
   /**
