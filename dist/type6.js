@@ -23,7 +23,7 @@
 * http://type6js.lcluber.com
 */
 var TYPE6 = {
-    Revision: "0.2.5"
+    Revision: "0.2.6"
 };
 
 TYPE6.MathUtils = {
@@ -437,6 +437,10 @@ TYPE6.Geometry.Circle = {
         this.size = TYPE6.Vector2D.create(this.diameter, this.diameter);
         this.halfSize = TYPE6.Vector2D.create(this.radius, this.radius);
     },
+    setSize: function() {
+        this.size.setXY(this.diameter, this.diameter);
+        this.halfSize.setXY(this.radius, this.radius);
+    },
     copy: function(circle) {
         return this.create(circle.getPositionX(), circle.getPositionY(), circle.getRadius());
     },
@@ -472,7 +476,7 @@ TYPE6.Geometry.Circle = {
     setRadius: function(radius) {
         this.radius = radius;
         this.diameter = this.radius * 2;
-        this.initSize();
+        this.setSize();
         return this.radius;
     },
     getRadius: function() {
@@ -481,7 +485,7 @@ TYPE6.Geometry.Circle = {
     setDiameter: function(diameter) {
         this.diameter = diameter;
         this.radius = this.diameter * .5;
-        this.initSize();
+        this.setSize();
         return this.diameter;
     },
     getDiameter: function() {
@@ -489,6 +493,9 @@ TYPE6.Geometry.Circle = {
     },
     getHalfSize: function() {
         return this.halfSize;
+    },
+    getSize: function() {
+        return this.size;
     },
     clampTo: function(rectangle) {
         this.position.clampTo(rectangle);

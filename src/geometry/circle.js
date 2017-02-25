@@ -68,6 +68,11 @@ TYPE6.Geometry.Circle = {
     this.size     = TYPE6.Vector2D.create( this.diameter, this.diameter );
     this.halfSize = TYPE6.Vector2D.create( this.radius, this.radius );
   },
+  
+  setSize: function(){
+    this.size.setXY( this.diameter, this.diameter );
+    this.halfSize.setXY( this.radius, this.radius );
+  },
 
   /**
   * Copy a circle.
@@ -185,7 +190,7 @@ TYPE6.Geometry.Circle = {
   setRadius: function( radius ){
     this.radius   = radius;
     this.diameter = this.radius * 2;
-    this.initSize();
+    this.setSize();
     return this.radius;
   },
 
@@ -210,7 +215,7 @@ TYPE6.Geometry.Circle = {
   setDiameter: function( diameter ){
     this.diameter = diameter;
     this.radius   = this.diameter * 0.5;
-    this.initSize();
+    this.setSize();
     return this.diameter;
   },
 
@@ -226,14 +231,23 @@ TYPE6.Geometry.Circle = {
   },
   
   /**
-  * get size.
-  * @since 0.2.0
+  * get halfSize.
+  * @since 0.2.1
   * @method
-  * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
   * @returns {Vector2D}
   */
   getHalfSize: function(){
     return this.halfSize;
+  },
+  
+  /**
+  * get size.
+  * @since 0.2.1
+  * @method
+  * @returns {Vector2D}
+  */
+  getSize: function(){
+    return this.size;
   },
 
   /**
