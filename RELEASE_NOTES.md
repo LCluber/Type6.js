@@ -5,6 +5,10 @@ Version 0.3.0 (incoming)
  * 3D vectors
  * documentation updates
  
+Version 0.2.7 (February 26th 2017)
+------------------------------
+ * Added strokeColor and strokeWidth parameters to the draw() method of the Geometry.Circle class
+ 
 Version 0.2.6 (February 25th 2017)
 ------------------------------
  * fixed getSize() and improved size handling in Geometry.Circle class

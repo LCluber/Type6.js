@@ -23,7 +23,7 @@
 * http://type6js.lcluber.com
 */
 var TYPE6 = {
-    Revision: "0.2.6"
+    Revision: "0.2.7"
 };
 
 TYPE6.MathUtils = {
@@ -513,11 +513,18 @@ TYPE6.Geometry.Circle = {
     getSquaredDistance: function(vector2) {
         return this.position.getSquaredDistance(vector2);
     },
-    draw: function(context, color) {
-        context.fillStyle = color;
+    draw: function(context, fillColor, strokeColor, strokeWidth) {
         context.beginPath();
         context.arc(this.getPositionX(), this.getPositionY(), this.getRadius(), 0, TYPE6.Trigonometry.TWOPI, false);
-        context.fill();
+        if (fillColor) {
+            context.fillStyle = fillColor;
+            context.fill();
+        }
+        if (strokeColor) {
+            context.strokeStyle = strokeColor;
+            context.lineWidth = strokeWidth;
+            context.stroke();
+        }
     }
 };
 

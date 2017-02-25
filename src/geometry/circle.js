@@ -312,11 +312,12 @@ TYPE6.Geometry.Circle = {
   * @since 0.2.3
   * @method
   * @param {context} context The context of the canvas.
-  * @param {string} color The color of the circle.
+  * @param {string} fillColor The fill color of the circle.
+  * @param {string} strokeColor The stroke color of the circle.
+  * @param {float} strokeWidth The stroke width of the circle.
   * @returns {Vector2D}
   */
-  draw: function( context, color ){
-    context.fillStyle = color;
+  draw: function( context, fillColor, strokeColor, strokeWidth ){
     context.beginPath();
     context.arc(  this.getPositionX(),
                   this.getPositionY(),
@@ -325,7 +326,15 @@ TYPE6.Geometry.Circle = {
                   TYPE6.Trigonometry.TWOPI,
                   false
                 );
-    context.fill();
+    if( fillColor ){
+      context.fillStyle = fillColor;
+      context.fill();
+    }
+    if( strokeColor ){
+      context.strokeStyle = strokeColor;
+      context.lineWidth = strokeWidth;
+      context.stroke();
+    }
   }
 
 };

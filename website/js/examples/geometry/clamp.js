@@ -20,7 +20,7 @@ window.onload = function() {
     context.clearRect(0, 0, width, height);
 
     drawRectangles();
-    circle.draw( context, "#CC0000" );
+    circle.draw( context, "#CC0000", null, null );
 
     context.fill();
   });

@@ -5,7 +5,7 @@ window.onload = function() {
   var height  = canvas.height = window.innerHeight;
   var circle  = TYPE6.Geometry.Circle.create( width * 0.5, height * 0.5, 20 );
 
-  circle.draw( context, 'rgba(0,0,0,1)' );
+  circle.draw( context, 'rgba(0,0,0,1)', null, null );
   context.fill();
 
   document.body.addEventListener("mousemove", function(event) {
@@ -16,7 +16,7 @@ window.onload = function() {
                     ));
 
     context.clearRect(0, 0, width, height);
-    circle.draw( context, 'rgba(0,0,0,1)' );
+    circle.draw( context, 'rgba(0,0,0,1)', null, null );
     context.fill();
   });
 
