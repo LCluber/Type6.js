@@ -408,7 +408,7 @@ module.exports = function(grunt){
 
   grunt.registerTask( 'src',
                       'build library into /dist',
-                      [ 'jshint:lib', 'clean:lib', 'uglify', 'concat:lib', 'concat:libmin']
+                      [ 'jshint:lib', 'clean:lib', 'uglify' ]
                     );
 
   grunt.registerTask( 'website:js',

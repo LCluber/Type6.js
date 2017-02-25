@@ -424,7 +424,6 @@ TYPE6.Geometry.Circle = {
         var obj = Object.create(this);
         obj.init();
         obj.setRadius(radius);
-        obj.initSize();
         obj.setPositionXY(positionX, positionY);
         return obj;
     },
@@ -432,10 +431,11 @@ TYPE6.Geometry.Circle = {
         this.position = TYPE6.Vector2D.create();
         this.radius = 0;
         this.diameter = 0;
+        this.initSize();
     },
     initSize: function() {
-        this.size = TYPE6.Vector2D.create(this.diameter, this.diameter);
-        this.halfSize = TYPE6.Vector2D.create(this.radius, this.radius);
+        this.size = TYPE6.Vector2D.create();
+        this.halfSize = TYPE6.Vector2D.create();
     },
     setSize: function() {
         this.size.setXY(this.diameter, this.diameter);
