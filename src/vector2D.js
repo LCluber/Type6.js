@@ -793,6 +793,18 @@ TYPE6.Vector2D = {
     this.x *= vector2D.getX();
     this.y *= vector2D.getY();
   },
+  
+  /**
+  * Multiply scaled vector by.
+  * @since 0.2.8
+  * @method
+  * @param {Vector2} value The vector to scale.
+  * @param {value} value The scale amount.
+  */
+  multiplyScaledVectorBy:function(vector2D, scalar){
+    this.x *= vector2D.getX() * scalar;
+    this.y *= vector2D.getY() * scalar;
+  },
 
   /**
   * Divide by
@@ -804,6 +816,62 @@ TYPE6.Vector2D = {
   divideBy: function(vector2D) {
     this.x /= vector2D.getX();
     this.y /= vector2D.getY();
+  },
+
+  /**
+  * Divide scaled vector by
+  * @since 0.2.8
+  * @method
+  * @param {Vector2} value The vector to scale.
+  * @param {float} value The scale amount.
+  */
+  divideScaledVectorBy:function(vector2D, scalar){
+    this.x /= vector2D.getX() * scalar;
+    this.y /= vector2D.getY() * scalar;
+  },
+
+  /**
+  * return the maximum between each component and the given vector.
+  * @since 0.2.8
+  * @method
+  * @param {Vector2} value The vector to compare.
+  */
+  maxTo:function(vector2D){
+    this.x = Math.max( this.x, vector2D.getX() );
+    this.y = Math.max( this.y, vector2D.getY() );
+  },
+  
+  /**
+  * return the minimum between each component and the given vector.
+  * @since 0.2.8
+  * @method
+  * @param {Vector2} value The vector to compare.
+  */
+  minTo:function(vector2D){
+    this.x = Math.min( this.x, vector2D.getX() );
+    this.y = Math.min( this.y, vector2D.getY() );
+  },
+
+  /**
+  * return the maximum between each component and a scalar.
+  * @since 0.2.8
+  * @method
+  * @param {float} scalar The scale amount.
+  */
+  maxScalarTo:function(scalar){
+    this.x = Math.max( this.x, scalar );
+    this.y = Math.max( this.y, scalar );
+  },
+  
+  /**
+  * return the minimum between each component and a scalar.
+  * @since 0.2.8
+  * @method
+  * @param {float} value The scale amount.
+  */
+  minScalarTo:function(scalar){
+    this.x = Math.min( this.x, scalar );
+    this.y = Math.min( this.y, scalar );
   },
 
   /**

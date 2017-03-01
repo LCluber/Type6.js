@@ -23,7 +23,7 @@
 * http://type6js.lcluber.com
 */
 var TYPE6 = {
-    Revision: "0.2.7"
+    Revision: "0.2.8"
 };
 
 TYPE6.MathUtils = {
@@ -349,9 +349,33 @@ TYPE6.Vector2D = {
         this.x *= vector2D.getX();
         this.y *= vector2D.getY();
     },
+    multiplyScaledVectorBy: function(vector2D, scalar) {
+        this.x *= vector2D.getX() * scalar;
+        this.y *= vector2D.getY() * scalar;
+    },
     divideBy: function(vector2D) {
         this.x /= vector2D.getX();
         this.y /= vector2D.getY();
+    },
+    divideScaledVectorBy: function(vector2D, scalar) {
+        this.x /= vector2D.getX() * scalar;
+        this.y /= vector2D.getY() * scalar;
+    },
+    maxTo: function(vector2D) {
+        this.x = Math.max(this.x, vector2D.getX());
+        this.y = Math.max(this.y, vector2D.getY());
+    },
+    minTo: function(vector2D) {
+        this.x = Math.min(this.x, vector2D.getX());
+        this.y = Math.min(this.y, vector2D.getY());
+    },
+    maxScalarTo: function(scalar) {
+        this.x = Math.max(this.x, scalar);
+        this.y = Math.max(this.y, scalar);
+    },
+    minScalarTo: function(scalar) {
+        this.x = Math.min(this.x, scalar);
+        this.y = Math.min(this.y, scalar);
     },
     halveBy: function() {
         this.x *= .5;
