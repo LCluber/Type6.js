@@ -315,7 +315,6 @@ TYPE6.Geometry.Circle = {
   * @param {string} fillColor The fill color of the circle.
   * @param {string} strokeColor The stroke color of the circle.
   * @param {float} strokeWidth The stroke width of the circle.
-  * @returns {Vector2D}
   */
   draw: function( context, fillColor, strokeColor, strokeWidth ){
     context.beginPath();

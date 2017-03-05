@@ -5,6 +5,10 @@ Version 0.3.0 (incoming)
  * 3D vectors
  * documentation updates
  
+Version 0.2.9 (March 5th 2017)
+------------------------------
+ * Added strokeColor and strokeWidth parameters to the draw() method of the Geometry.Rectangle class
+ 
 Version 0.2.8 (March 2nd 2017)
 ------------------------------
  * Added multiplyScaledVectorBy() and divideScaledVectorBy() methods to the Vector2D class

@@ -22,12 +22,12 @@ window.onload = function() {
     drawRectangles();
     circle.draw( context, "#CC0000", null, null );
 
-    context.fill();
+    //context.fill();
   });
 
   function drawRectangles(){
-    rect.draw( context, "#cccccc" );
-    innerRect.draw( context, "#999999" );
+    rect.draw( context, "#cccccc", null, null );
+    innerRect.draw( context, "#999999", "#000000", 1 );
   }
 
 };

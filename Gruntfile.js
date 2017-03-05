@@ -351,11 +351,11 @@ module.exports = function(grunt){
       },
       webjs: {
         files: webDir + 'js/**/*.js',
-        tasks: ['js'],
+        tasks: ['website:js'],
       },
       webcss: {
         files: webDir + 'sass/**/*.scss',
-        tasks: ['css', 'static'],
+        tasks: ['website:css', 'static'],
       },
       options: {
         interrupt: true,

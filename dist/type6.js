@@ -23,7 +23,7 @@
 * http://type6js.lcluber.com
 */
 var TYPE6 = {
-    Revision: "0.2.8"
+    Revision: "0.2.9"
 };
 
 TYPE6.MathUtils = {
@@ -690,9 +690,18 @@ TYPE6.Geometry.Rectangle = {
     getHalfSizeY: function() {
         return this.halfSize.getY();
     },
-    draw: function(context, color) {
-        context.fillStyle = color;
-        context.fillRect(this.topLeftCorner.getX(), this.topLeftCorner.getY(), this.size.getX(), this.size.getY());
+    draw: function(context, fillColor, strokeColor, strokeWidth) {
+        context.beginPath();
+        context.rect(this.topLeftCorner.getX(), this.topLeftCorner.getY(), this.size.getX(), this.size.getY());
+        if (fillColor) {
+            context.fillStyle = fillColor;
+            context.fill();
+        }
+        if (strokeColor) {
+            context.strokeStyle = strokeColor;
+            context.lineWidth = strokeWidth;
+            context.stroke();
+        }
     }
 };
 
