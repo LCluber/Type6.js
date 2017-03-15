@@ -23,7 +23,7 @@
 * http://type6js.lcluber.com
 */
 var TYPE6 = {
-    Revision: "0.2.3"
+    Revision: "0.2.9"
 };
 
 TYPE6.MathUtils = {
@@ -76,7 +76,7 @@ TYPE6.MathUtils = {
 };
 
 TYPE6.Random = {
-    "float": function(min, max) {
+    float: function(min, max) {
         return min + Math.random() * (max - min);
     },
     integer: function(min, max) {
@@ -323,6 +323,12 @@ TYPE6.Vector2D = {
         this.x -= vector2D.getX();
         this.y -= vector2D.getY();
     },
+    subtractFromX: function(x) {
+        this.x -= x;
+    },
+    subtractFromY: function(y) {
+        this.y -= y;
+    },
     copySubtractFromTo: function(vector2DA, vector2DB) {
         this.x = vector2DA.getX() - vector2DB.getX();
         this.y = vector2DA.getY() - vector2DB.getY();
@@ -343,9 +349,33 @@ TYPE6.Vector2D = {
         this.x *= vector2D.getX();
         this.y *= vector2D.getY();
     },
+    multiplyScaledVectorBy: function(vector2D, scalar) {
+        this.x *= vector2D.getX() * scalar;
+        this.y *= vector2D.getY() * scalar;
+    },
     divideBy: function(vector2D) {
         this.x /= vector2D.getX();
         this.y /= vector2D.getY();
+    },
+    divideScaledVectorBy: function(vector2D, scalar) {
+        this.x /= vector2D.getX() * scalar;
+        this.y /= vector2D.getY() * scalar;
+    },
+    maxTo: function(vector2D) {
+        this.x = Math.max(this.x, vector2D.getX());
+        this.y = Math.max(this.y, vector2D.getY());
+    },
+    minTo: function(vector2D) {
+        this.x = Math.min(this.x, vector2D.getX());
+        this.y = Math.min(this.y, vector2D.getY());
+    },
+    maxScalarTo: function(scalar) {
+        this.x = Math.max(this.x, scalar);
+        this.y = Math.max(this.y, scalar);
+    },
+    minScalarTo: function(scalar) {
+        this.x = Math.min(this.x, scalar);
+        this.y = Math.min(this.y, scalar);
     },
     halveBy: function() {
         this.x *= .5;
@@ -418,7 +448,6 @@ TYPE6.Geometry.Circle = {
         var obj = Object.create(this);
         obj.init();
         obj.setRadius(radius);
-        obj.initSize();
         obj.setPositionXY(positionX, positionY);
         return obj;
     },
@@ -426,10 +455,15 @@ TYPE6.Geometry.Circle = {
         this.position = TYPE6.Vector2D.create();
         this.radius = 0;
         this.diameter = 0;
+        this.initSize();
     },
     initSize: function() {
-        this.size = TYPE6.Vector2D.create(this.diameter, this.diameter);
-        this.halfSize = TYPE6.Vector2D.create(this.radius, this.radius);
+        this.size = TYPE6.Vector2D.create();
+        this.halfSize = TYPE6.Vector2D.create();
+    },
+    setSize: function() {
+        this.size.setXY(this.diameter, this.diameter);
+        this.halfSize.setXY(this.radius, this.radius);
     },
     copy: function(circle) {
         return this.create(circle.getPositionX(), circle.getPositionY(), circle.getRadius());
@@ -466,7 +500,7 @@ TYPE6.Geometry.Circle = {
     setRadius: function(radius) {
         this.radius = radius;
         this.diameter = this.radius * 2;
-        this.initSize();
+        this.setSize();
         return this.radius;
     },
     getRadius: function() {
@@ -475,7 +509,7 @@ TYPE6.Geometry.Circle = {
     setDiameter: function(diameter) {
         this.diameter = diameter;
         this.radius = this.diameter * .5;
-        this.initSize();
+        this.setSize();
         return this.diameter;
     },
     getDiameter: function() {
@@ -483,6 +517,9 @@ TYPE6.Geometry.Circle = {
     },
     getHalfSize: function() {
         return this.halfSize;
+    },
+    getSize: function() {
+        return this.size;
     },
     clampTo: function(rectangle) {
         this.position.clampTo(rectangle);
@@ -500,11 +537,18 @@ TYPE6.Geometry.Circle = {
     getSquaredDistance: function(vector2) {
         return this.position.getSquaredDistance(vector2);
     },
-    draw: function(context, color) {
-        context.fillStyle = color;
+    draw: function(context, fillColor, strokeColor, strokeWidth) {
         context.beginPath();
         context.arc(this.getPositionX(), this.getPositionY(), this.getRadius(), 0, TYPE6.Trigonometry.TWOPI, false);
-        context.fill();
+        if (fillColor) {
+            context.fillStyle = fillColor;
+            context.fill();
+        }
+        if (strokeColor) {
+            context.strokeStyle = strokeColor;
+            context.lineWidth = strokeWidth;
+            context.stroke();
+        }
     }
 };
 
@@ -541,19 +585,19 @@ TYPE6.Geometry.Rectangle = {
         this.position.setX(x);
         this.setTopLeftCornerX(x - this.getHalfSizeX());
         this.setBottomRightCornerX(x + this.getHalfSizeX());
-        return this.position.getX();
+        return this.getPositionX();
     },
     setPositionY: function(y) {
         this.position.setY(y);
         this.setTopLeftCornerY(y - this.getHalfSizeY());
         this.setBottomRightCornerY(y + this.getHalfSizeY());
-        return this.position.getY();
+        return this.getPositionY();
     },
     setPositionXY: function(positionX, positionY) {
         this.position.setXY(positionX, positionY);
         this.setTopLeftCornerXY(positionX - this.getHalfSizeX(), positionY - this.getHalfSizeY());
         this.setBottomRightCornerXY(positionX + this.getHalfSizeX(), positionY + this.getHalfSizeY());
-        return this.position;
+        return this.getPosition();
     },
     setPositionFromVector2D: function(position) {
         this.position.copyTo(position);
@@ -561,17 +605,33 @@ TYPE6.Geometry.Rectangle = {
         this.setBottomRightCornerXY(position.getX() + this.getHalfSizeX(), position.getY() + this.getHalfSizeY());
         return this.position;
     },
+    setTopLeftCornerX: function(topLeftCornerX) {
+        this.topLeftCorner.setX(topLeftCornerX);
+        return this.getTopLeftCornerX();
+    },
+    setTopLeftCornerY: function(topLeftCornerY) {
+        this.topLeftCorner.setY(topLeftCornerY);
+        return this.getTopLeftCornerY();
+    },
     setTopLeftCornerXY: function(topLeftCornerX, topLeftCornerY) {
         this.topLeftCorner.setXY(topLeftCornerX, topLeftCornerY);
-        return this.topLeftCorner;
+        return this.getTopLeftCorner();
     },
     setTopLeftCornerFromVector2D: function(topLeftCorner) {
         this.topLeftCorner.copyTo(topLeftCorner);
         return this.topLeftCorner;
     },
+    setBottomRightCornerX: function(bottomRightCornerX) {
+        this.bottomRightCorner.setX(bottomRightCornerX);
+        return this.getBottomRightCornerX();
+    },
+    setBottomRightCornerY: function(bottomRightCornerY) {
+        this.bottomRightCorner.setY(bottomRightCornerY);
+        return this.getBottomRightCornerY();
+    },
     setBottomRightCornerXY: function(bottomRightCornerX, bottomRightCornerY) {
         this.bottomRightCorner.setXY(bottomRightCornerX, bottomRightCornerY);
-        return this.bottomRightCorner;
+        return this.getBottomRightCorner();
     },
     setBottomRightCornerFromVector2D: function(bottomRightCorner) {
         this.bottomRightCorner.copyTo(bottomRightCorner);
@@ -630,9 +690,18 @@ TYPE6.Geometry.Rectangle = {
     getHalfSizeY: function() {
         return this.halfSize.getY();
     },
-    draw: function(context, color) {
-        context.fillStyle = color;
-        context.fillRect(this.topLeftCorner.getX(), this.topLeftCorner.getY(), this.size.getX(), this.size.getY());
+    draw: function(context, fillColor, strokeColor, strokeWidth) {
+        context.beginPath();
+        context.rect(this.topLeftCorner.getX(), this.topLeftCorner.getY(), this.size.getX(), this.size.getY());
+        if (fillColor) {
+            context.fillStyle = fillColor;
+            context.fill();
+        }
+        if (strokeColor) {
+            context.strokeStyle = strokeColor;
+            context.lineWidth = strokeWidth;
+            context.stroke();
+        }
     }
 };
 

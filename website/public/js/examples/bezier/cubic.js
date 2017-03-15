@@ -1,0 +1,1 @@
+../../../../js/examples/bezier/cubic.js

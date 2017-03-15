@@ -16,7 +16,7 @@ window.onload = function() {
       TYPE6.MathUtils.roundToNearest(event.clientY, gridSize)
     );
 
-    circle.draw( context, 'rgba(0,0,0,1)' );
+    circle.draw( context, 'rgba(0,0,0,1)', null, null );
     context.fill();
   });
 

@@ -13,7 +13,7 @@ window.onload = function() {
                   TYPE6.Random.float( 10, 40 )
                 );
 
-    circle.draw( context, colors[ iMod3 ] );
+    circle.draw( context, colors[ iMod3 ], null, null );
 
   }
 

@@ -25,7 +25,7 @@ window.onload = function() {
 
     context.clearRect(0, 0, width, height);
 
-    circle.draw( context, 'rgba(0, 0, 0, ' + alpha + ')' );
+    circle.draw( context, 'rgba(0, 0, 0, ' + alpha + ')', null, null );
 
     period += speed;
 

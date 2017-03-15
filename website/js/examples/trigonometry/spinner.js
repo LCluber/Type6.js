@@ -50,7 +50,7 @@ window.onload = function() {
       }else {
         circle.majAlpha();
       }
-      circle.draw( context, 'rgba(0, 200, 100, ' + circle.alpha + ')');
+      circle.draw( context, 'rgba(0, 200, 100, ' + circle.alpha + ')', null, null );
     }
 
     step += 0.25;

@@ -197,7 +197,31 @@ TYPE6.Geometry.Rectangle = {
   },
   
   /**
-  * set top left corner XY.
+  * set bottom right corner X.
+  * @since 0.2.4
+  * @method
+  * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+  * @returns {Vector2D}
+  */
+  setBottomRightCornerX: function( bottomRightCornerX ){
+    this.bottomRightCorner.setX( bottomRightCornerX );
+    return this.getBottomRightCornerX();
+  },
+  
+  /**
+  * set bottom right corner Y.
+  * @since 0.2.4
+  * @method
+  * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
+  * @returns {Vector2D}
+  */
+  setBottomRightCornerY: function( bottomRightCornerY ){
+    this.bottomRightCorner.setY( bottomRightCornerY );
+    return this.getBottomRightCornerY();
+  },
+  
+  /**
+  * set bottom right corner XY.
   * @since 0.2.0
   * @method
   * @param {array(2)} An array of floats with array[0] as x and array[1] as y.
@@ -405,16 +429,26 @@ TYPE6.Geometry.Rectangle = {
   * @since 0.2.3
   * @method
   * @param {context} context The context of the canvas.
-  * @param {string} color The color of the rectangle.
-  * @returns {Vector2D}
+  * @param {string} fillColor The fill color of the rectangle.
+  * @param {string} strokeColor The stroke color of the rectangle.
+  * @param {float} strokeWidth The stroke width of the rectangle.
   */
-  draw : function( context, color ){
-    context.fillStyle = color;
-    context.fillRect( this.topLeftCorner.getX(),
-                      this.topLeftCorner.getY(),
-                      this.size.getX(),
-                      this.size.getY()
-                    );
+  draw : function( context, fillColor, strokeColor, strokeWidth ){
+    context.beginPath();
+    context.rect( this.topLeftCorner.getX(),
+                  this.topLeftCorner.getY(),
+                  this.size.getX(),
+                  this.size.getY()
+                );
+    if( fillColor ){
+      context.fillStyle = fillColor;
+      context.fill();
+    }
+    if( strokeColor ){
+      context.strokeStyle = strokeColor;
+      context.lineWidth = strokeWidth;
+      context.stroke();
+    }
   }
 
   // clampTo:function(rectangle){

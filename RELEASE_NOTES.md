@@ -4,6 +4,29 @@ Version 0.3.0 (incoming)
  * matrices
  * 3D vectors
  * documentation updates
+ 
+Version 0.2.9 (March 5th 2017)
+------------------------------
+ * Added strokeColor and strokeWidth parameters to the draw() method of the Geometry.Rectangle class
+ 
+Version 0.2.8 (March 2nd 2017)
+------------------------------
+ * Added multiplyScaledVectorBy() and divideScaledVectorBy() methods to the Vector2D class
+ * Added maxTo() and minTo() methods to the Vector2D class
+ * Added maxScalarTo() and minScalarTo() to the Vector2D class
+ 
+Version 0.2.7 (February 26th 2017)
+------------------------------
+ * Added strokeColor and strokeWidth parameters to the draw() method of the Geometry.Circle class
+ 
+Version 0.2.6 (February 25th 2017)
+------------------------------
+ * fixed getSize() and improved size handling in Geometry.Circle class
+ 
+Version 0.2.5 (February 25th 2017)
+------------------------------
+ * added subtractFromX() and subtractFromY() methods to the vector2D class.
+ * documentation updates
 
 Version 0.2.4 (February 15th 2017)
 ------------------------------
