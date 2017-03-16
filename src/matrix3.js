@@ -2,7 +2,7 @@
 * @class
 * @classdesc A class that represents a three dimensions Matrix.
 */
-TYPE6JS.Matrix3 = {
+TYPE6.Matrix3 = {
   /**
   * @since 0.3.0
   * @access private
@@ -89,15 +89,15 @@ TYPE6JS.Matrix3 = {
   * @returns {boolean}
   */
   make: function(x1, x2, x3, y1, y2, y3, z1, z2, z3){
-    this.m[0] = TYPE6JS.Math.isValidFloat(x1);
-    this.m[1] = TYPE6JS.Math.isValidFloat(x2);
-    this.m[2] = TYPE6JS.Math.isValidFloat(x3);
-    this.m[3] = TYPE6JS.Math.isValidFloat(y1);
-    this.m[4] = TYPE6JS.Math.isValidFloat(y2);
-    this.m[5] = TYPE6JS.Math.isValidFloat(y3);
-    this.m[6] = TYPE6JS.Math.isValidFloat(z1);
-    this.m[7] = TYPE6JS.Math.isValidFloat(z2);
-    this.m[8] = TYPE6JS.Math.isValidFloat(z3);
+    this.m[0] = this.valueValidation(x1);
+    this.m[1] = this.valueValidation(x2);
+    this.m[2] = this.valueValidation(x3);
+    this.m[3] = this.valueValidation(y1);
+    this.m[4] = this.valueValidation(y2);
+    this.m[5] = this.valueValidation(y3);
+    this.m[6] = this.valueValidation(z1);
+    this.m[7] = this.valueValidation(z2);
+    this.m[8] = this.valueValidation(z3);
   },
 
   // zero: function(){
@@ -154,65 +154,65 @@ TYPE6JS.Matrix3 = {
   */
   scale: function(vector2D) {
     return this.create(
-                vector2D.x, 0.0,        0.0,
-                0.0,        vector2D.y, 0.0,
+                vector2D.getX(), 0.0,        0.0,
+                0.0,        vector2D.getY(), 0.0,
                 0.0,        0.0,        1.0
               );
   },
 
-  /**
-  * Rotate the matrix on the X axis.
-  * @since 0.3.0
-  * @method
-  * @param {float} the value to validate.
-  * @returns {boolean}
-  */
-  rotateX : function(angle){
-    var cos = TYPE6JS.Trigonometry.cosine(angle);
-    var sin = TYPE6JS.Trigonometry.sine(angle);
-    return this.create(
-                1.0,  0.0,  0.0,  0.0,
-                0.0,  cos,  sin,  0.0,
-                0.0, -sin,  cos,  0.0,
-                0.0,  0.0,  0.0,  1.0
-              );
-  },
-
-  /**
-  * Rotate the matrix on the Y axis.
-  * @since 0.3.0
-  * @method
-  * @param {float} the value to validate.
-  * @returns {boolean}
-  */
-  rotateY : function(angle){
-    var cos = TYPE6JS.Trigonometry.cosine(angle);
-    var sin = TYPE6JS.Trigonometry.sine(angle);
-    return this.create(
-                cos,  0.0, -sin,  0.0,
-                0.0,  1.0,  0.0,  0.0,
-                sin,  0.0,  cos,  0.0,
-                0.0,  0.0,  0.0,  1.0
-              );
-  },
-
-  /**
-  * Rotate the matrix on the Z axis.
-  * @since 0.3.0
-  * @method
-  * @param {float} the value to validate.
-  * @returns {boolean}
-  */
-  rotateZ : function(angle){
-    var cos = TYPE6JS.Trigonometry.cosine(angle);
-    var sin = TYPE6JS.Trigonometry.sine(angle);
-    return this.create(
-                cos,  sin,  0.0,  0.0,
-               -sin,  cos,  0.0,  0.0,
-                0.0,  0.0,  1.0,  0.0,
-                0.0,  0.0,  0.0,  1.0
-              );
-  },
+  // /**
+  // * Rotate the matrix on the X axis.
+  // * @since 0.3.0
+  // * @method
+  // * @param {float} the value to validate.
+  // * @returns {boolean}
+  // */
+  // rotateX : function(angle){
+  //   var cos = TYPE6JS.Trigonometry.cosine(angle);
+  //   var sin = TYPE6JS.Trigonometry.sine(angle);
+  //   return this.create(
+  //               1.0,  0.0,  0.0,  0.0,
+  //               0.0,  cos,  sin,  0.0,
+  //               0.0, -sin,  cos,  0.0,
+  //               0.0,  0.0,  0.0,  1.0
+  //             );
+  // },
+  // 
+  // /**
+  // * Rotate the matrix on the Y axis.
+  // * @since 0.3.0
+  // * @method
+  // * @param {float} the value to validate.
+  // * @returns {boolean}
+  // */
+  // rotateY : function(angle){
+  //   var cos = TYPE6JS.Trigonometry.cosine(angle);
+  //   var sin = TYPE6JS.Trigonometry.sine(angle);
+  //   return this.create(
+  //               cos,  0.0, -sin,  0.0,
+  //               0.0,  1.0,  0.0,  0.0,
+  //               sin,  0.0,  cos,  0.0,
+  //               0.0,  0.0,  0.0,  1.0
+  //             );
+  // },
+  // 
+  // /**
+  // * Rotate the matrix on the Z axis.
+  // * @since 0.3.0
+  // * @method
+  // * @param {float} the value to validate.
+  // * @returns {boolean}
+  // */
+  // rotateZ : function(angle){
+  //   var cos = TYPE6JS.Trigonometry.cosine(angle);
+  //   var sin = TYPE6JS.Trigonometry.sine(angle);
+  //   return this.create(
+  //               cos,  sin,  0.0,  0.0,
+  //              -sin,  cos,  0.0,  0.0,
+  //               0.0,  0.0,  1.0,  0.0,
+  //               0.0,  0.0,  0.0,  1.0
+  //             );
+  // },
 
   /**
   * Translation matrix.
@@ -221,125 +221,124 @@ TYPE6JS.Matrix3 = {
   * @param {float} the value to validate.
   * @returns {boolean}
   */
-  translate : function(vector3D){
+  translate : function(vector2D){
     return this.create(
                 1.0,        0.0,        0.0,
                 0.0,        1.0,        0.0,
-                vector2D.x, vector2D.y, 1.0
+                vector2D.getX(), vector2D.getY(), 1.0
               );
   },
 
-  /**
-  * Multiply the matrix.
-  * @since 0.3.0
-  * @method
-  * @param {float} the value to validate.
-  * @returns {boolean}
-  */
-  multiply: function(m){
-    return this.create(
-              this.m[0]*m.m[ 0] + this.m[4]*m.m[ 1] + this.m[ 8]*m.m[ 2],
-              this.m[1]*m.m[ 0] + this.m[5]*m.m[ 1] + this.m[ 9]*m.m[ 2],
-              this.m[2]*m.m[ 0] + this.m[6]*m.m[ 1] + this.m[10]*m.m[ 2],
-              0.0,
-
-              this.m[0]*m.m[ 4] + this.m[4]*m.m[ 5] + this.m[ 8]*m.m[ 6],
-              this.m[1]*m.m[ 4] + this.m[5]*m.m[ 5] + this.m[ 9]*m.m[ 6],
-              this.m[2]*m.m[ 4] + this.m[6]*m.m[ 5] + this.m[10]*m.m[ 6],
-              0.0,
-
-              this.m[0]*m.m[ 8] + this.m[4]*m.m[ 9] + this.m[ 8]*m.m[10],
-              this.m[1]*m.m[ 8] + this.m[5]*m.m[ 9] + this.m[ 9]*m.m[10],
-              this.m[2]*m.m[ 8] + this.m[6]*m.m[ 9] + this.m[10]*m.m[10],
-              0.0,
-
-              this.m[0]*m.m[12] + this.m[4]*m.m[13] + this.m[ 8]*m.m[14] + this.m[12],
-              this.m[1]*m.m[12] + this.m[5]*m.m[13] + this.m[ 9]*m.m[14] + this.m[13],
-              this.m[2]*m.m[12] + this.m[6]*m.m[13] + this.m[10]*m.m[14] + this.m[14],
-              1.0
-            );
-
-  },
+  // /**
+  // * Multiply the matrix.
+  // * @since 0.3.0
+  // * @method
+  // * @param {float} the value to validate.
+  // * @returns {boolean}
+  // */
+  // multiply: function(m){
+  //   return this.create(
+  //             this.m[0]*m.m[ 0] + this.m[4]*m.m[ 1] + this.m[ 8]*m.m[ 2],
+  //             this.m[1]*m.m[ 0] + this.m[5]*m.m[ 1] + this.m[ 9]*m.m[ 2],
+  //             this.m[2]*m.m[ 0] + this.m[6]*m.m[ 1] + this.m[10]*m.m[ 2],
+  //             0.0,
+  // 
+  //             this.m[0]*m.m[ 4] + this.m[4]*m.m[ 5] + this.m[ 8]*m.m[ 6],
+  //             this.m[1]*m.m[ 4] + this.m[5]*m.m[ 5] + this.m[ 9]*m.m[ 6],
+  //             this.m[2]*m.m[ 4] + this.m[6]*m.m[ 5] + this.m[10]*m.m[ 6],
+  //             0.0,
+  // 
+  //             this.m[0]*m.m[ 8] + this.m[4]*m.m[ 9] + this.m[ 8]*m.m[10],
+  //             this.m[1]*m.m[ 8] + this.m[5]*m.m[ 9] + this.m[ 9]*m.m[10],
+  //             this.m[2]*m.m[ 8] + this.m[6]*m.m[ 9] + this.m[10]*m.m[10],
+  //             0.0,
+  // 
+  //             this.m[0]*m.m[12] + this.m[4]*m.m[13] + this.m[ 8]*m.m[14] + this.m[12],
+  //             this.m[1]*m.m[12] + this.m[5]*m.m[13] + this.m[ 9]*m.m[14] + this.m[13],
+  //             this.m[2]*m.m[12] + this.m[6]*m.m[13] + this.m[10]*m.m[14] + this.m[14],
+  //             1.0
+  //           );
+  // 
+  // },
 
   /**
   * sScale by a vector3D
   * @since 0.3.0
   * @method
-  * @param {Vector3D} vector3D the vector3D to scale by.
+  * @param {Vector2D} vector2D the vector2D to scale by.
   * @returns {boolean}
   */
   scaleBy: function(vector2D) {
-    this.make(  vector2D.x, 0.0,        0.0,
-                0.0,        vector2D.y, 0.0,
+    this.make(  vector2D.getX(), 0.0,        0.0,
+                0.0,        vector2D.getY(), 0.0,
                 0.0,        0.0,        1.0
               );
   },
 
-  /**
-  * Rotate the matrix on the X axis
-  * @since 0.3.0
-  * @method
-  * @param {float} angle the angle to rotate by.
-  * @returns {boolean}
-  */
-  rotateXBy : function(angle){
-    var cos = TYPE6JS.Trigonometry.cosine(angle);
-    var sin = TYPE6JS.Trigonometry.sine(angle);
-    this.make(
-                1.0,  0.0,  0.0,  0.0,
-                0.0,  cos,  sin,  0.0,
-                0.0, -sin,  cos,  0.0,
-                0.0,  0.0,  0.0,  1.0
-              );
-  },
+  // /**
+  // * Rotate the matrix on the X axis
+  // * @since 0.3.0
+  // * @method
+  // * @param {float} angle the angle to rotate by.
+  // * @returns {boolean}
+  // */
+  // rotateXBy : function(angle){
+  //   var cos = TYPE6JS.Trigonometry.cosine(angle);
+  //   var sin = TYPE6JS.Trigonometry.sine(angle);
+  //   this.make(
+  //               1.0,  0.0,  0.0,  0.0,
+  //               0.0,  cos,  sin,  0.0,
+  //               0.0, -sin,  cos,  0.0,
+  //               0.0,  0.0,  0.0,  1.0
+  //             );
+  // },
 
-  /**
-  * Rotate the matrix on the Y axis
-  * @since 0.3.0
-  * @method
-  * @param {float} angle the angle to rotate by.
-  * @returns {boolean}
-  */
-  rotateYBy : function(angle){
-    var cos = TYPE6JS.Trigonometry.cosine(angle);
-    var sin = TYPE6JS.Trigonometry.sine(angle);
-    this.make(
-                cos,  0.0, -sin,  0.0,
-                0.0,  1.0,  0.0,  0.0,
-                sin,  0.0,  cos,  0.0,
-                0.0,  0.0,  0.0,  1.0
-              );
-  },
+  // /**
+  // * Rotate the matrix on the Y axis
+  // * @since 0.3.0
+  // * @method
+  // * @param {float} angle the angle to rotate by.
+  // * @returns {boolean}
+  // */
+  // rotateYBy : function(angle){
+  //   var cos = TYPE6JS.Trigonometry.cosine(angle);
+  //   var sin = TYPE6JS.Trigonometry.sine(angle);
+  //   this.make(
+  //               cos,  0.0, -sin,  0.0,
+  //               0.0,  1.0,  0.0,  0.0,
+  //               sin,  0.0,  cos,  0.0,
+  //               0.0,  0.0,  0.0,  1.0
+  //             );
+  // },
 
-  /**
-  * Rotate the matrix on the Z axis
-  * @since 0.3.0
-  * @method
-  * @param {float} angle the angle to rotate by.
-  * @returns {boolean}
-  */
-  rotateZBy : function(angle){
-    var cos = TYPE6JS.Trigonometry.cosine(angle);
-    var sin = TYPE6JS.Trigonometry.sine(angle);
-    this.make(  cos,  sin,  0.0,  0.0,
-               -sin,  cos,  0.0,  0.0,
-                0.0,  0.0,  1.0,  0.0,
-                0.0,  0.0,  0.0,  1.0
-              );
-  },
+  // /**
+  // * Rotate the matrix on the Z axis
+  // * @since 0.3.0
+  // * @method
+  // * @param {float} angle the angle to rotate by.
+  // * @returns {boolean}
+  // */
+  // rotateZBy : function(angle){
+  //   var cos = TYPE6JS.Trigonometry.cosine(angle);
+  //   var sin = TYPE6JS.Trigonometry.sine(angle);
+  //   this.make(  cos,  sin,  0.0,  0.0,
+  //              -sin,  cos,  0.0,  0.0,
+  //               0.0,  0.0,  1.0,  0.0,
+  //               0.0,  0.0,  0.0,  1.0
+  //             );
+  // },
 
   /**
   * set cosine decimals precision.
   * @since 0.3.0
   * @method
-  * @param {Vector3D} vector3D the vector to translate by.
+  * @param {Vector2D} vector2D the vector to translate by.
   * @returns {boolean}
   */
-  translateTo : function(vector3D){
-    this.make(         1.0,        0.0,        0.0, 0.0,
-                       0.0,        1.0,        0.0, 0.0,
-                       0.0,        0.0,        1.0, 0.0,
-                vector3D.x, vector3D.y, vector3D.z, 1.0
+  translateTo : function(vector2D){
+    this.make(         1.0,        0.0, 0.0,
+                       0.0,        1.0, 0.0,
+                vector2D.getX(), vector2D.getY(), 1.0
               );
   },
 
@@ -512,6 +511,9 @@ TYPE6JS.Matrix3 = {
 	// 	return this;
   // 
 	// }
+  valueValidation: function(value){
+    return isNaN(value) ? 0.0 : value;
+  }
 
 };
 
