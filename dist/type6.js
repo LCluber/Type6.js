@@ -862,3 +862,57 @@ TYPE6.Trigonometry = {
 };
 
 TYPE6.Trigonometry.createFactorialArray();
+
+TYPE6.Matrix3 = {
+    m: new Float32Array(9),
+    create: function(x1, x2, x3, y1, y2, y3, z1, z2, z3) {
+        var _this = Object.create(this);
+        _this.make(x1, x2, x3, y1, y2, y3, z1, z2, z3);
+        return _this;
+    },
+    createFromArray: function(m) {
+        var _this = Object.create(this);
+        _this.make(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8]);
+        return _this;
+    },
+    createIdentity: function() {
+        var _this = Object.create(this);
+        _this.identity();
+        return _this;
+    },
+    make: function(x1, x2, x3, y1, y2, y3, z1, z2, z3) {
+        this.m[0] = this.valueValidation(x1);
+        this.m[1] = this.valueValidation(x2);
+        this.m[2] = this.valueValidation(x3);
+        this.m[3] = this.valueValidation(y1);
+        this.m[4] = this.valueValidation(y2);
+        this.m[5] = this.valueValidation(y3);
+        this.m[6] = this.valueValidation(z1);
+        this.m[7] = this.valueValidation(z2);
+        this.m[8] = this.valueValidation(z3);
+    },
+    toArray: function() {
+        return this.m;
+    },
+    toString: function() {
+        return "(" + this.m[0] + "," + this.m[1] + "," + this.m[2] + ";" + this.m[3] + "," + this.m[4] + "," + this.m[5] + ";" + this.m[6] + "," + this.m[7] + "," + this.m[8] + ";";
+    },
+    identity: function() {
+        this.make(1, 0, 0, 0, 1, 0, 0, 0, 1);
+    },
+    scale: function(vector2D) {
+        return this.create(vector2D.getX(), 0, 0, 0, vector2D.getY(), 0, 0, 0, 1);
+    },
+    translate: function(vector2D) {
+        return this.create(1, 0, 0, 0, 1, 0, vector2D.getX(), vector2D.getY(), 1);
+    },
+    scaleBy: function(vector2D) {
+        this.make(vector2D.getX(), 0, 0, 0, vector2D.getY(), 0, 0, 0, 1);
+    },
+    translateTo: function(vector2D) {
+        this.make(1, 0, 0, 0, 1, 0, vector2D.getX(), vector2D.getY(), 1);
+    },
+    valueValidation: function(value) {
+        return isNaN(value) ? 0 : value;
+    }
+};

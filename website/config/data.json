@@ -89,6 +89,13 @@
           "href":"examples/geometry/clamp",
           "name":"clamp"
       }
+    ],
+    
+    "Matrix" : [
+      {
+          "href":"examples/matrix/2d-transform",
+          "name":"2d-transform"
+      }
     ]
   }
 }
