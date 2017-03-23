@@ -511,6 +511,7 @@ TYPE6.Matrix3 = {
 	// 	return this;
   // 
 	// }
+  
   valueValidation: function(value){
     return isNaN(value) ? 0.0 : value;
   }

@@ -24,7 +24,8 @@ module.exports = function(grunt){
               srcDir + 'geometry/circle.js',
               srcDir + 'geometry/rectangle.js',
               srcDir + 'trigonometry.js',
-              srcDir + 'matrix3.js'
+              srcDir + 'matrix3.js',
+              srcDir + 'matrix4.js'
             ];
   
   var banner    = '/** MIT License\n' +
