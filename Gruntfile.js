@@ -19,13 +19,14 @@ module.exports = function(grunt){
               srcDir + 'mathUtils.js',
               srcDir + 'random.js',
               srcDir + 'bezier.js',
-              srcDir + 'vector2D.js',
+              srcDir + 'vector2.js',
+              srcDir + 'vector3.js',
               srcDir + 'geometry.js',
               srcDir + 'geometry/circle.js',
               srcDir + 'geometry/rectangle.js',
               srcDir + 'trigonometry.js',
-              srcDir + 'matrix3.js',
-              srcDir + 'matrix4.js'
+              srcDir + 'matrix4x3.js',
+              srcDir + 'matrix4x4.js'
             ];
   
   var banner    = '/** MIT License\n' +

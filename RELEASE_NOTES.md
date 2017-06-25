@@ -1,14 +1,8 @@
 Version 0.3.0 (incoming)
 ------------------------------
- * 3D maths
- * matrices
  * 3D vectors
+ * matrices 4x3 and 4x4
  * documentation updates
- 
- 
- Version 0.3.0 (March 5th 2017)
- ------------------------------
-  * Added Matrix3 class
  
 Version 0.2.9 (March 5th 2017)
 ------------------------------

@@ -435,6 +435,74 @@ TYPE6.Vector2D = {
     }
 };
 
+TYPE6.Vector3 = {
+    x: 0,
+    y: 0,
+    z: 0,
+    create: function(x, y, z) {
+        var _this = Object.create(this);
+        _this.setX(x);
+        _this.setY(y);
+        _this.setZ(z);
+        return _this;
+    },
+    toArray: function() {
+        return [ this.x, this.y, this.z ];
+    },
+    toString: function() {
+        return "(" + this.x + ";" + this.y + ";" + this.z + ")";
+    },
+    setX: function(value) {
+        this.x = this.valueValidation(value);
+        return this.x;
+    },
+    getX: function() {
+        return this.x;
+    },
+    setY: function(value) {
+        this.y = this.valueValidation(value);
+        return this.y;
+    },
+    getY: function() {
+        return this.y;
+    },
+    setZ: function(value) {
+        this.z = this.valueValidation(value);
+        return this.z;
+    },
+    getZ: function() {
+        return this.z;
+    },
+    subtract: function(vector3D) {
+        return this.create(this.x - vector3D.getX(), this.y - vector3D.getY(), this.z - vector3D.getZ());
+    },
+    scale: function(value) {
+        return this.create(this.x * value, this.y * value, this.z * value);
+    },
+    getMagnitude: function() {
+        return Math.sqrt(this.getSquaredMagnitude());
+    },
+    getSquaredMagnitude: function() {
+        return this.x * this.x + this.y * this.y + this.z * this.z;
+    },
+    normalize: function() {
+        var length = this.getMagnitude();
+        if (length) {
+            return this.scale(1 / length);
+        }
+        return this.create(this.x, this.y, this.z);
+    },
+    dot: function(vector3) {
+        return this.x * vector3.getX() + this.y * vector3.getY() + this.z * vector3.getZ();
+    },
+    cross: function(vector3) {
+        return this.create(this.y * vector3.getZ() - this.z * vector3.getY(), this.z * vector3.getX() - this.x * vector3.getZ(), this.x * vector3.getY() - this.y * vector3.getX());
+    },
+    valueValidation: function(value) {
+        return isNaN(value) ? 0 : value;
+    }
+};
+
 TYPE6.Geometry = {};
 
 TYPE6.Geometry.Circle = {
@@ -863,16 +931,16 @@ TYPE6.Trigonometry = {
 
 TYPE6.Trigonometry.createFactorialArray();
 
-TYPE6.Matrix3 = {
-    m: new Float32Array(9),
-    create: function(x1, x2, x3, y1, y2, y3, z1, z2, z3) {
+TYPE6.Matrix4x3 = {
+    m: new Float32Array(16),
+    create: function(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3) {
         var _this = Object.create(this);
-        _this.make(x1, x2, x3, y1, y2, y3, z1, z2, z3);
+        _this.make(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3);
         return _this;
     },
     createFromArray: function(m) {
         var _this = Object.create(this);
-        _this.make(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8]);
+        _this.make(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11]);
         return _this;
     },
     createIdentity: function() {
@@ -880,37 +948,125 @@ TYPE6.Matrix3 = {
         _this.identity();
         return _this;
     },
-    make: function(x1, x2, x3, y1, y2, y3, z1, z2, z3) {
+    make: function(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3) {
         this.m[0] = this.valueValidation(x1);
         this.m[1] = this.valueValidation(x2);
         this.m[2] = this.valueValidation(x3);
-        this.m[3] = this.valueValidation(y1);
-        this.m[4] = this.valueValidation(y2);
-        this.m[5] = this.valueValidation(y3);
-        this.m[6] = this.valueValidation(z1);
-        this.m[7] = this.valueValidation(z2);
-        this.m[8] = this.valueValidation(z3);
+        this.m[3] = 0;
+        this.m[4] = this.valueValidation(y1);
+        this.m[5] = this.valueValidation(y2);
+        this.m[6] = this.valueValidation(y3);
+        this.m[7] = 0;
+        this.m[8] = this.valueValidation(z1);
+        this.m[9] = this.valueValidation(z2);
+        this.m[10] = this.valueValidation(z3);
+        this.m[11] = 0;
+        this.m[12] = this.valueValidation(t1);
+        this.m[13] = this.valueValidation(t2);
+        this.m[14] = this.valueValidation(t3);
+        this.m[15] = 1;
     },
     toArray: function() {
         return this.m;
     },
     toString: function() {
-        return "(" + this.m[0] + "," + this.m[1] + "," + this.m[2] + ";" + this.m[3] + "," + this.m[4] + "," + this.m[5] + ";" + this.m[6] + "," + this.m[7] + "," + this.m[8] + ";";
+        return "(" + this.m[0] + "," + this.m[1] + "," + this.m[2] + "," + this.m[3] + ";" + this.m[4] + "," + this.m[5] + "," + this.m[6] + "," + this.m[7] + ";" + this.m[8] + "," + this.m[9] + "," + this.m[10] + "," + this.m[11] + ";" + this.m[12] + "," + this.m[13] + "," + this.m[14] + "," + this.m[15] + ")";
     },
     identity: function() {
-        this.make(1, 0, 0, 0, 1, 0, 0, 0, 1);
+        this.make(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0);
     },
-    scale: function(vector2D) {
-        return this.create(vector2D.getX(), 0, 0, 0, vector2D.getY(), 0, 0, 0, 1);
+    rotateXBy: function(angle) {
+        var cos = TYPE6.Trigonometry.cosine(angle);
+        var sin = TYPE6.Trigonometry.sine(angle);
+        this.make(1, 0, 0, 0, cos, sin, 0, -sin, cos, 0, 0, 0);
     },
-    translate: function(vector2D) {
-        return this.create(1, 0, 0, 0, 1, 0, vector2D.getX(), vector2D.getY(), 1);
+    rotateYBy: function(angle) {
+        var cos = TYPE6.Trigonometry.cosine(angle);
+        var sin = TYPE6.Trigonometry.sine(angle);
+        this.make(cos, 0, -sin, 0, 1, 0, sin, 0, cos, 0, 0, 0);
     },
-    scaleBy: function(vector2D) {
-        this.make(vector2D.getX(), 0, 0, 0, vector2D.getY(), 0, 0, 0, 1);
+    rotateZBy: function(angle) {
+        var cos = TYPE6.Trigonometry.cosine(angle);
+        var sin = TYPE6.Trigonometry.sine(angle);
+        this.make(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0);
     },
-    translateTo: function(vector2D) {
-        this.make(1, 0, 0, 0, 1, 0, vector2D.getX(), vector2D.getY(), 1);
+    multiplyBy: function(m) {
+        var m1 = this.get();
+        var m2 = m.get();
+        this.make(m1[0] * m2[0] + m1[4] * m2[1] + m1[8] * m2[2], m1[1] * m2[0] + m1[5] * m2[1] + m1[9] * m2[2], m1[2] * m2[0] + m1[6] * m2[1] + m1[10] * m2[2], m1[0] * m2[4] + m1[4] * m2[5] + m1[8] * m2[6], m1[1] * m2[4] + m1[5] * m2[5] + m1[9] * m2[6], m1[2] * m2[4] + m1[6] * m2[5] + m1[10] * m2[6], m1[0] * m2[8] + m1[4] * m2[9] + m1[8] * m2[10], m1[1] * m2[8] + m1[5] * m2[9] + m1[9] * m2[10], m1[2] * m2[8] + m1[6] * m2[9] + m1[10] * m2[10], m1[0] * m2[12] + m1[4] * m2[13] + m1[8] * m2[14] + m1[12], m1[1] * m2[12] + m1[5] * m2[13] + m1[9] * m2[14] + m1[13], m1[2] * m2[12] + m1[6] * m2[13] + m1[10] * m2[14] + m1[14]);
+    },
+    lookAtRH: function(eye, target, up) {
+        var zaxis = eye.subtract(target).normalize();
+        var xaxis = up.cross(zaxis).normalize();
+        var yaxis = zaxis.cross(xaxis);
+        this.make(xaxis.getX(), yaxis.getX(), zaxis.getX(), xaxis.getY(), yaxis.getY(), zaxis.getY(), xaxis.getZ(), yaxis.getZ(), zaxis.getZ(), -xaxis.dot(eye), -yaxis.dot(eye), -zaxis.dot(eye));
+    },
+    valueValidation: function(value) {
+        return isNaN(value) ? 0 : value;
+    }
+};
+
+TYPE6.Matrix4x4 = {
+    m: new Float32Array(16),
+    create: function(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4) {
+        var _this = Object.create(this);
+        _this.make(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4);
+        return _this;
+    },
+    createFromArray: function(m) {
+        var _this = Object.create(this);
+        _this.make(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]);
+        return _this;
+    },
+    createIdentity: function() {
+        var _this = Object.create(this);
+        _this.identity();
+        return _this;
+    },
+    make: function(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4) {
+        this.m[0] = this.valueValidation(x1);
+        this.m[1] = this.valueValidation(x2);
+        this.m[2] = this.valueValidation(x3);
+        this.m[3] = this.valueValidation(x4);
+        this.m[4] = this.valueValidation(y1);
+        this.m[5] = this.valueValidation(y2);
+        this.m[6] = this.valueValidation(y3);
+        this.m[7] = this.valueValidation(y4);
+        this.m[8] = this.valueValidation(z1);
+        this.m[9] = this.valueValidation(z2);
+        this.m[10] = this.valueValidation(z3);
+        this.m[11] = this.valueValidation(z4);
+        this.m[12] = this.valueValidation(t1);
+        this.m[13] = this.valueValidation(t2);
+        this.m[14] = this.valueValidation(t3);
+        this.m[15] = this.valueValidation(t4);
+    },
+    toArray: function() {
+        return this.m;
+    },
+    toString: function() {
+        return "(" + this.m[0] + "," + this.m[1] + "," + this.m[2] + "," + this.m[3] + ";" + this.m[4] + "," + this.m[5] + "," + this.m[6] + "," + this.m[7] + ";" + this.m[8] + "," + this.m[9] + "," + this.m[10] + "," + this.m[11] + ";" + this.m[12] + "," + this.m[13] + "," + this.m[14] + "," + this.m[15] + ")";
+    },
+    identity: function() {
+        this.make(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+    },
+    multiplyBy: function(m) {
+        this.make(this.m[0] * m.m[0] + this.m[4] * m.m[1] + this.m[8] * m.m[2], this.m[1] * m.m[0] + this.m[5] * m.m[1] + this.m[9] * m.m[2], this.m[2] * m.m[0] + this.m[6] * m.m[1] + this.m[10] * m.m[2], 0, this.m[0] * m.m[4] + this.m[4] * m.m[5] + this.m[8] * m.m[6], this.m[1] * m.m[4] + this.m[5] * m.m[5] + this.m[9] * m.m[6], this.m[2] * m.m[4] + this.m[6] * m.m[5] + this.m[10] * m.m[6], 0, this.m[0] * m.m[8] + this.m[4] * m.m[9] + this.m[8] * m.m[10], this.m[1] * m.m[8] + this.m[5] * m.m[9] + this.m[9] * m.m[10], this.m[2] * m.m[8] + this.m[6] * m.m[9] + this.m[10] * m.m[10], 0, this.m[0] * m.m[12] + this.m[4] * m.m[13] + this.m[8] * m.m[14] + this.m[12], this.m[1] * m.m[12] + this.m[5] * m.m[13] + this.m[9] * m.m[14] + this.m[13], this.m[2] * m.m[12] + this.m[6] * m.m[13] + this.m[10] * m.m[14] + this.m[14], 1);
+    },
+    perspective: function(fovy, aspect, znear, zfar) {
+        var f = Math.tan(Math.PI * .5 - .5 * fovy * Math.PI / 180);
+        var rangeInv = 1 / (znear - zfar);
+        this.make(f / aspect, 0, 0, 0, 0, f, 0, 0, 0, 0, (znear + zfar) * rangeInv, -1, 0, 0, znear * zfar * rangeInv * 2, 0);
+    },
+    orthographic: function(left, right, top, bottom, near, far) {
+        var w = right - left;
+        var h = top - bottom;
+        var p = far - near;
+        var x = (right + left) / w;
+        var y = (top + bottom) / h;
+        var z = (far + near) / p;
+        this.make(2 / w, 0, 0, 0, 0, 2 / h, 0, 0, 0, 0, -2 / p, 0, -x, -y, -z, 1);
+        return this;
     },
     valueValidation: function(value) {
         return isNaN(value) ? 0 : value;

@@ -546,7 +546,7 @@ TYPE6.Matrix4 = {
 
 		return this;
 
-	}
+	},
   
   valueValidation: function(value){
     return isNaN(value) ? 0.0 : value;
