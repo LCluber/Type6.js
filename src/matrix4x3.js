@@ -402,8 +402,8 @@ TYPE6.Matrix4x3 = {
   * @returns {boolean}
   */
   multiplyBy: function(m){
-    var m1 = this.get();
-    var m2 = m.get();
+    var m1 = this.toArray();
+    var m2 = m.toArray();
     this.make(m1[0]*m2[ 0] + m1[4]*m2[ 1] + m1[ 8]*m2[2],
               m1[1]*m2[ 0] + m1[5]*m2[ 1] + m1[ 9]*m2[2],
               m1[2]*m2[ 0] + m1[6]*m2[ 1] + m1[10]*m2[2],
