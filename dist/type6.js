@@ -935,17 +935,14 @@ TYPE6.Matrix4x3 = {
     m: new Float32Array(16),
     create: function(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3) {
         var _this = Object.create(this);
+        _this.m = new Float32Array(16);
         _this.make(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3);
         return _this;
     },
     createFromArray: function(m) {
         var _this = Object.create(this);
+        _this.m = new Float32Array(16);
         _this.make(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11]);
-        return _this;
-    },
-    createIdentity: function() {
-        var _this = Object.create(this);
-        _this.identity();
         return _this;
     },
     make: function(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3) {
@@ -1010,17 +1007,14 @@ TYPE6.Matrix4x4 = {
     m: new Float32Array(16),
     create: function(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4) {
         var _this = Object.create(this);
+        _this.m = new Float32Array(16);
         _this.make(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4);
         return _this;
     },
     createFromArray: function(m) {
         var _this = Object.create(this);
+        _this.m = new Float32Array(16);
         _this.make(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]);
-        return _this;
-    },
-    createIdentity: function() {
-        var _this = Object.create(this);
-        _this.identity();
         return _this;
     },
     make: function(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4) {
@@ -1066,7 +1060,6 @@ TYPE6.Matrix4x4 = {
         var y = (top + bottom) / h;
         var z = (far + near) / p;
         this.make(2 / w, 0, 0, 0, 0, 2 / h, 0, 0, 0, 0, -2 / p, 0, -x, -y, -z, 1);
-        return this;
     },
     valueValidation: function(value) {
         return isNaN(value) ? 0 : value;

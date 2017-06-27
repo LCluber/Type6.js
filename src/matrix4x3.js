@@ -11,7 +11,6 @@ TYPE6.Matrix4x3 = {
   m : new Float32Array(16),
 
 
-
   /**
   * Create a matrix
   * @since 0.3.0
@@ -32,6 +31,7 @@ TYPE6.Matrix4x3 = {
   */
   create: function(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3) {
     var _this   = Object.create(this);
+    _this.m = new Float32Array(16);
     _this.make( x1, x2, x3,
                 y1, y2, y3,
                 z1, z2, z3,
@@ -50,6 +50,7 @@ TYPE6.Matrix4x3 = {
   */
   createFromArray : function(m){
     var _this = Object.create(this);
+    _this.m = new Float32Array(16);
     _this.make( m[ 0],  m[ 1],  m[ 2],
                 m[ 3],  m[ 4],  m[ 5],
                 m[ 6],  m[ 7],  m[ 8],
@@ -58,29 +59,29 @@ TYPE6.Matrix4x3 = {
     return _this;
   },
 
-  /**
-  * Create an identity matrix
-  * @since 0.3.0
-  * @method
-  * @param {float} [x1 = 0.0] x1
-  * @param {float} [x2 = 0.0] x2
-  * @param {float} [x3 = 0.0] x3
-  * @param {float} [y1 = 0.0] y1
-  * @param {float} [y2 = 0.0] y2
-  * @param {float} [y3 = 0.0] y3
-  * @param {float} [z1 = 0.0] z1
-  * @param {float} [z2 = 0.0] z2
-  * @param {float} [z3 = 0.0] z3
-  * @param {float} [t1 = 0.0] t1
-  * @param {float} [t2 = 0.0] t2
-  * @param {float} [t3 = 0.0] t3
-  * @returns {Matrix4x3}
-  */
-  createIdentity: function() {
-    var _this   = Object.create(this);
-    _this.identity();
-    return _this;
-  },
+  // /**
+  // * Create an identity matrix
+  // * @since 0.3.0
+  // * @method
+  // * @param {float} [x1 = 0.0] x1
+  // * @param {float} [x2 = 0.0] x2
+  // * @param {float} [x3 = 0.0] x3
+  // * @param {float} [y1 = 0.0] y1
+  // * @param {float} [y2 = 0.0] y2
+  // * @param {float} [y3 = 0.0] y3
+  // * @param {float} [z1 = 0.0] z1
+  // * @param {float} [z2 = 0.0] z2
+  // * @param {float} [z3 = 0.0] z3
+  // * @param {float} [t1 = 0.0] t1
+  // * @param {float} [t2 = 0.0] t2
+  // * @param {float} [t3 = 0.0] t3
+  // * @returns {Matrix4x3}
+  // */
+  // createIdentity: function() {
+  //   var _this   = Object.create(this);
+  //   _this.identity();
+  //   return _this;
+  // },
 
 
   /**

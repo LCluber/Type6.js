@@ -34,6 +34,7 @@ TYPE6.Matrix4x4 = {
   */
   create: function(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4) {
     var _this   = Object.create(this);
+    _this.m = new Float32Array(16);
     _this.make( x1, x2, x3, x4,
                 y1, y2, y3, y4,
                 z1, z2, z3, z4,
@@ -52,6 +53,7 @@ TYPE6.Matrix4x4 = {
   */
   createFromArray : function(m){
     var _this = Object.create(this);
+    _this.m = new Float32Array(16);
     _this.make( m[ 0],  m[ 1],  m[ 2],  m[ 3],
                 m[ 4],  m[ 5],  m[ 6],  m[ 7],
                 m[ 8],  m[ 9],  m[10],  m[11],
@@ -60,33 +62,33 @@ TYPE6.Matrix4x4 = {
     return _this;
   },
 
-  /**
-  * Create an identity matrix
-  * @since 0.3.0
-  * @method
-  * @param {float} [x1 = 0.0] x1
-  * @param {float} [x2 = 0.0] x2
-  * @param {float} [x3 = 0.0] x3
-  * @param {float} [x4 = 0.0] x4
-  * @param {float} [y1 = 0.0] y1
-  * @param {float} [y2 = 0.0] y2
-  * @param {float} [y3 = 0.0] y3
-  * @param {float} [y4 = 0.0] y4
-  * @param {float} [z1 = 0.0] z1
-  * @param {float} [z2 = 0.0] z2
-  * @param {float} [z3 = 0.0] z3
-  * @param {float} [z4 = 0.0] z4
-  * @param {float} [t1 = 0.0] t1
-  * @param {float} [t2 = 0.0] t2
-  * @param {float} [t3 = 0.0] t3
-  * @param {float} [t4 = 0.0] t4
-  * @returns {Matrix4x4}
-  */
-  createIdentity: function() {
-    var _this   = Object.create(this);
-    _this.identity();
-    return _this;
-  },
+  // /**
+  // * Create an identity matrix
+  // * @since 0.3.0
+  // * @method
+  // * @param {float} [x1 = 0.0] x1
+  // * @param {float} [x2 = 0.0] x2
+  // * @param {float} [x3 = 0.0] x3
+  // * @param {float} [x4 = 0.0] x4
+  // * @param {float} [y1 = 0.0] y1
+  // * @param {float} [y2 = 0.0] y2
+  // * @param {float} [y3 = 0.0] y3
+  // * @param {float} [y4 = 0.0] y4
+  // * @param {float} [z1 = 0.0] z1
+  // * @param {float} [z2 = 0.0] z2
+  // * @param {float} [z3 = 0.0] z3
+  // * @param {float} [z4 = 0.0] z4
+  // * @param {float} [t1 = 0.0] t1
+  // * @param {float} [t2 = 0.0] t2
+  // * @param {float} [t3 = 0.0] t3
+  // * @param {float} [t4 = 0.0] t4
+  // * @returns {Matrix4x4}
+  // */
+  // createIdentity: function() {
+  //   var _this   = Object.create(this);
+  //   _this.identity();
+  //   return _this;
+  // },
 
 
   /**
@@ -542,7 +544,7 @@ TYPE6.Matrix4x4 = {
                 -x,  -y,   -z, 1
              );
 
-    return this;
+    //return this;
 
 	},
   
