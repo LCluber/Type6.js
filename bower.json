@@ -1,0 +1,12 @@
+{
+  "author": "Ludovic Cluber",
+  "name": "Type6js",
+  "main": [
+    "dist/type6.js"
+  ],
+  "description": "Mathematics library written in Javascript.",
+  "version": "0.3.0",
+  "dependencies": {
+  
+  }
+}
