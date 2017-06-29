@@ -1,6 +1,6 @@
 {
   "author": "Ludovic Cluber",
-  "name": "Type6js",
+  "name": "type6js",
   "main": [
     "dist/type6.js"
   ],
