@@ -1,6 +1,7 @@
 {
   "author": "Ludovic Cluber",
   "name": "type6js",
+  "license": "MIT",
   "main": [
     "dist/type6.js"
   ],
