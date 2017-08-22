@@ -647,6 +647,7 @@ TYPE6.Vector2D = {
   addTo: function(vector2D) {
     this.x += vector2D.getX();
     this.y += vector2D.getY();
+    return this;
   },
 
   /**
@@ -657,6 +658,7 @@ TYPE6.Vector2D = {
   */
   addToX: function(x) {
     this.x += x;
+    return this;
   },
 
   /**
@@ -667,6 +669,7 @@ TYPE6.Vector2D = {
   */
   addToY: function(y) {
     this.y += y;
+    return this;
   },
 
   /**
@@ -678,6 +681,7 @@ TYPE6.Vector2D = {
   addScalarTo: function(scalar) {
     this.x += scalar;
     this.y += scalar;
+    return this;
   },
 
   /**
@@ -690,6 +694,7 @@ TYPE6.Vector2D = {
   addScaledVectorTo:function(vector2D, scalar){
     this.x += vector2D.getX() * scalar;
     this.y += vector2D.getY() * scalar;
+    return this;
   },
   
   /**
@@ -702,6 +707,7 @@ TYPE6.Vector2D = {
   copyScaledVectorTo:function(vector2D, scalar){
     this.x = vector2D.getX() * scalar;
     this.y = vector2D.getY() * scalar;
+    return this;
   },
 
   /**
@@ -713,6 +719,7 @@ TYPE6.Vector2D = {
   subtractFrom: function(vector2D) {
     this.x -= vector2D.getX();
     this.y -= vector2D.getY();
+    return this;
   },
   
   /**
@@ -723,6 +730,7 @@ TYPE6.Vector2D = {
   */
   subtractFromX: function(x) {
     this.x -= x;
+    return this;
   },
   
   /**
@@ -733,6 +741,7 @@ TYPE6.Vector2D = {
   */
   subtractFromY: function(y) {
     this.y -= y;
+    return this;
   },
   
   /**
@@ -745,6 +754,7 @@ TYPE6.Vector2D = {
   copySubtractFromTo: function(vector2DA, vector2DB) {
     this.x = vector2DA.getX() - vector2DB.getX();
     this.y = vector2DA.getY() - vector2DB.getY();
+    return this;
   },
 
   /**
@@ -757,6 +767,7 @@ TYPE6.Vector2D = {
   subtractScalarFrom: function(scalar) {
     this.x -= scalar;
     this.y -= scalar;
+    return this;
   },
   
   /**
@@ -769,6 +780,7 @@ TYPE6.Vector2D = {
   subtractScaledVectorFrom:function(vector2D, scalar){
     this.x -= vector2D.getX() * scalar;
     this.y -= vector2D.getY() * scalar;
+    return this;
   },
 
   /**
@@ -780,6 +792,7 @@ TYPE6.Vector2D = {
   scaleBy: function(value) {
     this.x *= value;
     this.y *= value;
+    return this;
   },
 
   /**
@@ -792,6 +805,7 @@ TYPE6.Vector2D = {
   multiplyBy: function(vector2D){
     this.x *= vector2D.getX();
     this.y *= vector2D.getY();
+    return this;
   },
   
   /**
@@ -804,6 +818,7 @@ TYPE6.Vector2D = {
   multiplyScaledVectorBy:function(vector2D, scalar){
     this.x *= vector2D.getX() * scalar;
     this.y *= vector2D.getY() * scalar;
+    return this;
   },
 
   /**
@@ -816,6 +831,7 @@ TYPE6.Vector2D = {
   divideBy: function(vector2D) {
     this.x /= vector2D.getX();
     this.y /= vector2D.getY();
+    return this;
   },
 
   /**
@@ -828,6 +844,7 @@ TYPE6.Vector2D = {
   divideScaledVectorBy:function(vector2D, scalar){
     this.x /= vector2D.getX() * scalar;
     this.y /= vector2D.getY() * scalar;
+    return this;
   },
 
   /**
@@ -839,6 +856,7 @@ TYPE6.Vector2D = {
   maxTo:function(vector2D){
     this.x = Math.max( this.x, vector2D.getX() );
     this.y = Math.max( this.y, vector2D.getY() );
+    return this;
   },
   
   /**
@@ -850,6 +868,7 @@ TYPE6.Vector2D = {
   minTo:function(vector2D){
     this.x = Math.min( this.x, vector2D.getX() );
     this.y = Math.min( this.y, vector2D.getY() );
+    return this;
   },
 
   /**
@@ -872,6 +891,7 @@ TYPE6.Vector2D = {
   minScalarTo:function(scalar){
     this.x = Math.min( this.x, scalar );
     this.y = Math.min( this.y, scalar );
+    return this;
   },
 
   /**
@@ -884,6 +904,7 @@ TYPE6.Vector2D = {
   halveBy: function() {
     this.x *= 0.5;
     this.y *= 0.5;
+    return this;
   },
 
   /**
@@ -896,6 +917,7 @@ TYPE6.Vector2D = {
     if( length ){
       this.scaleBy( 1/length );
     }
+    return this;
   },
 
   /**
@@ -906,6 +928,7 @@ TYPE6.Vector2D = {
   absoluteTo: function(){
     this.x = Math.abs( this.x );
     this.y = Math.abs( this.y );
+    return this;
   },
 
   /**
@@ -917,6 +940,7 @@ TYPE6.Vector2D = {
   oppositeTo:function(){
     this.x = -this.x;
     this.y = -this.y;
+    return this;
   },
 
   /**
@@ -927,6 +951,7 @@ TYPE6.Vector2D = {
   */
   oppositeXTo:function(){
     this.x = -this.x;
+    return this;
   },
 
   /**
@@ -937,6 +962,7 @@ TYPE6.Vector2D = {
   */
   oppositeYTo:function(){
     this.y = -this.y;
+    return this;
   },
 
 
@@ -956,6 +982,7 @@ TYPE6.Vector2D = {
               rectangle.topLeftCorner.getY(),
               rectangle.bottomRightCorner.getY()
             );
+    return this;
   },
 
   /**
@@ -968,6 +995,7 @@ TYPE6.Vector2D = {
   lerpTo: function(normal, min, max){
     this.x = TYPE6.MathUtils.lerp( normal, min.getX(), max.getX() );
     this.y = TYPE6.MathUtils.lerp( normal, min.getY(), max.getY() );
+    return this;
   },
 
   /**
@@ -989,7 +1017,7 @@ TYPE6.Vector2D = {
   */
   //true if vector is equal to (0;0)
   isOrigin: function(){
-    if( this.x === 0 || this.y === 0 )
+    if( this.x === 0 && this.y === 0 )
       return true;
     return false;
   },

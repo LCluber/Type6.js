@@ -7,7 +7,6 @@ TYPE6.Random = {
   * @method
   * @param {float} min The minimum value.
   * @param {float} max The maximum value.
-  * @param {integer} decimals The number of decimals.
   * @returns {float}
   */
   float : function (min,max){
@@ -20,7 +19,6 @@ TYPE6.Random = {
   * @method
   * @param {float} min The minimum value.
   * @param {float} max The maximum value.
-  * @param {integer} decimals The number of decimals.
   * @returns {float}
   */
   integer : function (min,max){
@@ -33,7 +31,7 @@ TYPE6.Random = {
   * @method
   * @param {float} min The minimum value.
   * @param {float} max The maximum value.
-  * @param {integer} decimals The number of decimals.
+  * @param {integer} iterations The number of decimals.
   * @returns {float}
   */
   distribution : function(min, max, iterations) {
@@ -50,7 +48,6 @@ TYPE6.Random = {
   * @method
   * @param {float} min The minimum value.
   * @param {float} max The maximum value.
-  * @param {integer} decimals The number of decimals.
   * @returns {float}
   */
   pick : function ( value1, value2 ){

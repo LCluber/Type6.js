@@ -59,6 +59,32 @@ TYPE6.Vector3 = {
   },
   
   /**
+  * copy the given vector2D values.
+  * @since 0.3.0
+  * @method
+  * @returns {Vector3} A new vector3D identical to this vector2D
+  */
+  copy: function() {
+    return this.create(
+      this.getX(),
+      this.getY(),
+      this.getZ()
+    );
+  },
+  
+  /**
+  * copy the given vector values into this vector.
+  * @since 0.3.0
+  * @method
+  * @param {vector3} vector3 The vector2D you want to copy.
+  */
+  copyTo: function(vector3) {
+    this.x = vector3.getX();
+    this.y = vector3.getY();
+    this.z = vector3.getZ();
+  },
+  
+  /**
   * Set the x axis value of the vector2D.
   * @since 0.0.2
   * @method

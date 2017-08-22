@@ -58,6 +58,15 @@ TYPE6.Matrix4x3 = {
               );
     return _this;
   },
+  
+  copy : function(matrix4x3){
+    var m = matrix4x3.toArray();
+    this.make(  m[ 0],  m[ 1],  m[ 2],
+                m[ 4],  m[ 5],  m[ 6],
+                m[ 8],  m[ 9],  m[10],
+                m[12],  m[13],  m[14]
+              );
+  },
 
   // /**
   // * Create an identity matrix
@@ -164,20 +173,6 @@ TYPE6.Matrix4x3 = {
   // toArray: function(){
   //   return this.m;
   // },
-  // 
-  // /**
-  // * export the matrix into a string
-  // * @since 0.3.0
-  // * @method
-  // * @returns {string}
-  // */
-  // toString: function () {
-  //   return '(' +  this.m[ 0] + ',' + this.m[ 1] + ',' + this.m[ 2] + ',' + this.m[ 3] + ';' +
-  //                 this.m[ 4] + ',' + this.m[ 5] + ',' + this.m[ 6] + ',' + this.m[ 7] + ';' +
-  //                 this.m[ 8] + ',' + this.m[ 9] + ',' + this.m[10] + ',' + this.m[11] + ';' +
-  //                 this.m[12] + ',' + this.m[13] + ',' + this.m[14] + ',' + this.m[15] + ')';
-  // },
-
 
   /**
   * create an identity matrix.
@@ -380,20 +375,20 @@ TYPE6.Matrix4x3 = {
               );
   },
 
-  // /**
-  // * set cosine decimals precision.
-  // * @since 0.3.0
-  // * @method
-  // * @param {Vector3D} vector3D the vector to translate by.
-  // * @returns {boolean}
-  // */
-  // translateTo : function(vector3D){
-  //   this.make(  1.0,              0.0,              0.0,              0.0,
-  //               0.0,              1.0,              0.0,              0.0,
-  //               0.0,              0.0,              1.0,              0.0,
-  //               vector3D.getX(),  vector3D.getY(),  vector3D.getZ(),  1.0
-  //             );
-  // },
+  /**
+  * set cosine decimals precision.
+  * @since 0.3.0
+  * @method
+  * @param {Vector3D} vector3D the vector to translate by.
+  * @returns {boolean}
+  */
+  translateTo : function(vector3D){
+    this.make(  1.0,              0.0,              0.0,              0.0,
+                0.0,              1.0,              0.0,              0.0,
+                0.0,              0.0,              1.0,              0.0,
+                vector3D.getX(),  vector3D.getY(),  vector3D.getZ(),  1.0
+              );
+  },
 
   /**
   * set cosine decimals precision.

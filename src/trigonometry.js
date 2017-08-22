@@ -263,10 +263,10 @@ TYPE6.Trigonometry = {
   * Sine equation
   * @since 0.0.1
   * @method
-  * @param {float} the amplitude of the wave.
-  * @param {float} the period of the wave.
-  * @param {float} the shift of the wave on the x axis.
-  * @param {float} the shift of the wave on the y axis.
+  * @param {float} amplitude the amplitude of the wave.
+  * @param {float} period the period of the wave.
+  * @param {float} shiftX the shift of the wave on the x axis.
+  * @param {float} shiftY the shift of the wave on the y axis.
   * @returns {integer}
   */
   sineEquation: function (amplitude, period, shiftX, shiftY){
@@ -277,10 +277,10 @@ TYPE6.Trigonometry = {
   * cosine equation.
   * @since 0.0.1
   * @method
-  * @param {float} the amplitude of the wave.
-  * @param {float} the period of the wave.
-  * @param {float} the shift of the wave on the x axis.
-  * @param {float} the shift of the wave on the y axis
+  * @param {float} ampliture the amplitude of the wave.
+  * @param {float} period the period of the wave.
+  * @param {float} shiftX the shift of the wave on the x axis.
+  * @param {float} shiftY the shift of the wave on the y axis
   * @returns {integer}
   */
   cosineEquation: function (amplitude, period, shiftX, shiftY){

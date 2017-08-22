@@ -24,7 +24,7 @@
 */
 
 var TYPE6 = {
-    Revision: "0.3.0"
+    Revision: "0.3.1"
 };
 
 TYPE6.MathUtils = {
@@ -301,74 +301,93 @@ TYPE6.Vector2D = {
     addTo: function(vector2D) {
         this.x += vector2D.getX();
         this.y += vector2D.getY();
+        return this;
     },
     addToX: function(x) {
         this.x += x;
+        return this;
     },
     addToY: function(y) {
         this.y += y;
+        return this;
     },
     addScalarTo: function(scalar) {
         this.x += scalar;
         this.y += scalar;
+        return this;
     },
     addScaledVectorTo: function(vector2D, scalar) {
         this.x += vector2D.getX() * scalar;
         this.y += vector2D.getY() * scalar;
+        return this;
     },
     copyScaledVectorTo: function(vector2D, scalar) {
         this.x = vector2D.getX() * scalar;
         this.y = vector2D.getY() * scalar;
+        return this;
     },
     subtractFrom: function(vector2D) {
         this.x -= vector2D.getX();
         this.y -= vector2D.getY();
+        return this;
     },
     subtractFromX: function(x) {
         this.x -= x;
+        return this;
     },
     subtractFromY: function(y) {
         this.y -= y;
+        return this;
     },
     copySubtractFromTo: function(vector2DA, vector2DB) {
         this.x = vector2DA.getX() - vector2DB.getX();
         this.y = vector2DA.getY() - vector2DB.getY();
+        return this;
     },
     subtractScalarFrom: function(scalar) {
         this.x -= scalar;
         this.y -= scalar;
+        return this;
     },
     subtractScaledVectorFrom: function(vector2D, scalar) {
         this.x -= vector2D.getX() * scalar;
         this.y -= vector2D.getY() * scalar;
+        return this;
     },
     scaleBy: function(value) {
         this.x *= value;
         this.y *= value;
+        return this;
     },
     multiplyBy: function(vector2D) {
         this.x *= vector2D.getX();
         this.y *= vector2D.getY();
+        return this;
     },
     multiplyScaledVectorBy: function(vector2D, scalar) {
         this.x *= vector2D.getX() * scalar;
         this.y *= vector2D.getY() * scalar;
+        return this;
     },
     divideBy: function(vector2D) {
         this.x /= vector2D.getX();
         this.y /= vector2D.getY();
+        return this;
     },
     divideScaledVectorBy: function(vector2D, scalar) {
         this.x /= vector2D.getX() * scalar;
         this.y /= vector2D.getY() * scalar;
+        return this;
     },
     maxTo: function(vector2D) {
         this.x = Math.max(this.x, vector2D.getX());
         this.y = Math.max(this.y, vector2D.getY());
+        return this;
     },
     minTo: function(vector2D) {
         this.x = Math.min(this.x, vector2D.getX());
         this.y = Math.min(this.y, vector2D.getY());
+        return this;
     },
     maxScalarTo: function(scalar) {
         this.x = Math.max(this.x, scalar);
@@ -377,44 +396,53 @@ TYPE6.Vector2D = {
     minScalarTo: function(scalar) {
         this.x = Math.min(this.x, scalar);
         this.y = Math.min(this.y, scalar);
+        return this;
     },
     halveBy: function() {
         this.x *= .5;
         this.y *= .5;
+        return this;
     },
     normalizeTo: function() {
         var length = this.getMagnitude();
         if (length) {
             this.scaleBy(1 / length);
         }
+        return this;
     },
     absoluteTo: function() {
         this.x = Math.abs(this.x);
         this.y = Math.abs(this.y);
+        return this;
     },
     oppositeTo: function() {
         this.x = -this.x;
         this.y = -this.y;
+        return this;
     },
     oppositeXTo: function() {
         this.x = -this.x;
+        return this;
     },
     oppositeYTo: function() {
         this.y = -this.y;
+        return this;
     },
     clampTo: function(rectangle) {
         this.x = TYPE6.MathUtils.clamp(this.x, rectangle.topLeftCorner.getX(), rectangle.bottomRightCorner.getX());
         this.y = TYPE6.MathUtils.clamp(this.y, rectangle.topLeftCorner.getY(), rectangle.bottomRightCorner.getY());
+        return this;
     },
     lerpTo: function(normal, min, max) {
         this.x = TYPE6.MathUtils.lerp(normal, min.getX(), max.getX());
         this.y = TYPE6.MathUtils.lerp(normal, min.getY(), max.getY());
+        return this;
     },
     dotProduct: function(vector2D) {
         return this.x * vector2D.getX() + this.y * vector2D.getY();
     },
     isOrigin: function() {
-        if (this.x === 0 || this.y === 0) return true;
+        if (this.x === 0 && this.y === 0) return true;
         return false;
     },
     isPositive: function() {
@@ -452,6 +480,14 @@ TYPE6.Vector3 = {
     },
     toString: function() {
         return "(" + this.x + ";" + this.y + ";" + this.z + ")";
+    },
+    copy: function() {
+        return this.create(this.getX(), this.getY(), this.getZ());
+    },
+    copyTo: function(vector3) {
+        this.x = vector3.getX();
+        this.y = vector3.getY();
+        this.z = vector3.getZ();
     },
     setX: function(value) {
         this.x = this.valueValidation(value);
@@ -946,6 +982,10 @@ TYPE6.Matrix4x3 = {
         _this.make(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11]);
         return _this;
     },
+    copy: function(matrix4x3) {
+        var m = matrix4x3.toArray();
+        this.make(m[0], m[1], m[2], m[4], m[5], m[6], m[8], m[9], m[10], m[12], m[13], m[14]);
+    },
     make: function(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3) {
         this.m[0] = this.valueValidation(x1);
         this.m[1] = this.valueValidation(x2);
@@ -987,6 +1027,9 @@ TYPE6.Matrix4x3 = {
         var cos = TYPE6.Trigonometry.cosine(angle);
         var sin = TYPE6.Trigonometry.sine(angle);
         this.make(cos, sin, 0, -sin, cos, 0, 0, 0, 1, 0, 0, 0);
+    },
+    translateTo: function(vector3D) {
+        this.make(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, vector3D.getX(), vector3D.getY(), vector3D.getZ(), 1);
     },
     multiplyBy: function(m) {
         var m1 = this.toArray();
