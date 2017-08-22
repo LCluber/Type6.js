@@ -1,4 +1,4 @@
-Version 0.3.1 (July 10th 2017)
+Version 0.3.1 (August 22th 2017)
 ------------------------------
  * Updated vector3 class with copy methods
  * Updated Matrix4x3 class with copy and translation methods
