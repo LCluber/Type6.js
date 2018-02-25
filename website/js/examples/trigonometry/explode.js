@@ -10,26 +10,23 @@ window.onload = function() {
     velocity: {},
     create : function( positionX, positionY, velocityX, velocityY ){
       var obj = Object.create(this);
-      obj.init();
-      obj.position.setXY( positionX, positionY );
-      obj.velocity.setXY( velocityX, velocityY );
+      obj.position = new TYPE6.Vector2( positionX, positionY );
+      obj.velocity = new TYPE6.Vector2( velocityX, velocityY );
       return obj;
     },
-    init: function(){
-      this.position = TYPE6.Vector2D.create();
-      this.velocity = TYPE6.Vector2D.create();
-    },
     update: function(){
-      this.position.addTo(this.velocity);
+      this.position.add(this.velocity);
     }
   };
+  
+  var px = width * 0.5;
+  var py = height * 0.5;
 
 	for (var i = 0; i < 200; i += 1) {
     var radius    = TYPE6.Random.float(0, 3);
-    var angle     = TYPE6.Random.float(0, TYPE6.Trigonometry.TWOPI);
+    var angle     = TYPE6.Random.float(0, TYPE6.Trigonometry.twopi);
     particles[i]  = particle.create(
-                      width * 0.5,
-                      height * 0.5,
+                      px, py,
                       TYPE6.Trigonometry.cosineEquation( radius, angle, 0, 0 ),
                       TYPE6.Trigonometry.sineEquation( radius, angle, 0, 0 )
                     );
@@ -43,7 +40,7 @@ window.onload = function() {
       var p = particles[i];
       p.update();
       context.beginPath();
-      context.arc(p.position.getX(), p.position.getY(), 3, 0, TYPE6.Trigonometry.TWOPI, false);
+      context.arc(p.position.x, p.position.y, 3, 0, TYPE6.Trigonometry.twopi, false);
       context.fill();
     }
     requestAnimationFrame(update);

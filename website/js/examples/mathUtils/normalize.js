@@ -14,8 +14,8 @@ window.onload = function() {
 
   //compute positions
   for ( var i = 0; i <= qty; i++ ) {
-    var normValue = TYPE6.MathUtils.normalize(values[i], min, max);
-    positions[i]  = TYPE6.Vector2D.create(
+    var normValue = TYPE6.Utils.normalize(values[i], min, max);
+    positions[i]  = new TYPE6.Vector2(
       slice * i,
       height - height * normValue
     );
@@ -26,11 +26,11 @@ window.onload = function() {
   context.beginPath();
   //move to first plot
   var position1 = positions[0];
-  context.moveTo(position1.getX(), position1.getY());
+  context.moveTo(position1.x, position1.y);
   //loop through following plots
   for ( i = 1; i <= qty; i++) {
     position = positions[i];
-    context.lineTo(position.getX(), position.getY());
+    context.lineTo(position.x, position.y);
   }
 	context.stroke();
 
@@ -39,7 +39,7 @@ window.onload = function() {
   for(i = 0; i <= qty; i++) {
     position = positions[i];
     context.beginPath();
-    context.arc(position.getX(), position.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
+    context.arc(position.x, position.y, 4, 0, TYPE6.Trigonometry.twopi, false);
     context.fill();
   }
 

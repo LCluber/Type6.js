@@ -7,7 +7,7 @@ window.onload = function() {
   context.translate( width * 0.5, height * 0.5 );
   context.scale( 1, -1 );
 
-  for(var angle = -TYPE6.Trigonometry.PI; angle <= TYPE6.Trigonometry.PI; angle += 0.04) {
+  for(var angle = -TYPE6.Trigonometry.pi; angle <= TYPE6.Trigonometry.pi; angle += 0.04) {
 
     var x = angle * 200;
 

@@ -2,32 +2,34 @@ module.exports = function(grunt){
 
   require('time-grunt')(grunt);
 
-  var projectName = 'Type6';
-
+  var projectName = 'TYPE6';
+  var projectNameLC = projectName.toLowerCase();
+  
   var port      = 3002;
   var host      = 'localhost';
 
-  var srcDir    = 'src/';
-  var distDir   = 'dist/';
-  var webDir    = 'website/';
-  var publicDir = webDir + 'public/';
-  var nodeDir   = 'node_modules/';
-  var docDir    = 'doc/';
-  var zipDir    = 'zip/';
+  var srcDir          = 'src/';
+  var compiledSrcDir  = srcDir + 'ts/build/';
+  var distDir         = 'dist/';
+  var webDir          = 'website/';
+  var publicDir       = webDir + 'public/';
+  var nodeDir         = 'node_modules/';
+  var docDir          = 'doc/';
+  var zipDir          = 'zip/';
 
-  var src = [ srcDir + projectName.toLowerCase() + '.js',
-              srcDir + 'mathUtils.js',
-              srcDir + 'random.js',
-              srcDir + 'bezier.js',
-              srcDir + 'vector2.js',
-              srcDir + 'vector3.js',
-              srcDir + 'geometry.js',
-              srcDir + 'geometry/circle.js',
-              srcDir + 'geometry/rectangle.js',
-              srcDir + 'trigonometry.js',
-              srcDir + 'matrix4x3.js',
-              srcDir + 'matrix4x4.js'
-            ];
+  // var src = [ srcDir + projectName.toLowerCase() + '.js',
+  //             srcDir + 'mathUtils.js',
+  //             srcDir + 'random.js',
+  //             srcDir + 'bezier.js',
+  //             srcDir + 'vector2.js',
+  //             srcDir + 'vector3.js',
+  //             srcDir + 'geometry.js',
+  //             srcDir + 'geometry/circle.js',
+  //             srcDir + 'geometry/rectangle.js',
+  //             srcDir + 'trigonometry.js',
+  //             srcDir + 'matrix4x3.js',
+  //             srcDir + 'matrix4x4.js'
+  //           ];
   
   var banner    = '/** MIT License\n' +
     '* \n' +
@@ -51,7 +53,7 @@ module.exports = function(grunt){
     '* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n' +
     '* SOFTWARE.\n' +
     '*\n' +
-    '* http://' + projectName.toLowerCase() + 'js.lcluber.com\n' +
+    '* http://' + projectNameLC + 'js.lcluber.com\n' +
     '*/\n';
 
   // Project configuration.
@@ -59,18 +61,21 @@ module.exports = function(grunt){
     pkg: grunt.file.readJSON('package.json'),
     clean: {
       lib:{
-        src: [  distDir + '*'
+        src: [  distDir + '*',
+                docDir  + '*',
               ]
       },
       web:{
-        src: [  docDir    + '*',
-                zipDir    + '*',
-                webDir    + 'static/*',
-                webDir    + 'sass/build/*',
-                publicDir + 'js/*',
+        src: [  zipDir + '*',
+                webDir + 'static/*',
+                webDir + 'sass/build/*',
+        ]
+      },
+      public: {
+        src: [  publicDir + 'js/*',
                 publicDir + 'css/*',
                 publicDir + 'fonts/*'
-              ]
+        ]
       }
     },
     jshint: {
@@ -121,7 +126,7 @@ module.exports = function(grunt){
     },
     jsdoc: {
       dist : {
-        src: src,
+        src: distDir + projectNameLC + '.js',
         config: 'config/jsdoc-conf.json'
       }
     },
@@ -160,6 +165,42 @@ module.exports = function(grunt){
         dest: webDir + 'static/'
       }
     },
+    tslint: {
+      options: {
+        configuration: 'config/tslint.json',
+        force: false
+      },
+      lib: {
+        files: [{
+          expand: true,
+          cwd: srcDir, 
+          src: [ srcDir + '**/*.ts' ]
+        }]
+      }
+    },
+    ts: {
+      tsconfig: 'config/tsconfig.json',
+      lib : {
+        outDir: compiledSrcDir,
+        options: {
+          rootDir: srcDir + 'ts/',
+          declaration: false
+        },
+        src: [ srcDir + '**/*.ts', '!node_modules/**/*.ts' ]
+      }
+    },
+    rollup: {
+      options: {
+        format:'umd',
+        moduleName: projectName
+      },
+      bundle:{
+        files: [ {
+          src : compiledSrcDir + projectNameLC + '.js', 
+          dest : distDir + projectNameLC + '.js' 
+        } ]
+      }
+    },
     uglify: {
       lib: {
         options: {
@@ -168,8 +209,8 @@ module.exports = function(grunt){
           mangle: false,
           compress:false,
         },
-        src: src,
-        dest: distDir + projectName.toLowerCase() + '.js'
+        src: distDir + projectNameLC + '.js',
+        dest: distDir + projectNameLC + '.js'
       },
       libmin: {
         options: {
@@ -177,7 +218,7 @@ module.exports = function(grunt){
           sourceMapName: srcDir + 'sourcemap.map',
           banner: banner,
           mangle: {
-            reserved: [projectName.toUpperCase()],
+            reserved: [projectName],
           },
           compress: {
             sequences: true,
@@ -199,8 +240,8 @@ module.exports = function(grunt){
             keep_fnames: false
           }
         },
-        src: src,
-        dest: distDir + projectName.toLowerCase() + '.min.js'
+        src: distDir + projectNameLC + '.js',
+        dest: distDir + projectNameLC + '.min.js'
       },
       web: {
         options: {
@@ -313,7 +354,7 @@ module.exports = function(grunt){
     compress: {
       main: {
         options: {
-          archive: zipDir + projectName.toLowerCase() + 'js.zip'
+          archive: zipDir + projectNameLC + 'js.zip'
         },
         files: [
           {expand: true, cwd: webDir + 'static/', src: '**', dest: '/'},
@@ -335,7 +376,7 @@ module.exports = function(grunt){
           //nodeArgs: ['--debug'],
           delay:1000,
           watch: ['website/routes', 'website/app.js'],
-          ext: 'js'
+          ext: 'js,scss'
         }
       }
     },
@@ -346,8 +387,8 @@ module.exports = function(grunt){
     },
     watch: {
       lib: {
-        files: srcDir + '**/*.js',
-        tasks: ['src', 'doc'],  
+        files: srcDir + 'ts/**/*.ts',
+        tasks: ['dist'],  
       },
       webpug:{
         files: webDir + 'views/**/*.pug'
@@ -392,16 +433,20 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-concurrent' );
   grunt.loadNpmTasks( 'grunt-nodemon' );
   grunt.loadNpmTasks( 'grunt-open' );
+  grunt.loadNpmTasks( 'grunt-tslint' );
+  grunt.loadNpmTasks( 'grunt-ts' );
+  grunt.loadNpmTasks( 'grunt-rollup' );
 
 
-  grunt.registerTask( 'dist',
-                      'build release distribution for prosuction',
-                      [ 'jshint', 'clean', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'symlink:fonts', 'symlink:fontAwesome', 'concat', 'symlink:examples', 'symlink:public', 'symlink:doc', 'htmlmin', 'compress' ]
-                    );
-
-  grunt.registerTask( 'serve',
-                      'serve files, open website and watch for changes.',
-                      [ 'jshint', 'clean', 'jsdoc', 'sass', 'cssmin', 'pug', 'uglify', 'symlink:fonts', 'symlink:fontAwesome', 'concat', 'symlink:examples', 'symlink:public', 'symlink:doc', 'compress', 'concurrent' ]
+  grunt.registerTask( 'lib',
+                      'build the library in the dist/ folder',
+                      [ 'tslint:lib',
+                        'clean:lib',
+                        'ts:lib',
+                        'rollup',
+                        'uglify:libmin', 'uglify:lib'
+                        //'jsdoc'
+                      ]
                     );
 
   grunt.registerTask( 'doc',
@@ -409,29 +454,50 @@ module.exports = function(grunt){
                       [ 'jsdoc' ]
                     );
 
-  grunt.registerTask( 'src',
-                      'build library into /dist',
-                      [ 'jshint:lib', 'clean:lib', 'uglify' ]
+  grunt.registerTask( 'serve',
+                      'launch server, open website and watch for changes',
+                      [ 'concurrent' ]
                     );
 
-  grunt.registerTask( 'website:js',
-                      'build necessary js files for website into /website/public/js',
-                      [ 'jshint:web', 'uglify:web', 'symlink:examples', 'concat:webjs' ]
+  grunt.registerTask( 'website',
+                      'build the website in the website/ folder',
+                      [ 'jshint:web',
+                        'clean:public', 'clean:web',
+                        //js
+                          'uglify:web',
+                          'concat:webjs',
+                          'symlink:examples',
+                        //css
+                          'sass',
+                          'cssmin',
+                          'symlink:fonts', 'symlink:fontAwesome',
+                          'concat:webcss',
+                        //static
+                          'pug',
+                          'htmlmin',
+                          'symlink:public', 'symlink:doc',
+                          'compress'
+                      ]
                     );
 
-  grunt.registerTask( 'website:css',
-                      'build sass for website into /website/public/css',
-                      [ 'sass', 'csslint', 'cssmin', 'concat:webcss' ]
+  grunt.registerTask( 'dist',
+                      'build library and website',
+                      function() {
+                        //build lib
+                        grunt.task.run('lib');
+                        //build site
+                        grunt.task.run('website');
+                      }
                     );
 
-  grunt.registerTask( 'website:static',
-                      'build static version of the website into /website/static',
-                      [ 'pug', 'htmlmin', 'symlink:fonts', 'symlink:fontAwesome', 'symlink:examples', 'symlink:public', 'symlink:doc' ]
-                    );
-
-  grunt.registerTask( 'zip',
-                      'create the  package',
-                      ['compress']
+  grunt.registerTask( 'default',
+                      'build library, website, launch server, open website and watch for changes.',
+                      function() {
+                        //build library and website
+                        grunt.task.run('dist');
+                        // launch server and watch for changes
+                        grunt.task.run('serve');
+                      }
                     );
 
 };
