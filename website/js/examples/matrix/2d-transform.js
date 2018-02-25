@@ -4,10 +4,10 @@ window.onload = function() {
   var width         = canvas.width = window.innerWidth;
   var height        = canvas.height = window.innerHeight;
 
-  var circle = TYPE6.Geometry.Circle.create( width*0.5, height*0.5, 40 );
-  var circle2 = TYPE6.Geometry.Circle.create( width*0.5, height*0.5, 20 );
+  var circle = new TYPE6.Circle( width*0.5, height*0.5, 40 );
+  var circle2 = new TYPE6.Circle( width*0.5, height*0.5, 20 );
 
-  var position = TYPE6.Matrix3.create(1.0, x2, x3, y1, 1.0, y3, circle.getPositionX(), circle.getPositionY(), 1.0);
+  var position = new TYPE6.Matrix3x3(1.0, x2, x3, y1, 1.0, y3, circle.position.x, circle.position.y, 1.0);
 
   update();
 
@@ -18,7 +18,7 @@ window.onload = function() {
   }
   
   function move() {
-    var p = TYPE6.Vector2D.create(0.1,0.1);
+    var p = new TYPE6.Vector2(0.1,0.1);
   }
   
   function draw() {

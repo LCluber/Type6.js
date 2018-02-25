@@ -7,7 +7,7 @@ window.onload = function() {
 
   for (var i = 0 ; i < 300 ; i += 1){
     var iMod3 = i%3;
-    var circle = TYPE6.Geometry.Circle.create(
+    var circle = new TYPE6.Circle(
                   TYPE6.Random.float( width * iMod3/3, width * (iMod3+1)/3 ),
                   TYPE6.Random.float( 0, height ),
                   TYPE6.Random.float( 10, 40 )

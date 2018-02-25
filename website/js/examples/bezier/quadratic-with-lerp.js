@@ -3,12 +3,12 @@ window.onload = function() {
   var context   = canvas.getContext("2d");
   var width     = canvas.width = window.innerWidth;
   var height    = canvas.height = window.innerHeight;
-  var p0        = TYPE6.Vector2D.create(100, 500);
-  var p1        = TYPE6.Vector2D.create(200, 100);
-  var p2        = TYPE6.Vector2D.create(1000,400);
-  var pA        = TYPE6.Vector2D.create();
-  var pB        = TYPE6.Vector2D.create();
-  var pFinal    = TYPE6.Vector2D.create();
+  var p0        = new TYPE6.Vector2(100, 500);
+  var p1        = new TYPE6.Vector2(200, 100);
+  var p2        = new TYPE6.Vector2(1000,400);
+  var pA        = new TYPE6.Vector2();
+  var pB        = new TYPE6.Vector2();
+  var pFinal    = new TYPE6.Vector2();
   var t         = 0;
   var maxT      = 0;
   var step      = 0.1;
@@ -22,53 +22,53 @@ window.onload = function() {
 
     context.strokeStyle = "#ccc";
     context.beginPath();
-    context.moveTo(p0.getX(), p0.getY());
-    context.lineTo(p1.getX(), p1.getY());
-    context.lineTo(p2.getX(), p2.getY());
+    context.moveTo(p0.x, p0.y);
+    context.lineTo(p1.x, p1.y);
+    context.lineTo(p2.x, p2.y);
     context.stroke();
 
     context.beginPath();
-    context.arc(p0.getX(), p0.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
+    context.arc(p0.x, p0.y, 4, 0, TYPE6.Trigonometry.twopi, false);
     context.fill();
 
     context.beginPath();
-    context.arc(p1.getX(), p1.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
+    context.arc(p1.x, p1.y, 4, 0, TYPE6.Trigonometry.twopi, false);
     context.fill();
 
     context.beginPath();
-    context.arc(p2.getX(), p2.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
+    context.arc(p2.x, p2.y, 4, 0, TYPE6.Trigonometry.twopi, false);
     context.fill();
 
     context.strokeStyle = "red";
     context.beginPath();
-    context.moveTo(p0.getX(), p0.getY());
+    context.moveTo(p0.x, p0.y);
 
     for(t = 0; t <= maxT; t += step) {
-      pA.lerpTo(t, p0, p1);
-      pB.lerpTo(t, p1, p2);
-      pFinal.lerpTo(t, pA, pB);
+      pA.lerp(t, p0, p1);
+      pB.lerp(t, p1, p2);
+      pFinal.lerp(t, pA, pB);
 
-      context.lineTo(pFinal.getX(), pFinal.getY());
+      context.lineTo(pFinal.x, pFinal.y);
     }
     context.stroke();
 
     context.beginPath();
     context.strokeStyle = "green";
-    context.moveTo(pA.getX(), pA.getY());
-    context.lineTo(pB.getX(), pB.getY());
+    context.moveTo(pA.x, pA.y);
+    context.lineTo(pB.x, pB.y);
     context.stroke();
 
     context.beginPath();
-    context.arc(pA.getX(), pA.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
+    context.arc(pA.x, pA.y, 4, 0, TYPE6.Trigonometry.twopi, false);
     context.fill();
 
     context.beginPath();
-    context.arc(pB.getX(), pB.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
+    context.arc(pB.x, pB.y, 4, 0, TYPE6.Trigonometry.twopi, false);
     context.fill();
 
     context.fillStyle = "red";
     context.beginPath();
-    context.arc(pFinal.getX(), pFinal.getY(), 4, 0, TYPE6.Trigonometry.TWOPI, false);
+    context.arc(pFinal.x, pFinal.y, 4, 0, TYPE6.Trigonometry.twopi, false);
     context.fill();
     context.fillStyle = "black";
 
@@ -81,7 +81,7 @@ window.onload = function() {
 
     maxT += step * sign;
     if( maxT > 1 || maxT < 0 ){
-      sign = TYPE6.MathUtils.getOppositeSign(sign);
+      sign = TYPE6.Utils.opposite(sign);
       maxT += step * sign;
     }
 
@@ -89,10 +89,10 @@ window.onload = function() {
   }
 
   function labelPoint(p, name) {
-    context.fillText(name + '( x : ' + Math.round(p.getX()) + ', y:' + Math.round(p.getY()) + ')', p.getX() - 40, p.getY() - 20);
+    context.fillText(name + '( x : ' + Math.round(p.x) + ', y:' + Math.round(p.y) + ')', p.x - 40, p.y - 20);
   }
 
   function labelT() {
-    context.fillText("t = " + TYPE6.MathUtils.round(maxT, 1), 400, 400);
+    context.fillText("t = " + TYPE6.Utils.round(maxT, 1), 400, 400);
   }
 };

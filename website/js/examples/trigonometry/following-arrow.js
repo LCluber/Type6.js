@@ -4,8 +4,8 @@ window.onload = function() {
   var width   = canvas.width = window.innerWidth;
   var height  = canvas.height = window.innerHeight;
 
-  var arrowPosition = TYPE6.Vector2D.create(width, height).scale(0.5);
-  var mousePosition = TYPE6.Vector2D.create();
+  var arrowPosition = new TYPE6.Vector2(width, height).halve();
+  var mousePosition = new TYPE6.Vector2();
   var angle = 0.0;
   var a = 0.0;
 
@@ -16,7 +16,7 @@ window.onload = function() {
     context.clearRect(0, 0, width, height);
 
     context.save();
-    context.translate(arrowPosition.getX(), arrowPosition.getY());
+    context.translate(arrowPosition.x, arrowPosition.y);
     context.rotate(angle);
 
     context.beginPath();
@@ -34,12 +34,12 @@ window.onload = function() {
   }
 
   document.body.addEventListener("mousemove", function(event) {
-    mousePosition.setXY(
+    mousePosition.set(
       event.clientX,
       event.clientY
     );
-    mousePosition.subtractFrom(arrowPosition);
-    angle = TYPE6.Trigonometry.arctan2fromVector2D(mousePosition);
+    mousePosition.subtract(arrowPosition);
+    angle = TYPE6.Trigonometry.arctan2Vector2(mousePosition);
   });
 
 

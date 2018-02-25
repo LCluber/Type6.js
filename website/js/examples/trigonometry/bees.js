@@ -6,7 +6,7 @@ window.onload = function() {
 
   var bees    = [];
   var numBees = 30;
-  var center  = TYPE6.Vector2D.create(width, height).halve();
+  var center  = new TYPE6.Vector2(width, height).halve();
 
   var bee = {
     create: function() {
@@ -16,32 +16,31 @@ window.onload = function() {
     },
 
     init: function() {
-      this.angle = TYPE6.Vector2D.create(
-        TYPE6.Random.float(0, TYPE6.Trigonometry.TWOPI),
-        TYPE6.Random.float(0, TYPE6.Trigonometry.TWOPI)
+      this.angle = new TYPE6.Vector2(
+        TYPE6.Random.float(0, TYPE6.Trigonometry.twopi),
+        TYPE6.Random.float(0, TYPE6.Trigonometry.twopi)
       );
-      this.speed = TYPE6.Vector2D.create(
+      this.speed = new TYPE6.Vector2(
         this.randomSpeedGenerator(),
         this.randomSpeedGenerator()
       );
-      this.circle = TYPE6.Geometry.Circle.create( 0, 0, TYPE6.Random.integer(100,200) );
+      this.circle = new TYPE6.Circle( 0, 0, TYPE6.Random.integer(100,200) );
 
     },
 
     update: function() {
-      this.circle.setPositionXY(
-        TYPE6.Trigonometry.cosineEquation( this.circle.getRadius(), this.angle.getX(), 0, 0 ),
-        TYPE6.Trigonometry.sineEquation( this.circle.getRadius(), this.angle.getY(), 0, 0 )
-      );
+      this.circle.position.set(
+        TYPE6.Trigonometry.cosineEquation( this.circle.radius, this.angle.x, 0, 0 ),
+        TYPE6.Trigonometry.sineEquation( this.circle.radius, this.angle.y, 0, 0 )
+      ).add(center);
 
-      this.circle.position.addTo(center);
-      this.angle.addTo( this.speed );
+      this.angle.add( this.speed );
       this.draw();
     },
 
     draw: function(){
       context.beginPath();
-      context.arc( this.circle.getPositionX(), this.circle.getPositionY(), 2, 0, TYPE6.Trigonometry.TWOPI, false );
+      context.arc( this.circle.position.x, this.circle.position.y, 2, 0, TYPE6.Trigonometry.twopi, false );
       context.fill();
     },
 

@@ -5,21 +5,21 @@ window.onload = function() {
   var width   = canvas.width = window.innerWidth;
   var height  = canvas.height = window.innerHeight;
 
-  var mainCircle   = TYPE6.Geometry.Circle.create( width * 0.5, height * 0.5, 200 );
+  var mainCircle   = new TYPE6.Circle( width * 0.5, height * 0.5, 200 );
   var smallCircles = [];
   var angle        = 0;
   var numObjects   = 24;
   var step         = 0;
   var minAlpha     = 0.2;
-  var slice        = TYPE6.Trigonometry.TWOPI / numObjects;
+  var slice        = TYPE6.Trigonometry.twopi / numObjects;
   var radius       = 20;
   //var circlePosition  = TYPE6.Vector2.create();
 
   for(var i = 0; i < numObjects; i += 1) {
     angle = i * slice;
-    smallCircles[i] = TYPE6.Geometry.Circle.create(
-      TYPE6.Trigonometry.cosineEquation( mainCircle.getRadius(), angle, 0, mainCircle.getPositionX() ),
-      TYPE6.Trigonometry.sineEquation( mainCircle.getRadius(), angle, 0, mainCircle.getPositionY() ),
+    smallCircles[i] = new TYPE6.Circle(
+      TYPE6.Trigonometry.cosineEquation( mainCircle.radius, angle, 0, mainCircle.position.x ),
+      TYPE6.Trigonometry.sineEquation( mainCircle.radius, angle, 0, mainCircle.position.y ),
       20
     );
     var circle = smallCircles[i];

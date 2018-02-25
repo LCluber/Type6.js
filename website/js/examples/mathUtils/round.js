@@ -4,16 +4,16 @@ window.onload = function() {
   var width     = canvas.width = window.innerWidth;
   var height    = canvas.height = window.innerHeight;
   var gridSize  = 40;
-  var circle    = TYPE6.Geometry.Circle.create( 0, 0, 20 );
+  var circle    = new TYPE6.Circle( 0, 0, 20 );
 	drawGrid();
 
   document.body.addEventListener("mousemove", function(event) {
     context.clearRect(0, 0, width, height);
     drawGrid();
 
-    circle.setPositionXY(
-      TYPE6.MathUtils.roundToNearest(event.clientX, gridSize),
-      TYPE6.MathUtils.roundToNearest(event.clientY, gridSize)
+    circle.position.set(
+      TYPE6.Utils.roundToNearest(event.clientX, gridSize),
+      TYPE6.Utils.roundToNearest(event.clientY, gridSize)
     );
 
     circle.draw( context, 'rgba(0,0,0,1)', null, null );

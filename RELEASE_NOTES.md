@@ -1,8 +1,17 @@
+
+Version 0.4.0 (February 25th 2018)
+------------------------------
+ * Now written in Typescript. And can be used as a module.
+
+Version 0.3.2 (August 22th 2017)
+------------------------------
+ * Matrix4x3.translate() methods now need 3 parameters for x,y,z coordinates instead of a Vector3
+
 Version 0.3.1 (August 22th 2017)
 ------------------------------
  * Updated vector3 class with copy methods
  * Updated Matrix4x3 class with copy and translation methods
- * Fixed Vector2D.isOrigin() method
+ * Fixed Vector2.isOrigin() method
  * Fixed TYPE6.random documentation 
 
 Version 0.3.0 (July 2nd 2017)
@@ -13,37 +22,33 @@ Version 0.3.0 (July 2nd 2017)
  
 Version 0.2.9 (March 5th 2017)
 ------------------------------
- * Added strokeColor and strokeWidth parameters to the draw() method of the Geometry.Rectangle class
+ * Added strokeColor and strokeWidth parameters to the draw() method of the Rectangle class
  
 Version 0.2.8 (March 2nd 2017)
 ------------------------------
- * Added multiplyScaledVectorBy() and divideScaledVectorBy() methods to the Vector2D class
- * Added maxTo() and minTo() methods to the Vector2D class
- * Added maxScalarTo() and minScalarTo() to the Vector2D class
+ * Added multiplyScaledVector() and divideScaledVector() methods to the Vector2D class
+ * Added max() and min() methods to the Vector2 class
+ * Added maxScalar() and minScalar() to the Vector2 class
  
 Version 0.2.7 (February 26th 2017)
 ------------------------------
- * Added strokeColor and strokeWidth parameters to the draw() method of the Geometry.Circle class
+ * Added strokeColor and strokeWidth parameters to the draw() method of the Circle class
  
 Version 0.2.6 (February 25th 2017)
 ------------------------------
- * Fixed getSize() and improved size handling in Geometry.Circle class
+ * Improved size handling in Circle class
  
 Version 0.2.5 (February 25th 2017)
 ------------------------------
- * Added subtractFromX() and subtractFromY() methods to the vector2D class.
  * Documentation updates
 
 Version 0.2.4 (February 15th 2017)
 ------------------------------
- * Added setPositionX() and setPositionY() methods to Geometry.Rectangle class
- * Added setTopLeftCornerX() and setTopLeftCornerY() methods to Geometry.Rectangle class
- * Added setBottomRightCornerX() and setBottomRightCornerY() methods to Geometry.Rectangle class
  * Documentation updates
 
 Version 0.2.3 (January 29th 2017)
 ------------------------------
- * Added draw() method to Geometry.Circle and Geometry.Rectangle classes to draw those forms in a HTML canvas
+ * Added draw() method to Circle and Rectangle classes to draw those forms in a HTML canvas
 
 Version 0.2.2 (January 2nd 2017)
 ------------------------------
@@ -51,16 +56,12 @@ Version 0.2.2 (January 2nd 2017)
 
 Version 0.2.1 (December 21th 2016)
 ------------------------------
- * Vector2D class
-  * Added copyScaledVectorTo() method merging copy and scale methods into one
-  * Added copySubtractFromTo() method merging copy and subtract methods into one
-  * Added subtractScaledVector() and subtractScaledVectorFrom() methods
-  * Added isPositive() and isNegative methods
-  * Added setXToOrigin() and setYToOrigin() methods
+ * Vector2 class
+  * Added subtractScaledVector() method
+  * Added isPositive() and isNegative() methods
   * Fixed copy() method
- * Geometry class
-  * Added bottomRightCorner and halfSize properties to rectangle class with getters and setters
-  * Added size and halfSize Properties to circle class
+ * Rectangle class
+  * Added bottomRightCorner and halfSize properties
 
 Version 0.2.0 (September 21st 2016)
 ------------------------------

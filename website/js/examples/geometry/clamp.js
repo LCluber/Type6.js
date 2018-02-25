@@ -6,16 +6,16 @@ window.onload = function() {
   var hWidth  = width  * 0.5;
   var hHeight = height * 0.5;
 
-  var circle    = TYPE6.Geometry.Circle.create( 0, 0, 40 );
-  var rect      = TYPE6.Geometry.Rectangle.create( hWidth, hHeight, hWidth, hHeight );
-  var innerRect = TYPE6.Geometry.Rectangle.create( hWidth, hHeight, hWidth - circle.getDiameter(), hHeight - circle.getDiameter());
+  var circle    = new TYPE6.Circle( 0, 0, 40 );
+  var rect      = new TYPE6.Rectangle( hWidth, hHeight, hWidth, hHeight );
+  var innerRect = new TYPE6.Rectangle( hWidth, hHeight, hWidth - circle.diameter, hHeight - circle.diameter );
 
   //initial rendering
   drawRectangles();
 
   document.body.addEventListener("mousemove", function(event) {
-    circle.setPositionXY(event.clientX, event.clientY);
-    circle.clampTo(innerRect);
+    circle.position.set(event.clientX, event.clientY);
+    circle.position.clamp(innerRect);
 
     context.clearRect(0, 0, width, height);
 
