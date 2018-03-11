@@ -5,6 +5,8 @@
         "sourceMap": true,
         "fast": "always",
         "noImplicitAny": true,
+        "allowSyntheticDefaultImports": true,
+        "allowJs": false,
         "removeComments": true,
         "preserveConstEnums": true,
         "suppressImplicitAnyIndexErrors":true

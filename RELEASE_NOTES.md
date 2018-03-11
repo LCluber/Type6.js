@@ -1,4 +1,8 @@
 
+Version 0.4.1 (March 11th 2018)
+------------------------------
+ * Added TypeScript Declaration File
+
 Version 0.4.0 (February 25th 2018)
 ------------------------------
  * Now written in Typescript. And can be used as a module.
