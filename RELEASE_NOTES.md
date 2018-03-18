@@ -1,4 +1,8 @@
 
+Version 0.4.3 (March 19th 2018)
+------------------------------
+ * Fixed millisecondToFramePerSecond function name
+
 Version 0.4.2 (March 18th 2018)
 ------------------------------
  * Added Time class with utility functions for time
