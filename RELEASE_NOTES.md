@@ -1,4 +1,8 @@
 
+Version 0.4.2 (March 18th 2018)
+------------------------------
+ * Added Time class with utility functions for time
+
 Version 0.4.1 (March 11th 2018)
 ------------------------------
  * Added TypeScript Declaration File

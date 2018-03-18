@@ -292,6 +292,24 @@
     }());
     Trigonometry.init();
 
+    var Time = (function () {
+        function Time() {
+        }
+        Time.millisecondToSecond = function (millisecond) {
+            return millisecond * 0.001;
+        };
+        Time.secondToMilliecond = function (second) {
+            return second * 1000;
+        };
+        Time.millisecondToframePerSecond = function (millisecond) {
+            return Math.round(1000 / millisecond);
+        };
+        Time.framePerSecondToMillisecond = function (refreshRate) {
+            return Utils.round(1000 / refreshRate, 1);
+        };
+        return Time;
+    }());
+
     var Random = (function () {
         function Random() {
         }
@@ -1115,6 +1133,7 @@
 
     exports.Trigonometry = Trigonometry;
     exports.Utils = Utils;
+    exports.Time = Time;
     exports.Random = Random;
     exports.Bezier = Bezier;
     exports.Circle = Circle;

@@ -112,6 +112,12 @@ export declare class Random {
     static distribution(min: number, max: number, iterations: number): number;
     static pick(value1: number, value2: number): number;
 }
+export declare class Time {
+    static millisecondToSecond(millisecond: number): number;
+    static secondToMilliecond(second: number): number;
+    static millisecondToframePerSecond(millisecond: number): number;
+    static framePerSecondToMillisecond(refreshRate: number): number;
+}
 
 export declare class Trigonometry {
     static readonly sineLoops: Array<number>;
@@ -144,6 +150,7 @@ export declare class Trigonometry {
     static arctanEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;
     private static taylorSerie(start, max, x, angle, needFactorial);
 }
+
 
 
 
