@@ -115,7 +115,7 @@ export declare class Random {
 export declare class Time {
     static millisecondToSecond(millisecond: number): number;
     static secondToMilliecond(second: number): number;
-    static millisecondToframePerSecond(millisecond: number): number;
+    static millisecondToFramePerSecond(millisecond: number): number;
     static framePerSecondToMillisecond(refreshRate: number): number;
 }
 

@@ -301,7 +301,7 @@
         Time.secondToMilliecond = function (second) {
             return second * 1000;
         };
-        Time.millisecondToframePerSecond = function (millisecond) {
+        Time.millisecondToFramePerSecond = function (millisecond) {
             return Math.round(1000 / millisecond);
         };
         Time.framePerSecondToMillisecond = function (refreshRate) {

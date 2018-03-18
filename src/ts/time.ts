@@ -10,7 +10,7 @@ export class Time {
     return second * 1000;
   }
   
-  static millisecondToframePerSecond( millisecond:number ): number {
+  static millisecondToFramePerSecond( millisecond:number ): number {
     return Math.round(1000 / millisecond);
   }
   
