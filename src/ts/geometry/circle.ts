@@ -6,8 +6,8 @@ export class Circle {
   public position: Vector2;
   private _radius: number;
   private _diameter: number;
-  readonly shape: 'circle';
-  
+  readonly shape: 'circle' = 'circle';
+
   constructor(positionX: number, positionY: number, radius: number) {
     this.position = new Vector2( positionX, positionY );
     this.radius = radius;
@@ -21,7 +21,7 @@ export class Circle {
   get radius(): number {
     return this._radius;
   }
-  
+
   set diameter(diameter : number) {
     this._diameter = diameter;
     this._radius = this._diameter * 0.5;
@@ -32,7 +32,7 @@ export class Circle {
   }
 
   public clone(): Circle {
-    return new Circle(this.position.x, this.position.y, this.radius);  
+    return new Circle(this.position.x, this.position.y, this.radius);
   }
 
   public copy( circle: Circle ): void {
@@ -45,10 +45,18 @@ export class Circle {
     this.radius = radius;
   }
 
+  public setPositionXY( positionX: number, positionY: number ): void {
+    this.position.set( positionX, positionY );
+  }
+
+  public setPositionFromVector( position: Vector2 ): void {
+    this.position.copy( position );
+  }
+
   public scale(scalar: number): void {
     this.radius *= scalar;
   }
-  
+
   /**
   * draw the circle in a canvas.
   */

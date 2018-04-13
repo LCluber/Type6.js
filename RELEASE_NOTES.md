@@ -1,4 +1,8 @@
 
+Version 0.4.4 (April 13th 2018)
+------------------------------
+ * Added new utility methods to vector2 class
+
 Version 0.4.3 (March 19th 2018)
 ------------------------------
  * Fixed millisecondToFramePerSecond function name
@@ -24,32 +28,32 @@ Version 0.3.1 (August 22th 2017)
  * Updated vector3 class with copy methods
  * Updated Matrix4x3 class with copy and translation methods
  * Fixed Vector2.isOrigin() method
- * Fixed TYPE6.random documentation 
+ * Fixed TYPE6.random documentation
 
 Version 0.3.0 (July 2nd 2017)
 ------------------------------
  * 3D vectors
  * Matrices 4x3 and 4x4
  * Documentation updates
- 
+
 Version 0.2.9 (March 5th 2017)
 ------------------------------
  * Added strokeColor and strokeWidth parameters to the draw() method of the Rectangle class
- 
+
 Version 0.2.8 (March 2nd 2017)
 ------------------------------
  * Added multiplyScaledVector() and divideScaledVector() methods to the Vector2D class
  * Added max() and min() methods to the Vector2 class
  * Added maxScalar() and minScalar() to the Vector2 class
- 
+
 Version 0.2.7 (February 26th 2017)
 ------------------------------
  * Added strokeColor and strokeWidth parameters to the draw() method of the Circle class
- 
+
 Version 0.2.6 (February 25th 2017)
 ------------------------------
  * Improved size handling in Circle class
- 
+
 Version 0.2.5 (February 25th 2017)
 ------------------------------
  * Documentation updates

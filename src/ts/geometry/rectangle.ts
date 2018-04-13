@@ -2,15 +2,15 @@
 import {Vector2} from '../vectors/vector2';
 
 export class Rectangle {
-  
-  readonly position : Vector2;
-  readonly topLeftCorner : Vector2;
-  readonly bottomRightCorner : Vector2;
-  readonly size : Vector2;
-  readonly halfSize : Vector2;
-  readonly shape: 'aabb';
 
-  
+  public position : Vector2;
+  public topLeftCorner : Vector2;
+  public bottomRightCorner : Vector2;
+  public size : Vector2;
+  public halfSize : Vector2;
+  readonly shape: 'aabb' = 'aabb';
+
+
   constructor( positionX: number, positionY: number, sizeX: number, sizeY: number ) {
     //this.initSize( sizeX, sizeY );
     //this.initPosition( positionX, positionY );
@@ -26,15 +26,15 @@ export class Rectangle {
   //   this.size = new Vector2( sizeX, sizeY );
   //   this.setHalfSize();
   // }
-  // 
+  //
   // private initPosition( positionX: number, positionY: number ): void {
   //   this.position          = new Vector2( positionX, positionY );
   //   this.topLeftCorner     = new Vector2( positionX - this.halfSize.x, positionY - this.halfSize.y );
   //   this.bottomRightCorner = new Vector2( positionX + this.halfSize.x, positionY + this.halfSize.y );
   // }
-  
+
   public clone(): Rectangle {
-    return new Rectangle(this.position.x, this.position.y, this.size.x, this.size.y);  
+    return new Rectangle(this.position.x, this.position.y, this.size.x, this.size.y);
   }
 
   public copy( rectangle: Rectangle ): void {
@@ -65,7 +65,7 @@ export class Rectangle {
     this.position.set( positionX, positionY );
     this.setCorners();
   }
-  
+
   public setPositionFromVector( position: Vector2 ): void {
     this.position.copy( position );
     this.setCorners();
@@ -93,16 +93,16 @@ export class Rectangle {
     this.setHalfSize();
     this.setCorners();
   }
-  
+
   public setSizeFromVector( size: Vector2 ): void {
     this.size.copy( size );
     this.setHalfSize();
     this.setCorners();
   }
 
-  private setCorners(): void { 
+  private setCorners(): void {
     this.topLeftCorner.set( this.position.x - this.halfSize.x,
-                            this.position.y - this.halfSize.y ); 
+                            this.position.y - this.halfSize.y );
     this.bottomRightCorner.set( this.position.x + this.halfSize.x,
                                 this.position.y + this.halfSize.y );
   }
@@ -111,7 +111,7 @@ export class Rectangle {
     this.halfSize.copy(this.size);
     this.halfSize.halve();
   }
-  
+
   /**
   * draw the rectangle in a canvas.
   */

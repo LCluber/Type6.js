@@ -38,16 +38,18 @@ export declare class Circle {
     clone(): Circle;
     copy(circle: Circle): void;
     set(positionX: number, positionY: number, radius: number): void;
+    setPositionXY(positionX: number, positionY: number): void;
+    setPositionFromVector(position: Vector2): void;
     scale(scalar: number): void;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
 
 export declare class Rectangle {
-    readonly position: Vector2;
-    readonly topLeftCorner: Vector2;
-    readonly bottomRightCorner: Vector2;
-    readonly size: Vector2;
-    readonly halfSize: Vector2;
+    position: Vector2;
+    topLeftCorner: Vector2;
+    bottomRightCorner: Vector2;
+    size: Vector2;
+    halfSize: Vector2;
     readonly shape: 'aabb';
     constructor(positionX: number, positionY: number, sizeX: number, sizeY: number);
     clone(): Rectangle;
@@ -162,8 +164,6 @@ export declare class Trigonometry {
 
 
 export declare class Utils {
-    static min(x: number, min: number): number;
-    static max(x: number, max: number): number;
     static round(x: number, decimals: number): number;
     static floor(x: number, decimals: number): number;
     static ceil(x: number, decimals: number): number;
@@ -171,7 +171,6 @@ export declare class Utils {
     static roundToNearest(x: number, nearest: number): number;
     static mix(x: number, y: number, ratio: number): number;
     static sign(x: number): number;
-    static absolute(x: number): number;
     static opposite(x: number): number;
     static clamp(x: number, min: number, max: number): number;
     static normalize(x: number, min: number, max: number): number;
@@ -219,6 +218,7 @@ export declare class Vector2 {
     subtractScaledVector(vector2: Vector2, scalar: number): Vector2;
     subtractVectors(v1: Vector2, v2: Vector2): Vector2;
     scale(value: number): Vector2;
+    scaleVector(v1: Vector2, value: number): Vector2;
     multiply(vector2: Vector2): Vector2;
     multiplyScaledVector(vector2: Vector2, scalar: number): Vector2;
     multiplyVectors(v1: Vector2, v2: Vector2): Vector2;
@@ -230,9 +230,15 @@ export declare class Vector2 {
     min(vector2: Vector2): Vector2;
     maxScalar(scalar: number): Vector2;
     minScalar(scalar: number): Vector2;
+    maxAxis(): 'x' | 'y';
+    minAxis(): 'x' | 'y';
+    setOppositeAxis(axis: string, value: number): Vector2;
     normalize(): Vector2;
+    normalizeVector(v: Vector2): Vector2;
     absolute(): Vector2;
+    absoluteVector(v: Vector2): Vector2;
     opposite(): Vector2;
+    oppositeVector(v: Vector2): Vector2;
     clamp(rectangle: Rectangle): Vector2;
     lerp(normal: number, min: Vector2, max: Vector2): Vector2;
     dotProduct(vector2: Vector2): number;

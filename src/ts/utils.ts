@@ -1,13 +1,5 @@
 
 export class Utils {
-  
-  static min(x: number, min:number): number {
-    return Math.min( x, min );
-  }
-
-  static max(x: number, max:number): number {
-    return Math.max( x, max );
-  }
 
   static round(x: number, decimals: number): number {
     decimals = Math.pow( 10, decimals );
@@ -44,10 +36,6 @@ export class Utils {
 
   static sign(x: number): number {
     return x ? x < 0 ? -1 : 1 : 0;
-  }
-
-  static absolute(x: number): number {
-    return Math.abs(x);
   }
 
   static opposite(x: number): number {

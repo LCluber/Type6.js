@@ -5,7 +5,7 @@ import {Rectangle} from '../geometry/rectangle';
 import {Utils} from '../utils';
 
 export class Vector2 {
-  
+
   private _x: number;
   private _y: number;
 
@@ -29,7 +29,7 @@ export class Vector2 {
   get y(): number {
     return this._y;
   }
-  
+
   //true if vector is equal to (0;0)
   public isOrigin(): boolean {
     return ( Utils.isOrigin(this.x) && Utils.isOrigin(this.y) ) ? true : false;
@@ -43,81 +43,79 @@ export class Vector2 {
   public isPositive(): boolean {
     return ( Utils.isPositive(this.x) && Utils.isPositive(this.y) ) ? true : false;
   }
-  
+
   public isNegative(): boolean {
     return ( Utils.isNegative(this.x) && Utils.isNegative(this.y) ) ? true : false;
   }
-  
+
   public fromArray( array: Array<number>, offset?: number ): Vector2 {
     if ( offset === undefined ){
       offset = 0;
     }
-    
+
     this.x = array[ offset ];
     this.y = array[ offset + 1 ];
     return this;
   }
-  
+
   public toArray(): Array<number> {
     return [ this.x, this.y ];
   }
-  
+
   public toString(): string {
     return '(' + this.x + ';' + this.y + ')';
   }
-  
+
   public set(x:number, y:number): Vector2 {
     this.x = x;
     this.y = y;
     return this;
   }
-  
+
   public clone(): Vector2 {
     return new Vector2(this.x,this.y);
   }
-  
+
   public copy(vector2: Vector2 ): Vector2 {
     this.x = vector2.x;
     this.y = vector2.y;
     return this;
 	}
-  
+
   public origin(): Vector2 {
     this.x = 0.0;
     this.y = 0.0;
     return this;
   }
-  
+
   public setAngle(angle: number): Vector2 {
     if(Utils.validate(angle)){
       let length = this.getMagnitude();
       this.x = Trigonometry.cosine( angle ) * length;
       this.y = Trigonometry.sine( angle ) * length;
-      //return true;
     }
-    //return false;
     return this;
   }
-  
+
   public getAngle(): number {
     return Math.atan2(this.y, this.x);
   }
-  
+
   public getMagnitude(): number{
     return Math.sqrt(this.getSquaredMagnitude());
   }
-  
+
   public getSquaredMagnitude(): number {
     return this.x * this.x + this.y * this.y;
   }
-  
+
   public getDistance(vector2: Vector2): number {
     this.subtract(vector2);
     let magnitude = this.getMagnitude();
     this.add(vector2);
     return magnitude;
   }
-  
+
   public getSquaredDistance(vector2: Vector2): number {
     this.subtract(vector2);
     let squaredMagnitude = this.getSquaredMagnitude();
@@ -125,7 +123,7 @@ export class Vector2 {
     return squaredMagnitude;
 
   }
-  
+
   public quadraticBezier(p0:Vector2, p1:Vector2, p2:Vector2, t:number): Vector2 {
     this.x = Bezier.quadratic( p0.x, p1.x, p2.x, t );
     this.y = Bezier.quadratic( p0.y, p1.y, p2.y, t );
@@ -136,8 +134,8 @@ export class Vector2 {
     this.x = Bezier.cubic( p0.x, p1.x, p2.x, p3.x, t );
     this.y = Bezier.cubic( p0.y, p1.y, p2.y, p3.y, t );
     return this;
-  }  
-  
+  }
+
   public add(vector2: Vector2): Vector2 {
     this.x += vector2.x;
     this.y += vector2.y;
@@ -155,13 +153,13 @@ export class Vector2 {
     this.y += vector2.y * scalar;
     return this;
   }
-  
+
   public addVectors ( v1: Vector2, v2: Vector2 ): Vector2 {
     this.x = v1.x + v2.x;
     this.y = v1.y + v2.y;
     return this;
   }
-  
+
   public subtract(vector2: Vector2): Vector2 {
     this.x -= vector2.x;
     this.y -= vector2.y;
@@ -173,13 +171,13 @@ export class Vector2 {
     this.y -= scalar;
     return this;
   }
-  
+
   public subtractScaledVector(vector2: Vector2, scalar: number): Vector2 {
     this.x -= vector2.x * scalar;
     this.y -= vector2.y * scalar;
     return this;
   }
-  
+
   public subtractVectors ( v1: Vector2, v2: Vector2 ): Vector2 {
     this.x = v1.x - v2.x;
     this.y = v1.y - v2.y;
@@ -192,19 +190,26 @@ export class Vector2 {
     return this;
   }
 
+  public scaleVector ( v1: Vector2, value: number ): Vector2 {
+    this.x = v1.x * value;
+    this.y = v1.y * value;
+    return this;
+  }
+
+
   //component product
   public multiply(vector2: Vector2): Vector2 {
     this.x *= vector2.x;
     this.y *= vector2.y;
     return this;
   }
-  
+
   public multiplyScaledVector(vector2: Vector2, scalar: number): Vector2 {
     this.x *= vector2.x * scalar;
     this.y *= vector2.y * scalar;
     return this;
   }
-  
+
   public multiplyVectors ( v1: Vector2, v2: Vector2 ): Vector2 {
     this.x = v1.x * v2.x;
     this.y = v1.y * v2.y;
@@ -223,13 +228,13 @@ export class Vector2 {
     this.y /= vector2.y * scalar;
     return this;
   }
-  
+
   public divideVectors ( v1: Vector2, v2: Vector2 ): Vector2 {
     this.x = v1.x / v2.x;
     this.y = v1.y / v2.y;
     return this;
   }
-  
+
   public halve(): Vector2 {
     this.x *= 0.5;
     this.y *= 0.5;
@@ -237,47 +242,86 @@ export class Vector2 {
   }
 
   public max(vector2: Vector2): Vector2 {
-    this.x = Utils.max( this.x, vector2.x );
-    this.y = Utils.max( this.y, vector2.y );
+    this.x = Math.max( this.x, vector2.x );
+    this.y = Math.max( this.y, vector2.y );
     return this;
   }
-  
+
   public min(vector2: Vector2): Vector2 {
-    this.x = Utils.min( this.x, vector2.x );
-    this.y = Utils.min( this.y, vector2.y );
+    this.x = Math.min( this.x, vector2.x );
+    this.y = Math.min( this.y, vector2.y );
     return this;
   }
 
   public maxScalar(scalar: number): Vector2 {
-    this.x = Utils.max( this.x, scalar );
-    this.y = Utils.max( this.y, scalar );
+    this.x = Math.max( this.x, scalar );
+    this.y = Math.max( this.y, scalar );
     return this;
   }
-  
+
   public minScalar(scalar: number): Vector2 {
-    this.x = Utils.min( this.x, scalar );
-    this.y = Utils.min( this.y, scalar );
+    this.x = Math.min( this.x, scalar );
+    this.y = Math.min( this.y, scalar );
+    return this;
+  }
+
+  public maxAxis(): 'x'|'y' {
+    if(this.y > this.x) {
+      return 'y';
+    }
+    return 'x';
+  }
+
+  public minAxis(): 'x'|'y' {
+    if(this.y < this.x) {
+      return 'y';
+    }
+    return 'x';
+  }
+
+  public setOppositeAxis(axis: string, value: number): Vector2 {
+    if(axis === 'y' ) {
+      this.x = value;
+    } else {
+      this.y = value;
+    }
     return this;
   }
 
   public normalize(): Vector2 {
     let length = this.getMagnitude();
-    if( length ){
+    if( length && length != 1) {
       this.scale(1/length);
     }
     return this;
   }
 
+  public normalizeVector(v: Vector2): Vector2 {
+    this.copy(v);
+    return this.normalize();
+  }
+
   public absolute(): Vector2 {
-    this.x = Utils.absolute(this.x);
-    this.y = Utils.absolute(this.y);
+    this.x = Math.abs(this.x);
+    this.y = Math.abs(this.y);
     return this;
   }
-  
+
+  public absoluteVector(v: Vector2): Vector2 {
+    this.x = Math.abs(v.x);
+    this.y = Math.abs(v.y);
+    return this;
+  }
 
   public opposite(): Vector2 {
-    this.x = Utils.opposite(this.x);
-    this.y = Utils.opposite(this.y);
+    this.x = -this.x;
+    this.y = -this.y;
+    return this;
+  }
+
+  public oppositeVector(v: Vector2): Vector2 {
+    this.x = -v.x;
+    this.y = -v.y;
     return this;
   }
 
@@ -311,7 +355,7 @@ export class Vector2 {
   //   _this.setY( array[1] );
   //   return _this;
   // },
-  
+
 
 
   // /**
@@ -326,7 +370,7 @@ export class Vector2 {
   //                       this.y + vector2.getY()
   //                     );
   // },
-  // 
+  //
   // /**
   // * Add X value to this vector and returns a new vector
   // * @since 0.0.3
@@ -339,7 +383,7 @@ export class Vector2 {
   //                       this.y
   //                     );
   // },
-  // 
+  //
   // /**
   // * Add Y value to this vector and returns a new vector
   // * @since 0.0.3
@@ -352,7 +396,7 @@ export class Vector2 {
   //                       this.y + y
   //                     );
   // },
-  // 
+  //
   // /**
   // * Add a scalar to this vector and create a new vector
   // * @since 0.0.3
@@ -365,7 +409,7 @@ export class Vector2 {
   //                       this.y + scalar
   //                     );
   // },
-  // 
+  //
   // /**
   // * scale the given vector by the given scalar, add it to this vector and creates a new vector.
   // * @since 0.0.3
@@ -379,7 +423,7 @@ export class Vector2 {
   //                       this.y + vector2.getY() * scalar
   //                     );
   // },
-  // 
+  //
   // /**
   // * Subtract a vector to this vector and returns a new vector
   // * @since 0.0.3
@@ -392,7 +436,7 @@ export class Vector2 {
   //                       this.y - vector2.getY()
   //                     );
   // },
-  // 
+  //
   // /**
   // * Subtract this vector by the given scalar and create a new vector
   // * @since 0.0.3
@@ -405,7 +449,7 @@ export class Vector2 {
   //                       this.y - scalar
   //                     );
   // },
-  // 
+  //
   // /**
   // * scale the given vector by the given scalar, subtract it to this vector and creates a new vector.
   // * @since 0.0.3
@@ -419,7 +463,7 @@ export class Vector2 {
   //                       this.y - vector2.getY() * scalar
   //                     );
   // },
-  // 
+  //
   // /**
   // * scale this vector by the given scalar and create a new vector
   // * @since 0.0.3
@@ -432,7 +476,7 @@ export class Vector2 {
   //                       this.y * value
   //                     );
   // },
-  // 
+  //
   // /**
   // * Multiply this vector by the given one and create a new vector
   // * @since 0.0.3
@@ -446,7 +490,7 @@ export class Vector2 {
   //                       this.y * vector2.getY()
   //                     );
   // },
-  // 
+  //
   // /**
   // * Divide this vector by the given one and create a new vector
   // * @since 0.0.6
@@ -459,7 +503,7 @@ export class Vector2 {
   //                       this.y / vector2.getY()
   //                     );
   // },
-  // 
+  //
   // /**
   // * Halve the vector and create a new one
   // * @since 0.0.6
@@ -472,7 +516,7 @@ export class Vector2 {
   //                       this.y * 0.5
   //                     );
   // },
-  // 
+  //
   // /**
   // * Normalize the vector and create a new vector
   // * @since 0.0.3
@@ -485,7 +529,7 @@ export class Vector2 {
   //     return this.scale( 1/length );
   //   }
   // },
-  // 
+  //
   // /**
   // * transform vector coordinates into absolute value. So negative values become positive
   // * @since 0.0.4
@@ -497,7 +541,7 @@ export class Vector2 {
   //                       Math.abs( this.y )
   //                     );
   // },
-  // 
+  //
   // /**
   // * create a new vector with opposite coordinates
   // * @since 0.0.4
@@ -509,7 +553,7 @@ export class Vector2 {
   //                       -this.y
   //                     );
   // },
-  // 
+  //
   // /**
   // * create a new vector with opposite X coordinate
   // * @since 0.0.4
@@ -521,7 +565,7 @@ export class Vector2 {
   //                       this.y
   //                     );
   // },
-  // 
+  //
   // /**
   // * create a new vector with opposite Y coordinate
   // * @since 0.0.4
@@ -533,8 +577,8 @@ export class Vector2 {
   //                       -this.y
   //                     );
   // },
-  // 
-  // 
+  //
+  //
   // /**
   // * Clamp the vector inside the given rectangle.
   // * @since 0.0.2
@@ -555,7 +599,7 @@ export class Vector2 {
   //                       )
   //                     );
   // },
-  // 
+  //
   // /**
   // * computes a linear interpolation and creates a new vector.
   // * @since 0.0.1
@@ -568,7 +612,7 @@ export class Vector2 {
   //                       TYPE6.MathUtils.lerp( normal, min.getY(), max.getY() )
   //                     );
   // },
-  // 
+  //
   // /**
   // * Quadratic bezier
   // * @since 0.0.3
@@ -588,7 +632,7 @@ export class Vector2 {
   //                       TYPE6.Bezier.quadratic( p0.getY(), p1.getY(), p2.getY(), t, tt, oneMinusT, powerOf2, oneMinusTByTwo2ByT )
   //                     );
   // },
-  // 
+  //
   // /**
   // * Cubic bezier
   // * @since 0.0.3
@@ -608,7 +652,7 @@ export class Vector2 {
   //                     );
   // },
 
-  
+
 
   //modifiy current vector
 

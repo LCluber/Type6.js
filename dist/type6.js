@@ -32,12 +32,6 @@
     var Utils = (function () {
         function Utils() {
         }
-        Utils.min = function (x, min) {
-            return Math.min(x, min);
-        };
-        Utils.max = function (x, max) {
-            return Math.max(x, max);
-        };
         Utils.round = function (x, decimals) {
             decimals = Math.pow(10, decimals);
             return Math.round(x * decimals) / decimals;
@@ -66,9 +60,6 @@
         };
         Utils.sign = function (x) {
             return x ? x < 0 ? -1 : 1 : 0;
-        };
-        Utils.absolute = function (x) {
-            return Math.abs(x);
         };
         Utils.opposite = function (x) {
             return -x;
@@ -505,6 +496,11 @@
             this.y *= value;
             return this;
         };
+        Vector2.prototype.scaleVector = function (v1, value) {
+            this.x = v1.x * value;
+            this.y = v1.y * value;
+            return this;
+        };
         Vector2.prototype.multiply = function (vector2) {
             this.x *= vector2.x;
             this.y *= vector2.y;
@@ -541,40 +537,75 @@
             return this;
         };
         Vector2.prototype.max = function (vector2) {
-            this.x = Utils.max(this.x, vector2.x);
-            this.y = Utils.max(this.y, vector2.y);
+            this.x = Math.max(this.x, vector2.x);
+            this.y = Math.max(this.y, vector2.y);
             return this;
         };
         Vector2.prototype.min = function (vector2) {
-            this.x = Utils.min(this.x, vector2.x);
-            this.y = Utils.min(this.y, vector2.y);
+            this.x = Math.min(this.x, vector2.x);
+            this.y = Math.min(this.y, vector2.y);
             return this;
         };
         Vector2.prototype.maxScalar = function (scalar) {
-            this.x = Utils.max(this.x, scalar);
-            this.y = Utils.max(this.y, scalar);
+            this.x = Math.max(this.x, scalar);
+            this.y = Math.max(this.y, scalar);
             return this;
         };
         Vector2.prototype.minScalar = function (scalar) {
-            this.x = Utils.min(this.x, scalar);
-            this.y = Utils.min(this.y, scalar);
+            this.x = Math.min(this.x, scalar);
+            this.y = Math.min(this.y, scalar);
+            return this;
+        };
+        Vector2.prototype.maxAxis = function () {
+            if (this.y > this.x) {
+                return 'y';
+            }
+            return 'x';
+        };
+        Vector2.prototype.minAxis = function () {
+            if (this.y < this.x) {
+                return 'y';
+            }
+            return 'x';
+        };
+        Vector2.prototype.setOppositeAxis = function (axis, value) {
+            if (axis === 'y') {
+                this.x = value;
+            }
+            else {
+                this.y = value;
+            }
             return this;
         };
         Vector2.prototype.normalize = function () {
             var length = this.getMagnitude();
-            if (length) {
+            if (length && length != 1) {
                 this.scale(1 / length);
             }
             return this;
         };
+        Vector2.prototype.normalizeVector = function (v) {
+            this.copy(v);
+            return this.normalize();
+        };
         Vector2.prototype.absolute = function () {
-            this.x = Utils.absolute(this.x);
-            this.y = Utils.absolute(this.y);
+            this.x = Math.abs(this.x);
+            this.y = Math.abs(this.y);
+            return this;
+        };
+        Vector2.prototype.absoluteVector = function (v) {
+            this.x = Math.abs(v.x);
+            this.y = Math.abs(v.y);
             return this;
         };
         Vector2.prototype.opposite = function () {
-            this.x = Utils.opposite(this.x);
-            this.y = Utils.opposite(this.y);
+            this.x = -this.x;
+            this.y = -this.y;
+            return this;
+        };
+        Vector2.prototype.oppositeVector = function (v) {
+            this.x = -v.x;
+            this.y = -v.y;
             return this;
         };
         Vector2.prototype.clamp = function (rectangle) {
@@ -595,6 +626,7 @@
 
     var Circle = (function () {
         function Circle(positionX, positionY, radius) {
+            this.shape = 'circle';
             this.position = new Vector2(positionX, positionY);
             this.radius = radius;
         }
@@ -631,6 +663,12 @@
             this.position.set(positionX, positionY);
             this.radius = radius;
         };
+        Circle.prototype.setPositionXY = function (positionX, positionY) {
+            this.position.set(positionX, positionY);
+        };
+        Circle.prototype.setPositionFromVector = function (position) {
+            this.position.copy(position);
+        };
         Circle.prototype.scale = function (scalar) {
             this.radius *= scalar;
         };
@@ -652,6 +690,7 @@
 
     var Rectangle = (function () {
         function Rectangle(positionX, positionY, sizeX, sizeY) {
+            this.shape = 'aabb';
             this.size = new Vector2(sizeX, sizeY);
             this.halfSize = new Vector2();
             this.setHalfSize();
@@ -922,32 +961,32 @@
             return this;
         };
         Vector3.prototype.max = function (vector3) {
-            this.x = Utils.max(this.x, vector3.x);
-            this.y = Utils.max(this.y, vector3.y);
-            this.z = Utils.max(this.z, vector3.z);
+            this.x = Math.max(this.x, vector3.x);
+            this.y = Math.max(this.y, vector3.y);
+            this.z = Math.max(this.z, vector3.z);
             return this;
         };
         Vector3.prototype.min = function (vector3) {
-            this.x = Utils.min(this.x, vector3.x);
-            this.y = Utils.min(this.y, vector3.y);
-            this.z = Utils.min(this.z, vector3.z);
+            this.x = Math.min(this.x, vector3.x);
+            this.y = Math.min(this.y, vector3.y);
+            this.z = Math.min(this.z, vector3.z);
             return this;
         };
         Vector3.prototype.maxScalar = function (scalar) {
-            this.x = Utils.max(this.x, scalar);
-            this.y = Utils.max(this.y, scalar);
-            this.z = Utils.max(this.z, scalar);
+            this.x = Math.max(this.x, scalar);
+            this.y = Math.max(this.y, scalar);
+            this.z = Math.max(this.z, scalar);
             return this;
         };
         Vector3.prototype.minScalar = function (scalar) {
-            this.x = Utils.min(this.x, scalar);
-            this.y = Utils.min(this.y, scalar);
-            this.z = Utils.min(this.z, scalar);
+            this.x = Math.min(this.x, scalar);
+            this.y = Math.min(this.y, scalar);
+            this.z = Math.min(this.z, scalar);
             return this;
         };
         Vector3.prototype.normalize = function () {
             var length = this.getMagnitude();
-            if (length) {
+            if (length && length != 1) {
                 this.scale(1 / length);
             }
             return this;
