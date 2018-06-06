@@ -343,6 +343,12 @@
         return Bezier;
     }());
 
+    var Axis;
+    (function (Axis) {
+        Axis["x"] = "x";
+        Axis["y"] = "y";
+    })(Axis || (Axis = {}));
+
     var Vector2 = (function () {
         function Vector2(x, y) {
             this.x = x;
@@ -392,7 +398,7 @@
             return [this.x, this.y];
         };
         Vector2.prototype.toString = function () {
-            return '(' + this.x + ';' + this.y + ')';
+            return '(' + Axis.x + ' = ' + this.x + ';' + Axis.y + ' = ' + this.y + ')';
         };
         Vector2.prototype.set = function (x, y) {
             this.x = x;
@@ -558,18 +564,18 @@
         };
         Vector2.prototype.maxAxis = function () {
             if (this.y > this.x) {
-                return 'y';
+                return Axis.y;
             }
-            return 'x';
+            return Axis.x;
         };
         Vector2.prototype.minAxis = function () {
             if (this.y < this.x) {
-                return 'y';
+                return Axis.y;
             }
-            return 'x';
+            return Axis.x;
         };
         Vector2.prototype.setOppositeAxis = function (axis, value) {
-            if (axis === 'y') {
+            if (axis === Axis.y) {
                 this.x = value;
             }
             else {
@@ -774,6 +780,13 @@
         return Rectangle;
     }());
 
+    var Axis$1;
+    (function (Axis) {
+        Axis["x"] = "x";
+        Axis["y"] = "y";
+        Axis["z"] = "z";
+    })(Axis$1 || (Axis$1 = {}));
+
     var Vector3 = (function () {
         function Vector3(x, y, z) {
             this.x = x;
@@ -823,7 +836,7 @@
             return [this.x, this.y, this.z];
         };
         Vector3.prototype.toString = function () {
-            return '(' + this.x + ';' + this.y + ';' + this.z + ')';
+            return '(' + Axis$1.x + ' = ' + this.x + ';' + Axis$1.y + ' = ' + this.y + ';' + Axis$1.z + ' = ' + this.z + ')';
         };
         Vector3.prototype.set = function (x, y, z) {
             this.x = x;
@@ -1041,6 +1054,10 @@
         Matrix4x3.prototype.copy = function (matrix4x3) {
             var m = matrix4x3.m;
             this.make(m[0], m[1], m[2], m[4], m[5], m[6], m[8], m[9], m[10], m[12], m[13], m[14]);
+            return this;
+        };
+        Matrix4x3.prototype.toArray = function () {
+            return this.m;
         };
         Matrix4x3.prototype.toString = function () {
             return '('
@@ -1051,38 +1068,46 @@
         };
         Matrix4x3.prototype.identity = function () {
             this.make(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0);
+            return this;
         };
         Matrix4x3.prototype.scale = function (vector3) {
             this.make(vector3.x, 0.0, 0.0, 0.0, vector3.y, 0.0, 0.0, 0.0, vector3.z, 0.0, 0.0, 0.0);
+            return this;
         };
         Matrix4x3.prototype.rotateX = function (angle) {
             var cos = Trigonometry.cosine(angle);
             var sin = Trigonometry.sine(angle);
             this.make(1.0, 0.0, 0.0, 0.0, cos, sin, 0.0, -sin, cos, 0.0, 0.0, 0.0);
+            return this;
         };
         Matrix4x3.prototype.rotateY = function (angle) {
             var cos = Trigonometry.cosine(angle);
             var sin = Trigonometry.sine(angle);
             this.make(cos, 0.0, -sin, 0.0, 1.0, 0.0, sin, 0.0, cos, 0.0, 0.0, 0.0);
+            return this;
         };
         Matrix4x3.prototype.rotateZ = function (angle) {
             var cos = Trigonometry.cosine(angle);
             var sin = Trigonometry.sine(angle);
             this.make(cos, sin, 0.0, -sin, cos, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0);
+            return this;
         };
         Matrix4x3.prototype.translate = function (vector3) {
             this.make(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, vector3.x, vector3.y, vector3.z);
+            return this;
         };
         Matrix4x3.prototype.multiply = function (matrix4x3) {
             var m1 = this.m;
             var m2 = matrix4x3.m;
             this.make(m1[0] * m2[0] + m1[4] * m2[1] + m1[8] * m2[2], m1[1] * m2[0] + m1[5] * m2[1] + m1[9] * m2[2], m1[2] * m2[0] + m1[6] * m2[1] + m1[10] * m2[2], m1[0] * m2[4] + m1[4] * m2[5] + m1[8] * m2[6], m1[1] * m2[4] + m1[5] * m2[5] + m1[9] * m2[6], m1[2] * m2[4] + m1[6] * m2[5] + m1[10] * m2[6], m1[0] * m2[8] + m1[4] * m2[9] + m1[8] * m2[10], m1[1] * m2[8] + m1[5] * m2[9] + m1[9] * m2[10], m1[2] * m2[8] + m1[6] * m2[9] + m1[10] * m2[10], m1[0] * m2[12] + m1[4] * m2[13] + m1[8] * m2[14] + m1[12], m1[1] * m2[12] + m1[5] * m2[13] + m1[9] * m2[14] + m1[13], m1[2] * m2[12] + m1[6] * m2[13] + m1[10] * m2[14] + m1[14]);
+            return this;
         };
         Matrix4x3.prototype.lookAtRH = function (eye, target, up) {
             this.zAxis.subtractVectors(eye, target).normalize();
             this.xAxis.crossVectors(up, this.zAxis).normalize();
             this.yAxis.crossVectors(this.zAxis, this.xAxis);
             this.make(this.xAxis.x, this.yAxis.x, this.zAxis.x, this.xAxis.y, this.yAxis.y, this.zAxis.y, this.xAxis.z, this.yAxis.z, this.zAxis.z, -this.xAxis.dotProduct(eye), -this.yAxis.dotProduct(eye), -this.zAxis.dotProduct(eye));
+            return this;
         };
         return Matrix4x3;
     }());
@@ -1116,6 +1141,10 @@
         Matrix4x4.prototype.copy = function (matrix4x4) {
             var m = matrix4x4.m;
             this.make(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]);
+            return this;
+        };
+        Matrix4x4.prototype.toArray = function () {
+            return this.m;
         };
         Matrix4x4.prototype.toString = function () {
             return '('
@@ -1126,37 +1155,45 @@
         };
         Matrix4x4.prototype.identity = function () {
             this.make(1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0);
+            return this;
         };
         Matrix4x4.prototype.scale = function (vector3) {
             this.make(vector3.x, 0.0, 0.0, 0.0, 0.0, vector3.y, 0.0, 0.0, 0.0, 0.0, vector3.z, 0.0, 0.0, 0.0, 0.0, 1.0);
+            return this;
         };
         Matrix4x4.prototype.rotateX = function (angle) {
             var cos = Trigonometry.cosine(angle);
             var sin = Trigonometry.sine(angle);
             this.make(1.0, 0.0, 0.0, 0.0, 0.0, cos, sin, 0.0, 0.0, -sin, cos, 0.0, 0.0, 0.0, 0.0, 1.0);
+            return this;
         };
         Matrix4x4.prototype.rotateY = function (angle) {
             var cos = Trigonometry.cosine(angle);
             var sin = Trigonometry.sine(angle);
             this.make(cos, 0.0, -sin, 0.0, 0.0, 1.0, 0.0, 0.0, sin, 0.0, cos, 0.0, 0.0, 0.0, 0.0, 1.0);
+            return this;
         };
         Matrix4x4.prototype.rotateZ = function (angle) {
             var cos = Trigonometry.cosine(angle);
             var sin = Trigonometry.sine(angle);
             this.make(cos, sin, 0.0, 0.0, -sin, cos, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0);
+            return this;
         };
         Matrix4x4.prototype.translate = function (vector3) {
             this.make(1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, vector3.x, vector3.y, vector3.z, 1.0);
+            return this;
         };
         Matrix4x4.prototype.multiply = function (matrix4x4) {
             var m1 = this.m;
             var m2 = matrix4x4.m;
             this.make(m1[0] * m2[0] + m1[4] * m2[1] + m1[8] * m2[2], m1[1] * m2[0] + m1[5] * m2[1] + m1[9] * m2[2], m1[2] * m2[0] + m1[6] * m2[1] + m1[10] * m2[2], 0.0, m1[0] * m2[4] + m1[4] * m2[5] + m1[8] * m2[6], m1[1] * m2[4] + m1[5] * m2[5] + m1[9] * m2[6], m1[2] * m2[4] + m1[6] * m2[5] + m1[10] * m2[6], 0.0, m1[0] * m2[8] + m1[4] * m2[9] + m1[8] * m2[10], m1[1] * m2[8] + m1[5] * m2[9] + m1[9] * m2[10], m1[2] * m2[8] + m1[6] * m2[9] + m1[10] * m2[10], 0.0, m1[0] * m2[12] + m1[4] * m2[13] + m1[8] * m2[14] + m1[12], m1[1] * m2[12] + m1[5] * m2[13] + m1[9] * m2[14] + m1[13], m1[2] * m2[12] + m1[6] * m2[13] + m1[10] * m2[14] + m1[14], 1.0);
+            return this;
         };
         Matrix4x4.prototype.perspective = function (fovy, aspect, znear, zfar) {
             var f = Math.tan(Trigonometry.halfpi - 0.5 * fovy * Trigonometry.pi / 180);
             var rangeInv = 1.0 / (znear - zfar);
             this.make(f / aspect, 0.0, 0.0, 0.0, 0.0, f, 0.0, 0.0, 0.0, 0.0, (znear + zfar) * rangeInv, -1.0, 0.0, 0.0, znear * zfar * rangeInv * 2, 0.0);
+            return this;
         };
         Matrix4x4.prototype.orthographic = function (left, right, top, bottom, near, far) {
             var w = right - left;
@@ -1166,6 +1203,7 @@
             var y = (top + bottom) / h;
             var z = (far + near) / p;
             this.make(2 / w, 0.0, 0.0, 0.0, 0.0, 2 / h, 0.0, 0.0, 0.0, 0.0, -2 / p, 0.0, -x, -y, -z, 1.0);
+            return this;
         };
         return Matrix4x4;
     }());

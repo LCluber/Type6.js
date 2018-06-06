@@ -14,6 +14,8 @@ window.onload = function() {
   var step    = 0.01;
   var sign    = 1;
 
+  console.log(p0.toString());
+
   context.strokeStyle = "green";
 
   draw();

@@ -1,4 +1,10 @@
 
+Version 0.4.5 (June 6th 2018)
+------------------------------
+ * Matrix4x3 methods now returns the matrix.
+ * Matrix4x4 methods now returns the matrix.
+ * Added toArray() method to Matrix4x3 and Matrix4x4
+
 Version 0.4.4 (April 13th 2018)
 ------------------------------
  * Added new utility methods to vector2 class

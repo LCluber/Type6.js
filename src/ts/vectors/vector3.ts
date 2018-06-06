@@ -2,6 +2,10 @@
 import {Trigonometry} from '../trigonometry';
 import {Utils} from '../utils';
 
+enum Axis { x = 'x',
+            y = 'y',
+            z = 'z' };
+
 export class Vector3 {
 
   private _x: number;
@@ -54,7 +58,7 @@ export class Vector3 {
   }
 
   public toString(): string {
-    return '(' + this.x + ';' + this.y + ';' + this.z + ')';
+    return '(' + Axis.x + ' = ' + this.x + ';' + Axis.y + ' = ' + this.y + ';' + Axis.z + ' = ' + this.z + ')';
   }
 
   public set(x:number, y:number, z:number): Vector3 {

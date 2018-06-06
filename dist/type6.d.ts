@@ -77,16 +77,17 @@ export declare class Matrix4x3 {
     private zAxis;
     constructor(x1?: number, x2?: number, x3?: number, y1?: number, y2?: number, y3?: number, z1?: number, z2?: number, z3?: number, t1?: number, t2?: number, t3?: number);
     private make(x1?, x2?, x3?, y1?, y2?, y3?, z1?, z2?, z3?, t1?, t2?, t3?);
-    copy(matrix4x3: Matrix4x3): void;
+    copy(matrix4x3: Matrix4x3): Matrix4x3;
+    toArray(): Float32Array;
     toString(): string;
-    identity(): void;
-    scale(vector3: Vector3): void;
-    rotateX(angle: number): void;
-    rotateY(angle: number): void;
-    rotateZ(angle: number): void;
-    translate(vector3: Vector3): void;
-    multiply(matrix4x3: Matrix4x3): void;
-    lookAtRH(eye: Vector3, target: Vector3, up: Vector3): void;
+    identity(): Matrix4x3;
+    scale(vector3: Vector3): Matrix4x3;
+    rotateX(angle: number): Matrix4x3;
+    rotateY(angle: number): Matrix4x3;
+    rotateZ(angle: number): Matrix4x3;
+    translate(vector3: Vector3): Matrix4x3;
+    multiply(matrix4x3: Matrix4x3): Matrix4x3;
+    lookAtRH(eye: Vector3, target: Vector3, up: Vector3): Matrix4x3;
 }
 
 export declare class Matrix4x4 {
@@ -96,17 +97,18 @@ export declare class Matrix4x4 {
     private zAxis;
     constructor(x1?: number, x2?: number, x3?: number, x4?: number, y1?: number, y2?: number, y3?: number, y4?: number, z1?: number, z2?: number, z3?: number, z4?: number, t1?: number, t2?: number, t3?: number, t4?: number);
     private make(x1?, x2?, x3?, x4?, y1?, y2?, y3?, y4?, z1?, z2?, z3?, z4?, t1?, t2?, t3?, t4?);
-    copy(matrix4x4: Matrix4x4): void;
+    copy(matrix4x4: Matrix4x4): Matrix4x4;
+    toArray(): Float32Array;
     toString(): string;
-    identity(): void;
-    scale(vector3: Vector3): void;
-    rotateX(angle: number): void;
-    rotateY(angle: number): void;
-    rotateZ(angle: number): void;
-    translate(vector3: Vector3): void;
-    multiply(matrix4x4: Matrix4x4): void;
-    perspective(fovy: number, aspect: number, znear: number, zfar: number): void;
-    orthographic(left: number, right: number, top: number, bottom: number, near: number, far: number): void;
+    identity(): Matrix4x4;
+    scale(vector3: Vector3): Matrix4x4;
+    rotateX(angle: number): Matrix4x4;
+    rotateY(angle: number): Matrix4x4;
+    rotateZ(angle: number): Matrix4x4;
+    translate(vector3: Vector3): Matrix4x4;
+    multiply(matrix4x4: Matrix4x4): Matrix4x4;
+    perspective(fovy: number, aspect: number, znear: number, zfar: number): Matrix4x4;
+    orthographic(left: number, right: number, top: number, bottom: number, near: number, far: number): Matrix4x4;
 }
 export declare class Random {
     static float(min: number, max: number): number;
@@ -230,8 +232,8 @@ export declare class Vector2 {
     min(vector2: Vector2): Vector2;
     maxScalar(scalar: number): Vector2;
     minScalar(scalar: number): Vector2;
-    maxAxis(): 'x' | 'y';
-    minAxis(): 'x' | 'y';
+    maxAxis(): string;
+    minAxis(): string;
     setOppositeAxis(axis: string, value: number): Vector2;
     normalize(): Vector2;
     normalizeVector(v: Vector2): Vector2;

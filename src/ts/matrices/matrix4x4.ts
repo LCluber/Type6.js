@@ -4,14 +4,14 @@ import {Utils} from '../utils';
 import {Vector3} from '../vectors/vector3';
 
 export class Matrix4x4 {
-  
+
   private m: Float32Array;
   //utility vectors for lookAtRH method
   private xAxis: Vector3;
   private yAxis: Vector3;
   private zAxis: Vector3;
 
-  constructor(  x1?:number, x2?:number, x3?:number, x4?:number,       
+  constructor(  x1?:number, x2?:number, x3?:number, x4?:number,
                 y1?:number, y2?:number, y3?:number, y4?:number,
                 z1?:number, z2?:number, z3?:number, z4?:number,
                 t1?:number, t2?:number, t3?:number, t4?:number
@@ -51,16 +51,21 @@ export class Matrix4x4 {
     this.m[15] = Utils.validate(t4);
   }
 
-  public copy(matrix4x4: Matrix4x4 ): void {
+  public copy(matrix4x4: Matrix4x4 ): Matrix4x4 {
     let m = matrix4x4.m;
     this.make(  m[ 0],  m[ 1],  m[ 2], m[ 3],
                 m[ 4],  m[ 5],  m[ 6], m[ 7],
                 m[ 8],  m[ 9],  m[10], m[11],
                 m[12],  m[13],  m[14], m[15]
               );
+    return this;
   }
 
-  public toString() {
+  public toArray(): Float32Array{
+    return this.m;
+  }
+
+  public toString(): string {
     return '('
       +  this.m[ 0] + ',' + this.m[ 1] + ',' + this.m[ 2] + ',' + this.m[ 3] + ';'
       + this.m[ 4] + ',' + this.m[ 5] + ',' + this.m[ 6] + ',' + this.m[ 7] + ';'
@@ -68,23 +73,25 @@ export class Matrix4x4 {
       + this.m[12] + ',' + this.m[13] + ',' + this.m[14] + ',' + this.m[15] + ')';
   }
 
-  public identity(): void {
+  public identity(): Matrix4x4 {
     this.make(  1.0,  0.0,  0.0,  0.0,
                 0.0,  1.0,  0.0,  0.0,
                 0.0,  0.0,  1.0,  0.0,
                 0.0,  0.0,  0.0,  1.0
               );
+    return this;
   }
 
-  public scale(vector3: Vector3): void {
+  public scale(vector3: Vector3): Matrix4x4 {
     this.make(  vector3.x, 0.0, 0.0, 0.0,
                 0.0, vector3.y, 0.0, 0.0,
                 0.0, 0.0, vector3.z, 0.0,
                 0.0, 0.0, 0.0,        1.0
               );
+    return this;
   }
 
-  public rotateX(angle: number): void {
+  public rotateX(angle: number): Matrix4x4 {
     let cos = Trigonometry.cosine(angle);
     let sin = Trigonometry.sine(angle);
     this.make(  1.0,  0.0,  0.0,  0.0,
@@ -92,9 +99,10 @@ export class Matrix4x4 {
                 0.0, -sin,  cos,  0.0,
                 0.0,  0.0,  0.0,  1.0
               );
+    return this;
   }
 
-  public rotateY(angle: number): void {
+  public rotateY(angle: number): Matrix4x4 {
     let cos = Trigonometry.cosine(angle);
     let sin = Trigonometry.sine(angle);
     this.make(  cos,  0.0, -sin,  0.0,
@@ -102,9 +110,10 @@ export class Matrix4x4 {
                 sin,  0.0,  cos,  0.0,
                 0.0,  0.0,  0.0,  1.0
               );
+    return this;
   }
 
-  public rotateZ(angle: number): void {
+  public rotateZ(angle: number): Matrix4x4 {
     let cos = Trigonometry.cosine(angle);
     let sin = Trigonometry.sine(angle);
     this.make(  cos,  sin,  0.0,  0.0,
@@ -112,17 +121,19 @@ export class Matrix4x4 {
                 0.0,  0.0,  1.0,  0.0,
                 0.0,  0.0,  0.0,  1.0
               );
+    return this;
   }
 
-  public translate(vector3: Vector3): void {
+  public translate(vector3: Vector3): Matrix4x4 {
     this.make(  1.0, 0.0, 0.0, 0.0,
                 0.0, 1.0, 0.0, 0.0,
                 0.0, 0.0, 1.0, 0.0,
                 vector3.x, vector3.y, vector3.z, 1.0
               );
+    return this;
   }
 
-  public multiply(matrix4x4: Matrix4x4): void {
+  public multiply(matrix4x4: Matrix4x4): Matrix4x4 {
     let m1 = this.m;
     let m2 = matrix4x4.m;
     this.make(m1[0]*m2[ 0] + m1[4]*m2[ 1] + m1[ 8]*m2[2],
@@ -145,36 +156,37 @@ export class Matrix4x4 {
               m1[2]*m2[12] + m1[6]*m2[13] + m1[10]*m2[14] + m1[14],
               1.0
             );
-            //return this;
+    return this;
   }
 
-  public perspective(fovy:number, aspect:number, znear:number, zfar:number) {
+  public perspective(fovy:number, aspect:number, znear:number, zfar:number): Matrix4x4 {
     // var top = znear * Math.tan(fovy * Math.PI / 360.0);
     // var bottom = -top;
     // var left = bottom * aspect;
     // var right = top * aspect;
-    // 
+    //
     // var X = 2*znear/(right-left);
     // var Y = 2*znear/(top-bottom);
     // var A = (right+left)/(right-left);
     // var B = (top+bottom)/(top-bottom);
     // var C = -(zfar+znear)/(zfar-znear);
     // var D = -2*zfar*znear/(zfar-znear);
-    // 
+    //
     // this.make(X,0,0,0, 0,Y,0,0, A,B,C,-1, 0,0,D,0);
 
     let f = Math.tan(Trigonometry.halfpi - 0.5 * fovy * Trigonometry.pi / 180);
     let rangeInv = 1.0 / (znear - zfar);
-      
+
     this.make( f/aspect, 0.0, 0.0, 0.0,
                0.0, f, 0.0,  0.0,
                0.0, 0.0, (znear+zfar)*rangeInv,-1.0,
                0.0, 0.0, znear*zfar*rangeInv*2, 0.0
             );
+    return this;
 
   }
 
-  public orthographic(left:number, right:number, top:number, bottom:number, near:number, far:number ) {
+  public orthographic(left:number, right:number, top:number, bottom:number, near:number, far:number ): Matrix4x4 {
 
     //var te = this.elements;
     var w = right - left;
@@ -191,7 +203,7 @@ export class Matrix4x4 {
                 -x,  -y,  -z,   1.0
              );
 
-    //return this;
+    return this;
 
 	}
 
@@ -278,7 +290,7 @@ export class Matrix4x4 {
   //               0.0,  0.0,  0.0,  1.0
   //             );
   // },
-  // 
+  //
   // /**
   // * Rotate the matrix on the Y axis.
   // * @since 0.3.0
@@ -296,7 +308,7 @@ export class Matrix4x4 {
   //               0.0,  0.0,  0.0,  1.0
   //             );
   // },
-  // 
+  //
   // /**
   // * Rotate the matrix on the Z axis.
   // * @since 0.3.0
@@ -314,7 +326,7 @@ export class Matrix4x4 {
   //               0.0,  0.0,  0.0,  1.0
   //             );
   // },
-  // 
+  //
   // /**
   // * Translation matrix.
   // * @since 0.3.0
@@ -344,23 +356,23 @@ export class Matrix4x4 {
   //             this.m[1]*m.m[ 0] + this.m[5]*m.m[ 1] + this.m[ 9]*m.m[ 2],
   //             this.m[2]*m.m[ 0] + this.m[6]*m.m[ 1] + this.m[10]*m.m[ 2],
   //             0.0,
-  // 
+  //
   //             this.m[0]*m.m[ 4] + this.m[4]*m.m[ 5] + this.m[ 8]*m.m[ 6],
   //             this.m[1]*m.m[ 4] + this.m[5]*m.m[ 5] + this.m[ 9]*m.m[ 6],
   //             this.m[2]*m.m[ 4] + this.m[6]*m.m[ 5] + this.m[10]*m.m[ 6],
   //             0.0,
-  // 
+  //
   //             this.m[0]*m.m[ 8] + this.m[4]*m.m[ 9] + this.m[ 8]*m.m[10],
   //             this.m[1]*m.m[ 8] + this.m[5]*m.m[ 9] + this.m[ 9]*m.m[10],
   //             this.m[2]*m.m[ 8] + this.m[6]*m.m[ 9] + this.m[10]*m.m[10],
   //             0.0,
-  // 
+  //
   //             this.m[0]*m.m[12] + this.m[4]*m.m[13] + this.m[ 8]*m.m[14] + this.m[12],
   //             this.m[1]*m.m[12] + this.m[5]*m.m[13] + this.m[ 9]*m.m[14] + this.m[13],
   //             this.m[2]*m.m[12] + this.m[6]*m.m[13] + this.m[10]*m.m[14] + this.m[14],
   //             1.0
   //           );
-  // 
+  //
   // },
 
   // /**
@@ -377,7 +389,7 @@ export class Matrix4x4 {
   //               0.0,              0.0,              0.0,              1.0
   //             );
   // },
-  // 
+  //
   // /**
   // * Rotate the matrix on the X axis
   // * @since 0.3.0
@@ -395,7 +407,7 @@ export class Matrix4x4 {
   //               0.0,  0.0,  0.0,  1.0
   //             );
   // },
-  // 
+  //
   // /**
   // * Rotate the matrix on the Y axis
   // * @since 0.3.0
@@ -413,7 +425,7 @@ export class Matrix4x4 {
   //               0.0,  0.0,  0.0,  1.0
   //             );
   // },
-  // 
+  //
   // /**
   // * Rotate the matrix on the Z axis
   // * @since 0.3.0
@@ -430,7 +442,7 @@ export class Matrix4x4 {
   //               0.0,  0.0,  0.0,  1.0
   //             );
   // },
-  // 
+  //
   // /**
   // * set cosine decimals precision.
   // * @since 0.3.0
@@ -446,7 +458,7 @@ export class Matrix4x4 {
   //             );
   // },
 
-  
+
 
   // /**
   // * Make inverse.
@@ -461,12 +473,12 @@ export class Matrix4x4 {
 	// 	var it0 = -m.m[12];
 	// 	var it1 = -m.m[13];
 	// 	var it2 = -m.m[14];
-  // 
+  //
 	// 	// Calculate the translation
 	// 	this.m[12] = m.m[0] * it0 + m.m[1] * it1 + m.m[2] * it2;
 	// 	this.m[13] = m.m[4] * it0 + m.m[5] * it1 + m.m[6] * it2;
 	// 	this.m[14] = m.m[8] * it0 + m.m[9] * it1 + m.m[10] * it2;
-  // 
+  //
 	// 	// Calculate the rotation (transpose)
 	// 	this.m[ 0] = m.m[ 0];
 	// 	this.m[ 1] = m.m[ 4];
@@ -489,19 +501,19 @@ export class Matrix4x4 {
   // * @returns {boolean}
   // */
   // lookAtRH : function(eye, target, up){
-  // 
+  //
 	// 	var zaxis = eye.subtractRV(target); // The "forward" vector.
 	// 	zaxis.normalize();
-  // 
+  //
 	// 	var xaxis = up.cross(zaxis); // The "right" vector.
 	// 	xaxis.normalize();
-  // 
+  //
 	// 	var yaxis = zaxis.cross(xaxis);// The "up" vector.
-  // 
+  //
 	// 	//var ex = new Vector3(xaxis.x, xaxis.y, xaxis.z); //-Vector3.Dot(xAxis, eye);
   //       //var ey = new Vector3(yaxis.x, yaxis.y, yaxis.z); //-Vector3.Dot(yAxis, eye);
   //       //var ez = new Vector3(zaxis.x, zaxis.y, zaxis.z); //-Vector3.Dot(zAxis, eye);
-  // 
+  //
 	// 	// Create a 4x4 view matrix from the right, up, forward and eye position vectors
 	// 	this.make(	xaxis.x,		yaxis.x,		zaxis.x,		0.0,
   //            		xaxis.y,		yaxis.y,		zaxis.y,		0.0,

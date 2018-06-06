@@ -4,6 +4,9 @@ import {Bezier} from '../bezier';
 import {Rectangle} from '../geometry/rectangle';
 import {Utils} from '../utils';
 
+enum Axis { x = 'x',
+            y = 'y' };
+
 export class Vector2 {
 
   private _x: number;
@@ -63,7 +66,7 @@ export class Vector2 {
   }
 
   public toString(): string {
-    return '(' + this.x + ';' + this.y + ')';
+    return '(' + Axis.x + ' = ' + this.x + ';' + Axis.y + ' = ' + this.y + ')';
   }
 
   public set(x:number, y:number): Vector2 {
@@ -265,22 +268,22 @@ export class Vector2 {
     return this;
   }
 
-  public maxAxis(): 'x'|'y' {
+  public maxAxis(): string {
     if(this.y > this.x) {
-      return 'y';
+      return Axis.y;
     }
-    return 'x';
+    return Axis.x;
   }
 
-  public minAxis(): 'x'|'y' {
+  public minAxis(): string {
     if(this.y < this.x) {
-      return 'y';
+      return Axis.y;
     }
-    return 'x';
+    return Axis.x;
   }
 
   public setOppositeAxis(axis: string, value: number): Vector2 {
-    if(axis === 'y' ) {
+    if(axis === Axis.y ) {
       this.x = value;
     } else {
       this.y = value;

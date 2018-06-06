@@ -4,7 +4,7 @@ module.exports = function(grunt){
 
   var projectName = 'TYPE6';
   var projectNameLC = projectName.toLowerCase();
-  
+
   var port      = 3002;
   var host      = 'localhost';
 
@@ -15,7 +15,6 @@ module.exports = function(grunt){
   var publicDir       = webDir + 'public/';
   var nodeDir         = 'node_modules/';
   var docDir          = 'doc/';
-  var zipDir          = 'zip/';
 
   // var src = [ srcDir + projectName.toLowerCase() + '.js',
   //             srcDir + 'mathUtils.js',
@@ -30,7 +29,7 @@ module.exports = function(grunt){
   //             srcDir + 'matrix4x3.js',
   //             srcDir + 'matrix4x4.js'
   //           ];
-  
+
   var banner    = '/** MIT License\n' +
     '* \n' +
     '* Copyright (c) 2011 Ludovic CLUBER \n' +
@@ -66,9 +65,7 @@ module.exports = function(grunt){
               ]
       },
       web:{
-        src: [  zipDir + '*',
-                webDir + 'static/*',
-                webDir + 'sass/build/*'
+        src: [  webDir + 'sass/build/*'
         ]
       },
       public: {
@@ -130,29 +127,6 @@ module.exports = function(grunt){
         config: 'config/jsdoc-conf.json'
       }
     },
-    pug: {
-      compile: {
-        options: {
-          namespace   : 'JST',
-          separator   : '\n\n',
-          amd         : false,
-          client      : false,
-          pretty      : true,
-          self        : false,
-          debug       : false,
-          compileDebug: true,
-          globals     : [],
-          data        : grunt.file.readJSON(webDir + 'config/dataStatic.json')
-        },
-        files: [ {
-          cwd: webDir + 'views',
-          src: ['**/*.pug', '!**/_*.pug'],
-          dest: webDir + 'static',
-          expand: true,
-          ext: '.htm'
-        } ]
-      }
-    },
     htmlmin: {
       static: {
         options: {
@@ -173,7 +147,7 @@ module.exports = function(grunt){
       lib: {
         files: [{
           expand: true,
-          cwd: srcDir, 
+          cwd: srcDir,
           src: [ srcDir + '**/*.ts' ]
         }]
       }
@@ -197,8 +171,8 @@ module.exports = function(grunt){
       },
       bundle:{
         files: [ {
-          src : compiledSrcDir + projectNameLC + '.js', 
-          dest : distDir + projectNameLC + '.js' 
+          src : compiledSrcDir + projectNameLC + '.js',
+          dest : distDir + projectNameLC + '.js'
         } ]
       }
     },
@@ -362,42 +336,6 @@ module.exports = function(grunt){
         dest: publicDir + 'js/' ,
         filter: 'isFile'
       },
-      public: {
-        expand: true,
-        cwd: publicDir,
-        src: ['**/*'],
-        dest: webDir + 'static/public/'
-      },
-      doc: {
-        expand: true,
-        cwd: docDir,
-        src: ['**/*'],
-        dest: webDir + 'static/' + docDir
-      },
-      dist: {
-        expand: true,
-        cwd: 'dist/',
-        src: ['**/*'],
-        dest: webDir + 'static/dist/'
-      }
-    },
-    compress: {
-      main: {
-        options: {
-          archive: zipDir + projectNameLC + 'js.zip'
-        },
-        files: [
-          {expand: true, cwd: webDir + 'static/', src: '**', dest: '/'},
-          {expand: true, cwd: publicDir, src: '**', dest: '/public'},
-          {src: [ distDir + '**',
-                  docDir + '**',
-                  'LICENCE.md',
-                  'README.md',
-                  'RELEASE_NOTES.md'
-                ],
-                dest: '/', filter: 'isFile'}
-        ]
-      }
     },
     nodemon: {
       dev: {
@@ -418,7 +356,7 @@ module.exports = function(grunt){
     watch: {
       lib: {
         files: srcDir + 'ts/**/*.ts',
-        tasks: ['dist'],  
+        tasks: ['dist'],
       },
       webpug:{
         files: webDir + 'views/**/*.pug'
@@ -453,14 +391,11 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-contrib-csslint' );
   grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
   grunt.loadNpmTasks( 'grunt-contrib-concat' );
-  grunt.loadNpmTasks( 'grunt-contrib-pug' );
   grunt.loadNpmTasks( 'grunt-contrib-sass' );
   grunt.loadNpmTasks( 'grunt-contrib-htmlmin' );
   grunt.loadNpmTasks( 'grunt-contrib-symlink' );
-  grunt.loadNpmTasks( 'grunt-contrib-compress' );
   grunt.loadNpmTasks( 'grunt-contrib-watch' );
   grunt.loadNpmTasks( 'grunt-strip-code' );
-  grunt.loadNpmTasks( 'grunt-jsdoc' );
   grunt.loadNpmTasks( 'grunt-concurrent' );
   grunt.loadNpmTasks( 'grunt-nodemon' );
   grunt.loadNpmTasks( 'grunt-open' );
@@ -482,11 +417,6 @@ module.exports = function(grunt){
                       ]
                     );
 
-  grunt.registerTask( 'doc',
-                      'build jsdoc into /doc',
-                      [ 'jsdoc' ]
-                    );
-
   grunt.registerTask( 'serve',
                       'launch server, open website and watch for changes',
                       [ 'concurrent' ]
@@ -506,10 +436,8 @@ module.exports = function(grunt){
                           'symlink:fonts', 'symlink:fontAwesome',
                           'concat:webcss',
                         //static
-                          'pug',
-                          'htmlmin',
-                          'symlink:public', 'symlink:doc',
-                          'compress'
+                          'htmlmin'
+
                       ]
                     );
 

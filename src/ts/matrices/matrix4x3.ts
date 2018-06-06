@@ -11,9 +11,9 @@ export class Matrix4x3 {
   private yAxis: Vector3;
   private zAxis: Vector3;
 
-  constructor(  x1?:number, x2?:number, x3?:number,       
-                y1?:number, y2?:number, y3?:number, 
-                z1?:number, z2?:number, z3?:number, 
+  constructor(  x1?:number, x2?:number, x3?:number,
+                y1?:number, y2?:number, y3?:number,
+                z1?:number, z2?:number, z3?:number,
                 t1?:number, t2?:number, t3?:number
               ) {
     this.m = new Float32Array(16);
@@ -28,9 +28,9 @@ export class Matrix4x3 {
               );
   }
 
-  private make( x1?:number, x2?:number, x3?:number, 
-                y1?:number, y2?:number, y3?:number, 
-                z1?:number, z2?:number, z3?:number, 
+  private make( x1?:number, x2?:number, x3?:number,
+                y1?:number, y2?:number, y3?:number,
+                z1?:number, z2?:number, z3?:number,
                 t1?:number, t2?:number, t3?:number
               ): void {
     this.m[ 0] = Utils.validate(x1);
@@ -50,41 +50,48 @@ export class Matrix4x3 {
     this.m[14] = Utils.validate(t3);
     this.m[15] = 1.0;
   }
-  
-  public copy(matrix4x3: Matrix4x3 ): void {
+
+  public copy(matrix4x3: Matrix4x3 ): Matrix4x3 {
     let m = matrix4x3.m;
     this.make(  m[ 0],  m[ 1],  m[ 2],
                 m[ 4],  m[ 5],  m[ 6],
                 m[ 8],  m[ 9],  m[10],
                 m[12],  m[13],  m[14]
               );
+    return this;
+  }
+
+  public toArray(): Float32Array{
+    return this.m;
   }
 
   public toString(): string {
     return  '('
-      +  this.m[ 0] + ',' + this.m[ 1] + ',' + this.m[ 2] + ',' + this.m[ 3] + ';'
+      + this.m[ 0] + ',' + this.m[ 1] + ',' + this.m[ 2] + ',' + this.m[ 3] + ';'
       + this.m[ 4] + ',' + this.m[ 5] + ',' + this.m[ 6] + ',' + this.m[ 7] + ';'
       + this.m[ 8] + ',' + this.m[ 9] + ',' + this.m[10] + ',' + this.m[11] + ';'
       + this.m[12] + ',' + this.m[13] + ',' + this.m[14] + ',' + this.m[15] + ')';
   }
 
-  public identity(): void {
+  public identity(): Matrix4x3 {
     this.make(  1.0,  0.0,  0.0,
                 0.0,  1.0,  0.0,
                 0.0,  0.0,  1.0,
                 0.0,  0.0,  0.0
               );
+    return this;
   }
 
-  public scale(vector3: Vector3): void {
+  public scale(vector3: Vector3): Matrix4x3 {
     this.make(  vector3.x, 0.0, 0.0,
-                0.0, vector3.y, 0.0,   
+                0.0, vector3.y, 0.0,
                 0.0, 0.0, vector3.z,
                 0.0, 0.0, 0.0
               );
+    return this;
   }
 
-  public rotateX(angle: number): void {
+  public rotateX(angle: number): Matrix4x3 {
     var cos = Trigonometry.cosine(angle);
     var sin = Trigonometry.sine(angle);
     this.make(  1.0,  0.0,  0.0,
@@ -92,9 +99,10 @@ export class Matrix4x3 {
                 0.0, -sin,  cos,
                 0.0,  0.0,  0.0
               );
+    return this;
   }
 
-  public rotateY(angle: number): void {
+  public rotateY(angle: number): Matrix4x3 {
     var cos = Trigonometry.cosine(angle);
     var sin = Trigonometry.sine(angle);
     this.make(  cos,  0.0, -sin,
@@ -102,9 +110,10 @@ export class Matrix4x3 {
                 sin,  0.0,  cos,
                 0.0,  0.0,  0.0
               );
+    return this;
   }
 
-  public rotateZ(angle: number): void {
+  public rotateZ(angle: number): Matrix4x3 {
     var cos = Trigonometry.cosine(angle);
     var sin = Trigonometry.sine(angle);
     this.make(  cos,  sin,  0.0,
@@ -112,17 +121,19 @@ export class Matrix4x3 {
                 0.0,  0.0,  1.0,
                 0.0,  0.0,  0.0
               );
+    return this;
   }
 
-  public translate(vector3: Vector3): void {
+  public translate(vector3: Vector3): Matrix4x3 {
     this.make(  1.0,        0.0,        0.0,
                 0.0,        1.0,        0.0,
                 0.0,        0.0,        1.0,
                 vector3.x, vector3.y, vector3.z
               );
+    return this;
   }
 
-  public multiply(matrix4x3: Matrix4x3): void {
+  public multiply(matrix4x3: Matrix4x3): Matrix4x3 {
     let m1 = this.m;
     let m2 = matrix4x3.m;
     this.make(m1[0]*m2[ 0] + m1[4]*m2[ 1] + m1[ 8]*m2[2],
@@ -141,20 +152,22 @@ export class Matrix4x3 {
               m1[1]*m2[12] + m1[5]*m2[13] + m1[ 9]*m2[14] + m1[13],
               m1[2]*m2[12] + m1[6]*m2[13] + m1[10]*m2[14] + m1[14]
             );
+    return this;
   }
 
-  public lookAtRH(eye: Vector3, target: Vector3, up: Vector3): void {
-  
+  public lookAtRH(eye: Vector3, target: Vector3, up: Vector3): Matrix4x3 {
+
     this.zAxis.subtractVectors(eye, target).normalize(); // The "forward" vector.
     this.xAxis.crossVectors(up,this.zAxis).normalize(); // The "right" vector.
     this.yAxis.crossVectors(this.zAxis,this.xAxis);// The "up" vector.
-  
+
     // Create a view matrix from the right, up, forward and eye position vectors
     this.make( this.xAxis.x, this.yAxis.x, this.zAxis.x,
                this.xAxis.y, this.yAxis.y, this.zAxis.y,
                this.xAxis.z, this.yAxis.z, this.zAxis.z,
               -this.xAxis.dotProduct(eye), -this.yAxis.dotProduct(eye), -this.zAxis.dotProduct(eye)
               );
+    return this;
 	}
 
   // /**
@@ -191,7 +204,7 @@ export class Matrix4x3 {
   //   return _this;
   // },
 
-  
+
   // /**
   // * returns the matrix as Array.
   // * @since 0.3.0
@@ -203,7 +216,7 @@ export class Matrix4x3 {
   //   return this.m;
   // },
 
-  
+
 
 
   // zero: function(){
@@ -324,23 +337,23 @@ export class Matrix4x3 {
   //             this.m[1]*m.m[ 0] + this.m[5]*m.m[ 1] + this.m[ 9]*m.m[ 2],
   //             this.m[2]*m.m[ 0] + this.m[6]*m.m[ 1] + this.m[10]*m.m[ 2],
   //             0.0,
-  // 
+  //
   //             this.m[0]*m.m[ 4] + this.m[4]*m.m[ 5] + this.m[ 8]*m.m[ 6],
   //             this.m[1]*m.m[ 4] + this.m[5]*m.m[ 5] + this.m[ 9]*m.m[ 6],
   //             this.m[2]*m.m[ 4] + this.m[6]*m.m[ 5] + this.m[10]*m.m[ 6],
   //             0.0,
-  // 
+  //
   //             this.m[0]*m.m[ 8] + this.m[4]*m.m[ 9] + this.m[ 8]*m.m[10],
   //             this.m[1]*m.m[ 8] + this.m[5]*m.m[ 9] + this.m[ 9]*m.m[10],
   //             this.m[2]*m.m[ 8] + this.m[6]*m.m[ 9] + this.m[10]*m.m[10],
   //             0.0,
-  // 
+  //
   //             this.m[0]*m.m[12] + this.m[4]*m.m[13] + this.m[ 8]*m.m[14] + this.m[12],
   //             this.m[1]*m.m[12] + this.m[5]*m.m[13] + this.m[ 9]*m.m[14] + this.m[13],
   //             this.m[2]*m.m[12] + this.m[6]*m.m[13] + this.m[10]*m.m[14] + this.m[14],
   //             1.0
   //           );
-  // 
+  //
   // },
 
   // /**
@@ -373,12 +386,12 @@ export class Matrix4x3 {
 	// 	var it0 = -m.m[12];
 	// 	var it1 = -m.m[13];
 	// 	var it2 = -m.m[14];
-  // 
+  //
 	// 	// Calculate the translation
 	// 	this.m[12] = m.m[0] * it0 + m.m[1] * it1 + m.m[2] * it2;
 	// 	this.m[13] = m.m[4] * it0 + m.m[5] * it1 + m.m[6] * it2;
 	// 	this.m[14] = m.m[8] * it0 + m.m[9] * it1 + m.m[10] * it2;
-  // 
+  //
 	// 	// Calculate the rotation (transpose)
 	// 	this.m[ 0] = m.m[ 0];
 	// 	this.m[ 1] = m.m[ 4];
