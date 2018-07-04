@@ -64,6 +64,10 @@ module.exports = function(grunt){
                 compiledSrcDir + '*'
               ]
       },
+      doc:{
+        src: [  docDir + '*'
+              ]
+      },
       web:{
         src: [  webDir + 'sass/build/*'
         ]
@@ -75,6 +79,16 @@ module.exports = function(grunt){
         ]
       }
     },
+    typedoc: {
+  		build: {
+  			options: {
+  				out: docDir,
+  				target: 'es6',
+          name: projectName + '.js - Documentation'
+  			},
+  			src: [srcDir + 'ts/*.ts']
+  		}
+  	},
     jshint: {
       options: {
         jshintrc: 'config/.jshintrc'
@@ -402,6 +416,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-tslint' );
   grunt.loadNpmTasks( 'grunt-ts' );
   grunt.loadNpmTasks( 'grunt-rollup' );
+  grunt.loadNpmTasks( 'grunt-typedoc' );
 
 
   grunt.registerTask( 'lib',
@@ -413,7 +428,13 @@ module.exports = function(grunt){
                         'uglify:libmin',
                         'concat:declaration',
                         'strip_code:declaration'
-                        //'jsdoc'
+                      ]
+                    );
+
+  grunt.registerTask( 'doc',
+                      'Compile lib documentation',
+                      [ 'clean:doc',
+                        'typedoc'
                       ]
                     );
 
@@ -448,6 +469,8 @@ module.exports = function(grunt){
                         grunt.task.run('lib');
                         //build site
                         grunt.task.run('website');
+                        //build documentation
+                        grunt.task.run('doc');
                       }
                     );
 
