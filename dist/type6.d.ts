@@ -65,8 +65,8 @@ export declare class Rectangle {
     setSize(property: string, value: number): void;
     setSizeXY(width: number, height: number): void;
     setSizeFromVector(size: Vector2): void;
-    private setCorners();
-    private setHalfSize();
+    private setCorners;
+    private setHalfSize;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
 
@@ -76,7 +76,7 @@ export declare class Matrix4x3 {
     private yAxis;
     private zAxis;
     constructor(x1?: number, x2?: number, x3?: number, y1?: number, y2?: number, y3?: number, z1?: number, z2?: number, z3?: number, t1?: number, t2?: number, t3?: number);
-    private make(x1?, x2?, x3?, y1?, y2?, y3?, z1?, z2?, z3?, t1?, t2?, t3?);
+    private make;
     copy(matrix4x3: Matrix4x3): Matrix4x3;
     toArray(): Float32Array;
     toString(): string;
@@ -96,7 +96,7 @@ export declare class Matrix4x4 {
     private yAxis;
     private zAxis;
     constructor(x1?: number, x2?: number, x3?: number, x4?: number, y1?: number, y2?: number, y3?: number, y4?: number, z1?: number, z2?: number, z3?: number, z4?: number, t1?: number, t2?: number, t3?: number, t4?: number);
-    private make(x1?, x2?, x3?, x4?, y1?, y2?, y3?, y4?, z1?, z2?, z3?, z4?, t1?, t2?, t3?, t4?);
+    private make;
     copy(matrix4x4: Matrix4x4): Matrix4x4;
     toArray(): Float32Array;
     toString(): string;
@@ -135,9 +135,9 @@ export declare class Trigonometry {
     private static arctanDecimals;
     private static factorialArray;
     static init(): void;
-    private static createRoundedPis();
-    private static createFactorialArray();
-    private static factorial(i);
+    private static createRoundedPis;
+    private static createFactorialArray;
+    private static factorial;
     static setSinePrecision(value: number): number;
     static setCosinePrecision(value: number): number;
     static setArctanPrecision(value: number): number;
@@ -152,7 +152,7 @@ export declare class Trigonometry {
     static sineEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;
     static cosineEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;
     static arctanEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;
-    private static taylorSerie(start, max, x, angle, needFactorial);
+    private static taylorSerie;
 }
 
 
