@@ -28,6 +28,10 @@ You just cloned Type6.js : git clone https://github.com/LCluber/Type6.js.git
   - Run **npm install -g grunt-cli**
 
 
+### Install typescript :
+  - Run **npm install -g typescript**
+
+
 ### Install project dependencies
   - Run **npm install** in your project directory
 
@@ -51,8 +55,8 @@ You just cloned Type6.js : git clone https://github.com/LCluber/Type6.js.git
       - Linux / OSX : Run **DEBUG=Type6js:* npm start**
     - Go to **http://localhost:3002/** to test the app.
     - Keep in mind running **grunt serve** once will do all this automatically.
-    
-    
-  - Set node environment if needed : 
+
+
+  - Set node environment if needed :
     - Run **export NODE_ENV=development**
     - Or **export NODE_ENV=production**
