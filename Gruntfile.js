@@ -279,7 +279,7 @@ module.exports = function(grunt){
         files: [{
           src  : [
             nodeDir + 'jquery-easing/jquery.easing.1.3.js',
-            distDir + projectNameLC + '.iife.js',
+            //distDir + projectNameLC + '.iife.js',
             webDir + 'js/*.js'
           ],
           dest : publicDir + 'js/main.min.js'

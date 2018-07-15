@@ -15,11 +15,11 @@ window.onload = function() {
   //var circlePosition  = Type6.Vector2.create();
 
   function smallCircle(posX,posY) {
-    this.circle = new Type6.Circle(0.0, 0.0, 20);
+    this.circle = new Type6.Circle(posX, posY, 20);
     this.alpha = 0.2;
     this.minAlpha = 0.2;
     this.setAlpha = function() {
-      if( this.alpha > this.minAlpha ){
+      if( this.alpha > this.minAlpha ) {
         this.alpha = Math.max(this.alpha - 0.01, this.minAlpha);
       }
     };
@@ -43,9 +43,9 @@ window.onload = function() {
       if (i == Math.floor(step)){
         circle.alpha = 1;
       }else {
-        circle.majAlpha();
+        circle.setAlpha();
       }
-      circle.draw( context, 'rgba(0, 200, 100, ' + circle.alpha + ')', null, null );
+      circle.circle.draw( context, 'rgba(0, 200, 100, ' + circle.alpha + ')', null, null );
     }
 
     step += 0.25;
