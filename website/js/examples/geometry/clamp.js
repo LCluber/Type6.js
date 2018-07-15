@@ -6,9 +6,9 @@ window.onload = function() {
   var hWidth  = width  * 0.5;
   var hHeight = height * 0.5;
 
-  var circle    = new TYPE6.Circle( 0, 0, 40 );
-  var rect      = new TYPE6.Rectangle( hWidth, hHeight, hWidth, hHeight );
-  var innerRect = new TYPE6.Rectangle( hWidth, hHeight, hWidth - circle.diameter, hHeight - circle.diameter );
+  var circle    = new Type6.Circle( 0, 0, 40 );
+  var rect      = new Type6.Rectangle( hWidth, hHeight, hWidth, hHeight );
+  var innerRect = new Type6.Rectangle( hWidth, hHeight, hWidth - circle.diameter, hHeight - circle.diameter );
 
   //initial rendering
   drawRectangles();

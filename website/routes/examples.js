@@ -15,7 +15,7 @@ router.get('/:folder/:page', function(req, res) {
   //console.log(prms);
   res.render(folder + prms.folder + '/' + prms.page, {
     title     : prms.page,
-    type6Path : '/dist/type6.min.js',
+    type6Path : '/dist/type6.iife.min.js',
     jsPath    : '/public/js/' + folder + prms.folder + '/' + prms.page + '.js',
     cssPath   : '/public/css/examples.min.css',
     examples  : data.examples

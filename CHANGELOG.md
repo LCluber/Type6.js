@@ -1,3 +1,8 @@
+Version 0.4.7 (July 14th 2018)
+------------------------------
+ * Library exported as ES6 and IIFE modules instead of UMD.
+ * TYPE6 namespace becomes Type6
+
 Version 0.4.6 (July 4th 2018)
 ------------------------------
  * Documentation automatically generated in /doc folder

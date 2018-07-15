@@ -5,41 +5,36 @@ window.onload = function() {
   var width   = canvas.width = window.innerWidth;
   var height  = canvas.height = window.innerHeight;
 
-  var mainCircle   = new TYPE6.Circle( width * 0.5, height * 0.5, 200 );
+  var mainCircle   = new Type6.Circle( width * 0.5, height * 0.5, 200 );
   var smallCircles = [];
   var angle        = 0;
   var numObjects   = 24;
   var step         = 0;
-  var minAlpha     = 0.2;
-  var slice        = TYPE6.Trigonometry.twopi / numObjects;
+  var slice        = Type6.Trigonometry.twopi / numObjects;
   var radius       = 20;
-  //var circlePosition  = TYPE6.Vector2.create();
+  //var circlePosition  = Type6.Vector2.create();
 
-  for(var i = 0; i < numObjects; i += 1) {
-    angle = i * slice;
-    smallCircles[i] = new TYPE6.Circle(
-      TYPE6.Trigonometry.cosineEquation( mainCircle.radius, angle, 0, mainCircle.position.x ),
-      TYPE6.Trigonometry.sineEquation( mainCircle.radius, angle, 0, mainCircle.position.y ),
-      20
-    );
-    var circle = smallCircles[i];
-    circle.alpha = minAlpha;
-    circle.majAlpha = function(){
-      if( this.alpha > minAlpha ){
-        //this.alpha += 0.01;
-        this.alpha = Math.max(this.alpha - 0.01, minAlpha);
+  function smallCircle(posX,posY) {
+    this.circle = new Type6.Circle(0.0, 0.0, 20);
+    this.alpha = 0.2;
+    this.minAlpha = 0.2;
+    this.setAlpha = function() {
+      if( this.alpha > this.minAlpha ){
+        this.alpha = Math.max(this.alpha - 0.01, this.minAlpha);
       }
     };
   }
 
+  for(var i = 0; i < numObjects; i += 1) {
+    angle = i * slice;
+    smallCircles[i] = new smallCircle(
+      Type6.Trigonometry.cosineEquation( mainCircle.radius, angle, 0, mainCircle.position.x ),
+      Type6.Trigonometry.sineEquation( mainCircle.radius, angle, 0, mainCircle.position.y )
+    );
+  }
+
   render();
 
-  // function majAlpha(minAlpha){
-  //   if( this.alpha > minAlpha ){
-  //     //this.alpha += 0.01;
-  //     this.alpha = Math.max(this.alpha - 0.01, minAlpha);
-  //   }
-  // }
 
   function render(){
     context.clearRect(0, 0, width, height);

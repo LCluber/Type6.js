@@ -6,7 +6,7 @@ window.onload = function() {
 
   var bees    = [];
   var numBees = 30;
-  var center  = new TYPE6.Vector2(width, height).halve();
+  var center  = new Type6.Vector2(width, height).halve();
 
   var bee = {
     create: function() {
@@ -16,22 +16,22 @@ window.onload = function() {
     },
 
     init: function() {
-      this.angle = new TYPE6.Vector2(
-        TYPE6.Random.float(0, TYPE6.Trigonometry.twopi),
-        TYPE6.Random.float(0, TYPE6.Trigonometry.twopi)
+      this.angle = new Type6.Vector2(
+        Type6.Random.float(0, Type6.Trigonometry.twopi),
+        Type6.Random.float(0, Type6.Trigonometry.twopi)
       );
-      this.speed = new TYPE6.Vector2(
+      this.speed = new Type6.Vector2(
         this.randomSpeedGenerator(),
         this.randomSpeedGenerator()
       );
-      this.circle = new TYPE6.Circle( 0, 0, TYPE6.Random.integer(100,200) );
+      this.circle = new Type6.Circle( 0, 0, Type6.Random.integer(100,200) );
 
     },
 
     update: function() {
       this.circle.position.set(
-        TYPE6.Trigonometry.cosineEquation( this.circle.radius, this.angle.x, 0, 0 ),
-        TYPE6.Trigonometry.sineEquation( this.circle.radius, this.angle.y, 0, 0 )
+        Type6.Trigonometry.cosineEquation( this.circle.radius, this.angle.x, 0, 0 ),
+        Type6.Trigonometry.sineEquation( this.circle.radius, this.angle.y, 0, 0 )
       ).add(center);
 
       this.angle.add( this.speed );
@@ -40,13 +40,13 @@ window.onload = function() {
 
     draw: function(){
       context.beginPath();
-      context.arc( this.circle.position.x, this.circle.position.y, 2, 0, TYPE6.Trigonometry.twopi, false );
+      context.arc( this.circle.position.x, this.circle.position.y, 2, 0, Type6.Trigonometry.twopi, false );
       context.fill();
     },
 
     randomSpeedGenerator: function(){
-      var sign = TYPE6.Random.pick(-1,1);
-      var randNumber = TYPE6.Random.float(0.0125, 0.05, 4);
+      var sign = Type6.Random.pick(-1,1);
+      var randNumber = Type6.Random.float(0.0125, 0.05, 4);
       return randNumber * sign;
     }
 

@@ -7,17 +7,8 @@ html
 
     canvas( id='canvas' )
 
-    if title
-      div(id='text')
-        h1= title
-        a( href='/#example' class='btn btn-secondary' ) << back 
-        || 
-        a( href=jsPath class='btn btn-secondary' ) Show code
-    else
-      block title
+    block title
 
     script( src = type6Path )
-    if jsPath
-      script( src = jsPath )
-    else
-      block content
+    
+    script( src = jsPath )
