@@ -18,10 +18,6 @@ Or download it **[here](http://type6js.lcluber.com/#download)**.
 
 See a basic example **[here](http://type6js.lcluber.com/#example)**.
 
-## Usage
-
-Learn how to use it **[here](http://type6js.lcluber.com/#source)**.
-
 ## API Reference
 
 Read the documentation **[here](http://type6js.lcluber.com/doc/)**.
