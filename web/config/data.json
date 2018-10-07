@@ -1,0 +1,94 @@
+{
+  "examples"      : {
+    "Trigonometry" : [
+      {
+          "href":"examples/trigonometry/sine-cosine-arctan",
+          "name":"sine cosine arctangent"
+      },
+      {
+          "href":"examples/trigonometry/sinewave-animation",
+          "name":"sinewave animation"
+      },
+      {
+          "href":"examples/trigonometry/spinner",
+          "name":"spinner"
+      },
+      {
+          "href":"examples/trigonometry/bees",
+          "name":"bees"
+      },
+      {
+          "href":"examples/trigonometry/explode",
+          "name":"explode"
+      },
+      {
+          "href":"examples/trigonometry/following-arrow",
+          "name":"following arrow"
+      }
+    ],
+
+    "Math utils" : [
+      {
+          "href":"examples/mathUtils/normalize",
+          "name":"normalize"
+      },
+      {
+          "href":"examples/mathUtils/lerp",
+          "name":"lerp"
+      },
+      {
+          "href":"examples/mathUtils/map",
+          "name":"map"
+      },
+      {
+          "href":"examples/mathUtils/round",
+          "name":"round"
+      }
+    ],
+
+    "Random" : [
+      {
+          "href":"examples/random/random",
+          "name":"random"
+      },
+      {
+          "href":"examples/random/1d-random-distribution",
+          "name":"1D random distribution"
+      },
+      {
+          "href":"examples/random/2d-random-distribution",
+          "name":"2D random distribution"
+      }
+    ],
+
+    "Vector2" : [
+
+    ],
+
+    "Bezier" : [
+      {
+          "href":"examples/bezier/quadratic-with-lerp",
+          "name":"quadratic with lerp"
+      },
+      {
+          "href":"examples/bezier/quadratic",
+          "name":"quadratic"
+      },
+      {
+          "href":"examples/bezier/cubic",
+          "name":"cubic"
+      }
+    ],
+
+    "Geometry" : [
+      {
+          "href":"examples/geometry/distance",
+          "name":"distance"
+      },
+      {
+          "href":"examples/geometry/clamp",
+          "name":"clamp"
+      }
+    ]
+  }
+}
