@@ -8,32 +8,18 @@ You just cloned Type6.js : git clone https://github.com/LCluber/Type6.js.git
     - **curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -**
     - **sudo apt-get install -y nodejs**
 
-
-### Install ruby :
-  - Windows : **http://rubyinstaller.org/downloads/**
-  - OSX : already installed
-  - Linux master race : run **sudo apt-get install ruby-full**
-
-
-### Install sass :
-  - Run **gem install sass**
-
-
 ### Install grunt :
   - Run **npm update -g npm** to update npm
   - Run **npm install -g grunt-cli**
 
-
 ### Install typescript :
   - Run **npm install -g typescript**
-
 
 ### Install project dependencies
   - Run **npm install** in your project directory
 
-
 ### Workflow
-  - Run **grunt** to serve the website. (http://localhost:3002/)
+  - Run **grunt** to serve the website. (http://localhost:3000/)
   - Run **grunt build** to build the library and serve the website.
   - Use **grunt --help** to see the list of tasks.
 
