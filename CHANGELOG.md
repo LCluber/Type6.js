@@ -1,7 +1,11 @@
+Version 1.0.3 (December 18th 2018)
+-----------------------------
+ * fixed declaration file.
+
 Version 1.0.2 (December 17th 2018)
 -----------------------------
  * fixed copy() method in Vector3 class.
- 
+
 Version 1.0.1 (October 07th 2018)
 -----------------------------
  * Type6.js published on NPM at @lcluber/type6js.
