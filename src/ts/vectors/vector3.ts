@@ -1,5 +1,5 @@
 
-import {Trigonometry} from '../trigonometry';
+// import {Trigonometry} from '../trigonometry';
 import {Utils} from '../utils';
 
 enum Axis { x = 'x',
@@ -75,7 +75,7 @@ export class Vector3 {
   public copy(vector3: Vector3 ): Vector3 {
     this.x = vector3.x;
     this.y = vector3.y;
-    this.y = vector3.z;
+    this.z = vector3.z;
     return this;
 	}
 

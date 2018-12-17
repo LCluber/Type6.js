@@ -798,7 +798,7 @@ class Vector3 {
     copy(vector3) {
         this.x = vector3.x;
         this.y = vector3.y;
-        this.y = vector3.z;
+        this.z = vector3.z;
         return this;
     }
     origin() {

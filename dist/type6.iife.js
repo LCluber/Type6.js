@@ -797,7 +797,7 @@ var Type6 = (function (exports) {
         Vector3.prototype.copy = function (vector3) {
             this.x = vector3.x;
             this.y = vector3.y;
-            this.y = vector3.z;
+            this.z = vector3.z;
             return this;
         };
         Vector3.prototype.origin = function () {
