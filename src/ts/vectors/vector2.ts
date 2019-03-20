@@ -7,14 +7,20 @@ import {Utils} from '../utils';
 enum Axis { x = 'x',
             y = 'y' };
 
+export interface Vector2 {
+  [key: string]: any;
+}
+
 export class Vector2 {
 
   private _x: number;
   private _y: number;
 
   constructor(x?: number, y?: number) {
-    this.x = x;
-    this.y = y;
+    this._x = 0.0;
+    this._y = 0.0;
+    this.x = x||0.0;
+    this.y = y||0.0;
   }
 
   set x(x : number) {

@@ -1,6 +1,6 @@
 
 // import {Trigonometry} from '../trigonometry';
-import {Utils} from '../utils';
+import { Utils } from '../utils';
 
 enum Axis { x = 'x',
             y = 'y',
@@ -13,9 +13,12 @@ export class Vector3 {
   private _z: number;
 
   constructor(x?: number, y?: number, z?: number) {
-    this.x = x;
-    this.y = y;
-    this.z = z;
+    this._x = 0.0;
+    this._y = 0.0;
+    this._z = 0.0;
+    this.x = x||0.0;
+    this.y = y||0.0;
+    this.z = z||0.0;
   }
 
   set x(x : number) {

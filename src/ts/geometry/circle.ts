@@ -9,6 +9,8 @@ export class Circle {
   readonly shape: 'circle' = 'circle';
 
   constructor(positionX: number, positionY: number, radius: number) {
+    this._radius = 0.0;
+    this._diameter = 0.0;
     this.position = new Vector2( positionX, positionY );
     this.radius = radius;
   }

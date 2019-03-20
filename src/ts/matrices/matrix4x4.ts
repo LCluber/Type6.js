@@ -7,9 +7,9 @@ export class Matrix4x4 {
 
   private m: Float32Array;
   //utility vectors for lookAtRH method
-  private xAxis: Vector3;
-  private yAxis: Vector3;
-  private zAxis: Vector3;
+  // private xAxis: Vector3;
+  // private yAxis: Vector3;
+  // private zAxis: Vector3;
 
   constructor(  x1?:number, x2?:number, x3?:number, x4?:number,
                 y1?:number, y2?:number, y3?:number, y4?:number,
@@ -18,9 +18,9 @@ export class Matrix4x4 {
               ) {
     this.m = new Float32Array(16);
     //utility vectors for lookAtRH method
-    this.xAxis = new Vector3();
-    this.yAxis = new Vector3();
-    this.zAxis = new Vector3();
+    // this.xAxis = new Vector3();
+    // this.yAxis = new Vector3();
+    // this.zAxis = new Vector3();
     this.make(  x1, x2, x3, x4,
                 y1, y2, y3, y4,
                 z1, z2, z3, z4,
@@ -33,22 +33,22 @@ export class Matrix4x4 {
                 z1?:number, z2?:number, z3?:number, z4?:number,
                 t1?:number, t2?:number, t3?:number, t4?:number
               ): void {
-    this.m[ 0] = Utils.validate(x1);
-    this.m[ 1] = Utils.validate(x2);
-    this.m[ 2] = Utils.validate(x3);
-    this.m[ 3] = Utils.validate(x4);
-    this.m[ 4] = Utils.validate(y1);
-    this.m[ 5] = Utils.validate(y2);
-    this.m[ 6] = Utils.validate(y3);
-    this.m[ 7] = Utils.validate(y4);
-    this.m[ 8] = Utils.validate(z1);
-    this.m[ 9] = Utils.validate(z2);
-    this.m[10] = Utils.validate(z3);
-    this.m[11] = Utils.validate(z4);
-    this.m[12] = Utils.validate(t1);
-    this.m[13] = Utils.validate(t2);
-    this.m[14] = Utils.validate(t3);
-    this.m[15] = Utils.validate(t4);
+    this.m[ 0] = Utils.validate(x1||0.0);
+    this.m[ 1] = Utils.validate(x2||0.0);
+    this.m[ 2] = Utils.validate(x3||0.0);
+    this.m[ 3] = Utils.validate(x4||0.0);
+    this.m[ 4] = Utils.validate(y1||0.0);
+    this.m[ 5] = Utils.validate(y2||0.0);
+    this.m[ 6] = Utils.validate(y3||0.0);
+    this.m[ 7] = Utils.validate(y4||0.0);
+    this.m[ 8] = Utils.validate(z1||0.0);
+    this.m[ 9] = Utils.validate(z2||0.0);
+    this.m[10] = Utils.validate(z3||0.0);
+    this.m[11] = Utils.validate(z4||0.0);
+    this.m[12] = Utils.validate(t1||0.0);
+    this.m[13] = Utils.validate(t2||0.0);
+    this.m[14] = Utils.validate(t3||0.0);
+    this.m[15] = Utils.validate(t4||0.0);
   }
 
   public copy(matrix4x4: Matrix4x4 ): Matrix4x4 {

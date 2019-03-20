@@ -33,21 +33,21 @@ export class Matrix4x3 {
                 z1?:number, z2?:number, z3?:number,
                 t1?:number, t2?:number, t3?:number
               ): void {
-    this.m[ 0] = Utils.validate(x1);
-    this.m[ 1] = Utils.validate(x2);
-    this.m[ 2] = Utils.validate(x3);
+    this.m[ 0] = Utils.validate(x1||0.0);
+    this.m[ 1] = Utils.validate(x2||0.0);
+    this.m[ 2] = Utils.validate(x3||0.0);
     this.m[ 3] = 0.0;
-    this.m[ 4] = Utils.validate(y1);
-    this.m[ 5] = Utils.validate(y2);
-    this.m[ 6] = Utils.validate(y3);
+    this.m[ 4] = Utils.validate(y1||0.0);
+    this.m[ 5] = Utils.validate(y2||0.0);
+    this.m[ 6] = Utils.validate(y3||0.0);
     this.m[ 7] = 0.0;
-    this.m[ 8] = Utils.validate(z1);
-    this.m[ 9] = Utils.validate(z2);
-    this.m[10] = Utils.validate(z3);
+    this.m[ 8] = Utils.validate(z1||0.0);
+    this.m[ 9] = Utils.validate(z2||0.0);
+    this.m[10] = Utils.validate(z3||0.0);
     this.m[11] = 0.0;
-    this.m[12] = Utils.validate(t1);
-    this.m[13] = Utils.validate(t2);
-    this.m[14] = Utils.validate(t3);
+    this.m[12] = Utils.validate(t1||0.0);
+    this.m[13] = Utils.validate(t2||0.0);
+    this.m[14] = Utils.validate(t3||0.0);
     this.m[15] = 1.0;
   }
 

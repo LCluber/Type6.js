@@ -1,3 +1,7 @@
+Version 1.0.4 (March 21st 2019)
+-----------------------------
+ * Improved typings
+
 Version 1.0.3 (December 18th 2018)
 -----------------------------
  * fixed declaration file.

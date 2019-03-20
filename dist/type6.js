@@ -330,8 +330,10 @@ var Axis;
 
 class Vector2 {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        this._x = 0.0;
+        this._y = 0.0;
+        this.x = x || 0.0;
+        this.y = y || 0.0;
     }
     set x(x) {
         this._x = Utils.validate(x);
@@ -603,6 +605,8 @@ class Vector2 {
 class Circle {
     constructor(positionX, positionY, radius) {
         this.shape = 'circle';
+        this._radius = 0.0;
+        this._diameter = 0.0;
         this.position = new Vector2(positionX, positionY);
         this.radius = radius;
     }
@@ -749,9 +753,12 @@ var Axis$1;
 
 class Vector3 {
     constructor(x, y, z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this._x = 0.0;
+        this._y = 0.0;
+        this._z = 0.0;
+        this.x = x || 0.0;
+        this.y = y || 0.0;
+        this.z = z || 0.0;
     }
     set x(x) {
         this._x = Utils.validate(x);
@@ -981,21 +988,21 @@ class Matrix4x3 {
         this.make(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3);
     }
     make(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3) {
-        this.m[0] = Utils.validate(x1);
-        this.m[1] = Utils.validate(x2);
-        this.m[2] = Utils.validate(x3);
+        this.m[0] = Utils.validate(x1 || 0.0);
+        this.m[1] = Utils.validate(x2 || 0.0);
+        this.m[2] = Utils.validate(x3 || 0.0);
         this.m[3] = 0.0;
-        this.m[4] = Utils.validate(y1);
-        this.m[5] = Utils.validate(y2);
-        this.m[6] = Utils.validate(y3);
+        this.m[4] = Utils.validate(y1 || 0.0);
+        this.m[5] = Utils.validate(y2 || 0.0);
+        this.m[6] = Utils.validate(y3 || 0.0);
         this.m[7] = 0.0;
-        this.m[8] = Utils.validate(z1);
-        this.m[9] = Utils.validate(z2);
-        this.m[10] = Utils.validate(z3);
+        this.m[8] = Utils.validate(z1 || 0.0);
+        this.m[9] = Utils.validate(z2 || 0.0);
+        this.m[10] = Utils.validate(z3 || 0.0);
         this.m[11] = 0.0;
-        this.m[12] = Utils.validate(t1);
-        this.m[13] = Utils.validate(t2);
-        this.m[14] = Utils.validate(t3);
+        this.m[12] = Utils.validate(t1 || 0.0);
+        this.m[13] = Utils.validate(t2 || 0.0);
+        this.m[14] = Utils.validate(t3 || 0.0);
         this.m[15] = 1.0;
     }
     copy(matrix4x3) {
@@ -1061,28 +1068,25 @@ class Matrix4x3 {
 class Matrix4x4 {
     constructor(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4) {
         this.m = new Float32Array(16);
-        this.xAxis = new Vector3();
-        this.yAxis = new Vector3();
-        this.zAxis = new Vector3();
         this.make(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4);
     }
     make(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4) {
-        this.m[0] = Utils.validate(x1);
-        this.m[1] = Utils.validate(x2);
-        this.m[2] = Utils.validate(x3);
-        this.m[3] = Utils.validate(x4);
-        this.m[4] = Utils.validate(y1);
-        this.m[5] = Utils.validate(y2);
-        this.m[6] = Utils.validate(y3);
-        this.m[7] = Utils.validate(y4);
-        this.m[8] = Utils.validate(z1);
-        this.m[9] = Utils.validate(z2);
-        this.m[10] = Utils.validate(z3);
-        this.m[11] = Utils.validate(z4);
-        this.m[12] = Utils.validate(t1);
-        this.m[13] = Utils.validate(t2);
-        this.m[14] = Utils.validate(t3);
-        this.m[15] = Utils.validate(t4);
+        this.m[0] = Utils.validate(x1 || 0.0);
+        this.m[1] = Utils.validate(x2 || 0.0);
+        this.m[2] = Utils.validate(x3 || 0.0);
+        this.m[3] = Utils.validate(x4 || 0.0);
+        this.m[4] = Utils.validate(y1 || 0.0);
+        this.m[5] = Utils.validate(y2 || 0.0);
+        this.m[6] = Utils.validate(y3 || 0.0);
+        this.m[7] = Utils.validate(y4 || 0.0);
+        this.m[8] = Utils.validate(z1 || 0.0);
+        this.m[9] = Utils.validate(z2 || 0.0);
+        this.m[10] = Utils.validate(z3 || 0.0);
+        this.m[11] = Utils.validate(z4 || 0.0);
+        this.m[12] = Utils.validate(t1 || 0.0);
+        this.m[13] = Utils.validate(t2 || 0.0);
+        this.m[14] = Utils.validate(t3 || 0.0);
+        this.m[15] = Utils.validate(t4 || 0.0);
     }
     copy(matrix4x4) {
         let m = matrix4x4.m;
