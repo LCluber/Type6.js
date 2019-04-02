@@ -1,5 +1,5 @@
-
-import {Vector2} from '../vectors/vector2';
+import {AxisNames2d} from '../types';
+import {Vector2 } from '../vectors/vector2';
 
 export class Rectangle {
 
@@ -55,7 +55,7 @@ export class Rectangle {
     this.setPosition('y', y);
   }
 
-  public setPosition(property: string, value: number): void {
+  public setPosition(property: AxisNames2d, value: number): void {
     this.position[property] = value;
     this.topLeftCorner[property] = value - this.halfSize[property];
     this.bottomRightCorner[property] = value + this.halfSize[property] ;
@@ -81,7 +81,7 @@ export class Rectangle {
     this.setSize('y', height);
   }
 
-  public setSize(property: string, value: number): void {
+  public setSize(property: AxisNames2d, value: number): void {
     this.size[property] = value;
     this.setHalfSize();
     this.topLeftCorner[property] = this.position[property] - this.halfSize[property];

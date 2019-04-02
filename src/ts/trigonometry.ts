@@ -2,8 +2,8 @@ import { Vector2 } from './vectors/vector2';
 import { Utils } from './utils';
 
 export class Trigonometry {
-  
-  static readonly sineLoops: Array<number> = [
+
+  static readonly sineLoops: number[] = [
     //number of loops needed to get x decimals precision on full circle
     9,//gives 0 decimals precision on full circle
     11,//gives 1 decimals precision on full circle
@@ -15,8 +15,8 @@ export class Trigonometry {
     21,//gives 7 decimals precision on full circle
     23//gives 8 decimals precision on full circle
   ];
-  
-  static readonly cosineLoops: Array<number> = [
+
+  static readonly cosineLoops: number[] = [
     //number of loops needed to get x decimals precision on full circle
     6,//gives 0 decimals precision on full circle
     8,//gives 1 decimals precision on full circle
@@ -29,7 +29,7 @@ export class Trigonometry {
     22//gives 8 decimals precision on full circle
   ];
 
-  static readonly arctanLoops: Array<number> = [
+  static readonly arctanLoops: number[] = [
     //number of loops needed to get x decimals precision on full circle
     17,//gives 0 decimals precision on full circle
     19,//gives 1 decimals precision on full circle
@@ -41,17 +41,17 @@ export class Trigonometry {
     31,//gives 7 decimals precision on full circle
     33//gives 8 decimals precision on full circle
   ];
-  
+
   static pi: number; //3.1415926535897932384626433832795
   static twopi: number; //6.283185307179586
   static halfpi: number; //1.57079632679
-  
+
   private static sineDecimals: number = 2;
   private static cosineDecimals: number = 2;
   private static arctanDecimals : number = 2;
 
-  private static factorialArray: Array<number> = [];
-  
+  private static factorialArray: number[] = [];
+
   static init(){
     Trigonometry.createRoundedPis();
     Trigonometry.createFactorialArray();
@@ -87,7 +87,7 @@ export class Trigonometry {
     this.sineDecimals = 2;
     return 2;
   }
-  
+
   static setCosinePrecision(value: number): number {
     if(value < Trigonometry.cosineLoops.length) {
       this.cosineDecimals = value;
@@ -96,7 +96,7 @@ export class Trigonometry {
     this.cosineDecimals = 2;
     return 2;
   }
-  
+
   static setArctanPrecision(value: number): number {
     if(value < Trigonometry.arctanLoops.length) {
       this.cosineDecimals = value;

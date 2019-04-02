@@ -291,12 +291,6 @@ var Type6 = (function (exports) {
         return Bezier;
     }();
 
-    var Axis;
-    (function (Axis) {
-        Axis["x"] = "x";
-        Axis["y"] = "y";
-    })(Axis || (Axis = {}));
-
     var Vector2 = function () {
         function Vector2(x, y) {
             this._x = 0.0;
@@ -348,7 +342,7 @@ var Type6 = (function (exports) {
             return [this.x, this.y];
         };
         Vector2.prototype.toString = function () {
-            return '(' + Axis.x + ' = ' + this.x + ';' + Axis.y + ' = ' + this.y + ')';
+            return '(x = ' + this.x + ';y = ' + this.y + ')';
         };
         Vector2.prototype.set = function (x, y) {
             this.x = x;
@@ -513,19 +507,13 @@ var Type6 = (function (exports) {
             return this;
         };
         Vector2.prototype.maxAxis = function () {
-            if (this.y > this.x) {
-                return Axis.y;
-            }
-            return Axis.x;
+            return this.y > this.x ? 'y' : 'x';
         };
         Vector2.prototype.minAxis = function () {
-            if (this.y < this.x) {
-                return Axis.y;
-            }
-            return Axis.x;
+            return this.y < this.x ? 'y' : 'x';
         };
         Vector2.prototype.setOppositeAxis = function (axis, value) {
-            if (axis === Axis.y) {
+            if (axis === 'y') {
                 this.x = value;
             } else {
                 this.y = value;
@@ -731,13 +719,6 @@ var Type6 = (function (exports) {
         return Rectangle;
     }();
 
-    var Axis$1;
-    (function (Axis) {
-        Axis["x"] = "x";
-        Axis["y"] = "y";
-        Axis["z"] = "z";
-    })(Axis$1 || (Axis$1 = {}));
-
     var Vector3 = function () {
         function Vector3(x, y, z) {
             this._x = 0.0;
@@ -790,7 +771,7 @@ var Type6 = (function (exports) {
             return [this.x, this.y, this.z];
         };
         Vector3.prototype.toString = function () {
-            return '(' + Axis$1.x + ' = ' + this.x + ';' + Axis$1.y + ' = ' + this.y + ';' + Axis$1.z + ' = ' + this.z + ')';
+            return '(x = ' + this.x + ';y = ' + this.y + ';z = ' + this.z + ')';
         };
         Vector3.prototype.set = function (x, y, z) {
             this.x = x;

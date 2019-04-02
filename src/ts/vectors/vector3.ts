@@ -2,12 +2,15 @@
 // import {Trigonometry} from '../trigonometry';
 import { Utils } from '../utils';
 
-enum Axis { x = 'x',
-            y = 'y',
-            z = 'z' };
+// enum Axis { x = 'x',
+//             y = 'y',
+//             z = 'z' };
+
+export interface Vector3 {
+  [key: string]: any;
+}
 
 export class Vector3 {
-
   private _x: number;
   private _y: number;
   private _z: number;
@@ -61,7 +64,7 @@ export class Vector3 {
   }
 
   public toString(): string {
-    return '(' + Axis.x + ' = ' + this.x + ';' + Axis.y + ' = ' + this.y + ';' + Axis.z + ' = ' + this.z + ')';
+    return '(x = ' + this.x + ';y = ' + this.y + ';z = ' + this.z + ')';
   }
 
   public set(x:number, y:number, z:number): Vector3 {

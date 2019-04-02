@@ -1,18 +1,17 @@
-
+import {AxisNames2d} from '../types';
 import {Trigonometry} from '../trigonometry';
 import {Bezier} from '../bezier';
 import {Rectangle} from '../geometry/rectangle';
 import {Utils} from '../utils';
 
-enum Axis { x = 'x',
-            y = 'y' };
+// export enum Axis { x = 'x',
+//                    y = 'y' };
 
 export interface Vector2 {
   [key: string]: any;
 }
 
 export class Vector2 {
-
   private _x: number;
   private _y: number;
 
@@ -57,7 +56,7 @@ export class Vector2 {
     return ( Utils.isNegative(this.x) && Utils.isNegative(this.y) ) ? true : false;
   }
 
-  public fromArray( array: Array<number>, offset?: number ): Vector2 {
+  public fromArray( array: number[], offset?: number ): Vector2 {
     if ( offset === undefined ){
       offset = 0;
     }
@@ -67,12 +66,12 @@ export class Vector2 {
     return this;
   }
 
-  public toArray(): Array<number> {
+  public toArray(): number[] {
     return [ this.x, this.y ];
   }
 
   public toString(): string {
-    return '(' + Axis.x + ' = ' + this.x + ';' + Axis.y + ' = ' + this.y + ')';
+    return '(x = ' + this.x + ';y = ' + this.y + ')';
   }
 
   public set(x:number, y:number): Vector2 {
@@ -274,22 +273,16 @@ export class Vector2 {
     return this;
   }
 
-  public maxAxis(): string {
-    if(this.y > this.x) {
-      return Axis.y;
-    }
-    return Axis.x;
+  public maxAxis(): AxisNames2d {
+    return (this.y > this.x) ? 'y' : 'x';
   }
 
-  public minAxis(): string {
-    if(this.y < this.x) {
-      return Axis.y;
-    }
-    return Axis.x;
+  public minAxis(): AxisNames2d {
+    return (this.y < this.x) ? 'y' : 'x';
   }
 
-  public setOppositeAxis(axis: string, value: number): Vector2 {
-    if(axis === Axis.y ) {
+  public setOppositeAxis(axis: AxisNames2d, value: number): Vector2 {
+    if(axis === 'y' ) {
       this.x = value;
     } else {
       this.y = value;

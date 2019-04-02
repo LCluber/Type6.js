@@ -44,6 +44,7 @@ export declare class Circle {
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
 
+
 export declare class Rectangle {
     position: Vector2;
     topLeftCorner: Vector2;
@@ -57,12 +58,12 @@ export declare class Rectangle {
     set(positionX: number, positionY: number, sizeX: number, sizeY: number): void;
     setPositionX(x: number): void;
     setPositionY(y: number): void;
-    setPosition(property: string, value: number): void;
+    setPosition(property: AxisNames2d, value: number): void;
     setPositionXY(positionX: number, positionY: number): void;
     setPositionFromVector(position: Vector2): void;
     setSizeX(width: number): void;
     setSizeY(height: number): void;
-    setSize(property: string, value: number): void;
+    setSize(property: AxisNames2d, value: number): void;
     setSizeXY(width: number, height: number): void;
     setSizeFromVector(size: Vector2): void;
     private setCorners;
@@ -92,9 +93,6 @@ export declare class Matrix4x3 {
 
 export declare class Matrix4x4 {
     private m;
-    private xAxis;
-    private yAxis;
-    private zAxis;
     constructor(x1?: number, x2?: number, x3?: number, x4?: number, y1?: number, y2?: number, y3?: number, y4?: number, z1?: number, z2?: number, z3?: number, z4?: number, t1?: number, t2?: number, t3?: number, t4?: number);
     private make;
     copy(matrix4x4: Matrix4x4): Matrix4x4;
@@ -124,9 +122,9 @@ export declare class Time {
 }
 
 export declare class Trigonometry {
-    static readonly sineLoops: Array<number>;
-    static readonly cosineLoops: Array<number>;
-    static readonly arctanLoops: Array<number>;
+    static readonly sineLoops: number[];
+    static readonly cosineLoops: number[];
+    static readonly arctanLoops: number[];
     static pi: number;
     static twopi: number;
     static halfpi: number;
@@ -165,6 +163,9 @@ export declare class Trigonometry {
 
 
 
+
+export declare type AxisNames2d = 'x' | 'y';
+export declare type AxisNames3d = AxisNames2d & 'z';
 export declare class Utils {
     static round(x: number, decimals: number): number;
     static floor(x: number, decimals: number): number;
@@ -186,6 +187,10 @@ export declare class Utils {
     static validate(x: number): number;
 }
 
+
+export interface Vector2 {
+    [key: string]: any;
+}
 export declare class Vector2 {
     private _x;
     private _y;
@@ -196,8 +201,8 @@ export declare class Vector2 {
     isNotOrigin(): boolean;
     isPositive(): boolean;
     isNegative(): boolean;
-    fromArray(array: Array<number>, offset?: number): Vector2;
-    toArray(): Array<number>;
+    fromArray(array: number[], offset?: number): Vector2;
+    toArray(): number[];
     toString(): string;
     set(x: number, y: number): Vector2;
     clone(): Vector2;
@@ -232,9 +237,9 @@ export declare class Vector2 {
     min(vector2: Vector2): Vector2;
     maxScalar(scalar: number): Vector2;
     minScalar(scalar: number): Vector2;
-    maxAxis(): string;
-    minAxis(): string;
-    setOppositeAxis(axis: string, value: number): Vector2;
+    maxAxis(): AxisNames2d;
+    minAxis(): AxisNames2d;
+    setOppositeAxis(axis: AxisNames2d, value: number): Vector2;
     normalize(): Vector2;
     normalizeVector(v: Vector2): Vector2;
     absolute(): Vector2;
@@ -244,6 +249,9 @@ export declare class Vector2 {
     clamp(rectangle: Rectangle): Vector2;
     lerp(normal: number, min: Vector2, max: Vector2): Vector2;
     dotProduct(vector2: Vector2): number;
+}
+export interface Vector3 {
+    [key: string]: any;
 }
 export declare class Vector3 {
     private _x;

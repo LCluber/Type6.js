@@ -322,12 +322,6 @@ class Bezier {
     }
 }
 
-var Axis;
-(function (Axis) {
-    Axis["x"] = "x";
-    Axis["y"] = "y";
-})(Axis || (Axis = {}));
-
 class Vector2 {
     constructor(x, y) {
         this._x = 0.0;
@@ -371,7 +365,7 @@ class Vector2 {
         return [this.x, this.y];
     }
     toString() {
-        return '(' + Axis.x + ' = ' + this.x + ';' + Axis.y + ' = ' + this.y + ')';
+        return '(x = ' + this.x + ';y = ' + this.y + ')';
     }
     set(x, y) {
         this.x = x;
@@ -536,19 +530,13 @@ class Vector2 {
         return this;
     }
     maxAxis() {
-        if (this.y > this.x) {
-            return Axis.y;
-        }
-        return Axis.x;
+        return (this.y > this.x) ? 'y' : 'x';
     }
     minAxis() {
-        if (this.y < this.x) {
-            return Axis.y;
-        }
-        return Axis.x;
+        return (this.y < this.x) ? 'y' : 'x';
     }
     setOppositeAxis(axis, value) {
-        if (axis === Axis.y) {
+        if (axis === 'y') {
             this.x = value;
         }
         else {
@@ -744,13 +732,6 @@ class Rectangle {
     }
 }
 
-var Axis$1;
-(function (Axis) {
-    Axis["x"] = "x";
-    Axis["y"] = "y";
-    Axis["z"] = "z";
-})(Axis$1 || (Axis$1 = {}));
-
 class Vector3 {
     constructor(x, y, z) {
         this._x = 0.0;
@@ -791,7 +772,7 @@ class Vector3 {
         return [this.x, this.y, this.z];
     }
     toString() {
-        return '(' + Axis$1.x + ' = ' + this.x + ';' + Axis$1.y + ' = ' + this.y + ';' + Axis$1.z + ' = ' + this.z + ')';
+        return '(x = ' + this.x + ';y = ' + this.y + ';z = ' + this.z + ')';
     }
     set(x, y, z) {
         this.x = x;
