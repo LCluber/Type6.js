@@ -1,5 +1,6 @@
 import {AxisNames2d} from '../types';
 import {Vector2 } from '../vectors/vector2';
+import {Utils} from '../utils';
 
 export class Rectangle {
 
@@ -72,7 +73,6 @@ export class Rectangle {
   }
 
 
-
   public setSizeX( width: number ): void {
     this.setSize('x', width);
   }
@@ -112,10 +112,15 @@ export class Rectangle {
     this.halfSize.halve();
   }
 
+  public contains(vector: Vector2): boolean {
+    return (Utils.contains(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x)
+            && Utils.contains(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y));
+  }
+
   /**
   * draw the rectangle in a canvas.
   */
-  draw( context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number ){
+  public draw( context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number ){
     context.beginPath();
     context.rect( this.topLeftCorner.x,
                   this.topLeftCorner.y,

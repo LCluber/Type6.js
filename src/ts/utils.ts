@@ -5,7 +5,7 @@ export class Utils {
     decimals = Math.pow( 10, decimals );
     return Math.round( x * decimals ) / decimals;
   }
-    
+
   static floor(x: number, decimals: number): number {
     decimals = Math.pow( 10, decimals );
     return Math.floor( x * decimals ) / decimals;
@@ -44,7 +44,6 @@ export class Utils {
 
   static clamp( x: number, min: number, max: number ) {
     return Math.min(Math.max(x,min),max);
-    //return ( x < min ) ? min : ( ( x > max ) ? max : x );
   }
 
   static normalize(x: number, min: number, max: number) {
@@ -74,9 +73,13 @@ export class Utils {
   static isPositive(x: number): boolean {
     return x >= 0 ? true : false;
   }
-    
+
   static isNegative(x: number): boolean {
     return x < 0 ? true : false;
+  }
+
+  static contains( x: number, min: number, max: number ): boolean {
+    return x >= min && x <= max;
   }
 
   static validate(x: number): number {

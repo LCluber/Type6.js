@@ -1,3 +1,9 @@
+Version 1.0.6 (June 01st 2019)
+-----------------------------
+ * Added contains() static method in Utils class.
+ * Added contains() method in Rectangle class.
+ * Added contains() method in Circle class.
+
 Version 1.0.5 (April 02nd 2019)
 -----------------------------
  * fixed declaration file.

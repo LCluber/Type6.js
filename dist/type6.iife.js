@@ -87,6 +87,9 @@ var Type6 = (function (exports) {
         Utils.isNegative = function (x) {
             return x < 0 ? true : false;
         };
+        Utils.contains = function (x, min, max) {
+            return x >= min && x <= max;
+        };
         Utils.validate = function (x) {
             return isNaN(x) ? 0.0 : x;
         };
@@ -617,6 +620,9 @@ var Type6 = (function (exports) {
         Circle.prototype.scale = function (scalar) {
             this.radius *= scalar;
         };
+        Circle.prototype.contains = function (vector) {
+            return vector.getSquaredDistance(this.position) <= this.radius * this.radius;
+        };
         Circle.prototype.draw = function (context, fillColor, strokeColor, strokeWidth) {
             context.beginPath();
             context.arc(this.position.x, this.position.y, this.radius, 0, Trigonometry.twopi, false);
@@ -702,6 +708,9 @@ var Type6 = (function (exports) {
         Rectangle.prototype.setHalfSize = function () {
             this.halfSize.copy(this.size);
             this.halfSize.halve();
+        };
+        Rectangle.prototype.contains = function (vector) {
+            return Utils.contains(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x) && Utils.contains(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y);
         };
         Rectangle.prototype.draw = function (context, fillColor, strokeColor, strokeWidth) {
             context.beginPath();

@@ -83,6 +83,9 @@ class Utils {
     static isNegative(x) {
         return x < 0 ? true : false;
     }
+    static contains(x, min, max) {
+        return x >= min && x <= max;
+    }
     static validate(x) {
         return isNaN(x) ? 0.0 : x;
     }
@@ -632,6 +635,9 @@ class Circle {
     scale(scalar) {
         this.radius *= scalar;
     }
+    contains(vector) {
+        return vector.getSquaredDistance(this.position) <= this.radius * this.radius;
+    }
     draw(context, fillColor, strokeColor, strokeWidth) {
         context.beginPath();
         context.arc(this.position.x, this.position.y, this.radius, 0, Trigonometry.twopi, false);
@@ -716,6 +722,10 @@ class Rectangle {
     setHalfSize() {
         this.halfSize.copy(this.size);
         this.halfSize.halve();
+    }
+    contains(vector) {
+        return (Utils.contains(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x)
+            && Utils.contains(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y));
     }
     draw(context, fillColor, strokeColor, strokeWidth) {
         context.beginPath();

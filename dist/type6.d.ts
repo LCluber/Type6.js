@@ -41,6 +41,7 @@ export declare class Circle {
     setPositionXY(positionX: number, positionY: number): void;
     setPositionFromVector(position: Vector2): void;
     scale(scalar: number): void;
+    contains(vector: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
 
@@ -68,6 +69,7 @@ export declare class Rectangle {
     setSizeFromVector(size: Vector2): void;
     private setCorners;
     private setHalfSize;
+    contains(vector: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
 
@@ -184,6 +186,7 @@ export declare class Utils {
     static isOrigin(x: number): boolean;
     static isPositive(x: number): boolean;
     static isNegative(x: number): boolean;
+    static contains(x: number, min: number, max: number): boolean;
     static validate(x: number): number;
 }
 

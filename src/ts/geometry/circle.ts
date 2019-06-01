@@ -59,6 +59,10 @@ export class Circle {
     this.radius *= scalar;
   }
 
+  public contains(vector: Vector2): boolean {
+    return vector.getSquaredDistance(this.position) <= this.radius * this.radius;
+  }
+
   /**
   * draw the circle in a canvas.
   */
