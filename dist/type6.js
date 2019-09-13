@@ -282,10 +282,10 @@ class Time {
         return second * 1000;
     }
     static millisecondToFramePerSecond(millisecond) {
-        return Math.round(1000 / millisecond);
+        return 1000 / millisecond;
     }
     static framePerSecondToMillisecond(refreshRate) {
-        return Utils.round(1000 / refreshRate, 1);
+        return 1000 / refreshRate;
     }
 }
 

@@ -1,4 +1,3 @@
-import {Utils} from './utils';
 
 export class Time {
 
@@ -11,11 +10,11 @@ export class Time {
   }
   
   static millisecondToFramePerSecond( millisecond:number ): number {
-    return Math.round(1000 / millisecond);
+    return 1000 / millisecond;
   }
   
   static framePerSecondToMillisecond( refreshRate:number ): number {
-    return Utils.round(1000 / refreshRate, 1);
+    return 1000 / refreshRate;
   }
 
 }

@@ -251,10 +251,10 @@ var Type6 = (function (exports) {
             return second * 1000;
         };
         Time.millisecondToFramePerSecond = function (millisecond) {
-            return Math.round(1000 / millisecond);
+            return 1000 / millisecond;
         };
         Time.framePerSecondToMillisecond = function (refreshRate) {
-            return Utils.round(1000 / refreshRate, 1);
+            return 1000 / refreshRate;
         };
         return Time;
     }();

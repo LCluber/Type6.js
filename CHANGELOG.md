@@ -1,3 +1,8 @@
+Version 1.0.7 (September 13th 2019)
+-----------------------------
+ * millisecondToFramePerSecond() method in Time class returns the exact result instead of a rounded number.
+ * framePerSecondToMillisecond() method in Time class returns the exact result instead of a rounded number.
+
 Version 1.0.6 (June 01st 2019)
 -----------------------------
  * Added contains() static method in Utils class.
