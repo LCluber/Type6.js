@@ -81,8 +81,4 @@ export class Utils {
   static contains( x: number, min: number, max: number ): boolean {
     return x >= min && x <= max;
   }
-
-  static validate(x: number): number {
-    return isNaN(x) ? 0.0 : x;
-  }
 }

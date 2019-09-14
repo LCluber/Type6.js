@@ -86,9 +86,6 @@ class Utils {
     static contains(x, min, max) {
         return x >= min && x <= max;
     }
-    static validate(x) {
-        return isNaN(x) ? 0.0 : x;
-    }
 }
 
 class Trigonometry {
@@ -308,6 +305,24 @@ class Random {
     }
 }
 
+class NumArray {
+    static min(array) {
+        return Math.min(...array);
+    }
+    static max(array) {
+        return Math.max(...array);
+    }
+    static sum(array) {
+        return array.reduce((a, b) => a + b, 0);
+    }
+    static multiply(array) {
+        return array.reduce((a, b) => a * b, 0);
+    }
+    static average(array, length) {
+        return NumArray.sum(array) / length;
+    }
+}
+
 class Bezier {
     static quadratic(p0, p1, p2, t) {
         let oneMinusT = 1 - t;
@@ -327,22 +342,8 @@ class Bezier {
 
 class Vector2 {
     constructor(x, y) {
-        this._x = 0.0;
-        this._y = 0.0;
         this.x = x || 0.0;
         this.y = y || 0.0;
-    }
-    set x(x) {
-        this._x = Utils.validate(x);
-    }
-    get x() {
-        return this._x;
-    }
-    set y(y) {
-        this._y = Utils.validate(y);
-    }
-    get y() {
-        return this._y;
     }
     isOrigin() {
         return (Utils.isOrigin(this.x) && Utils.isOrigin(this.y)) ? true : false;
@@ -389,7 +390,7 @@ class Vector2 {
         return this;
     }
     setAngle(angle) {
-        if (Utils.validate(angle)) {
+        if (angle) {
             let length = this.getMagnitude();
             this.x = Trigonometry.cosine(angle) * length;
             this.y = Trigonometry.sine(angle) * length;
@@ -744,30 +745,9 @@ class Rectangle {
 
 class Vector3 {
     constructor(x, y, z) {
-        this._x = 0.0;
-        this._y = 0.0;
-        this._z = 0.0;
         this.x = x || 0.0;
         this.y = y || 0.0;
         this.z = z || 0.0;
-    }
-    set x(x) {
-        this._x = Utils.validate(x);
-    }
-    get x() {
-        return this._x;
-    }
-    set y(y) {
-        this._y = Utils.validate(y);
-    }
-    get y() {
-        return this._y;
-    }
-    set z(z) {
-        this._z = Utils.validate(z);
-    }
-    get z() {
-        return this._z;
     }
     fromArray(array, offset) {
         if (offset === undefined) {
@@ -979,21 +959,21 @@ class Matrix4x3 {
         this.make(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3);
     }
     make(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3) {
-        this.m[0] = Utils.validate(x1 || 0.0);
-        this.m[1] = Utils.validate(x2 || 0.0);
-        this.m[2] = Utils.validate(x3 || 0.0);
+        this.m[0] = x1 || 0.0;
+        this.m[1] = x2 || 0.0;
+        this.m[2] = x3 || 0.0;
         this.m[3] = 0.0;
-        this.m[4] = Utils.validate(y1 || 0.0);
-        this.m[5] = Utils.validate(y2 || 0.0);
-        this.m[6] = Utils.validate(y3 || 0.0);
+        this.m[4] = y1 || 0.0;
+        this.m[5] = y2 || 0.0;
+        this.m[6] = y3 || 0.0;
         this.m[7] = 0.0;
-        this.m[8] = Utils.validate(z1 || 0.0);
-        this.m[9] = Utils.validate(z2 || 0.0);
-        this.m[10] = Utils.validate(z3 || 0.0);
+        this.m[8] = z1 || 0.0;
+        this.m[9] = z2 || 0.0;
+        this.m[10] = z3 || 0.0;
         this.m[11] = 0.0;
-        this.m[12] = Utils.validate(t1 || 0.0);
-        this.m[13] = Utils.validate(t2 || 0.0);
-        this.m[14] = Utils.validate(t3 || 0.0);
+        this.m[12] = t1 || 0.0;
+        this.m[13] = t2 || 0.0;
+        this.m[14] = t3 || 0.0;
         this.m[15] = 1.0;
     }
     copy(matrix4x3) {
@@ -1062,22 +1042,22 @@ class Matrix4x4 {
         this.make(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4);
     }
     make(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4) {
-        this.m[0] = Utils.validate(x1 || 0.0);
-        this.m[1] = Utils.validate(x2 || 0.0);
-        this.m[2] = Utils.validate(x3 || 0.0);
-        this.m[3] = Utils.validate(x4 || 0.0);
-        this.m[4] = Utils.validate(y1 || 0.0);
-        this.m[5] = Utils.validate(y2 || 0.0);
-        this.m[6] = Utils.validate(y3 || 0.0);
-        this.m[7] = Utils.validate(y4 || 0.0);
-        this.m[8] = Utils.validate(z1 || 0.0);
-        this.m[9] = Utils.validate(z2 || 0.0);
-        this.m[10] = Utils.validate(z3 || 0.0);
-        this.m[11] = Utils.validate(z4 || 0.0);
-        this.m[12] = Utils.validate(t1 || 0.0);
-        this.m[13] = Utils.validate(t2 || 0.0);
-        this.m[14] = Utils.validate(t3 || 0.0);
-        this.m[15] = Utils.validate(t4 || 0.0);
+        this.m[0] = x1 || 0.0;
+        this.m[1] = x2 || 0.0;
+        this.m[2] = x3 || 0.0;
+        this.m[3] = x4 || 0.0;
+        this.m[4] = y1 || 0.0;
+        this.m[5] = y2 || 0.0;
+        this.m[6] = y3 || 0.0;
+        this.m[7] = y4 || 0.0;
+        this.m[8] = z1 || 0.0;
+        this.m[9] = z2 || 0.0;
+        this.m[10] = z3 || 0.0;
+        this.m[11] = z4 || 0.0;
+        this.m[12] = t1 || 0.0;
+        this.m[13] = t2 || 0.0;
+        this.m[14] = t3 || 0.0;
+        this.m[15] = t4 || 0.0;
     }
     copy(matrix4x4) {
         let m = matrix4x4.m;
@@ -1148,4 +1128,4 @@ class Matrix4x4 {
     }
 }
 
-export { Trigonometry, Utils, Time, Random, Bezier, Circle, Rectangle, Vector2, Vector3, Matrix4x3, Matrix4x4 };
+export { Trigonometry, Utils, Time, Random, NumArray, Bezier, Circle, Rectangle, Vector2, Vector3, Matrix4x3, Matrix4x4 };

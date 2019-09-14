@@ -90,9 +90,6 @@ var Type6 = (function (exports) {
         Utils.contains = function (x, min, max) {
             return x >= min && x <= max;
         };
-        Utils.validate = function (x) {
-            return isNaN(x) ? 0.0 : x;
-        };
         return Utils;
     }();
 
@@ -280,6 +277,30 @@ var Type6 = (function (exports) {
         return Random;
     }();
 
+    var NumArray = function () {
+        function NumArray() {}
+        NumArray.min = function (array) {
+            return Math.min.apply(Math, array);
+        };
+        NumArray.max = function (array) {
+            return Math.max.apply(Math, array);
+        };
+        NumArray.sum = function (array) {
+            return array.reduce(function (a, b) {
+                return a + b;
+            }, 0);
+        };
+        NumArray.multiply = function (array) {
+            return array.reduce(function (a, b) {
+                return a * b;
+            }, 0);
+        };
+        NumArray.average = function (array, length) {
+            return NumArray.sum(array) / length;
+        };
+        return NumArray;
+    }();
+
     var Bezier = function () {
         function Bezier() {}
         Bezier.quadratic = function (p0, p1, p2, t) {
@@ -296,31 +317,9 @@ var Type6 = (function (exports) {
 
     var Vector2 = function () {
         function Vector2(x, y) {
-            this._x = 0.0;
-            this._y = 0.0;
             this.x = x || 0.0;
             this.y = y || 0.0;
         }
-        Object.defineProperty(Vector2.prototype, "x", {
-            get: function get() {
-                return this._x;
-            },
-            set: function set(x) {
-                this._x = Utils.validate(x);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Vector2.prototype, "y", {
-            get: function get() {
-                return this._y;
-            },
-            set: function set(y) {
-                this._y = Utils.validate(y);
-            },
-            enumerable: true,
-            configurable: true
-        });
         Vector2.prototype.isOrigin = function () {
             return Utils.isOrigin(this.x) && Utils.isOrigin(this.y) ? true : false;
         };
@@ -366,7 +365,7 @@ var Type6 = (function (exports) {
             return this;
         };
         Vector2.prototype.setAngle = function (angle) {
-            if (Utils.validate(angle)) {
+            if (angle) {
                 var length_1 = this.getMagnitude();
                 this.x = Trigonometry.cosine(angle) * length_1;
                 this.y = Trigonometry.sine(angle) * length_1;
@@ -730,43 +729,10 @@ var Type6 = (function (exports) {
 
     var Vector3 = function () {
         function Vector3(x, y, z) {
-            this._x = 0.0;
-            this._y = 0.0;
-            this._z = 0.0;
             this.x = x || 0.0;
             this.y = y || 0.0;
             this.z = z || 0.0;
         }
-        Object.defineProperty(Vector3.prototype, "x", {
-            get: function get() {
-                return this._x;
-            },
-            set: function set(x) {
-                this._x = Utils.validate(x);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Vector3.prototype, "y", {
-            get: function get() {
-                return this._y;
-            },
-            set: function set(y) {
-                this._y = Utils.validate(y);
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Vector3.prototype, "z", {
-            get: function get() {
-                return this._z;
-            },
-            set: function set(z) {
-                this._z = Utils.validate(z);
-            },
-            enumerable: true,
-            configurable: true
-        });
         Vector3.prototype.fromArray = function (array, offset) {
             if (offset === undefined) {
                 offset = 0;
@@ -984,21 +950,21 @@ var Type6 = (function (exports) {
             this.make(x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3);
         }
         Matrix4x3.prototype.make = function (x1, x2, x3, y1, y2, y3, z1, z2, z3, t1, t2, t3) {
-            this.m[0] = Utils.validate(x1 || 0.0);
-            this.m[1] = Utils.validate(x2 || 0.0);
-            this.m[2] = Utils.validate(x3 || 0.0);
+            this.m[0] = x1 || 0.0;
+            this.m[1] = x2 || 0.0;
+            this.m[2] = x3 || 0.0;
             this.m[3] = 0.0;
-            this.m[4] = Utils.validate(y1 || 0.0);
-            this.m[5] = Utils.validate(y2 || 0.0);
-            this.m[6] = Utils.validate(y3 || 0.0);
+            this.m[4] = y1 || 0.0;
+            this.m[5] = y2 || 0.0;
+            this.m[6] = y3 || 0.0;
             this.m[7] = 0.0;
-            this.m[8] = Utils.validate(z1 || 0.0);
-            this.m[9] = Utils.validate(z2 || 0.0);
-            this.m[10] = Utils.validate(z3 || 0.0);
+            this.m[8] = z1 || 0.0;
+            this.m[9] = z2 || 0.0;
+            this.m[10] = z3 || 0.0;
             this.m[11] = 0.0;
-            this.m[12] = Utils.validate(t1 || 0.0);
-            this.m[13] = Utils.validate(t2 || 0.0);
-            this.m[14] = Utils.validate(t3 || 0.0);
+            this.m[12] = t1 || 0.0;
+            this.m[13] = t2 || 0.0;
+            this.m[14] = t3 || 0.0;
             this.m[15] = 1.0;
         };
         Matrix4x3.prototype.copy = function (matrix4x3) {
@@ -1064,22 +1030,22 @@ var Type6 = (function (exports) {
             this.make(x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4);
         }
         Matrix4x4.prototype.make = function (x1, x2, x3, x4, y1, y2, y3, y4, z1, z2, z3, z4, t1, t2, t3, t4) {
-            this.m[0] = Utils.validate(x1 || 0.0);
-            this.m[1] = Utils.validate(x2 || 0.0);
-            this.m[2] = Utils.validate(x3 || 0.0);
-            this.m[3] = Utils.validate(x4 || 0.0);
-            this.m[4] = Utils.validate(y1 || 0.0);
-            this.m[5] = Utils.validate(y2 || 0.0);
-            this.m[6] = Utils.validate(y3 || 0.0);
-            this.m[7] = Utils.validate(y4 || 0.0);
-            this.m[8] = Utils.validate(z1 || 0.0);
-            this.m[9] = Utils.validate(z2 || 0.0);
-            this.m[10] = Utils.validate(z3 || 0.0);
-            this.m[11] = Utils.validate(z4 || 0.0);
-            this.m[12] = Utils.validate(t1 || 0.0);
-            this.m[13] = Utils.validate(t2 || 0.0);
-            this.m[14] = Utils.validate(t3 || 0.0);
-            this.m[15] = Utils.validate(t4 || 0.0);
+            this.m[0] = x1 || 0.0;
+            this.m[1] = x2 || 0.0;
+            this.m[2] = x3 || 0.0;
+            this.m[3] = x4 || 0.0;
+            this.m[4] = y1 || 0.0;
+            this.m[5] = y2 || 0.0;
+            this.m[6] = y3 || 0.0;
+            this.m[7] = y4 || 0.0;
+            this.m[8] = z1 || 0.0;
+            this.m[9] = z2 || 0.0;
+            this.m[10] = z3 || 0.0;
+            this.m[11] = z4 || 0.0;
+            this.m[12] = t1 || 0.0;
+            this.m[13] = t2 || 0.0;
+            this.m[14] = t3 || 0.0;
+            this.m[15] = t4 || 0.0;
         };
         Matrix4x4.prototype.copy = function (matrix4x4) {
             var m = matrix4x4.m;
@@ -1151,6 +1117,7 @@ var Type6 = (function (exports) {
     exports.Utils = Utils;
     exports.Time = Time;
     exports.Random = Random;
+    exports.NumArray = NumArray;
     exports.Bezier = Bezier;
     exports.Circle = Circle;
     exports.Rectangle = Rectangle;

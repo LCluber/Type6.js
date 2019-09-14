@@ -22,6 +22,13 @@
 *
 * http://type6js.lcluber.com
 */
+export declare class NumArray {
+    static min(array: number[]): number;
+    static max(array: number[]): number;
+    static sum(array: number[]): number;
+    static multiply(array: number[]): number;
+    static average(array: number[], length: number): number;
+}
 export declare class Bezier {
     static quadratic(p0: number, p1: number, p2: number, t: number): number;
     static cubic(p0: number, p1: number, p2: number, p3: number, t: number): number;
@@ -166,6 +173,7 @@ export declare class Trigonometry {
 
 
 
+
 export declare type AxisNames2d = 'x' | 'y';
 export declare type AxisNames3d = AxisNames2d & 'z';
 export declare class Utils {
@@ -187,19 +195,13 @@ export declare class Utils {
     static isPositive(x: number): boolean;
     static isNegative(x: number): boolean;
     static contains(x: number, min: number, max: number): boolean;
-    static validate(x: number): number;
 }
 
 
-export interface Vector2 {
-    [key: string]: any;
-}
 export declare class Vector2 {
-    private _x;
-    private _y;
-    constructor(x?: number, y?: number);
     x: number;
     y: number;
+    constructor(x?: number, y?: number);
     isOrigin(): boolean;
     isNotOrigin(): boolean;
     isPositive(): boolean;
@@ -257,15 +259,12 @@ export interface Vector3 {
     [key: string]: any;
 }
 export declare class Vector3 {
-    private _x;
-    private _y;
-    private _z;
-    constructor(x?: number, y?: number, z?: number);
     x: number;
     y: number;
     z: number;
-    fromArray(array: Array<number>, offset?: number): Vector3;
-    toArray(): Array<number>;
+    constructor(x?: number, y?: number, z?: number);
+    fromArray(array: number[], offset?: number): Vector3;
+    toArray(): number[];
     toString(): string;
     set(x: number, y: number, z: number): Vector3;
     clone(): Vector3;

@@ -1,6 +1,5 @@
 
 import {Trigonometry} from '../trigonometry';
-import {Utils} from '../utils';
 import {Vector3} from '../vectors/vector3';
 
 export class Matrix4x3 {
@@ -33,21 +32,21 @@ export class Matrix4x3 {
                 z1?:number, z2?:number, z3?:number,
                 t1?:number, t2?:number, t3?:number
               ): void {
-    this.m[ 0] = Utils.validate(x1||0.0);
-    this.m[ 1] = Utils.validate(x2||0.0);
-    this.m[ 2] = Utils.validate(x3||0.0);
+    this.m[ 0] = x1||0.0;
+    this.m[ 1] = x2||0.0;
+    this.m[ 2] = x3||0.0;
     this.m[ 3] = 0.0;
-    this.m[ 4] = Utils.validate(y1||0.0);
-    this.m[ 5] = Utils.validate(y2||0.0);
-    this.m[ 6] = Utils.validate(y3||0.0);
+    this.m[ 4] = y1||0.0;
+    this.m[ 5] = y2||0.0;
+    this.m[ 6] = y3||0.0;
     this.m[ 7] = 0.0;
-    this.m[ 8] = Utils.validate(z1||0.0);
-    this.m[ 9] = Utils.validate(z2||0.0);
-    this.m[10] = Utils.validate(z3||0.0);
+    this.m[ 8] = z1||0.0;
+    this.m[ 9] = z2||0.0;
+    this.m[10] = z3||0.0;
     this.m[11] = 0.0;
-    this.m[12] = Utils.validate(t1||0.0);
-    this.m[13] = Utils.validate(t2||0.0);
-    this.m[14] = Utils.validate(t3||0.0);
+    this.m[12] = t1||0.0;
+    this.m[13] = t2||0.0;
+    this.m[14] = t3||0.0;
     this.m[15] = 1.0;
   }
 
@@ -169,239 +168,5 @@ export class Matrix4x3 {
               );
     return this;
 	}
-
-  // /**
-  // * Create an identity matrix
-  // * @since 0.3.0
-  // * @method
-  // * @param {float} [x1 = 0.0] x1
-  // * @param {float} [x2 = 0.0] x2
-  // * @param {float} [x3 = 0.0] x3
-  // * @param {float} [y1 = 0.0] y1
-  // * @param {float} [y2 = 0.0] y2
-  // * @param {float} [y3 = 0.0] y3
-  // * @param {float} [z1 = 0.0] z1
-  // * @param {float} [z2 = 0.0] z2
-  // * @param {float} [z3 = 0.0] z3
-  // * @param {float} [t1 = 0.0] t1
-  // * @param {float} [t2 = 0.0] t2
-  // * @param {float} [t3 = 0.0] t3
-  // * @returns {Matrix4x3}
-  // */
-  // createIdentity: function() {
-  //   var _this   = Object.create(this);
-  //   _this.identity();
-  //   return _this;
-  // },
-
-  // public fromArray(matrix4x3: Matrix4x3): void {
-  //   _this.m = new Float32Array(16);
-  //   _this.make( m[ 0],  m[ 1],  m[ 2],
-  //               m[ 3],  m[ 4],  m[ 5],
-  //               m[ 6],  m[ 7],  m[ 8],
-  //               m[ 9],  m[10],  m[11]
-  //             );
-  //   return _this;
-  // },
-
-
-  // /**
-  // * returns the matrix as Array.
-  // * @since 0.3.0
-  // * @method
-  // * @private
-  // * @returns {array}
-  // */
-  // toArray: function(){
-  //   return this.m;
-  // },
-
-
-
-
-  // zero: function(){
-  //   this.make(  0.0,  0.0,  0.0,  0.0,
-  //               0.0,  0.0,  0.0,  0.0,
-  //               0.0,  0.0,  0.0,  0.0,
-  //               0.0,  0.0,  0.0,  1.0
-  //             );
-  // },
-
-  // /**
-  // * Export the matrice into an array
-  // * @since 0.3.0
-  // * @method
-  // * @returns {array(2)} an array of floats with array[0] as x and array[1] as y.
-  // */
-  // toArray: function(){
-  //   return this.m;
-  // },
-
-
-  // /**
-  // * Scale the matrix.
-  // * @since 0.3.0
-  // * @method
-  // * @param {float} the value to validate.
-  // * @returns {boolean}
-  // */
-  // scale: function(vector3) {
-  //   return this.create(
-  //               vector3.getX(),  0.0,              0.0,              0.0,
-  //               0.0,              vector3.getY(),  0.0,              0.0,
-  //               0.0,              0.0,              vector3.getZ(),  0.0,
-  //               0.0,              0.0,              0.0,              1.0
-  //             );
-  // },
-
-  // /**
-  // * Rotate the matrix on the X axis.
-  // * @since 0.3.0
-  // * @method
-  // * @param {float} the value to validate.
-  // * @returns {boolean}
-  // */
-  // rotateX : function(angle){
-  //   var cos = TYPE6.Trigonometry.cosine(angle);
-  //   var sin = TYPE6.Trigonometry.sine(angle);
-  //   return this.create(
-  //               1.0,  0.0,  0.0,  0.0,
-  //               0.0,  cos,  sin,  0.0,
-  //               0.0, -sin,  cos,  0.0,
-  //               0.0,  0.0,  0.0,  1.0
-  //             );
-  // },
-
-  // /**
-  // * Rotate the matrix on the Y axis.
-  // * @since 0.3.0
-  // * @method
-  // * @param {float} the value to validate.
-  // * @returns {boolean}
-  // */
-  // rotateY : function(angle){
-  //   var cos = TYPE6.Trigonometry.cosine(angle);
-  //   var sin = TYPE6.Trigonometry.sine(angle);
-  //   return this.create(
-  //               cos,  0.0, -sin,  0.0,
-  //               0.0,  1.0,  0.0,  0.0,
-  //               sin,  0.0,  cos,  0.0,
-  //               0.0,  0.0,  0.0,  1.0
-  //             );
-  // },
-
-  // /**
-  // * Rotate the matrix on the Z axis.
-  // * @since 0.3.0
-  // * @method
-  // * @param {float} the value to validate.
-  // * @returns {boolean}
-  // */
-  // rotateZ : function(angle){
-  //   var cos = TYPE6.Trigonometry.cosine(angle);
-  //   var sin = TYPE6.Trigonometry.sine(angle);
-  //   return this.create(
-  //               cos,  sin,  0.0,  0.0,
-  //              -sin,  cos,  0.0,  0.0,
-  //               0.0,  0.0,  1.0,  0.0,
-  //               0.0,  0.0,  0.0,  1.0
-  //             );
-  // },
-
-  // /**
-  // * Translation matrix.
-  // * @since 0.3.0
-  // * @method
-  // * @param {float} the value to validate.
-  // * @returns {boolean}
-  // */
-  // translate : function(vector3){
-  //   return this.create(
-  //               1.0,              0.0,              0.0,              0.0,
-  //               0.0,              1.0,              0.0,              0.0,
-  //               0.0,              0.0,              1.0,              0.0,
-  //               vector3.getX(),  vector3.getY(),  vector3.getZ(),  1.0
-  //             );
-  // },
-
-  // /**
-  // * Multiply the matrix.
-  // * @since 0.3.0
-  // * @method
-  // * @param {float} the value to validate.
-  // * @returns {boolean}
-  // */
-  // multiply: function(m){
-  //   return this.create(
-  //             this.m[0]*m.m[ 0] + this.m[4]*m.m[ 1] + this.m[ 8]*m.m[ 2],
-  //             this.m[1]*m.m[ 0] + this.m[5]*m.m[ 1] + this.m[ 9]*m.m[ 2],
-  //             this.m[2]*m.m[ 0] + this.m[6]*m.m[ 1] + this.m[10]*m.m[ 2],
-  //             0.0,
-  //
-  //             this.m[0]*m.m[ 4] + this.m[4]*m.m[ 5] + this.m[ 8]*m.m[ 6],
-  //             this.m[1]*m.m[ 4] + this.m[5]*m.m[ 5] + this.m[ 9]*m.m[ 6],
-  //             this.m[2]*m.m[ 4] + this.m[6]*m.m[ 5] + this.m[10]*m.m[ 6],
-  //             0.0,
-  //
-  //             this.m[0]*m.m[ 8] + this.m[4]*m.m[ 9] + this.m[ 8]*m.m[10],
-  //             this.m[1]*m.m[ 8] + this.m[5]*m.m[ 9] + this.m[ 9]*m.m[10],
-  //             this.m[2]*m.m[ 8] + this.m[6]*m.m[ 9] + this.m[10]*m.m[10],
-  //             0.0,
-  //
-  //             this.m[0]*m.m[12] + this.m[4]*m.m[13] + this.m[ 8]*m.m[14] + this.m[12],
-  //             this.m[1]*m.m[12] + this.m[5]*m.m[13] + this.m[ 9]*m.m[14] + this.m[13],
-  //             this.m[2]*m.m[12] + this.m[6]*m.m[13] + this.m[10]*m.m[14] + this.m[14],
-  //             1.0
-  //           );
-  //
-  // },
-
-  // /**
-  // * sScale by a vector3
-  // * @since 0.3.0
-  // * @method
-  // * @param {Vector3} vector3 the vector3 to scale by.
-  // * @returns {boolean}
-  // */
-  // scaleBy: function(vector3) {
-  //   this.make(  vector3.getX(),  0.0,              0.0,              0.0,
-  //               0.0,              vector3.getY(),  0.0,              0.0,
-  //               0.0,              0.0,              vector3.getZ(),  0.0,
-  //               0.0,              0.0,              0.0,              1.0
-  //             );
-  // },
-
-
-
-  // /**
-  // * Make inverse.
-  // * @since 0.3.0
-  // * @method
-  // * @param {matrix}  the matrix to invert.
-  // * @returns {boolean}
-  // */
-  // makeInverseRigidBody : function(m) {
-	// 	// Inv(M) = Inv(Rot*Trans) = Inv(Rot) * Inv(Trans) = Transpose(Rot) * -T
-	// 	// Invert translation
-	// 	var it0 = -m.m[12];
-	// 	var it1 = -m.m[13];
-	// 	var it2 = -m.m[14];
-  //
-	// 	// Calculate the translation
-	// 	this.m[12] = m.m[0] * it0 + m.m[1] * it1 + m.m[2] * it2;
-	// 	this.m[13] = m.m[4] * it0 + m.m[5] * it1 + m.m[6] * it2;
-	// 	this.m[14] = m.m[8] * it0 + m.m[9] * it1 + m.m[10] * it2;
-  //
-	// 	// Calculate the rotation (transpose)
-	// 	this.m[ 0] = m.m[ 0];
-	// 	this.m[ 1] = m.m[ 4];
-	// 	this.m[ 2] = m.m[ 8];
-	// 	this.m[ 4] = m.m[ 1];
-	// 	this.m[ 5] = m.m[ 5];
-	// 	this.m[ 6] = m.m[ 9];
-	// 	this.m[ 8] = m.m[ 2];
-	// 	this.m[ 9] = m.m[ 6];
-	// 	this.m[10] = m.m[10];
-  // },
 
 };

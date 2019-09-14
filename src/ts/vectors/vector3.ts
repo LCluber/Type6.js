@@ -1,54 +1,20 @@
 
-// import {Trigonometry} from '../trigonometry';
-import { Utils } from '../utils';
-
-// enum Axis { x = 'x',
-//             y = 'y',
-//             z = 'z' };
-
 export interface Vector3 {
   [key: string]: any;
 }
 
 export class Vector3 {
-  private _x: number;
-  private _y: number;
-  private _z: number;
+  public x: number;
+  public y: number;
+  public z: number;
 
   constructor(x?: number, y?: number, z?: number) {
-    this._x = 0.0;
-    this._y = 0.0;
-    this._z = 0.0;
     this.x = x||0.0;
     this.y = y||0.0;
     this.z = z||0.0;
   }
 
-  set x(x : number) {
-    this._x = Utils.validate(x);
-  }
-
-  get x(): number {
-    return this._x;
-  }
-
-  set y(y: number) {
-    this._y = Utils.validate(y);
-  }
-
-  get y(): number {
-    return this._y;
-  }
-
-  set z(z: number) {
-    this._z = Utils.validate(z);
-  }
-
-  get z(): number {
-    return this._z;
-  }
-
-  public fromArray( array: Array<number>, offset?: number ): Vector3 {
+  public fromArray( array: number[], offset?: number ): Vector3 {
     if ( offset === undefined ){
       offset = 0;
     }
@@ -59,7 +25,7 @@ export class Vector3 {
     return this;
   }
 
-  public toArray(): Array<number> {
+  public toArray(): number[] {
     return [ this.x, this.y, this.z ];
   }
 

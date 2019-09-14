@@ -3,6 +3,7 @@ export { Trigonometry } from './trigonometry';
 export { Utils }        from './utils';
 export { Time }         from './time';
 export { Random }       from './random';
+export { NumArray }     from './array';
 export { Bezier }       from './bezier';
 export { Circle }       from './geometry/circle';
 export { Rectangle }    from './geometry/rectangle';
