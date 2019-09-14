@@ -1,6 +1,6 @@
 Version 1.1.0 (September 14th 2019)
 -----------------------------
- * Addded NumArray static class to work with array of numbers. Get min value, max value, sum, average...
+ * Added NumArray static class to work with array of numbers. Get min value, max value, sum, average...
 
 Version 1.0.7 (September 13th 2019)
 -----------------------------
