@@ -21,6 +21,256 @@ var environment = process.env.NODE_ENV;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+
+const menu = {
+  vectors : {
+    vector2 : {
+      setters : {
+        set : {},
+        copy : {},
+        setFromArray : {},
+        setFromAngle : {},
+        origin : {},
+        setOppositeAxis : {}
+      },
+      getters : {
+        getAngle : {},
+        getMagnitude : {},
+        getDistance : {},
+        getMaxAxis : {},
+        getMinAxis : {}
+      },
+      export : {
+        clone : {},
+        toArray : {},
+        toString : {}
+      },
+      check : {
+        isOrigin : {},
+        isNotOrigin : {},
+        isPositive : {},
+        isNegative : {}
+      },
+      operations : {
+        additions : {
+          add : {},
+          addScalar : {},
+          addScaledVector : {}
+        },
+        subtractions : {
+          subtract : {},
+          subtractScalar : {},
+          subtractScaledVector : {}
+        },
+        multiplications : {
+          scale : {},
+          multiply : {},
+          multiplyScaledVector : {}
+        },
+        divisions : {
+          divide : {},
+          divideScaledVector : {},
+          halve : {},
+          normalize : {}
+        },
+        max : {},
+        min : {},
+        maxScalar : {},
+        minScalar : {},
+        absolute : {},
+        opposite : {},
+        clamp : {},
+        lerp : {},
+        dotProduct : {},
+        quadraticBezier : {},
+        cubicBezier : {}
+      }
+    },
+    vector3 : {
+      setters : {
+        set : {},
+        copy : {},
+        setFromArray : {},
+        setFromAngle : {},
+        origin : {},
+        setOppositeAxis : {}
+      },
+      getters : {
+        getAngle : {},
+        getMagnitude : {},
+        getDistance : {},
+        getMaxAxis : {},
+        getMinAxis : {}
+      },
+      export : {
+        clone : {},
+        toArray : {},
+        toString : {}
+      },
+      check : {
+        isOrigin : {},
+        isNotOrigin : {},
+        isPositive : {},
+        isNegative : {}
+      },
+      operations : {
+        additions : {
+          add : {},
+          addScalar : {},
+          addScaledVector : {}
+        },
+        subtractions : {
+          subtract : {},
+          subtractScalar : {},
+          subtractScaledVector : {}
+        },
+        multiplications : {
+          scale : {},
+          multiply : {},
+          multiplyScaledVector : {}
+        },
+        divisions : {
+          divide : {},
+          divideScaledVector : {},
+          halve : {},
+          normalize : {}
+        },
+        max : {},
+        min : {},
+        maxScalar : {},
+        minScalar : {},
+        absolute : {},
+        opposite : {},
+        clamp : {},
+        lerp : {},
+        dotProduct : {},
+        cross : {},
+        quadraticBezier : {},
+        cubicBezier : {}
+      }
+    }
+  },
+  trigonometry : {
+    sine : {},
+    cosine : {},
+    arctan : {},
+    arctan2 : {},
+    sineEquation : {},
+    cosineEquation : {},
+    arctanEquation : {},
+    helpers : {
+
+    }
+  },
+  matrices : {
+    matrix4x3 : {
+      copy : {},
+      toArray : {},
+      toString : {},
+      identity : {},
+      scale : {},
+      rotateX : {},
+      rotateY : {},
+      rotateZ : {},
+      translate : {},
+      multiply : {},
+      lookAtRH : {}
+    },
+    matrix4x4 : {
+      copy : {},
+      toArray : {},
+      toString : {},
+      identity : {},
+      scale : {},
+      rotateX : {},
+      rotateY : {},
+      rotateZ : {},
+      translate : {},
+      multiply : {},
+      perspective : {},
+      orthographic : {}
+    }
+  },
+  geometry : {
+    circle : {
+      clone : {},
+      copy : {},
+      set : {},
+      setPositionXY : {},
+      setPositionFromVector : {},
+      scale : {},
+      isIn : {},
+      isOut : {},
+      draw : {}
+    },
+    rectangle : {
+      clone : {},
+      copy : {},
+      set : {},
+      setPositionX : {},
+      setPositionY : {},
+      setPosition : {},
+      setPositionXY : {},
+      setPositionFromVector : {},
+      setSizeX : {},
+      setSizeY : {},
+      setSize : {},
+      setSizeXY : {},
+      setSizeFromVector : {},
+      setCorners : {},
+      setHalfSize : {},
+      isIn : {},
+      draw : {}
+    }
+  },
+  time : {
+    millisecondToSecond : {},
+    secondToMilliecond : {},
+    millisecondToFramePerSecond : {},
+    framePerSecondToMillisecond : {}
+  },
+  bezier : {
+    quadratic : {},
+    cubic : {}
+  },
+  random : {
+    float : {},
+    integer : {},
+    distribution : {},
+    pick : {}
+  },
+  array : {
+    min : {},
+    max : {},
+    sum : {},
+    multiply : {},
+    average : {}
+  },
+  utils : {
+    round : {},
+    floor : {},
+    ceil : {},
+    trunc : {},
+    roundToNearest : {},
+    mix : {},
+    getSign : {},
+    opposite : {},
+    clamp : {},
+    normalize : {},
+    lerp : {},
+    map : {},
+    isEven : {},
+    isOdd : {},
+    isOrigin : {},
+    isPositive : {},
+    isNegative : {},
+    isIn : {},
+    isOut : {}
+  }
+
+
+}
+
 // uncomment after placing your favicon in /public/img/
 app.use(favicon(path.join(__dirname, 'public/img', 'favicon.ico')));
 app.use(logger('dev'));
@@ -30,7 +280,6 @@ app.use(cookieParser());
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/dist', express.static(path.join(__dirname, '../dist')));
-app.use('/zip', express.static(path.join(__dirname, '../zip')));
 
 // add <script src="//localhost:35729/livereload.js?snipver=1" async="" defer=""></script>
 // for livereload of grunt-contrib-watch

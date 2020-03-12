@@ -112,9 +112,9 @@ export class Rectangle {
     this.halfSize.halve();
   }
 
-  public contains(vector: Vector2): boolean {
-    return (Utils.contains(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x)
-            && Utils.contains(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y));
+  public isIn(vector: Vector2): boolean {
+    return (Utils.isIn(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x)
+            && Utils.isIn(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y));
   }
 
   /**

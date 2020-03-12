@@ -34,7 +34,7 @@ export class Utils {
     return (1-ratio)*x + ratio*y;
   }
 
-  static sign(x: number): number {
+  static getSign(x: number): number {
     return x ? x < 0 ? -1 : 1 : 0;
   }
 
@@ -78,7 +78,11 @@ export class Utils {
     return x < 0 ? true : false;
   }
 
-  static contains( x: number, min: number, max: number ): boolean {
+  static isIn( x: number, min: number, max: number ): boolean {
     return x >= min && x <= max;
+  }
+
+  static isOut( x: number, min: number, max: number ): boolean {
+    return x < min || x > max;
   }
 }

@@ -35,11 +35,10 @@ export class Vector2 {
     return ( Utils.isNegative(this.x) && Utils.isNegative(this.y) ) ? true : false;
   }
 
-  public fromArray( array: number[], offset?: number ): Vector2 {
+  public setFromArray( array: number[], offset?: number ): Vector2 {
     if ( offset === undefined ){
       offset = 0;
     }
-
     this.x = array[ offset ];
     this.y = array[ offset + 1 ];
     return this;
@@ -63,9 +62,9 @@ export class Vector2 {
     return new Vector2(this.x,this.y);
   }
 
-  public copy(vector2: Vector2 ): Vector2 {
-    this.x = vector2.x;
-    this.y = vector2.y;
+  public copy(v: Vector2 ): Vector2 {
+    this.x = v.x;
+    this.y = v.y;
     return this;
 	}
 
@@ -75,8 +74,8 @@ export class Vector2 {
     return this;
   }
 
-  public setAngle(angle: number): Vector2 {
-    if(angle) {
+  public setFromAngle(angle: number): Vector2 {
+    if (angle) {
       let length = this.getMagnitude();
       this.x = Trigonometry.cosine( angle ) * length;
       this.y = Trigonometry.sine( angle ) * length;
@@ -88,27 +87,19 @@ export class Vector2 {
     return Math.atan2(this.y, this.x);
   }
 
-  public getMagnitude(): number{
-    return Math.sqrt(this.getSquaredMagnitude());
+  public getMagnitude(square: boolean = false): number{
+    return square ? this.getSquaredMagnitude() : Math.sqrt(this.getSquaredMagnitude());
   }
 
-  public getSquaredMagnitude(): number {
+  private getSquaredMagnitude(): number {
     return this.x * this.x + this.y * this.y;
   }
 
-  public getDistance(vector2: Vector2): number {
-    this.subtract(vector2);
-    let magnitude = this.getMagnitude();
-    this.add(vector2);
+  public getDistance(v: Vector2, square: boolean = false): number {
+    this.subtract(v);
+    const magnitude = this.getMagnitude(square);
+    this.add(v);
     return magnitude;
-  }
-
-  public getSquaredDistance(vector2: Vector2): number {
-    this.subtract(vector2);
-    let squaredMagnitude = this.getSquaredMagnitude();
-    this.add(vector2);
-    return squaredMagnitude;
-
   }
 
   public quadraticBezier(p0:Vector2, p1:Vector2, p2:Vector2, t:number): Vector2 {
@@ -123,9 +114,9 @@ export class Vector2 {
     return this;
   }
 
-  public add(vector2: Vector2): Vector2 {
-    this.x += vector2.x;
-    this.y += vector2.y;
+  public add(v: Vector2): Vector2 {
+    this.x += v.x;
+    this.y += v.y;
     return this;
   }
 
@@ -135,21 +126,15 @@ export class Vector2 {
     return this;
   }
 
-  public addScaledVector(vector2: Vector2, scalar: number): Vector2 {
-    this.x += vector2.x * scalar;
-    this.y += vector2.y * scalar;
+  public addScaledVector(v: Vector2, scalar: number): Vector2 {
+    this.x += v.x * scalar;
+    this.y += v.y * scalar;
     return this;
   }
 
-  public addVectors ( v1: Vector2, v2: Vector2 ): Vector2 {
-    this.x = v1.x + v2.x;
-    this.y = v1.y + v2.y;
-    return this;
-  }
-
-  public subtract(vector2: Vector2): Vector2 {
-    this.x -= vector2.x;
-    this.y -= vector2.y;
+  public subtract(v: Vector2): Vector2 {
+    this.x -= v.x;
+    this.y -= v.y;
     return this;
   }
 
@@ -159,15 +144,9 @@ export class Vector2 {
     return this;
   }
 
-  public subtractScaledVector(vector2: Vector2, scalar: number): Vector2 {
-    this.x -= vector2.x * scalar;
-    this.y -= vector2.y * scalar;
-    return this;
-  }
-
-  public subtractVectors ( v1: Vector2, v2: Vector2 ): Vector2 {
-    this.x = v1.x - v2.x;
-    this.y = v1.y - v2.y;
+  public subtractScaledVector(v: Vector2, scalar: number): Vector2 {
+    this.x -= v.x * scalar;
+    this.y -= v.y * scalar;
     return this;
   }
 
@@ -177,48 +156,29 @@ export class Vector2 {
     return this;
   }
 
-  public scaleVector ( v1: Vector2, value: number ): Vector2 {
-    this.x = v1.x * value;
-    this.y = v1.y * value;
-    return this;
-  }
-
-
   //component product
-  public multiply(vector2: Vector2): Vector2 {
-    this.x *= vector2.x;
-    this.y *= vector2.y;
+  public multiply(v: Vector2): Vector2 {
+    this.x *= v.x;
+    this.y *= v.y;
     return this;
   }
 
-  public multiplyScaledVector(vector2: Vector2, scalar: number): Vector2 {
-    this.x *= vector2.x * scalar;
-    this.y *= vector2.y * scalar;
-    return this;
-  }
-
-  public multiplyVectors ( v1: Vector2, v2: Vector2 ): Vector2 {
-    this.x = v1.x * v2.x;
-    this.y = v1.y * v2.y;
+  public multiplyScaledVector(v: Vector2, scalar: number): Vector2 {
+    this.x *= v.x * scalar;
+    this.y *= v.y * scalar;
     return this;
   }
 
   //Prefer scale by value inferior to 1 if possible
-  public divide(vector2: Vector2): Vector2 {
-    this.x /= vector2.x;
-    this.y /= vector2.y;
+  public divide(v: Vector2): Vector2 {
+    this.x /= v.x;
+    this.y /= v.y;
     return this;
   }
 
-  public divideScaledVector(vector2: Vector2, scalar: number): Vector2 {
-    this.x /= vector2.x * scalar;
-    this.y /= vector2.y * scalar;
-    return this;
-  }
-
-  public divideVectors ( v1: Vector2, v2: Vector2 ): Vector2 {
-    this.x = v1.x / v2.x;
-    this.y = v1.y / v2.y;
+  public divideScaledVector(v: Vector2, scalar: number): Vector2 {
+    this.x /= v.x * scalar;
+    this.y /= v.y * scalar;
     return this;
   }
 
@@ -228,15 +188,15 @@ export class Vector2 {
     return this;
   }
 
-  public max(vector2: Vector2): Vector2 {
-    this.x = Math.max( this.x, vector2.x );
-    this.y = Math.max( this.y, vector2.y );
+  public max(v: Vector2): Vector2 {
+    this.x = Math.max( this.x, v.x );
+    this.y = Math.max( this.y, v.y );
     return this;
   }
 
-  public min(vector2: Vector2): Vector2 {
-    this.x = Math.min( this.x, vector2.x );
-    this.y = Math.min( this.y, vector2.y );
+  public min(v: Vector2): Vector2 {
+    this.x = Math.min( this.x, v.x );
+    this.y = Math.min( this.y, v.y );
     return this;
   }
 
@@ -252,11 +212,11 @@ export class Vector2 {
     return this;
   }
 
-  public maxAxis(): AxisNames2d {
+  public getMaxAxis(): AxisNames2d {
     return (this.y > this.x) ? 'y' : 'x';
   }
 
-  public minAxis(): AxisNames2d {
+  public getMinAxis(): AxisNames2d {
     return (this.y < this.x) ? 'y' : 'x';
   }
 
@@ -277,32 +237,15 @@ export class Vector2 {
     return this;
   }
 
-  public normalizeVector(v: Vector2): Vector2 {
-    this.copy(v);
-    return this.normalize();
-  }
-
   public absolute(): Vector2 {
     this.x = Math.abs(this.x);
     this.y = Math.abs(this.y);
     return this;
   }
 
-  public absoluteVector(v: Vector2): Vector2 {
-    this.x = Math.abs(v.x);
-    this.y = Math.abs(v.y);
-    return this;
-  }
-
   public opposite(): Vector2 {
     this.x = -this.x;
     this.y = -this.y;
-    return this;
-  }
-
-  public oppositeVector(v: Vector2): Vector2 {
-    this.x = -v.x;
-    this.y = -v.y;
     return this;
   }
 
@@ -326,8 +269,8 @@ export class Vector2 {
     return this;
   }
 
-  public dotProduct(vector2: Vector2): number { //scalar product
-    return this.x * vector2.x + this.y * vector2.y;
+  public dotProduct(v: Vector2): number { //scalar product
+    return this.x * v.x + this.y * v.y;
   }
 
 };

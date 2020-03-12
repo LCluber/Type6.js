@@ -59,8 +59,12 @@ export class Circle {
     this.radius *= scalar;
   }
 
-  public contains(vector: Vector2): boolean {
-    return vector.getSquaredDistance(this.position) <= this.radius * this.radius;
+  public isIn(v: Vector2): boolean {
+    return v.getDistance(this.position, true) <= this.radius * this.radius;
+  }
+
+  public isOut(v: Vector2): boolean {
+    return v.getDistance(this.position, true) > this.radius * this.radius;
   }
 
   /**
