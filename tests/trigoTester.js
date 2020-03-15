@@ -12,13 +12,13 @@ window.onload = function() {
   findById('bn').innerHTML = normAnglesHtml;
   findById('cn').innerHTML = normAnglesHtml;
 
-  test(angles, 'test my sine',     '1', TYPE6JS.Trigonometry, 'sine');
+  test(angles, 'test my sine',     '1', Type6.Trigonometry, 'sine');
   test(angles, 'test math sine',   '2', Math, 'sin');
-  test(angles, 'test my cosine',   '3', TYPE6JS.Trigonometry, 'cosine');
+  test(angles, 'test my cosine',   '3', Type6.Trigonometry, 'cosine');
   test(angles, 'test math cosine', '4', Math, 'cos');
-  test(angles, 'test my arctan',   '5', TYPE6JS.Trigonometry, 'arctan');
+  test(angles, 'test my arctan',   '5', Type6.Trigonometry, 'arctan');
   test(angles, 'test math arctan', '6', Math, 'atan');
-  //test(angles, 'test my arctan2',   '5', TYPE6JS.Trigonometry, 'arctan2');
+  //test(angles, 'test my arctan2',   '5', Type6.Trigonometry, 'arctan2');
   //test(angles, 'test math arctan2', '6', Math, 'atan2');
 
 }
@@ -37,10 +37,10 @@ function test(angles, name, container, _this, callback){
 }
 
 function computeAngles(){
-  //var angle = TYPE6JS.Trigonometry.TWOPI * 2;
+  //var angle = Type6.Trigonometry.TWOPI * 2;
   var angles = [];
   //var dxdy = []
-  for(var i = -TYPE6JS.Trigonometry.TWOPI ; i <= TYPE6JS.Trigonometry.TWOPI ; i+=0.1){
+  for(var i = -Type6.Trigonometry.TWOPI ; i <= Type6.Trigonometry.TWOPI ; i+=0.1){
     angles.push(i);
   }
   return angles;
@@ -49,8 +49,8 @@ function computeAngles(){
 function computeNormAngles(){
   var angles = [];
   //var dxdy = []
-  for(var i = -TYPE6JS.Trigonometry.TWOPI ; i <= TYPE6JS.Trigonometry.TWOPI ; i+=0.1){
-    angles.push(TYPE6JS.Trigonometry.normalizeRadian(i));
+  for(var i = -Type6.Trigonometry.TWOPI ; i <= Type6.Trigonometry.TWOPI ; i+=0.1){
+    angles.push(Type6.Trigonometry.normalizeRadian(i));
   }
   return angles;
 }

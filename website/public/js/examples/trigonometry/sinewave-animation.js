@@ -1,1 +1,0 @@
-../../../../js/examples/trigonometry/sinewave-animation.js
