@@ -54,7 +54,7 @@ var Type6 = (function (exports) {
         Utils.mix = function (x, y, ratio) {
             return (1 - ratio) * x + ratio * y;
         };
-        Utils.sign = function (x) {
+        Utils.getSign = function (x) {
             return x ? x < 0 ? -1 : 1 : 0;
         };
         Utils.opposite = function (x) {
@@ -87,8 +87,11 @@ var Type6 = (function (exports) {
         Utils.isNegative = function (x) {
             return x < 0 ? true : false;
         };
-        Utils.contains = function (x, min, max) {
+        Utils.isIn = function (x, min, max) {
             return x >= min && x <= max;
+        };
+        Utils.isOut = function (x, min, max) {
+            return x < min || x > max;
         };
         return Utils;
     }();
@@ -332,7 +335,7 @@ var Type6 = (function (exports) {
         Vector2.prototype.isNegative = function () {
             return Utils.isNegative(this.x) && Utils.isNegative(this.y) ? true : false;
         };
-        Vector2.prototype.fromArray = function (array, offset) {
+        Vector2.prototype.setFromArray = function (array, offset) {
             if (offset === undefined) {
                 offset = 0;
             }
@@ -354,9 +357,9 @@ var Type6 = (function (exports) {
         Vector2.prototype.clone = function () {
             return new Vector2(this.x, this.y);
         };
-        Vector2.prototype.copy = function (vector2) {
-            this.x = vector2.x;
-            this.y = vector2.y;
+        Vector2.prototype.copy = function (v) {
+            this.x = v.x;
+            this.y = v.y;
             return this;
         };
         Vector2.prototype.origin = function () {
@@ -364,7 +367,7 @@ var Type6 = (function (exports) {
             this.y = 0.0;
             return this;
         };
-        Vector2.prototype.setAngle = function (angle) {
+        Vector2.prototype.setFromAngle = function (angle) {
             if (angle) {
                 var length_1 = this.getMagnitude();
                 this.x = Trigonometry.cosine(angle) * length_1;
@@ -375,23 +378,23 @@ var Type6 = (function (exports) {
         Vector2.prototype.getAngle = function () {
             return Math.atan2(this.y, this.x);
         };
-        Vector2.prototype.getMagnitude = function () {
-            return Math.sqrt(this.getSquaredMagnitude());
+        Vector2.prototype.getMagnitude = function (square) {
+            if (square === void 0) {
+                square = false;
+            }
+            return square ? this.getSquaredMagnitude() : Math.sqrt(this.getSquaredMagnitude());
         };
         Vector2.prototype.getSquaredMagnitude = function () {
             return this.x * this.x + this.y * this.y;
         };
-        Vector2.prototype.getDistance = function (vector2) {
-            this.subtract(vector2);
-            var magnitude = this.getMagnitude();
-            this.add(vector2);
+        Vector2.prototype.getDistance = function (v, square) {
+            if (square === void 0) {
+                square = false;
+            }
+            this.subtract(v);
+            var magnitude = this.getMagnitude(square);
+            this.add(v);
             return magnitude;
-        };
-        Vector2.prototype.getSquaredDistance = function (vector2) {
-            this.subtract(vector2);
-            var squaredMagnitude = this.getSquaredMagnitude();
-            this.add(vector2);
-            return squaredMagnitude;
         };
         Vector2.prototype.quadraticBezier = function (p0, p1, p2, t) {
             this.x = Bezier.quadratic(p0.x, p1.x, p2.x, t);
@@ -403,9 +406,9 @@ var Type6 = (function (exports) {
             this.y = Bezier.cubic(p0.y, p1.y, p2.y, p3.y, t);
             return this;
         };
-        Vector2.prototype.add = function (vector2) {
-            this.x += vector2.x;
-            this.y += vector2.y;
+        Vector2.prototype.add = function (v) {
+            this.x += v.x;
+            this.y += v.y;
             return this;
         };
         Vector2.prototype.addScalar = function (scalar) {
@@ -413,19 +416,14 @@ var Type6 = (function (exports) {
             this.y += scalar;
             return this;
         };
-        Vector2.prototype.addScaledVector = function (vector2, scalar) {
-            this.x += vector2.x * scalar;
-            this.y += vector2.y * scalar;
+        Vector2.prototype.addScaledVector = function (v, scalar) {
+            this.x += v.x * scalar;
+            this.y += v.y * scalar;
             return this;
         };
-        Vector2.prototype.addVectors = function (v1, v2) {
-            this.x = v1.x + v2.x;
-            this.y = v1.y + v2.y;
-            return this;
-        };
-        Vector2.prototype.subtract = function (vector2) {
-            this.x -= vector2.x;
-            this.y -= vector2.y;
+        Vector2.prototype.subtract = function (v) {
+            this.x -= v.x;
+            this.y -= v.y;
             return this;
         };
         Vector2.prototype.subtractScalar = function (scalar) {
@@ -433,14 +431,9 @@ var Type6 = (function (exports) {
             this.y -= scalar;
             return this;
         };
-        Vector2.prototype.subtractScaledVector = function (vector2, scalar) {
-            this.x -= vector2.x * scalar;
-            this.y -= vector2.y * scalar;
-            return this;
-        };
-        Vector2.prototype.subtractVectors = function (v1, v2) {
-            this.x = v1.x - v2.x;
-            this.y = v1.y - v2.y;
+        Vector2.prototype.subtractScaledVector = function (v, scalar) {
+            this.x -= v.x * scalar;
+            this.y -= v.y * scalar;
             return this;
         };
         Vector2.prototype.scale = function (value) {
@@ -448,39 +441,24 @@ var Type6 = (function (exports) {
             this.y *= value;
             return this;
         };
-        Vector2.prototype.scaleVector = function (v1, value) {
-            this.x = v1.x * value;
-            this.y = v1.y * value;
+        Vector2.prototype.multiply = function (v) {
+            this.x *= v.x;
+            this.y *= v.y;
             return this;
         };
-        Vector2.prototype.multiply = function (vector2) {
-            this.x *= vector2.x;
-            this.y *= vector2.y;
+        Vector2.prototype.multiplyScaledVector = function (v, scalar) {
+            this.x *= v.x * scalar;
+            this.y *= v.y * scalar;
             return this;
         };
-        Vector2.prototype.multiplyScaledVector = function (vector2, scalar) {
-            this.x *= vector2.x * scalar;
-            this.y *= vector2.y * scalar;
+        Vector2.prototype.divide = function (v) {
+            this.x /= v.x;
+            this.y /= v.y;
             return this;
         };
-        Vector2.prototype.multiplyVectors = function (v1, v2) {
-            this.x = v1.x * v2.x;
-            this.y = v1.y * v2.y;
-            return this;
-        };
-        Vector2.prototype.divide = function (vector2) {
-            this.x /= vector2.x;
-            this.y /= vector2.y;
-            return this;
-        };
-        Vector2.prototype.divideScaledVector = function (vector2, scalar) {
-            this.x /= vector2.x * scalar;
-            this.y /= vector2.y * scalar;
-            return this;
-        };
-        Vector2.prototype.divideVectors = function (v1, v2) {
-            this.x = v1.x / v2.x;
-            this.y = v1.y / v2.y;
+        Vector2.prototype.divideScaledVector = function (v, scalar) {
+            this.x /= v.x * scalar;
+            this.y /= v.y * scalar;
             return this;
         };
         Vector2.prototype.halve = function () {
@@ -488,14 +466,14 @@ var Type6 = (function (exports) {
             this.y *= 0.5;
             return this;
         };
-        Vector2.prototype.max = function (vector2) {
-            this.x = Math.max(this.x, vector2.x);
-            this.y = Math.max(this.y, vector2.y);
+        Vector2.prototype.max = function (v) {
+            this.x = Math.max(this.x, v.x);
+            this.y = Math.max(this.y, v.y);
             return this;
         };
-        Vector2.prototype.min = function (vector2) {
-            this.x = Math.min(this.x, vector2.x);
-            this.y = Math.min(this.y, vector2.y);
+        Vector2.prototype.min = function (v) {
+            this.x = Math.min(this.x, v.x);
+            this.y = Math.min(this.y, v.y);
             return this;
         };
         Vector2.prototype.maxScalar = function (scalar) {
@@ -508,10 +486,10 @@ var Type6 = (function (exports) {
             this.y = Math.min(this.y, scalar);
             return this;
         };
-        Vector2.prototype.maxAxis = function () {
+        Vector2.prototype.getMaxAxis = function () {
             return this.y > this.x ? 'y' : 'x';
         };
-        Vector2.prototype.minAxis = function () {
+        Vector2.prototype.getMinAxis = function () {
             return this.y < this.x ? 'y' : 'x';
         };
         Vector2.prototype.setOppositeAxis = function (axis, value) {
@@ -529,28 +507,14 @@ var Type6 = (function (exports) {
             }
             return this;
         };
-        Vector2.prototype.normalizeVector = function (v) {
-            this.copy(v);
-            return this.normalize();
-        };
         Vector2.prototype.absolute = function () {
             this.x = Math.abs(this.x);
             this.y = Math.abs(this.y);
             return this;
         };
-        Vector2.prototype.absoluteVector = function (v) {
-            this.x = Math.abs(v.x);
-            this.y = Math.abs(v.y);
-            return this;
-        };
         Vector2.prototype.opposite = function () {
             this.x = -this.x;
             this.y = -this.y;
-            return this;
-        };
-        Vector2.prototype.oppositeVector = function (v) {
-            this.x = -v.x;
-            this.y = -v.y;
             return this;
         };
         Vector2.prototype.clamp = function (rectangle) {
@@ -563,8 +527,8 @@ var Type6 = (function (exports) {
             this.y = Utils.lerp(normal, min.y, max.y);
             return this;
         };
-        Vector2.prototype.dotProduct = function (vector2) {
-            return this.x * vector2.x + this.y * vector2.y;
+        Vector2.prototype.dotProduct = function (v) {
+            return this.x * v.x + this.y * v.y;
         };
         return Vector2;
     }();
@@ -619,8 +583,11 @@ var Type6 = (function (exports) {
         Circle.prototype.scale = function (scalar) {
             this.radius *= scalar;
         };
-        Circle.prototype.contains = function (vector) {
-            return vector.getSquaredDistance(this.position) <= this.radius * this.radius;
+        Circle.prototype.isIn = function (v) {
+            return v.getDistance(this.position, true) <= this.radius * this.radius;
+        };
+        Circle.prototype.isOut = function (v) {
+            return v.getDistance(this.position, true) > this.radius * this.radius;
         };
         Circle.prototype.draw = function (context, fillColor, strokeColor, strokeWidth) {
             context.beginPath();
@@ -708,8 +675,8 @@ var Type6 = (function (exports) {
             this.halfSize.copy(this.size);
             this.halfSize.halve();
         };
-        Rectangle.prototype.contains = function (vector) {
-            return Utils.contains(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x) && Utils.contains(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y);
+        Rectangle.prototype.isIn = function (vector) {
+            return Utils.isIn(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x) && Utils.isIn(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y);
         };
         Rectangle.prototype.draw = function (context, fillColor, strokeColor, strokeWidth) {
             context.beginPath();
@@ -733,6 +700,18 @@ var Type6 = (function (exports) {
             this.y = y || 0.0;
             this.z = z || 0.0;
         }
+        Vector3.prototype.isOrigin = function () {
+            return Utils.isOrigin(this.x) && Utils.isOrigin(this.y) && Utils.isOrigin(this.z) ? true : false;
+        };
+        Vector3.prototype.isNotOrigin = function () {
+            return !Utils.isOrigin(this.x) || !Utils.isOrigin(this.y) || !Utils.isOrigin(this.z) ? true : false;
+        };
+        Vector3.prototype.isPositive = function () {
+            return Utils.isPositive(this.x) && Utils.isPositive(this.y) && Utils.isPositive(this.z) ? true : false;
+        };
+        Vector3.prototype.isNegative = function () {
+            return Utils.isNegative(this.x) && Utils.isNegative(this.y) && Utils.isNegative(this.z) ? true : false;
+        };
         Vector3.prototype.fromArray = function (array, offset) {
             if (offset === undefined) {
                 offset = 0;
@@ -757,10 +736,10 @@ var Type6 = (function (exports) {
         Vector3.prototype.clone = function () {
             return new Vector3(this.x, this.y, this.z);
         };
-        Vector3.prototype.copy = function (vector3) {
-            this.x = vector3.x;
-            this.y = vector3.y;
-            this.z = vector3.z;
+        Vector3.prototype.copy = function (v) {
+            this.x = v.x;
+            this.y = v.y;
+            this.z = v.z;
             return this;
         };
         Vector3.prototype.origin = function () {
@@ -769,28 +748,28 @@ var Type6 = (function (exports) {
             this.z = 0.0;
             return this;
         };
-        Vector3.prototype.getMagnitude = function () {
-            return Math.sqrt(this.getSquaredMagnitude());
+        Vector3.prototype.getMagnitude = function (square) {
+            if (square === void 0) {
+                square = false;
+            }
+            return square ? this.getSquaredMagnitude() : Math.sqrt(this.getSquaredMagnitude());
         };
         Vector3.prototype.getSquaredMagnitude = function () {
             return this.x * this.x + this.y * this.y + this.z * this.z;
         };
-        Vector3.prototype.getDistance = function (vector3) {
-            this.subtract(vector3);
-            var magnitude = this.getMagnitude();
-            this.add(vector3);
+        Vector3.prototype.getDistance = function (v, square) {
+            if (square === void 0) {
+                square = false;
+            }
+            this.subtract(v);
+            var magnitude = this.getMagnitude(square);
+            this.add(v);
             return magnitude;
         };
-        Vector3.prototype.getSquaredDistance = function (vector3) {
-            this.subtract(vector3);
-            var squaredMagnitude = this.getSquaredMagnitude();
-            this.add(vector3);
-            return squaredMagnitude;
-        };
-        Vector3.prototype.add = function (vector3) {
-            this.x += vector3.x;
-            this.y += vector3.y;
-            this.z += vector3.z;
+        Vector3.prototype.add = function (v) {
+            this.x += v.x;
+            this.y += v.y;
+            this.z += v.z;
             return this;
         };
         Vector3.prototype.addScalar = function (scalar) {
@@ -799,22 +778,16 @@ var Type6 = (function (exports) {
             this.z += scalar;
             return this;
         };
-        Vector3.prototype.addScaledVector = function (vector3, scalar) {
-            this.x += vector3.x * scalar;
-            this.y += vector3.y * scalar;
-            this.z += vector3.z * scalar;
+        Vector3.prototype.addScaledVector = function (v, scalar) {
+            this.x += v.x * scalar;
+            this.y += v.y * scalar;
+            this.z += v.z * scalar;
             return this;
         };
-        Vector3.prototype.addVectors = function (v1, v2) {
-            this.x = v1.x + v2.x;
-            this.y = v1.y + v2.y;
-            this.z = v1.z + v2.z;
-            return this;
-        };
-        Vector3.prototype.subtract = function (vector3) {
-            this.x -= vector3.x;
-            this.y -= vector3.y;
-            this.z -= vector3.z;
+        Vector3.prototype.subtract = function (v) {
+            this.x -= v.x;
+            this.y -= v.y;
+            this.z -= v.z;
             return this;
         };
         Vector3.prototype.subtractScalar = function (scalar) {
@@ -823,16 +796,10 @@ var Type6 = (function (exports) {
             this.z -= scalar;
             return this;
         };
-        Vector3.prototype.subtractScaledVector = function (vector3, scalar) {
-            this.x -= vector3.x * scalar;
-            this.y -= vector3.y * scalar;
-            this.z -= vector3.z * scalar;
-            return this;
-        };
-        Vector3.prototype.subtractVectors = function (v1, v2) {
-            this.x = v1.x - v2.x;
-            this.y = v1.y - v2.y;
-            this.z = v1.z - v2.z;
+        Vector3.prototype.subtractScaledVector = function (v, scalar) {
+            this.x -= v.x * scalar;
+            this.y -= v.y * scalar;
+            this.z -= v.z * scalar;
             return this;
         };
         Vector3.prototype.scale = function (value) {
@@ -841,40 +808,28 @@ var Type6 = (function (exports) {
             this.z *= value;
             return this;
         };
-        Vector3.prototype.multiply = function (vector3) {
-            this.x *= vector3.x;
-            this.y *= vector3.y;
-            this.z *= vector3.z;
+        Vector3.prototype.multiply = function (v) {
+            this.x *= v.x;
+            this.y *= v.y;
+            this.z *= v.z;
             return this;
         };
-        Vector3.prototype.multiplyScaledVector = function (vector3, scalar) {
-            this.x *= vector3.x * scalar;
-            this.y *= vector3.y * scalar;
-            this.z *= vector3.z * scalar;
+        Vector3.prototype.multiplyScaledVector = function (v, scalar) {
+            this.x *= v.x * scalar;
+            this.y *= v.y * scalar;
+            this.z *= v.z * scalar;
             return this;
         };
-        Vector3.prototype.multiplyVectors = function (v1, v2) {
-            this.x = v1.x * v2.x;
-            this.y = v1.y * v2.y;
-            this.z = v1.z * v2.z;
+        Vector3.prototype.divide = function (v) {
+            this.x /= v.x;
+            this.y /= v.y;
+            this.z /= v.z;
             return this;
         };
-        Vector3.prototype.divide = function (vector3) {
-            this.x /= vector3.x;
-            this.y /= vector3.y;
-            this.z /= vector3.z;
-            return this;
-        };
-        Vector3.prototype.divideScaledVector = function (vector3, scalar) {
-            this.x /= vector3.x * scalar;
-            this.y /= vector3.y * scalar;
-            this.z /= vector3.z * scalar;
-            return this;
-        };
-        Vector3.prototype.divideVectors = function (v1, v2) {
-            this.x = v1.x / v2.x;
-            this.y = v1.y / v2.y;
-            this.z = v1.z / v2.z;
+        Vector3.prototype.divideScaledVector = function (v, scalar) {
+            this.x /= v.x * scalar;
+            this.y /= v.y * scalar;
+            this.z /= v.z * scalar;
             return this;
         };
         Vector3.prototype.halve = function () {
@@ -883,16 +838,16 @@ var Type6 = (function (exports) {
             this.z *= 0.5;
             return this;
         };
-        Vector3.prototype.max = function (vector3) {
-            this.x = Math.max(this.x, vector3.x);
-            this.y = Math.max(this.y, vector3.y);
-            this.z = Math.max(this.z, vector3.z);
+        Vector3.prototype.max = function (v) {
+            this.x = Math.max(this.x, v.x);
+            this.y = Math.max(this.y, v.y);
+            this.z = Math.max(this.z, v.z);
             return this;
         };
-        Vector3.prototype.min = function (vector3) {
-            this.x = Math.min(this.x, vector3.x);
-            this.y = Math.min(this.y, vector3.y);
-            this.z = Math.min(this.z, vector3.z);
+        Vector3.prototype.min = function (v) {
+            this.x = Math.min(this.x, v.x);
+            this.y = Math.min(this.y, v.y);
+            this.z = Math.min(this.z, v.z);
             return this;
         };
         Vector3.prototype.maxScalar = function (scalar) {
@@ -914,28 +869,16 @@ var Type6 = (function (exports) {
             }
             return this;
         };
-        Vector3.prototype.dotProduct = function (vector3) {
-            return this.x * vector3.x + this.y * vector3.y + this.z * vector3.z;
+        Vector3.prototype.dotProduct = function (v) {
+            return this.x * v.x + this.y * v.y + this.z * v.z;
         };
-        Vector3.prototype.cross = function (vector3) {
+        Vector3.prototype.cross = function (v) {
             var x = this.x,
                 y = this.y,
                 z = this.z;
-            this.x = y * vector3.z - z * vector3.y;
-            this.y = z * vector3.x - x * vector3.z;
-            this.z = x * vector3.y - y * vector3.x;
-            return this;
-        };
-        Vector3.prototype.crossVectors = function (v1, v2) {
-            var v1x = v1.x,
-                v1y = v1.y,
-                v1z = v1.z;
-            var v2x = v2.x,
-                v2y = v2.y,
-                v2z = v2.z;
-            this.x = v1y * v2z - v1z * v2y;
-            this.y = v1z * v2x - v1x * v2z;
-            this.z = v1x * v2y - v1y * v2x;
+            this.x = y * v.z - z * v.y;
+            this.y = z * v.x - x * v.z;
+            this.z = x * v.y - y * v.x;
             return this;
         };
         return Vector3;

@@ -33,7 +33,7 @@ export declare class Bezier {
     static quadratic(p0: number, p1: number, p2: number, t: number): number;
     static cubic(p0: number, p1: number, p2: number, p3: number, t: number): number;
 }
-
+import { Vector2 } from '../vectors/vector2';
 export declare class Circle {
     position: Vector2;
     private _radius;
@@ -48,11 +48,12 @@ export declare class Circle {
     setPositionXY(positionX: number, positionY: number): void;
     setPositionFromVector(position: Vector2): void;
     scale(scalar: number): void;
-    contains(vector: Vector2): boolean;
+    isIn(v: Vector2): boolean;
+    isOut(v: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
-
-
+import { AxisNames2d } from '../types';
+import { Vector2 } from '../vectors/vector2';
 export declare class Rectangle {
     position: Vector2;
     topLeftCorner: Vector2;
@@ -76,10 +77,10 @@ export declare class Rectangle {
     setSizeFromVector(size: Vector2): void;
     private setCorners;
     private setHalfSize;
-    contains(vector: Vector2): boolean;
+    isIn(vector: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
-
+import { Vector3 } from '../vectors/vector3';
 export declare class Matrix4x3 {
     private m;
     private xAxis;
@@ -99,7 +100,7 @@ export declare class Matrix4x3 {
     multiply(matrix4x3: Matrix4x3): Matrix4x3;
     lookAtRH(eye: Vector3, target: Vector3, up: Vector3): Matrix4x3;
 }
-
+import { Vector3 } from '../vectors/vector3';
 export declare class Matrix4x4 {
     private m;
     constructor(x1?: number, x2?: number, x3?: number, x4?: number, y1?: number, y2?: number, y3?: number, y4?: number, z1?: number, z2?: number, z3?: number, z4?: number, t1?: number, t2?: number, t3?: number, t4?: number);
@@ -129,7 +130,7 @@ export declare class Time {
     static millisecondToFramePerSecond(millisecond: number): number;
     static framePerSecondToMillisecond(refreshRate: number): number;
 }
-
+import { Vector2 } from './vectors/vector2';
 export declare class Trigonometry {
     static readonly sineLoops: number[];
     static readonly cosineLoops: number[];
@@ -161,19 +162,19 @@ export declare class Trigonometry {
     static arctanEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;
     private static taylorSerie;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
+export { Trigonometry } from './trigonometry';
+export { Utils } from './utils';
+export { Time } from './time';
+export { Random } from './random';
+export { NumArray } from './array';
+export { Bezier } from './bezier';
+export { Circle } from './geometry/circle';
+export { Rectangle } from './geometry/rectangle';
+export { Vector2 } from './vectors/vector2';
+export { Vector3 } from './vectors/vector3';
+export { Matrix4x3 } from './matrices/matrix4x3';
+export { Matrix4x4 } from './matrices/matrix4x4';
+export { AxisNames2d, AxisNames3d } from './types';
 export declare type AxisNames2d = 'x' | 'y';
 export declare type AxisNames3d = AxisNames2d & 'z';
 export declare class Utils {
@@ -183,7 +184,7 @@ export declare class Utils {
     static trunc(x: number, decimals: number): number;
     static roundToNearest(x: number, nearest: number): number;
     static mix(x: number, y: number, ratio: number): number;
-    static sign(x: number): number;
+    static getSign(x: number): number;
     static opposite(x: number): number;
     static clamp(x: number, min: number, max: number): number;
     static normalize(x: number, min: number, max: number): number;
@@ -194,10 +195,11 @@ export declare class Utils {
     static isOrigin(x: number): boolean;
     static isPositive(x: number): boolean;
     static isNegative(x: number): boolean;
-    static contains(x: number, min: number, max: number): boolean;
+    static isIn(x: number, min: number, max: number): boolean;
+    static isOut(x: number, min: number, max: number): boolean;
 }
-
-
+import { AxisNames2d } from '../types';
+import { Rectangle } from '../geometry/rectangle';
 export declare class Vector2 {
     x: number;
     y: number;
@@ -206,54 +208,45 @@ export declare class Vector2 {
     isNotOrigin(): boolean;
     isPositive(): boolean;
     isNegative(): boolean;
-    fromArray(array: number[], offset?: number): Vector2;
+    setFromArray(array: number[], offset?: number): Vector2;
     toArray(): number[];
     toString(): string;
     set(x: number, y: number): Vector2;
     clone(): Vector2;
-    copy(vector2: Vector2): Vector2;
+    copy(v: Vector2): Vector2;
     origin(): Vector2;
-    setAngle(angle: number): Vector2;
+    setFromAngle(angle: number): Vector2;
     getAngle(): number;
-    getMagnitude(): number;
-    getSquaredMagnitude(): number;
-    getDistance(vector2: Vector2): number;
-    getSquaredDistance(vector2: Vector2): number;
+    getMagnitude(square?: boolean): number;
+    private getSquaredMagnitude;
+    getDistance(v: Vector2, square?: boolean): number;
     quadraticBezier(p0: Vector2, p1: Vector2, p2: Vector2, t: number): Vector2;
     cubicBezier(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: number): Vector2;
-    add(vector2: Vector2): Vector2;
+    add(v: Vector2): Vector2;
     addScalar(scalar: number): Vector2;
-    addScaledVector(vector2: Vector2, scalar: number): Vector2;
-    addVectors(v1: Vector2, v2: Vector2): Vector2;
-    subtract(vector2: Vector2): Vector2;
+    addScaledVector(v: Vector2, scalar: number): Vector2;
+    subtract(v: Vector2): Vector2;
     subtractScalar(scalar: number): Vector2;
-    subtractScaledVector(vector2: Vector2, scalar: number): Vector2;
-    subtractVectors(v1: Vector2, v2: Vector2): Vector2;
+    subtractScaledVector(v: Vector2, scalar: number): Vector2;
     scale(value: number): Vector2;
-    scaleVector(v1: Vector2, value: number): Vector2;
-    multiply(vector2: Vector2): Vector2;
-    multiplyScaledVector(vector2: Vector2, scalar: number): Vector2;
-    multiplyVectors(v1: Vector2, v2: Vector2): Vector2;
-    divide(vector2: Vector2): Vector2;
-    divideScaledVector(vector2: Vector2, scalar: number): Vector2;
-    divideVectors(v1: Vector2, v2: Vector2): Vector2;
+    multiply(v: Vector2): Vector2;
+    multiplyScaledVector(v: Vector2, scalar: number): Vector2;
+    divide(v: Vector2): Vector2;
+    divideScaledVector(v: Vector2, scalar: number): Vector2;
     halve(): Vector2;
-    max(vector2: Vector2): Vector2;
-    min(vector2: Vector2): Vector2;
+    max(v: Vector2): Vector2;
+    min(v: Vector2): Vector2;
     maxScalar(scalar: number): Vector2;
     minScalar(scalar: number): Vector2;
-    maxAxis(): AxisNames2d;
-    minAxis(): AxisNames2d;
+    getMaxAxis(): AxisNames2d;
+    getMinAxis(): AxisNames2d;
     setOppositeAxis(axis: AxisNames2d, value: number): Vector2;
     normalize(): Vector2;
-    normalizeVector(v: Vector2): Vector2;
     absolute(): Vector2;
-    absoluteVector(v: Vector2): Vector2;
     opposite(): Vector2;
-    oppositeVector(v: Vector2): Vector2;
     clamp(rectangle: Rectangle): Vector2;
     lerp(normal: number, min: Vector2, max: Vector2): Vector2;
-    dotProduct(vector2: Vector2): number;
+    dotProduct(v: Vector2): number;
 }
 export interface Vector3 {
     [key: string]: any;
@@ -263,39 +256,37 @@ export declare class Vector3 {
     y: number;
     z: number;
     constructor(x?: number, y?: number, z?: number);
+    isOrigin(): boolean;
+    isNotOrigin(): boolean;
+    isPositive(): boolean;
+    isNegative(): boolean;
     fromArray(array: number[], offset?: number): Vector3;
     toArray(): number[];
     toString(): string;
     set(x: number, y: number, z: number): Vector3;
     clone(): Vector3;
-    copy(vector3: Vector3): Vector3;
+    copy(v: Vector3): Vector3;
     origin(): Vector3;
-    getMagnitude(): number;
-    getSquaredMagnitude(): number;
-    getDistance(vector3: Vector3): number;
-    getSquaredDistance(vector3: Vector3): number;
-    add(vector3: Vector3): Vector3;
+    getMagnitude(square?: boolean): number;
+    private getSquaredMagnitude;
+    getDistance(v: Vector3, square?: boolean): number;
+    add(v: Vector3): Vector3;
     addScalar(scalar: number): Vector3;
-    addScaledVector(vector3: Vector3, scalar: number): Vector3;
-    addVectors(v1: Vector3, v2: Vector3): Vector3;
-    subtract(vector3: Vector3): Vector3;
+    addScaledVector(v: Vector3, scalar: number): Vector3;
+    subtract(v: Vector3): Vector3;
     subtractScalar(scalar: number): Vector3;
-    subtractScaledVector(vector3: Vector3, scalar: number): Vector3;
-    subtractVectors(v1: Vector3, v2: Vector3): Vector3;
+    subtractScaledVector(v: Vector3, scalar: number): Vector3;
     scale(value: number): Vector3;
-    multiply(vector3: Vector3): Vector3;
-    multiplyScaledVector(vector3: Vector3, scalar: number): Vector3;
-    multiplyVectors(v1: Vector3, v2: Vector3): Vector3;
-    divide(vector3: Vector3): Vector3;
-    divideScaledVector(vector3: Vector3, scalar: number): Vector3;
-    divideVectors(v1: Vector3, v2: Vector3): Vector3;
+    multiply(v: Vector3): Vector3;
+    multiplyScaledVector(v: Vector3, scalar: number): Vector3;
+    divide(v: Vector3): Vector3;
+    divideScaledVector(v: Vector3, scalar: number): Vector3;
     halve(): Vector3;
-    max(vector3: Vector3): Vector3;
-    min(vector3: Vector3): Vector3;
+    max(v: Vector3): Vector3;
+    min(v: Vector3): Vector3;
     maxScalar(scalar: number): Vector3;
     minScalar(scalar: number): Vector3;
     normalize(): Vector3;
-    dotProduct(vector3: Vector3): number;
-    cross(vector3: Vector3): Vector3;
-    crossVectors(v1: Vector3, v2: Vector3): Vector3;
+    dotProduct(v: Vector3): number;
+    cross(v: Vector3): Vector3;
 }

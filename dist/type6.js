@@ -50,7 +50,7 @@ class Utils {
     static mix(x, y, ratio) {
         return (1 - ratio) * x + ratio * y;
     }
-    static sign(x) {
+    static getSign(x) {
         return x ? x < 0 ? -1 : 1 : 0;
     }
     static opposite(x) {
@@ -83,8 +83,11 @@ class Utils {
     static isNegative(x) {
         return x < 0 ? true : false;
     }
-    static contains(x, min, max) {
+    static isIn(x, min, max) {
         return x >= min && x <= max;
+    }
+    static isOut(x, min, max) {
+        return x < min || x > max;
     }
 }
 
@@ -357,7 +360,7 @@ class Vector2 {
     isNegative() {
         return (Utils.isNegative(this.x) && Utils.isNegative(this.y)) ? true : false;
     }
-    fromArray(array, offset) {
+    setFromArray(array, offset) {
         if (offset === undefined) {
             offset = 0;
         }
@@ -379,9 +382,9 @@ class Vector2 {
     clone() {
         return new Vector2(this.x, this.y);
     }
-    copy(vector2) {
-        this.x = vector2.x;
-        this.y = vector2.y;
+    copy(v) {
+        this.x = v.x;
+        this.y = v.y;
         return this;
     }
     origin() {
@@ -389,7 +392,7 @@ class Vector2 {
         this.y = 0.0;
         return this;
     }
-    setAngle(angle) {
+    setFromAngle(angle) {
         if (angle) {
             let length = this.getMagnitude();
             this.x = Trigonometry.cosine(angle) * length;
@@ -400,23 +403,17 @@ class Vector2 {
     getAngle() {
         return Math.atan2(this.y, this.x);
     }
-    getMagnitude() {
-        return Math.sqrt(this.getSquaredMagnitude());
+    getMagnitude(square = false) {
+        return square ? this.getSquaredMagnitude() : Math.sqrt(this.getSquaredMagnitude());
     }
     getSquaredMagnitude() {
         return this.x * this.x + this.y * this.y;
     }
-    getDistance(vector2) {
-        this.subtract(vector2);
-        let magnitude = this.getMagnitude();
-        this.add(vector2);
+    getDistance(v, square = false) {
+        this.subtract(v);
+        const magnitude = this.getMagnitude(square);
+        this.add(v);
         return magnitude;
-    }
-    getSquaredDistance(vector2) {
-        this.subtract(vector2);
-        let squaredMagnitude = this.getSquaredMagnitude();
-        this.add(vector2);
-        return squaredMagnitude;
     }
     quadraticBezier(p0, p1, p2, t) {
         this.x = Bezier.quadratic(p0.x, p1.x, p2.x, t);
@@ -428,9 +425,9 @@ class Vector2 {
         this.y = Bezier.cubic(p0.y, p1.y, p2.y, p3.y, t);
         return this;
     }
-    add(vector2) {
-        this.x += vector2.x;
-        this.y += vector2.y;
+    add(v) {
+        this.x += v.x;
+        this.y += v.y;
         return this;
     }
     addScalar(scalar) {
@@ -438,19 +435,14 @@ class Vector2 {
         this.y += scalar;
         return this;
     }
-    addScaledVector(vector2, scalar) {
-        this.x += vector2.x * scalar;
-        this.y += vector2.y * scalar;
+    addScaledVector(v, scalar) {
+        this.x += v.x * scalar;
+        this.y += v.y * scalar;
         return this;
     }
-    addVectors(v1, v2) {
-        this.x = v1.x + v2.x;
-        this.y = v1.y + v2.y;
-        return this;
-    }
-    subtract(vector2) {
-        this.x -= vector2.x;
-        this.y -= vector2.y;
+    subtract(v) {
+        this.x -= v.x;
+        this.y -= v.y;
         return this;
     }
     subtractScalar(scalar) {
@@ -458,14 +450,9 @@ class Vector2 {
         this.y -= scalar;
         return this;
     }
-    subtractScaledVector(vector2, scalar) {
-        this.x -= vector2.x * scalar;
-        this.y -= vector2.y * scalar;
-        return this;
-    }
-    subtractVectors(v1, v2) {
-        this.x = v1.x - v2.x;
-        this.y = v1.y - v2.y;
+    subtractScaledVector(v, scalar) {
+        this.x -= v.x * scalar;
+        this.y -= v.y * scalar;
         return this;
     }
     scale(value) {
@@ -473,39 +460,24 @@ class Vector2 {
         this.y *= value;
         return this;
     }
-    scaleVector(v1, value) {
-        this.x = v1.x * value;
-        this.y = v1.y * value;
+    multiply(v) {
+        this.x *= v.x;
+        this.y *= v.y;
         return this;
     }
-    multiply(vector2) {
-        this.x *= vector2.x;
-        this.y *= vector2.y;
+    multiplyScaledVector(v, scalar) {
+        this.x *= v.x * scalar;
+        this.y *= v.y * scalar;
         return this;
     }
-    multiplyScaledVector(vector2, scalar) {
-        this.x *= vector2.x * scalar;
-        this.y *= vector2.y * scalar;
+    divide(v) {
+        this.x /= v.x;
+        this.y /= v.y;
         return this;
     }
-    multiplyVectors(v1, v2) {
-        this.x = v1.x * v2.x;
-        this.y = v1.y * v2.y;
-        return this;
-    }
-    divide(vector2) {
-        this.x /= vector2.x;
-        this.y /= vector2.y;
-        return this;
-    }
-    divideScaledVector(vector2, scalar) {
-        this.x /= vector2.x * scalar;
-        this.y /= vector2.y * scalar;
-        return this;
-    }
-    divideVectors(v1, v2) {
-        this.x = v1.x / v2.x;
-        this.y = v1.y / v2.y;
+    divideScaledVector(v, scalar) {
+        this.x /= v.x * scalar;
+        this.y /= v.y * scalar;
         return this;
     }
     halve() {
@@ -513,14 +485,14 @@ class Vector2 {
         this.y *= 0.5;
         return this;
     }
-    max(vector2) {
-        this.x = Math.max(this.x, vector2.x);
-        this.y = Math.max(this.y, vector2.y);
+    max(v) {
+        this.x = Math.max(this.x, v.x);
+        this.y = Math.max(this.y, v.y);
         return this;
     }
-    min(vector2) {
-        this.x = Math.min(this.x, vector2.x);
-        this.y = Math.min(this.y, vector2.y);
+    min(v) {
+        this.x = Math.min(this.x, v.x);
+        this.y = Math.min(this.y, v.y);
         return this;
     }
     maxScalar(scalar) {
@@ -533,10 +505,10 @@ class Vector2 {
         this.y = Math.min(this.y, scalar);
         return this;
     }
-    maxAxis() {
+    getMaxAxis() {
         return (this.y > this.x) ? 'y' : 'x';
     }
-    minAxis() {
+    getMinAxis() {
         return (this.y < this.x) ? 'y' : 'x';
     }
     setOppositeAxis(axis, value) {
@@ -555,28 +527,14 @@ class Vector2 {
         }
         return this;
     }
-    normalizeVector(v) {
-        this.copy(v);
-        return this.normalize();
-    }
     absolute() {
         this.x = Math.abs(this.x);
         this.y = Math.abs(this.y);
         return this;
     }
-    absoluteVector(v) {
-        this.x = Math.abs(v.x);
-        this.y = Math.abs(v.y);
-        return this;
-    }
     opposite() {
         this.x = -this.x;
         this.y = -this.y;
-        return this;
-    }
-    oppositeVector(v) {
-        this.x = -v.x;
-        this.y = -v.y;
         return this;
     }
     clamp(rectangle) {
@@ -589,8 +547,8 @@ class Vector2 {
         this.y = Utils.lerp(normal, min.y, max.y);
         return this;
     }
-    dotProduct(vector2) {
-        return this.x * vector2.x + this.y * vector2.y;
+    dotProduct(v) {
+        return this.x * v.x + this.y * v.y;
     }
 }
 
@@ -636,8 +594,11 @@ class Circle {
     scale(scalar) {
         this.radius *= scalar;
     }
-    contains(vector) {
-        return vector.getSquaredDistance(this.position) <= this.radius * this.radius;
+    isIn(v) {
+        return v.getDistance(this.position, true) <= this.radius * this.radius;
+    }
+    isOut(v) {
+        return v.getDistance(this.position, true) > this.radius * this.radius;
     }
     draw(context, fillColor, strokeColor, strokeWidth) {
         context.beginPath();
@@ -724,9 +685,9 @@ class Rectangle {
         this.halfSize.copy(this.size);
         this.halfSize.halve();
     }
-    contains(vector) {
-        return (Utils.contains(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x)
-            && Utils.contains(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y));
+    isIn(vector) {
+        return (Utils.isIn(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x)
+            && Utils.isIn(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y));
     }
     draw(context, fillColor, strokeColor, strokeWidth) {
         context.beginPath();
@@ -748,6 +709,18 @@ class Vector3 {
         this.x = x || 0.0;
         this.y = y || 0.0;
         this.z = z || 0.0;
+    }
+    isOrigin() {
+        return (Utils.isOrigin(this.x) && Utils.isOrigin(this.y) && Utils.isOrigin(this.z)) ? true : false;
+    }
+    isNotOrigin() {
+        return (!Utils.isOrigin(this.x) || !Utils.isOrigin(this.y) || !Utils.isOrigin(this.z)) ? true : false;
+    }
+    isPositive() {
+        return (Utils.isPositive(this.x) && Utils.isPositive(this.y) && Utils.isPositive(this.z)) ? true : false;
+    }
+    isNegative() {
+        return (Utils.isNegative(this.x) && Utils.isNegative(this.y) && Utils.isNegative(this.z)) ? true : false;
     }
     fromArray(array, offset) {
         if (offset === undefined) {
@@ -773,10 +746,10 @@ class Vector3 {
     clone() {
         return new Vector3(this.x, this.y, this.z);
     }
-    copy(vector3) {
-        this.x = vector3.x;
-        this.y = vector3.y;
-        this.z = vector3.z;
+    copy(v) {
+        this.x = v.x;
+        this.y = v.y;
+        this.z = v.z;
         return this;
     }
     origin() {
@@ -785,28 +758,22 @@ class Vector3 {
         this.z = 0.0;
         return this;
     }
-    getMagnitude() {
-        return Math.sqrt(this.getSquaredMagnitude());
+    getMagnitude(square = false) {
+        return square ? this.getSquaredMagnitude() : Math.sqrt(this.getSquaredMagnitude());
     }
     getSquaredMagnitude() {
         return this.x * this.x + this.y * this.y + this.z * this.z;
     }
-    getDistance(vector3) {
-        this.subtract(vector3);
-        let magnitude = this.getMagnitude();
-        this.add(vector3);
+    getDistance(v, square = false) {
+        this.subtract(v);
+        const magnitude = this.getMagnitude(square);
+        this.add(v);
         return magnitude;
     }
-    getSquaredDistance(vector3) {
-        this.subtract(vector3);
-        let squaredMagnitude = this.getSquaredMagnitude();
-        this.add(vector3);
-        return squaredMagnitude;
-    }
-    add(vector3) {
-        this.x += vector3.x;
-        this.y += vector3.y;
-        this.z += vector3.z;
+    add(v) {
+        this.x += v.x;
+        this.y += v.y;
+        this.z += v.z;
         return this;
     }
     addScalar(scalar) {
@@ -815,22 +782,16 @@ class Vector3 {
         this.z += scalar;
         return this;
     }
-    addScaledVector(vector3, scalar) {
-        this.x += vector3.x * scalar;
-        this.y += vector3.y * scalar;
-        this.z += vector3.z * scalar;
+    addScaledVector(v, scalar) {
+        this.x += v.x * scalar;
+        this.y += v.y * scalar;
+        this.z += v.z * scalar;
         return this;
     }
-    addVectors(v1, v2) {
-        this.x = v1.x + v2.x;
-        this.y = v1.y + v2.y;
-        this.z = v1.z + v2.z;
-        return this;
-    }
-    subtract(vector3) {
-        this.x -= vector3.x;
-        this.y -= vector3.y;
-        this.z -= vector3.z;
+    subtract(v) {
+        this.x -= v.x;
+        this.y -= v.y;
+        this.z -= v.z;
         return this;
     }
     subtractScalar(scalar) {
@@ -839,16 +800,10 @@ class Vector3 {
         this.z -= scalar;
         return this;
     }
-    subtractScaledVector(vector3, scalar) {
-        this.x -= vector3.x * scalar;
-        this.y -= vector3.y * scalar;
-        this.z -= vector3.z * scalar;
-        return this;
-    }
-    subtractVectors(v1, v2) {
-        this.x = v1.x - v2.x;
-        this.y = v1.y - v2.y;
-        this.z = v1.z - v2.z;
+    subtractScaledVector(v, scalar) {
+        this.x -= v.x * scalar;
+        this.y -= v.y * scalar;
+        this.z -= v.z * scalar;
         return this;
     }
     scale(value) {
@@ -857,40 +812,28 @@ class Vector3 {
         this.z *= value;
         return this;
     }
-    multiply(vector3) {
-        this.x *= vector3.x;
-        this.y *= vector3.y;
-        this.z *= vector3.z;
+    multiply(v) {
+        this.x *= v.x;
+        this.y *= v.y;
+        this.z *= v.z;
         return this;
     }
-    multiplyScaledVector(vector3, scalar) {
-        this.x *= vector3.x * scalar;
-        this.y *= vector3.y * scalar;
-        this.z *= vector3.z * scalar;
+    multiplyScaledVector(v, scalar) {
+        this.x *= v.x * scalar;
+        this.y *= v.y * scalar;
+        this.z *= v.z * scalar;
         return this;
     }
-    multiplyVectors(v1, v2) {
-        this.x = v1.x * v2.x;
-        this.y = v1.y * v2.y;
-        this.z = v1.z * v2.z;
+    divide(v) {
+        this.x /= v.x;
+        this.y /= v.y;
+        this.z /= v.z;
         return this;
     }
-    divide(vector3) {
-        this.x /= vector3.x;
-        this.y /= vector3.y;
-        this.z /= vector3.z;
-        return this;
-    }
-    divideScaledVector(vector3, scalar) {
-        this.x /= vector3.x * scalar;
-        this.y /= vector3.y * scalar;
-        this.z /= vector3.z * scalar;
-        return this;
-    }
-    divideVectors(v1, v2) {
-        this.x = v1.x / v2.x;
-        this.y = v1.y / v2.y;
-        this.z = v1.z / v2.z;
+    divideScaledVector(v, scalar) {
+        this.x /= v.x * scalar;
+        this.y /= v.y * scalar;
+        this.z /= v.z * scalar;
         return this;
     }
     halve() {
@@ -899,16 +842,16 @@ class Vector3 {
         this.z *= 0.5;
         return this;
     }
-    max(vector3) {
-        this.x = Math.max(this.x, vector3.x);
-        this.y = Math.max(this.y, vector3.y);
-        this.z = Math.max(this.z, vector3.z);
+    max(v) {
+        this.x = Math.max(this.x, v.x);
+        this.y = Math.max(this.y, v.y);
+        this.z = Math.max(this.z, v.z);
         return this;
     }
-    min(vector3) {
-        this.x = Math.min(this.x, vector3.x);
-        this.y = Math.min(this.y, vector3.y);
-        this.z = Math.min(this.z, vector3.z);
+    min(v) {
+        this.x = Math.min(this.x, v.x);
+        this.y = Math.min(this.y, v.y);
+        this.z = Math.min(this.z, v.z);
         return this;
     }
     maxScalar(scalar) {
@@ -930,22 +873,14 @@ class Vector3 {
         }
         return this;
     }
-    dotProduct(vector3) {
-        return this.x * vector3.x + this.y * vector3.y + this.z * vector3.z;
+    dotProduct(v) {
+        return this.x * v.x + this.y * v.y + this.z * v.z;
     }
-    cross(vector3) {
+    cross(v) {
         let x = this.x, y = this.y, z = this.z;
-        this.x = y * vector3.z - z * vector3.y;
-        this.y = z * vector3.x - x * vector3.z;
-        this.z = x * vector3.y - y * vector3.x;
-        return this;
-    }
-    crossVectors(v1, v2) {
-        let v1x = v1.x, v1y = v1.y, v1z = v1.z;
-        let v2x = v2.x, v2y = v2.y, v2z = v2.z;
-        this.x = v1y * v2z - v1z * v2y;
-        this.y = v1z * v2x - v1x * v2z;
-        this.z = v1x * v2y - v1y * v2x;
+        this.x = y * v.z - z * v.y;
+        this.y = z * v.x - x * v.z;
+        this.z = x * v.y - y * v.x;
         return this;
     }
 }
