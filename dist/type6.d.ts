@@ -33,7 +33,7 @@ export declare class Bezier {
     static quadratic(p0: number, p1: number, p2: number, t: number): number;
     static cubic(p0: number, p1: number, p2: number, p3: number, t: number): number;
 }
-import { Vector2 } from '../vectors/vector2';
+
 export declare class Circle {
     position: Vector2;
     private _radius;
@@ -52,8 +52,8 @@ export declare class Circle {
     isOut(v: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
-import { AxisNames2d } from '../types';
-import { Vector2 } from '../vectors/vector2';
+
+
 export declare class Rectangle {
     position: Vector2;
     topLeftCorner: Vector2;
@@ -80,7 +80,7 @@ export declare class Rectangle {
     isIn(vector: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
-import { Vector3 } from '../vectors/vector3';
+
 export declare class Matrix4x3 {
     private m;
     private xAxis;
@@ -100,7 +100,7 @@ export declare class Matrix4x3 {
     multiply(matrix4x3: Matrix4x3): Matrix4x3;
     lookAtRH(eye: Vector3, target: Vector3, up: Vector3): Matrix4x3;
 }
-import { Vector3 } from '../vectors/vector3';
+
 export declare class Matrix4x4 {
     private m;
     constructor(x1?: number, x2?: number, x3?: number, x4?: number, y1?: number, y2?: number, y3?: number, y4?: number, z1?: number, z2?: number, z3?: number, z4?: number, t1?: number, t2?: number, t3?: number, t4?: number);
@@ -130,7 +130,7 @@ export declare class Time {
     static millisecondToFramePerSecond(millisecond: number): number;
     static framePerSecondToMillisecond(refreshRate: number): number;
 }
-import { Vector2 } from './vectors/vector2';
+
 export declare class Trigonometry {
     static readonly sineLoops: number[];
     static readonly cosineLoops: number[];
@@ -162,19 +162,19 @@ export declare class Trigonometry {
     static arctanEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;
     private static taylorSerie;
 }
-export { Trigonometry } from './trigonometry';
-export { Utils } from './utils';
-export { Time } from './time';
-export { Random } from './random';
-export { NumArray } from './array';
-export { Bezier } from './bezier';
-export { Circle } from './geometry/circle';
-export { Rectangle } from './geometry/rectangle';
-export { Vector2 } from './vectors/vector2';
-export { Vector3 } from './vectors/vector3';
-export { Matrix4x3 } from './matrices/matrix4x3';
-export { Matrix4x4 } from './matrices/matrix4x4';
-export { AxisNames2d, AxisNames3d } from './types';
+
+
+
+
+
+
+
+
+
+
+
+
+
 export declare type AxisNames2d = 'x' | 'y';
 export declare type AxisNames3d = AxisNames2d & 'z';
 export declare class Utils {
@@ -198,8 +198,8 @@ export declare class Utils {
     static isIn(x: number, min: number, max: number): boolean;
     static isOut(x: number, min: number, max: number): boolean;
 }
-import { AxisNames2d } from '../types';
-import { Rectangle } from '../geometry/rectangle';
+
+
 export declare class Vector2 {
     x: number;
     y: number;

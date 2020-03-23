@@ -1,20 +1,37 @@
-nav( class='navbar navbar-custom navbar-fixed-top' role='navigation' )
-  div( class='container' )
-    div( class='navbar-header' )
-      button( type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-main-collapse') Menu
-        i( class='fa fa-bars')
 
-    div( class='collapse navbar-collapse navbar-right navbar-main-collapse' )
-      ul( class='nav navbar-nav' )
-        li
-          a( class='page-scroll' href='#page-top' ) Home
-        li
-          a( class='page-scroll' href='#about' ) About
-        li
-          a( class='page-scroll' href='#example' ) Examples
-        li
-          a( class='page-scroll' href='#download' ) Download
-        li
-          a( class='page-scroll' href='doc/index.html' target='_blank' ) Documentation
-        li
-          a( class='page-scroll' href='#contact' ) Contact
+div(id="docs-sidebar" class="docs-sidebar")
+  div(class="top-search-box d-lg-none p-3")
+    form(class="search-form")
+      input(type="text" placeholder="Search the docs..." name="search" class="form-control search-input")
+      button( type="submit" class="btn search-btn" value="Search")
+        i( class="fas fa-search")
+  nav(id="docs-nav" class="docs-nav navbar")
+    ul(class="section-items list-unstyled nav flex-column pb-3")
+      li(class="nav-item section-title")
+        a(class="nav-link scrollto active" href="index.html")
+          span( class="theme-icon-holder mr-2")
+            i( class="fas fa-map-signs") 
+          | Introduction
+      li(class="nav-item section-title mt-3")
+        a(class="nav-link scrollto" href="installation.html")
+          span( class="theme-icon-holder mr-2")
+            i( class="fas fa-arrow-down") 
+          | Installation
+				    
+      each val, index in menu
+        li(class="nav-item section-title")
+          a(href='#' class="nav-link scrollto")= index
+            ul(class="" id=index)
+              each val2, index2 in val
+                li(class="nav-item")
+                  a(href='#' class="nav-link scrollto" )= index2
+                    if !val2.params
+                      ul(class="" id=index2)
+                        each val3, index3 in val2
+                          li(class="nav-item")
+                            a(href=val3.link|'' class="nav-link scrollto")= index3
+                              if !val3.params
+                                ul(class="" id=index3)
+                                  each val4, index4 in val3
+                                    li(class="nav-item")
+                                      a(href=val4.link|'' class="nav-link scrollto")= index4

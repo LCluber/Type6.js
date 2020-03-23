@@ -2,58 +2,16 @@ extends _layout
 
 block content
 
-  include _header
-  //- include sections/_about
-  //- include sections/_example
-  //- include sections/_download
-  //- include sections/_contact
+  div(class="docs-wrapper")
+    include _menu
 
-  ul
-    each val, index in menu
-      li
-        a(href='#' data-toggle="collapse" data-target='#'+index)= index
-          ul(class="collapse" id=index)
-            each val2, index2 in val
-              li
-                a(href='#' data-toggle="collapse" data-target='#'+index2)= index2
-                  ul(class="collapse" id=index2)
-                    each val3, index3 in val2
-                      li
-                        a(href='#' data-toggle="collapse" data-target='#'+index3)= index3
-                          ul(class="collapse" id=index3)
-                            each val4, index4 in val3
-                              li
-                                a(href='#')= index4
-
-
-
-  ul( class="nav nav-tabs" id="myTab" role="tablist")
-    li( class="nav-item")
-      a( class="nav-link active" data-toggle="tab" href="#overview" id="overview-tab" role="tab" aria-controls="overview" aria-selected="true") Overview
-    li( class="nav-item")
-      a( class="nav-link" href="#api" data-toggle="tab" id="api-tab" role="tab" aria-controls="api" aria-selected="false") API
-    li( class="nav-item")
-      a( class="nav-link" href="#examples" data-toggle="tab" id="examples-tab" role="tab" aria-controls="examples" aria-selected="false") Examples
-
-    
-  div( class="tab-content" id="myTabContent")
-    div( class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab")
-      | test overview
-    div( class="tab-pane fade" id="api" role="tabpanel" aria-labelledby="api-tab")
-      
-      h2 Parameters
-
-      table
-        tr
-          td fdkl
-          td fdjl
-        tr
-          td mlm
-          td tre
-        tr
-          td azer
-          td erfdc
-
-    div( class="tab-pane fade" id="examples" role="tabpanel" aria-labelledby="examples-tab")
-      | toto
-      //- include examples/_{name}
+  div( class="docs-content")
+    div( class="container")
+      article( class="docs-article" id="section-1")
+        div( class='col-md-8 col-md-offset-2')
+          h1( class='brand-heading' ) Type6.js
+          p( class='intro-text') An open source mathematics library written in Javascript.
+            br/
+            br/ 
+            a( href='#about' class='btn btn-circle page-scroll' )
+              i( class='fa fa-angle-double-down animated' )

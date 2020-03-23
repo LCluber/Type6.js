@@ -77,18 +77,6 @@ module.exports = function(grunt){
         ]
       }
     },
-    typedoc: {
-  		build: {
-  			options: {
-  				out: docDir,
-  				target: 'es6',
-          name: projectName + '.js - Documentation',
-          includeDeclarations: false,
-          hideGenerator: true
-  			},
-  			src: [srcDir + 'ts/*.ts']
-  		}
-  	},
     jshint: {
       options: {
         // jshintrc: 'config/.jshintrc'
@@ -127,11 +115,8 @@ module.exports = function(grunt){
       target: {
         files: [
           {
-            src: webDir  + 'sass/build/grayscale.css',
+            src: webDir  + 'sass/build/*.css',
             dest: publicDir + 'css/style.min.css'
-          },
-          { src: webDir  + 'sass/build/examples.css',
-            dest: publicDir + 'css/examples.min.css'
           }
         ]
       }
@@ -280,7 +265,7 @@ module.exports = function(grunt){
         },
         files: [{
           src  : [
-            nodeDir + 'jquery-easing/jquery.easing.1.3.js',
+            // nodeDir + 'jquery-easing/jquery.easing.1.3.js',
             //distDir + projectNameLC + '.iife.js',
             webDir + 'js/*.js'
           ],
@@ -305,24 +290,24 @@ module.exports = function(grunt){
           banner: ''
         },
         src: [nodeDir   + 'jquery/dist/jquery.min.js',
-              nodeDir   + '@fortawesome/fontawesome-free/js/all.min.js',
+              // nodeDir   + '@fortawesome/fontawesome-free/js/all.min.js',
               nodeDir   + 'bootstrap/dist/js/bootstrap.min.js',
               publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
-      },
-      webcss: {
-        options: {
-          separator: '',
-          stripBanners: true,
-          banner: ''
-        },
-        src: [// nodeDir   + 'font-awesome/css/font-awesome.min.css',
-              nodeDir   + 'bootstrap/dist/css/bootstrap.min.css',
-              publicDir + 'css/style.min.css'
-            ],
-        dest: publicDir + 'css/style.min.css'
       }
+      // webcss: {
+      //   options: {
+      //     separator: '',
+      //     stripBanners: true,
+      //     banner: ''
+      //   },
+      //   src: [// nodeDir   + 'font-awesome/css/font-awesome.min.css',
+      //         //nodeDir   + 'bootstrap/dist/css/bootstrap.min.css',
+      //         publicDir + 'css/style.min.css'
+      //       ],
+      //   dest: publicDir + 'css/style.min.css'
+      // }
     },
     strip_code: {
       options: {
@@ -417,7 +402,6 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-tslint' );
   grunt.loadNpmTasks( 'grunt-ts' );
   grunt.loadNpmTasks( 'grunt-rollup' );
-  grunt.loadNpmTasks( 'grunt-typedoc' );
   grunt.loadNpmTasks( 'grunt-sass' );
 
   grunt.registerTask( 'lib',
@@ -453,8 +437,7 @@ grunt.registerTask( 'websass',
                     'Compile website css',
                     [ 'clean:websass',
                       'sass',
-                      'cssmin',
-                      'concat:webcss'
+                      'cssmin'
                      ]
                   );
 
@@ -492,9 +475,9 @@ grunt.registerTask( 'build',
                       //build site
                       grunt.task.run('website');
                       //build documentation
-                      grunt.task.run('doc');
+                      // grunt.task.run('doc');
                       // launch server and watch for changes
-                      grunt.task.run('serve');
+                      // grunt.task.run('serve');
                     }
                   );
 
