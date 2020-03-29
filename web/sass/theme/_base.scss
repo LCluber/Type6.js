@@ -23,6 +23,11 @@ code {
 }
 
 
+.list-group-item {
+  padding:0 0 0 10px;
+  border:0;
+}
+
 .table-bordered th, .table-bordered td {
 	border-color: $theme-divider;
 }

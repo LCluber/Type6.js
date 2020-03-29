@@ -3,7 +3,6 @@ $(window).on('load resize', function() {
    
     //Add/remove class based on browser size when load/resize
     var w = $(window).width();
-
 	if(w >= 1200) {
 	    // if larger 
 	    $('#docs-sidebar').addClass('sidebar-visible').removeClass('sidebar-hidden');

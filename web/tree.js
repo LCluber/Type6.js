@@ -1899,7 +1899,7 @@ module.exports = {
     }
   },
   time : {
-    millisecondToSecond : {
+    millisecToSec : {
       params: [
         { name: 'x',
           type: 'number',
@@ -1912,7 +1912,7 @@ module.exports = {
       ],
       return : 'Vector2'
     },
-    secondToMilliecond : {
+    secToMillisec : {
       params: [
         { name: 'x',
           type: 'number',
@@ -1925,7 +1925,7 @@ module.exports = {
       ],
       return : 'Vector2'
     },
-    millisecondToFramePerSecond : {
+    millisecToFps : {
       params: [
         { name: 'x',
           type: 'number',
@@ -1938,7 +1938,7 @@ module.exports = {
       ],
       return : 'Vector2'
     },
-    framePerSecondToMillisecond : {
+    fpsToMillisec : {
       params: [
         { name: 'x',
           type: 'number',

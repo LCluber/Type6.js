@@ -5,44 +5,44 @@ block content
   div(class="docs-wrapper")
     include _menu
 
-  div( class="docs-content")
-    div( class="container")
-      article( class="docs-article" id="section-1")
-        ul( class="nav nav-tabs" id="myTab" role="tablist")
-          li( class="nav-item")
-            a( class="nav-link active" data-toggle="tab" href="#overview" id="overview-tab" role="tab" aria-controls="overview" aria-selected="true") Overview
-          li( class="nav-item")
-            a( class="nav-link" href="#api" data-toggle="tab" id="api-tab" role="tab" aria-controls="api" aria-selected="false") API
-          li( class="nav-item")
-            a( class="nav-link" href="#examples" data-toggle="tab" id="examples-tab" role="tab" aria-controls="examples" aria-selected="false") Examples
+    div( class="docs-content")
+      div( class="container")
+        article( class="docs-article" id="section-1")
+          ul( class="nav nav-tabs" id="myTab" role="tablist")
+            li( class="nav-item")
+              a( class="nav-link active" data-toggle="tab" href="#overview" id="overview-tab" role="tab" aria-controls="overview" aria-selected="true") Overview
+            li( class="nav-item")
+              a( class="nav-link" href="#api" data-toggle="tab" id="api-tab" role="tab" aria-controls="api" aria-selected="false") API
+            li( class="nav-item")
+              a( class="nav-link" href="#examples" data-toggle="tab" id="examples-tab" role="tab" aria-controls="examples" aria-selected="false") Examples
 
-        div( class="tab-content" id="myTabContent")
-          div( class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab")
-            | test overview
-          div( class="tab-pane fade" id="api" role="tabpanel" aria-labelledby="api-tab")
-            
-            h2 Parameters
+          div( class="tab-content" id="myTabContent")
+            div( class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab")
+              | test overview
+            div( class="tab-pane fade" id="api" role="tabpanel" aria-labelledby="api-tab")
+              
+              h2 Parameters
 
-            table(class="table")
-              thead
-                tr
-                  th(scope="col") #
-                  th(scope="col") Name
-                  th(scope="col") Type
-                  th(scope="col") Description
-              tbody
-                each val, index in doc.params
+              table(class="table")
+                thead
                   tr
-                    th(scope="row")= index+1
-                    td= val.name
-                    td= val.type
-                    td= val.description
-                tr  
-                  th =>
-                  td Returns
-                  td= doc.return
-                  td
+                    th(scope="col") #
+                    th(scope="col") Name
+                    th(scope="col") Type
+                    th(scope="col") Description
+                tbody
+                  each val, index in doc.params
+                    tr
+                      th(scope="row")= index+1
+                      td= val.name
+                      td= val.type
+                      td= val.description
+                  tr  
+                    th =>
+                    td Returns
+                    td= doc.return
+                    td
 
-          div( class="tab-pane fade" id="examples" role="tabpanel" aria-labelledby="examples-tab")
-            | toto
-            //- include examples/_{name}
+            div( class="tab-pane fade" id="examples" role="tabpanel" aria-labelledby="examples-tab")
+              | toto
+              //- include examples/_{name}

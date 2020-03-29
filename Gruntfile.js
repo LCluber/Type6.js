@@ -285,13 +285,14 @@ module.exports = function(grunt){
       },
       webjs: {
         options: {
-          separator: '',
+          separator: ';\n',
           stripBanners: true,
           banner: ''
         },
         src: [nodeDir   + 'jquery/dist/jquery.min.js',
               // nodeDir   + '@fortawesome/fontawesome-free/js/all.min.js',
               nodeDir   + 'bootstrap/dist/js/bootstrap.min.js',
+              nodeDir   + 'highlight.js/lib/highlight.js',
               publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'

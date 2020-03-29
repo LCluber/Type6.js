@@ -6,32 +6,37 @@ div(id="docs-sidebar" class="docs-sidebar")
       button( type="submit" class="btn search-btn" value="Search")
         i( class="fas fa-search")
   nav(id="docs-nav" class="docs-nav navbar")
-    ul(class="section-items list-unstyled nav flex-column pb-3")
-      li(class="nav-item section-title")
+    ul(class="list-group")
+      li(class="list-group-item nav-item")
         a(class="nav-link scrollto active" href="index.html")
-          span( class="theme-icon-holder mr-2")
-            i( class="fas fa-map-signs") 
+          //- span( class="theme-icon-holder mr-2")
+          //-   i( class="fas fa-map-signs") 
           | Introduction
-      li(class="nav-item section-title mt-3")
+      li(class="list-group-item nav-item")
         a(class="nav-link scrollto" href="installation.html")
-          span( class="theme-icon-holder mr-2")
-            i( class="fas fa-arrow-down") 
+          //- span( class="theme-icon-holder mr-2")
+          //-   i( class="fas fa-arrow-down") 
           | Installation
-				    
-      each val, index in menu
-        li(class="nav-item section-title")
-          a(href='#' class="nav-link scrollto")= index
-            ul(class="" id=index)
-              each val2, index2 in val
-                li(class="nav-item")
-                  a(href='#' class="nav-link scrollto" )= index2
+      li(class="list-group-item nav-item")
+        a(class="nav-link scrollto" href="documentation.html")
+          //- span( class="theme-icon-holder mr-2")
+          //-   i( class="fas fa-arrow-down") 
+          | Documentation
+        ul(class="list-group" id=index)
+          each val, index in menu
+            li(class="list-group-item nav-item")
+              a(href='#' class="nav-link scrollto")= index
+              ul(class="list-group" id=index)
+                each val2, index2 in val
+                  li(class="list-group-item nav-item")
+                    a(href='#' class="nav-link scrollto" )= index2
                     if !val2.params
-                      ul(class="" id=index2)
+                      ul(class="list-group" id=index2)
                         each val3, index3 in val2
-                          li(class="nav-item")
-                            a(href=val3.link|'' class="nav-link scrollto")= index3
-                              if !val3.params
-                                ul(class="" id=index3)
-                                  each val4, index4 in val3
-                                    li(class="nav-item")
-                                      a(href=val4.link|'' class="nav-link scrollto")= index4
+                          li(class="list-group-item nav-item")
+                            a(href=index3|'' class="nav-link scrollto")= index3
+                            if !val3.params
+                              ul(class="list-group" id=index3)
+                                each val4, index4 in val3
+                                  li(class="list-group-item nav-item")
+                                    a(href=index4|'' class="nav-link scrollto")= index4
