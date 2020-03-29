@@ -8,35 +8,35 @@ div(id="docs-sidebar" class="docs-sidebar")
   nav(id="docs-nav" class="docs-nav navbar")
     ul(class="list-group")
       li(class="list-group-item nav-item")
-        a(class="nav-link scrollto active" href="index.html")
+        a(class="nav-link active" href="index.html")
           //- span( class="theme-icon-holder mr-2")
           //-   i( class="fas fa-map-signs") 
           | Introduction
       li(class="list-group-item nav-item")
-        a(class="nav-link scrollto" href="installation.html")
+        a(class="nav-link" href="installation.html")
           //- span( class="theme-icon-holder mr-2")
           //-   i( class="fas fa-arrow-down") 
           | Installation
       li(class="list-group-item nav-item")
-        a(class="nav-link scrollto" href="documentation.html")
+        a(class="nav-link" href="documentation.html")
           //- span( class="theme-icon-holder mr-2")
           //-   i( class="fas fa-arrow-down") 
           | Documentation
         ul(class="list-group" id=index)
           each val, index in menu
             li(class="list-group-item nav-item")
-              a(href='#' class="nav-link scrollto")= index
+              a(href='#' class="nav-link")= index
               ul(class="list-group" id=index)
                 each val2, index2 in val
                   li(class="list-group-item nav-item")
-                    a(href='#' class="nav-link scrollto" )= index2
+                    a(href='#' class="nav-link" )= index2
                     if !val2.params
                       ul(class="list-group" id=index2)
                         each val3, index3 in val2
                           li(class="list-group-item nav-item")
-                            a(href=index3|'' class="nav-link scrollto")= index3
+                            a(href=index3|'' class="nav-link")= index3
                             if !val3.params
                               ul(class="list-group" id=index3)
                                 each val4, index4 in val3
                                   li(class="list-group-item nav-item")
-                                    a(href=index4|'' class="nav-link scrollto")= index4
+                                    a(href=index4|'' class="nav-link")= index4
