@@ -4,12 +4,11 @@ $(document).ready(function() {
 	
 	/* ====== Toggle Sidebar ======= */
 	
-	$('#docs-sidebar-toggler').on('click', function(){
+	$('#sidebarToggler').on('click', function() {
 	
 		if ( $('#docs-sidebar').hasClass('sidebar-visible') ) {
 
 			  $("#docs-sidebar").removeClass('sidebar-visible').addClass('sidebar-hidden');
-			
 			
 		} else {
 

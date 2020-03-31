@@ -105,7 +105,7 @@
     }
     &:hover {
 	    span {
-		    @include opacity(1);
+		    opacity: 1;
 	    }
     }
     span {
@@ -117,8 +117,8 @@
 	   margin-bottom: 5px;
 	   position: relative;
 	   left: 0;
-	   @include opacity(0.8);
-	   @include border-radius(1px);
+	   opacity: 0.8;
+	   border-radius: 1px;
 	}
 }
 
