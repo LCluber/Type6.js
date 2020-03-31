@@ -4,22 +4,22 @@ const pug = require('pug');
 const tree = require('./tree');
 
 let pages = {};
-function extractMethods(object, pageName) {
+function extractMethods(object, property, pageName) {
   if (!object.hasOwnProperty('params')) {
     for (let prop in object) {
       if(object.hasOwnProperty(prop)) {
         let pn = pageName + '_' + prop;
-        extractMethods(object[prop], pn);
+        extractMethods(object[prop], prop, pn);
       }
     }
     return;
   }
-  let link = pageName.slice(1);
-  object.link = link + '.html';
+  // let link = pageName.slice(1);
+  object.name = property;
   pages[pageName.slice(1)] = object;
 }
 
-extractMethods(tree, '');
+extractMethods(tree, '', '');
 
 // Compile static pages
 let html = pug.renderFile(path.join(__dirname, './views/index.pug'), { menu: tree });
