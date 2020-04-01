@@ -66,6 +66,19 @@ $headerHeight: 50px;
       width: 0;
       transform: translateX(-400px);
     }
+
+    .nav-item {
+      border: 0;
+      
+      .nav-link {
+        padding: 0;
+        color: $theme-text-color-secondary;
+
+        &.active {
+          color: $theme-color-primary;
+        }
+      }
+    }
   }
 
   .docs-content {
