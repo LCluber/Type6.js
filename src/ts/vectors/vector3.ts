@@ -20,21 +20,11 @@ export class Vector3 {
     return ( Utils.isOrigin(this.x) && Utils.isOrigin(this.y) && Utils.isOrigin(this.z) ) ? true : false;
   }
 
-  //true if vector is different than (0,0)
-  public isNotOrigin(): boolean {
-    return ( !Utils.isOrigin(this.x) || !Utils.isOrigin(this.y) || !Utils.isOrigin(this.z) ) ? true : false;
-  }
-
   public isPositive(): boolean {
     return ( Utils.isPositive(this.x) && Utils.isPositive(this.y) && Utils.isPositive(this.z) ) ? true : false;
   }
 
-  public isNegative(): boolean {
-    return ( Utils.isNegative(this.x) && Utils.isNegative(this.y) && Utils.isNegative(this.z) ) ? true : false;
-  }
-
-
-  public fromArray( array: number[], offset?: number ): Vector3 {
+  public setFromArray( array: number[], offset?: number ): Vector3 {
     if ( offset === undefined ){
       offset = 0;
     }
@@ -49,7 +39,7 @@ export class Vector3 {
   }
 
   public toString(): string {
-    return '(x = ' + this.x + ';y = ' + this.y + ';z = ' + this.z + ')';
+    return '(x = ' + this.x + '; y = ' + this.y + '; z = ' + this.z + ')';
   }
 
   public set(x:number, y:number, z:number): Vector3 {
@@ -210,6 +200,20 @@ export class Vector3 {
     if(length && length != 1) {
       this.scale(1/length);
     }
+    return this;
+  }
+
+  public absolute(): Vector3 {
+    this.x = Math.abs(this.x);
+    this.y = Math.abs(this.y);
+    this.z = Math.abs(this.z);
+    return this;
+  }
+
+  public opposite(): Vector3 {
+    this.x = -this.x;
+    this.y = -this.y;
+    this.z = -this.z;
     return this;
   }
 

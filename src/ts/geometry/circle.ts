@@ -63,14 +63,14 @@ export class Circle {
     return v.getDistance(this.position, true) <= this.radius * this.radius;
   }
 
-  public isOut(v: Vector2): boolean {
-    return v.getDistance(this.position, true) > this.radius * this.radius;
-  }
+  // public isOut(v: Vector2): boolean {
+  //   return v.getDistance(this.position, true) > this.radius * this.radius;
+  // }
 
   /**
   * draw the circle in a canvas.
   */
-  draw( context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number ){
+  draw( context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number ): void {
     context.beginPath();
     context.arc(  this.position.x,
                   this.position.y,

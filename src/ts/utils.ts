@@ -42,19 +42,19 @@ export class Utils {
     return -x;
   }
 
-  static clamp( x: number, min: number, max: number ) {
+  static clamp( x: number, min: number, max: number ): number {
     return Math.min(Math.max(x,min),max);
   }
 
-  static normalize(x: number, min: number, max: number) {
+  static normalize(x: number, min: number, max: number): number {
     return (x - min) / (max - min);
   }
 
-  static lerp(normal: number, min: number, max: number) {
-    return (max - min) * normal + min;
+  static lerp(min: number, max: number, amount: number): number {
+    return (max - min) * amount + min;
   }
 
-  static map(x: number, sourceMin: number, sourceMax: number, destMin: number, destMax: number) {
+  static map(x: number, sourceMin: number, sourceMax: number, destMin: number, destMax: number): number {
     return this.lerp(this.normalize(x, sourceMin, sourceMax), destMin, destMax);
   }
 
@@ -62,8 +62,8 @@ export class Utils {
     return !(x&1);
   }
 
-  static isOdd(x: number): number {
-    return x&1;
+  static isOdd(x: number): boolean {
+    return x&1 ? true : false;
   }
 
   static isOrigin(x: number): boolean {

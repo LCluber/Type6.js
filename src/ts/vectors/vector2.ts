@@ -22,17 +22,8 @@ export class Vector2 {
     return ( Utils.isOrigin(this.x) && Utils.isOrigin(this.y) ) ? true : false;
   }
 
-  //true if vector is different than (0,0)
-  public isNotOrigin(): boolean {
-    return ( !Utils.isOrigin(this.x) || !Utils.isOrigin(this.y) ) ? true : false;
-  }
-
   public isPositive(): boolean {
     return ( Utils.isPositive(this.x) && Utils.isPositive(this.y) ) ? true : false;
-  }
-
-  public isNegative(): boolean {
-    return ( Utils.isNegative(this.x) && Utils.isNegative(this.y) ) ? true : false;
   }
 
   public setFromArray( array: number[], offset?: number ): Vector2 {
@@ -49,7 +40,7 @@ export class Vector2 {
   }
 
   public toString(): string {
-    return '(x = ' + this.x + ';y = ' + this.y + ')';
+    return '(x = ' + this.x + '; y = ' + this.y + ')';
   }
 
   public set(x:number, y:number): Vector2 {
@@ -263,9 +254,9 @@ export class Vector2 {
     return this;
   }
 
-  public lerp(normal: number, min: Vector2, max: Vector2): Vector2 {
-    this.x = Utils.lerp( normal, min.x, max.x );
-    this.y = Utils.lerp( normal, min.y, max.y );
+  public lerp(min: Vector2, max: Vector2, amount: number): Vector2 {
+    this.x = Utils.lerp( amount, min.x, max.x );
+    this.y = Utils.lerp( amount, min.y, max.y );
     return this;
   }
 

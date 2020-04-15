@@ -184,8 +184,8 @@ export class Trigonometry {
   /**
   * Estimate arctangent from a vector Vec2
   */
-  static arctan2Vector2(vector2: Vector2) {
-    return this.arctan2(vector2.x, vector2.y);
+  static arctan2Vector2(v: Vector2): number|false {
+    return this.arctan2(v.x, v.y);
   }
 
   /**
