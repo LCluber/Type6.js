@@ -15,7 +15,10 @@ module.exports = {
               description : 'Value of the Y axis'
             }  
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          } 
         },
         copy : {
           description:"Copy the values of the vector given as parameter",
@@ -25,7 +28,10 @@ module.exports = {
               description : 'A vector to copy'
             }
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         setFromArray : {
           description:"Set the x and y values of the vector from the array given as parameter. array[0] for x, array[1] for y",
@@ -39,7 +45,10 @@ module.exports = {
               description : 'the offset between X and Y values within the array'
             }  
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         setFromAngle : {
           description:"Set the x and y values of the vector from the angle given as parameter",
@@ -49,13 +58,19 @@ module.exports = {
               description : ''
             }
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         origin : {
           description:"Set the x and y values of this vector to zero",
           params: [
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         setOppositeAxis : {
           description:"Read the axis given as parameter and set the other one with value given as parameter",
@@ -69,7 +84,10 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         }
       },
       getters : {
@@ -77,7 +95,10 @@ module.exports = {
           description:"Compute and return the angle of the vector",
           params: [
           ],
-          return : 'number'
+          return : { 
+            type: 'number',
+            description : '' 
+          }
         },
         getMagnitude : {
           description:"Compute and return the magnitude of the vector",
@@ -87,7 +108,10 @@ module.exports = {
               description : ''
             }
           ],
-          return : 'number'
+          return : { 
+            type: 'number',
+            description : '' 
+          }
         },
         getDistance : {
           description:"Compute and returns the distance between this vector and the vector given as parameters",
@@ -101,19 +125,28 @@ module.exports = {
               description : ''
             } 
           ],
-          return : 'number'
+          return : { 
+            type: 'number',
+            description : '' 
+          }
         },
         getMaxAxis : {
           description:"Return the name of the axis with the highest value",
           params: [
           ],
-          return : 'AxisNames2d'
+          return : { 
+            type: 'AxisNames2d',
+            description : '' 
+          }
         },
         getMinAxis : {
           description:"Return the name of the axis with the lowest value",
           params: [ 
           ],
-          return : 'AxisNames2d'
+          return : { 
+            type: 'AxisNames2d',
+            description : '' 
+          }
         }
       },
       export : {
@@ -121,19 +154,28 @@ module.exports = {
           description:"Return a new vector identical to this vector",
           params: [
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         toArray : {
           description:"Exports the vector as an array with two values",
           params: [
           ],
-          return : 'number[]'
+          return : { 
+            type: 'number[]',
+            description : '' 
+          }
         },
         toString : {
           description:"Return a string containing values of each axis (x = 1; y = 1)",
           params: [
           ],
-          return : 'string'
+          return : { 
+            type: 'String',
+            description : '' 
+          }
         }
       },
       check : {
@@ -141,13 +183,19 @@ module.exports = {
           description:"Return true if this vector is equal to (0,0) or false otherwise",
           params: [
           ],
-          return : 'boolean'
+          return : { 
+            type: 'boolean',
+            description : '' 
+          }
         },
         isPositive : {
           description:"return true if this vector is greater than or equal to (0,0) or false otherwise",
           params: [ 
           ],
-          return : 'boolean'
+          return : { 
+            type: 'boolean',
+            description : '' 
+          }
         }
       },
       operations : {
@@ -160,7 +208,10 @@ module.exports = {
                 description : ''
               }  
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           },
           addScalar : {
             description:"Add a scalar number to each component of this vector",
@@ -170,7 +221,10 @@ module.exports = {
                 description : ''
               } 
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           },
           addScaledVector : {
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then add the result to this vector",
@@ -184,7 +238,10 @@ module.exports = {
                 description : ''
               }  
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           }
         },
         subtractions : {
@@ -196,7 +253,10 @@ module.exports = {
                 description : ''
               }
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           },
           subtractScalar : {
             description:"Subtract a scalar number from each component of this vector",
@@ -206,7 +266,10 @@ module.exports = {
                 description : ''
               }  
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           },
           subtractScaledVector : {
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then subract the result from this vector",
@@ -220,7 +283,10 @@ module.exports = {
                 description : ''
               }  
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           }
         },
         multiplications : {
@@ -232,7 +298,10 @@ module.exports = {
                 description : ''
               } 
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           },
           multiply : {
             description:"Multiply a vector by this vector",
@@ -242,7 +311,10 @@ module.exports = {
                 description : ''
               }
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           },
           multiplyScaledVector : {
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then multiply the result by this vector",
@@ -256,7 +328,10 @@ module.exports = {
                 description : ''
               }  
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           }
         },
         divisions : {
@@ -268,7 +343,10 @@ module.exports = {
                 description : ''
               }
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           },
           divideScaledVector : {
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then divide the result by this vector",
@@ -282,19 +360,28 @@ module.exports = {
                 description : ''
               }  
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           },
           halve : {
             description:"Divide this vector by 2",
             params: [
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           },
           normalize : {
             description:"Reduce the vector to a unit vector of length 1",
             params: [
             ],
-            return : 'Vector2'
+            return : { 
+              type: 'Vector2',
+              description : 'Value of the Y axis' 
+            }
           }
         },
         max : {
@@ -305,7 +392,10 @@ module.exports = {
               description : ''
             } 
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         min : {
           description:"Compare this vector to the vector given as parameter and set the lowest value of each axis to this vector",
@@ -315,7 +405,10 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         maxScalar : {
           description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is lower",
@@ -325,7 +418,10 @@ module.exports = {
               description : ''
             } 
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         minScalar : {
           description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is higher",
@@ -335,7 +431,10 @@ module.exports = {
               description : ''
             }
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         absolute : {
           description:"Set each axis of this vector to its absolut value",
@@ -349,13 +448,19 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         opposite : {
           description:"Set each axis of this vector to its opposite value",
           params: [
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         clamp : {
           description:"clamp each axis of this vector so it stays within the boundaries of the given rectangle",
@@ -365,7 +470,10 @@ module.exports = {
               description : ''
             } 
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         lerp : {
           description:"Set the interpolation point between the two vectors given as first and second parameters using the normalized amount given as third parameter",
@@ -383,7 +491,10 @@ module.exports = {
               description : 'the amount of interpolation; some value between 0.0 (old vector) and 1.0 (new vector). 0.9 is very near the new vector. 0.5 is halfway in between.'
             }
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         dotProduct : {
           description:"Return the dot product of this vector",
@@ -393,7 +504,10 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'number'
+          return : { 
+            type: 'number',
+            description : '' 
+          }
         },
         quadraticBezier : {
           description:"Set the interpolation point between the three vectors given as first, second and third parameters using the normalized amount given as fourth parameter",
@@ -415,7 +529,10 @@ module.exports = {
               description : ''
             }
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         },
         cubicBezier : {
           description:"Set the interpolation point between the four vectors given as first, second, third and fourth parameters using the normalized amount given as fifth parameter",
@@ -441,7 +558,10 @@ module.exports = {
               description : ''
             } 
           ],
-          return : 'Vector2'
+          return : { 
+            type: 'Vector2',
+            description : '' 
+          }
         }
       }
     },
@@ -463,7 +583,10 @@ module.exports = {
               description : ''
             } 
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         },
         copy : {
           description:"Copy the values of the vector given as parameter",
@@ -473,7 +596,10 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         },
         setFromArray : {
           description:"Set the x, y and z values of the vector from the array given as parameter. array[0] for x, array[1] for y",
@@ -491,13 +617,19 @@ module.exports = {
               description : ''
             }
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         },
         origin : {
           description:"Set the x, y and z values of this vector to zero",
           params: [ 
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         }
       },
       getters : {
@@ -509,7 +641,10 @@ module.exports = {
               description : ''
             } 
           ],
-          return : 'number'
+          return : { 
+            type: 'number',
+            description : '' 
+          }
         },
         getDistance : {
           description:"Compute and returns the distance between this vector and the vector given as parameters",
@@ -523,7 +658,10 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'number'
+          return : { 
+            type: 'number',
+            description : '' 
+          }
         }
       },
       export : {
@@ -531,19 +669,28 @@ module.exports = {
           description:"Return a new vector identical to this vector",
           params: [ 
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         },
         toArray : {
           description:"Exports the vector as an array with two values",
           params: [  
           ],
-          return : 'number[]'
+          return : { 
+            type: 'number[]',
+            description : '' 
+          }
         },
         toString : {
           description:"Return a string containing values of each axis (x = 1; y = 1; z = 1)",
           params: [
           ],
-          return : 'string'
+          return : { 
+          type: 'String',
+          description : '' 
+        }
         }
       },
       check : {
@@ -551,13 +698,19 @@ module.exports = {
           description:"Return true if this vector is equal to (0,0,0) or false otherwise",
           params: [
           ],
-          return : 'boolean'
+          return : { 
+            type: 'boolean',
+            description : '' 
+          }
         },
         isPositive : {
           description:"Return true if this vector is greater than or equal to (0,0,0) or false otherwise",
           params: [
           ],
-          return : 'boolean'
+          return : { 
+            type: 'boolean',
+            description : '' 
+          }
         }
       },
       operations : {
@@ -570,7 +723,10 @@ module.exports = {
               description : ''
             }  
           ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           },
           addScalar : {
             description:"Add a scalar number to each component of this vector",
@@ -580,7 +736,10 @@ module.exports = {
               description : ''
             } 
           ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           },
           addScaledVector : {
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then add the result to this vector",
@@ -594,7 +753,10 @@ module.exports = {
               description : ''
             }  
           ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           }
         },
         subtractions : {
@@ -606,7 +768,10 @@ module.exports = {
               description : ''
             }  
           ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           },
           subtractScalar : {
             description:"Subtract a scalar number from each component of this vector",
@@ -616,7 +781,10 @@ module.exports = {
               description : ''
             }  
           ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           },
           subtractScaledVector : {
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then subract the result from this vector",
@@ -630,7 +798,10 @@ module.exports = {
               description : ''
             }  
           ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           }
         },
         multiplications : {
@@ -642,7 +813,10 @@ module.exports = {
               description : ''
             }  
           ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           },
           multiply : {
             description:"Multiply a vector by this vector",
@@ -652,7 +826,10 @@ module.exports = {
               description : ''
             }  
           ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           },
           multiplyScaledVector : {
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then multiply the result by this vector",
@@ -666,7 +843,10 @@ module.exports = {
               description : ''
             }  
           ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           }
         },
         divisions : {
@@ -678,7 +858,10 @@ module.exports = {
                 description : ''
               }  
             ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           },
           divideScaledVector : {
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then divide the result by this vector",
@@ -692,19 +875,28 @@ module.exports = {
                 description : ''
               }  
             ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           },
           halve : {
             description:"Divide this vector by 2",
             params: [ 
             ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           },
           normalize : {
             description:"Reduce the vector to a unit vector of length 1",
             params: [ 
             ],
-            return : 'Vector3'
+            return : { 
+            type: 'Vector3',
+            description : '' 
+          }
           }
         },
         max : {
@@ -715,7 +907,10 @@ module.exports = {
               description : ''
             } 
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         },
         min : {
           description:"Compare this vector to the vector given as parameter and set the lowest value of each axis to this vector",
@@ -725,7 +920,10 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         },
         maxScalar : {
           description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is lower",
@@ -735,7 +933,10 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         },
         minScalar : {
           description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is higher",
@@ -745,19 +946,28 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         },
         absolute : {
           description:"Set each axis of this vector to its absolut value",
           params: [ 
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         },
         opposite : {
           description:"Set each axis of this vector to its opposite value",
           params: [ 
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         },
         dotProduct : {
           description:"Return the dot product of this vector",
@@ -767,7 +977,10 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'number'
+          return : { 
+            type: 'number',
+            description : '' 
+          }
         },
         cross : {
           description:"Return the cross product of this vector and the vector given as parameter",
@@ -777,7 +990,10 @@ module.exports = {
               description : ''
             }  
           ],
-          return : 'Vector3'
+          return : { 
+            type: 'Vector3',
+            description : '' 
+          }
         }
       }
     }
@@ -792,7 +1008,10 @@ module.exports = {
             description : ''
           } 
         ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
       },
       setCosinePrecision : {
         description:"Sets the precision of the cosine computation by setting the number of loops to do to estimate the value",
@@ -802,7 +1021,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'number'
+        return : { 
+            type: 'number',
+            description : '' 
+          }
       },
       setArctanPrecision : {
         description:"Sets the precision of the arctan computation by setting the number of loops to do to estimate the value",
@@ -812,7 +1034,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'number'
+        return : { 
+            type: 'number',
+            description : '' 
+          }
       }
     },
     sine : {
@@ -823,7 +1048,10 @@ module.exports = {
           description : ''
         } 
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     cosine : {
       description:"Find the cosine of an angle",
@@ -833,7 +1061,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     arctan : {
       description:"Estimate arctangent from an angle on 2 quadrants",
@@ -843,7 +1074,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     arctan2 : {
       description:"Estimate arctangent on four quadrants",
@@ -857,7 +1091,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number|false'
+      return : { 
+        type: 'number|false',
+        description : '' 
+      }
     },
     arctan2Vector2 : {
       description:"Estimate arctangent on four quadrants from a vector Vec2",
@@ -867,7 +1104,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number|false'
+      return : { 
+        type: 'number|false',
+        description : '' 
+      }
     },
     sineEquation : {
       description:"Compute a classic sine equation of type amplitude * sine( period + shiftX ) + shiftY",
@@ -889,7 +1129,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+        type: 'number',
+        description : '' 
+      }
     },
     cosineEquation : {
       description:"Compute a classic cosine equation of type amplitude * cosine( period + shiftX ) + shiftY",
@@ -911,7 +1154,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+        type: 'number',
+        description : '' 
+      }
     },
     arctanEquation : {
       description:"Compute a classic arctan equation of type amplitude * arctan( period + shiftX ) + shiftY",
@@ -933,7 +1179,10 @@ module.exports = {
           description : ''
         }    
       ],
-      return : 'number'
+      return : { 
+        type: 'number',
+        description : '' 
+      }
     },
     helpers : {
       degreeToRadian: {
@@ -944,7 +1193,10 @@ module.exports = {
             description : ''
           } 
         ],
-        return : 'number'
+        return : { 
+          type: 'number',
+          description : '' 
+        }
       },
       radianToDegree: {
         description:"",
@@ -954,7 +1206,10 @@ module.exports = {
             description : ''
           } 
         ],
-        return : 'number'
+        return : { 
+          type: 'number',
+          description : '' 
+        }
       },
       normalizeRadian: {
         description:"Normalizes an angle in radians between -Pi an Pi",
@@ -968,7 +1223,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'number'
+        return : { 
+          type: 'number',
+          description : '' 
+        }
       }
     }
   },
@@ -982,25 +1240,37 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'Matrix4x3'
+        return : { 
+          type: 'Matrix4x3',
+          description : '' 
+        }
       },
       toArray : {
         description:"Return this matrix as an array",
         params: [
         ],
-        return : 'Float32Array'
+        return : { 
+          type: 'Float32Array',
+          description : '' 
+        }
       },
       toString : {
         description:"Return a string describing the entire matrix",
         params: [
         ],
-        return : 'string'
+        return : { 
+          type: 'String',
+          description : '' 
+        }
       },
       identity : {
         description:"Set this matrix as an identity matrix",
         params: [
         ],
-        return : 'Matrix4x3'
+        return : { 
+          type: 'Matrix4x3',
+          description : '' 
+        }
       },
       scale : {
         description:"Scale this matrix by the Vector3 given as parameter",
@@ -1010,7 +1280,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'Matrix4x3'
+        return : { 
+          type: 'Matrix4x3',
+          description : '' 
+        }
       },
       rotateX : {
         description:"Rotate this matrix on the X axis by the angle given as parameter",
@@ -1020,7 +1293,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'Matrix4x3'
+        return : { 
+          type: 'Matrix4x3',
+          description : '' 
+        }
       },
       rotateY : {
         description:"Rotate this matrix on the Y axis by the angle given as parameter",
@@ -1030,7 +1306,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'Matrix4x3'
+        return : { 
+          type: 'Matrix4x3',
+          description : '' 
+        }
       },
       rotateZ : {
         description:"Rotate this matrix on the Z axis by the angle given as parameter",
@@ -1040,7 +1319,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'Matrix4x3'
+        return : { 
+          type: 'Matrix4x3',
+          description : '' 
+        }
       },
       translate : {
         description:"Translate this matrix by the Vector3 given as parameter",
@@ -1050,7 +1332,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'Matrix4x3'
+        return : { 
+          type: 'Matrix4x3',
+          description : '' 
+        }
       },
       multiply : {
         description:"Multiply this matrix by the matrix given as parameter",
@@ -1060,7 +1345,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'Matrix4x3'
+        return : { 
+          type: 'Matrix4x3',
+          description : '' 
+        }
       },
       lookAtRH : {
         description:"Build a right-handed look-at matrix with the cameraPosition, cameraTarget and the cameraUp vectors given as parameter",
@@ -1078,7 +1366,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'Matrix4x3'
+        return : { 
+          type: 'Matrix4x3',
+          description : '' 
+        }
       }
     },
     matrix4x4 : {
@@ -1090,25 +1381,37 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'Matrix4x4'
+        return : { 
+          type: 'Matrix4x4',
+          description : '' 
+        }
       },
       toArray : {
         description:"Return this matrix as an array",
         params: [  
         ],
-        return : 'Float32Array'
+        return : { 
+          type: 'Float32Array',
+          description : '' 
+        }
       },
       toString : {
         description:"Return a string describing the entire matrix",
         params: [  
         ],
-        return : 'String'
+        return : { 
+          type: 'String',
+          description : '' 
+        }
       },
       identity : {
         description:"Set this matrix as an identity matrix",
         params: [  
         ],
-        return : 'Matrix4x4'
+        return : { 
+          type: 'Matrix4x4',
+          description : '' 
+        }
       },
       scale : {
         description:"Scale this matrix by the Vector3 given as parameter",
@@ -1118,7 +1421,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'Matrix4x4'
+        return : { 
+          type: 'Matrix4x4',
+          description : '' 
+        }
       },
       rotateX : {
         description:"Rotate this matrix on the X axis by the angle given as parameter",
@@ -1128,7 +1434,10 @@ module.exports = {
             description : ''
           }  
       ],
-        return : 'Matrix4x4'
+        return : { 
+          type: 'Matrix4x4',
+          description : '' 
+        }
       },
       rotateY : {
         description:"Rotate this matrix on the Y axis by the angle given as parameter",
@@ -1138,7 +1447,10 @@ module.exports = {
             description : ''
           }  
       ],
-        return : 'Matrix4x4'
+        return : { 
+          type: 'Matrix4x4',
+          description : '' 
+        }
       },
       rotateZ : {
         description:"Rotate this matrix on the Z axis by the angle given as parameter",
@@ -1148,7 +1460,10 @@ module.exports = {
             description : ''
           }  
       ],
-        return : 'Matrix4x4'
+        return : { 
+          type: 'Matrix4x4',
+          description : '' 
+        }
       },
       translate : {
         description:"Translate this matrix by the Vector3 given as parameter",
@@ -1158,7 +1473,10 @@ module.exports = {
             description : ''
           }  
       ],
-        return : 'Matrix4x4'
+        return : { 
+          type: 'Matrix4x4',
+          description : '' 
+        }
       },
       multiply : {
         description:"Multiply this matrix by the matrix given as parameter",
@@ -1168,7 +1486,10 @@ module.exports = {
             description : ''
           }  
       ],
-        return : 'Matrix4x4'
+        return : { 
+          type: 'Matrix4x4',
+          description : '' 
+        }
       },
       perspective : {
         description:"Build a perspective projection matrix",
@@ -1190,7 +1511,10 @@ module.exports = {
             description : ''
           }  
       ],
-        return : 'Matrix4x4'
+        return : { 
+          type: 'Matrix4x4',
+          description : '' 
+        }
       },
       orthographic : {
         description:"Build an orthographic projection matrix",
@@ -1220,7 +1544,10 @@ module.exports = {
             description : ''
           }  
       ],
-        return : 'Matrix4x4'
+        return : { 
+          type: 'Matrix4x4',
+          description : '' 
+        }
       }
     }
   },
@@ -1230,7 +1557,10 @@ module.exports = {
         description:"Return a new circle with the same properties as this circle",
         params: [ 
         ],
-        return : 'Circle'
+        return : { 
+          type: 'Circle',
+          description : '' 
+        }
       },
       copy : {
         description:"Copy the values of the circle given as parameter into this circle",
@@ -1240,7 +1570,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       set : {
         description:"Set this circle with position and radius given as parameter",
@@ -1254,7 +1587,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       setPositionXY : {
         description:"Set the position of this circle using two number for each axis",
@@ -1268,7 +1604,10 @@ module.exports = {
             description : ''
           }   
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       setPositionFromVector : {
         description:"Set the position of the circle using a vector2",
@@ -1278,7 +1617,10 @@ module.exports = {
             description : ''
           } 
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       scale : {
         description:"Scale the radius of the circle by the number given as parameter",
@@ -1288,7 +1630,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       isIn : {
         description:"Check if the vector given as parameter is in this circle",
@@ -1298,7 +1643,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       draw : {
         description:"Draw this circle onto a canvas",
@@ -1320,7 +1668,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       }
     },
     rectangle : {
@@ -1328,7 +1679,10 @@ module.exports = {
         description:"Return a new rectangle with the same properties as this rectangle",
         params: [ 
         ],
-        return : 'Rectangle'
+        return : { 
+          type: 'Rectangle',
+          description : '' 
+        }
       },
       copy : {
         description:"Copy the values of the rectangle given as parameter into this rectangle",
@@ -1342,7 +1696,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       set : {
         description:"Set this rectangle with position and size given as parameter",
@@ -1364,7 +1721,10 @@ module.exports = {
             description : ''
           }
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       setPositionX : {
         description:"Set the position of the rectangle on the X axis",
@@ -1374,7 +1734,10 @@ module.exports = {
             description : ''
           } 
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       setPositionY : {
         description:"Set the position of the rectangle on the Y axis",
@@ -1384,7 +1747,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       setPositionXY : {
         description:"Set the position of the rectangle",
@@ -1398,7 +1764,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       setPositionFromVector : {
         description:"Set the position of the rectangle with the Vector2 given as parameter",
@@ -1412,7 +1781,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       setSizeX : {
         description:"Set the width of this rectangle",
@@ -1422,7 +1794,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       setSizeY : {
         description:"Set the height of this rectangle",
@@ -1432,7 +1807,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       setSizeXY : {
         description:"Set the size of the rectangle",
@@ -1446,7 +1824,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       setSizeFromVector : {
         description:"Set the size of the rectangle with the Vector2 given as parameter",
@@ -1456,7 +1837,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       },
       isIn : {
         description:"Check if the vector given as parameter is in this rectangle",
@@ -1466,7 +1850,10 @@ module.exports = {
             description : ''
           } 
         ],
-        return : 'boolean'
+        return : { 
+            type: 'boolean',
+            description : '' 
+          }
       },
       draw : {
         description:"Draw this circle onto a canvas",
@@ -1488,7 +1875,10 @@ module.exports = {
             description : ''
           }  
         ],
-        return : 'void'
+        return : { 
+          type: 'void',
+          description : '' 
+        }
       }
     }
   },
@@ -1501,7 +1891,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     secToMillisec : {
       description:"Convert seconds to milliseconds",
@@ -1511,7 +1904,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     millisecToFps : {
       description:"Convert milliseconds to frames per second",
@@ -1521,7 +1917,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     fpsToMillisec : {
       description:"Convert frame per second to millisecond",
@@ -1531,7 +1930,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     }
   },
   bezier : {
@@ -1555,7 +1957,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     cubic : {
       description:"Compute one dimension cubic bezier",
@@ -1581,7 +1986,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     }
   },
   random : {
@@ -1597,7 +2005,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     integer : {
       description:"Return an integer floating number between min and max numbers given as parameters",
@@ -1611,7 +2022,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     distribution : {
       description:"Compute random distribution with min, max and iteration numbers given as parameters",
@@ -1629,7 +2043,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     pick : {
       description:"Pick randomly between the two numbers given as parameter",
@@ -1643,7 +2060,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     }
   },
   array : {
@@ -1655,7 +2075,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     max : {
       description:"Return the highest number of the array",
@@ -1665,7 +2088,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     sum : {
       description:"Return the sum of all numbers of the array",
@@ -1675,7 +2101,10 @@ module.exports = {
           description : ''
         } 
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     multiply : {
       description:"Return the product of all numbers of the array",
@@ -1685,7 +2114,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     average : {
       description:"Return the average of all numbers of the array",
@@ -1695,7 +2127,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     }
   },
   utils : {
@@ -1711,7 +2146,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     floor : {
       description:"Return the number given as first parameter floored with the number of decimals given as second parameter",
@@ -1725,7 +2163,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     ceil : {
       description:"Return the number given as first parameter ceiled with the number of decimals given as second parameter",
@@ -1739,7 +2180,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     trunc : {
       description:"Return the number given as first parameter truncated with the number of decimals given as second parameter",
@@ -1753,7 +2197,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     roundToNearest : {
       description:"Return the number given as first parameter rounded to the nearest multiple of the number given as second parameter",
@@ -1767,7 +2214,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     mix : {
       description:"Return the linear blend of x and y, i.e. the product of x and (1 - a) plus the product of y and a",
@@ -1785,7 +2235,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     getSign : {
       description:"Return the sign (-1, 1 or 0) of the number given as parameter",
@@ -1795,7 +2248,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     opposite : {
       description:"Return the opposite of the number given as parameter",
@@ -1805,7 +2261,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     clamp : {
       description:"Clamp the number givens as first parameter into the limits of the min and max numbers given as second ans third parameters",
@@ -1823,7 +2282,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     normalize : {
       description:"Convert the number given as first parameter to a number from zero to one that indicates where it lies in the range given as second and third parameters",
@@ -1841,7 +2303,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     lerp : {
       description:"Return the interpolation value between the two numbers given as first and second parameters using the normalized amount given as third parameter",
@@ -1859,7 +2324,10 @@ module.exports = {
           description : ''
         }  
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     map : {
       description:"Interpolate the number given as first parameter between boundaies given as second and third parameter then map it to boundaries given as fourth and fifth parameters",
@@ -1885,7 +2353,10 @@ module.exports = {
           description : ''
         } 
       ],
-      return : 'number'
+      return : { 
+            type: 'number',
+            description : '' 
+          }
     },
     isEven : {
       description:"Check if the number given a parameter is even",
@@ -1895,7 +2366,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'boolean'
+      return : { 
+            type: 'boolean',
+            description : '' 
+          }
     },
     isOdd : {
       description:"Check if the number given a parameter is even",
@@ -1905,7 +2379,10 @@ module.exports = {
           description : ''
         } 
       ],
-      return : 'boolean'
+      return : { 
+            type: 'boolean',
+            description : '' 
+          }
     },
     isOrigin : {
       description:"Check if the number given as parameter is equal to zero",
@@ -1915,7 +2392,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'boolean'
+      return : { 
+            type: 'boolean',
+            description : '' 
+          }
     },
     isPositive : {
       description:"Check if the number given as parameter is positive",
@@ -1925,7 +2405,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'boolean'
+      return : { 
+            type: 'boolean',
+            description : '' 
+          }
     },
     isNegative : {
       description:"Check if the number given as parameter is negative",
@@ -1935,7 +2418,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'boolean'
+      return : { 
+            type: 'boolean',
+            description : '' 
+          }
     },
     isIn : {
       description:"Check if the number given as first parameter is within the boundaries given as second and third parameter",
@@ -1953,7 +2439,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'boolean'
+      return : { 
+            type: 'boolean',
+            description : '' 
+          }
     },
     isOut : {
       description:"Check if the number given as first parameter is outside the boundaries given as second and third parameter",
@@ -1971,7 +2460,10 @@ module.exports = {
           description : ''
         }
       ],
-      return : 'boolean'
+      return : { 
+            type: 'boolean',
+            description : '' 
+          }
     }
   }
 }

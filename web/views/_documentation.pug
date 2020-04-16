@@ -15,10 +15,11 @@ block content
 
           h3 Parameters
 
-            table(class="table")
+          if doc.params.length
+            table(class="table table-sm table-bordered table-dark")
               thead
                 tr
-                  th(scope="col") #
+                  th(scope="col") 
                   th(scope="col") Name
                   th(scope="col") Type
                   th(scope="col") Description
@@ -29,10 +30,13 @@ block content
                     td= val.name
                     td= val.type
                     td= val.description
-                tr  
-                  th =>
-                  td Returns
-                  td= doc.return
-                  td
+                  
+          else
+            p None
+
+          h3 Return value
+
+          p= doc.return.type
+          p= doc.return.description
 
           h3 Examples
