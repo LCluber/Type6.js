@@ -9,10 +9,6 @@ $(document).ready(function () {
 		}
 	});
 
-	if ($(window).width() < 768) {
-		$("#docs-sidebar").removeClass('sidebar-visible').addClass('sidebar-hidden');
-	}
-
 	// $(document).delegate('*[data-toggle="lightbox"]', 'click', function (e) {
 	// 	e.preventDefault();
 	// 	$(this).ekkoLightbox();

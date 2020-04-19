@@ -75,18 +75,18 @@ a {
     overflow-y: auto;
     overflow-x: hidden;
     transition: all .35s ease-in-out;
-    width: 260px;
-    transform: translateX(0);
+    min-width: 230px;
+    // transform: translateX(0);
     box-shadow: 0 1px 4px 0 rgba(255,255,255,.1);
   
     &.sidebar-visible {
-      width: 260px;
+      width: 230px;
       transform: translateX(0);
     }
 
     &.sidebar-hidden {
       width: 0;
-      transform: translateX(-260px);
+      transform: translateX(-230px);
     }
 
     .list-group-item {
@@ -113,28 +113,28 @@ a {
     overflow: auto;
     padding-left: 30px;
     padding-top: 30px;
-    max-width: 100%;
+    width: 100%;
 
     .table {
       color: $theme-text-color-primary;
     }
-  
   }
 
   @media screen and (max-width: 768px) {
     .docs-sidebar {
-      left: -260px;
+      width: 0;
       transition: all .35s ease-in-out;
       position: absolute;
       z-index: 1;
-      max-width: 80%;
 
       &.sidebar-visible {
-        left: 0;
+        width: 0;
+        transform: translateX(-230px);
       }
 
       &.sidebar-hidden {
-        width: 260px;
+        width: 230px;
+        transform: translateX(0);
       }
     }
   }
