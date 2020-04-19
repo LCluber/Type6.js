@@ -5,38 +5,36 @@ block content
   div(class="docs-wrapper")
     include _menu
     
-    div( class="docs-content")
-      div( class="container")
-        article( class="" id="")
-          h2= doc.name
-          h3 Overview
+    div( class="container")
+      article( class="" id="")
+        h2= doc.name + '()'
 
-          p= doc.description
+        p= doc.description
 
-          h3 Parameters
+        h3 Parameters
 
-          if doc.params.length
-            table(class="table table-sm table-bordered table-dark")
-              thead
+        if doc.params.length
+          table(class="table table-sm")
+            thead
+              tr
+                th(scope="col") 
+                th(scope="col") Name
+                th(scope="col") Type
+                th(scope="col") Description
+            tbody
+              each val, index in doc.params
                 tr
-                  th(scope="col") 
-                  th(scope="col") Name
-                  th(scope="col") Type
-                  th(scope="col") Description
-              tbody
-                each val, index in doc.params
-                  tr
-                    th(scope="row")= index+1
-                    td= val.name
-                    td= val.type
-                    td= val.description
-                  
-          else
-            p None
+                  th(scope="row")= index+1
+                  td= val.name
+                  td= val.type
+                  td= val.description
+                
+        else
+          p None
 
-          h3 Return value
+        h3 Return value
 
-          p= doc.return.type
-          p= doc.return.description
+        p= doc.return.type
+        p= doc.return.description
 
-          h3 Examples
+        h3 Examples
