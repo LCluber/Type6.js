@@ -14,8 +14,12 @@ html( lang='en')
 
     include _header
 
-    block content
+    div(class="docs-wrapper")
+      include _menu
+
+      div( class="container")
+        article( class="" id="")
+          block content
+        include _footer
     
-    //- include _footer
-        
     script( src = 'js/main.min.js' )
