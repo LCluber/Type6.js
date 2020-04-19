@@ -72,7 +72,8 @@ a {
   .docs-sidebar {
     // height: calc(100vh - #{$headerHeight});
     height: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     transition: all .35s ease-in-out;
     width: 260px;
     transform: translateX(0);
@@ -143,7 +144,7 @@ footer {
   height: $footerHeight;
   font-size: 11px;
   padding: 10px 0;
-  box-shadow: 0 1px 4px 0 rgba(255,255,255,.1);
+  // box-shadow: 0 1px 4px 0 rgba(255,255,255,.1);
 
   p {
     margin: 0;
