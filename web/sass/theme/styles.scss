@@ -3,14 +3,11 @@
 // @import "docs";
 
 $headerHeight: 50px;
+$footerHeight: 50px;
 
 body {
   background-color: #222;
   color: $theme-text-color-primary;
-}
-
-h2 {
-  // margin-top: 
 }
 
 a {
@@ -67,13 +64,14 @@ a {
 }
 
 .docs-wrapper {
-  margin-top: $headerHeight;
-  height: calc(100vh - #{$headerHeight});
+  // margin-top: $headerHeight;
+  height: calc(100vh - #{$headerHeight + $footerHeight});
   display: flex;
   overflow: hidden;
 
   .docs-sidebar {
-    height: calc(100vh - #{$headerHeight});
+    // height: calc(100vh - #{$headerHeight});
+    height: 100%;
     overflow: auto;
     transition: all .35s ease-in-out;
     width: 250px;
@@ -81,7 +79,7 @@ a {
     box-shadow: 0 1px 4px 0 rgba(255,255,255,.1);
   
     &.sidebar-visible {
-      width: 250px;
+      min-width: 250px;
       transform: translateX(0);
     }
 
@@ -108,11 +106,14 @@ a {
   }
 
   .container {
-    height: calc(100vh - #{$headerHeight});
+    // height: calc(100vh - #{$headerHeight});
+    height: 100%;
     flex-grow: 1;
     overflow: auto;
     padding-left: 30px;
     padding-top: 30px;
+    max-width: 100%;
+
     .table {
       color: $theme-text-color-primary;
     }
@@ -139,5 +140,31 @@ a {
 }
 
 footer {
+  height: $footerHeight;
   font-size: 11px;
+  padding: 10px 0;
+  box-shadow: 0 1px 4px 0 rgba(255,255,255,.1);
+
+  p {
+    margin: 0;
+  }
+}
+
+/* Custom scrollbar for Chrome browser */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #020b0b;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #173836;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #144f4b;
 }
