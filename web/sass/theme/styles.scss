@@ -65,7 +65,7 @@ a {
 
 .docs-wrapper {
   // margin-top: $headerHeight;
-  height: calc(100vh - #{$headerHeight + $footerHeight});
+  height: calc(100vh - #{$headerHeight});
   display: flex;
   overflow: hidden;
 
@@ -74,18 +74,18 @@ a {
     height: 100%;
     overflow: auto;
     transition: all .35s ease-in-out;
-    width: 250px;
+    width: 260px;
     transform: translateX(0);
     box-shadow: 0 1px 4px 0 rgba(255,255,255,.1);
   
     &.sidebar-visible {
-      min-width: 250px;
+      width: 260px;
       transform: translateX(0);
     }
 
     &.sidebar-hidden {
       width: 0;
-      transform: translateX(-250px);
+      transform: translateX(-260px);
     }
 
     .list-group-item {
@@ -122,7 +122,7 @@ a {
 
   @media screen and (max-width: 768px) {
     .docs-sidebar {
-      left: -250px;
+      left: -260px;
       transition: all .35s ease-in-out;
       position: absolute;
       z-index: 1;
@@ -133,7 +133,7 @@ a {
       }
 
       &.sidebar-hidden {
-        width: 250px;
+        width: 260px;
       }
     }
   }
@@ -162,9 +162,9 @@ footer {
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #173836;
+  background: $theme-color-primary;
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #144f4b;
+  background: $theme-color-secondary;
 }

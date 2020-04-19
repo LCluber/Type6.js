@@ -114,7 +114,7 @@ module.exports = {
           }
         },
         getDistance : {
-          description:"Compute and returns the distance between this vector and the vector given as parameters",
+          description:"Compute and returns the distance between this vector and the vector given as parameter",
           params: [
             { name: 'v',
               type: 'Vector2',
@@ -647,7 +647,7 @@ module.exports = {
           }
         },
         getDistance : {
-          description:"Compute and returns the distance between this vector and the vector given as parameters",
+          description:"Compute and returns the distance between this vector and the vector given as parameter",
           params: [
             { name: 'v',
               type: 'Vector3',
