@@ -38,22 +38,26 @@ export class Rectangle {
     return new Rectangle(this.position.x, this.position.y, this.size.x, this.size.y);
   }
 
-  public copy( rectangle: Rectangle ): void {
+  public copy( rectangle: Rectangle ): Rectangle {
     this.setSizeFromVector( rectangle.size );
     this.setPositionFromVector( rectangle.position );
+    return this;
   }
 
-  public set( positionX: number, positionY: number, sizeX: number, sizeY: number ): void {
+  public set( positionX: number, positionY: number, sizeX: number, sizeY: number ): Rectangle {
     this.setSizeXY( sizeX, sizeY );
     this.setPositionXY( positionX, positionY );
+    return this;
   }
 
-  public setPositionX(x: number): void {
+  public setPositionX(x: number): Rectangle {
     this.setPosition('x', x);
+    return this;
   }
 
-  public setPositionY(y: number): void {
+  public setPositionY(y: number): Rectangle {
     this.setPosition('y', y);
+    return this;
   }
 
   private setPosition(property: AxisNames2d, value: number): void {
@@ -62,23 +66,27 @@ export class Rectangle {
     this.bottomRightCorner[property] = value + this.halfSize[property] ;
   }
 
-  public setPositionXY( positionX: number, positionY: number ): void {
+  public setPositionXY( positionX: number, positionY: number ): Rectangle {
     this.position.set( positionX, positionY );
     this.setCorners();
+    return this;
   }
 
-  public setPositionFromVector( position: Vector2 ): void {
+  public setPositionFromVector( position: Vector2 ): Rectangle {
     this.position.copy( position );
     this.setCorners();
+    return this;
   }
 
 
-  public setSizeX( width: number ): void {
+  public setSizeX( width: number ): Rectangle {
     this.setSize('x', width);
+    return this;
   }
 
-  public setSizeY( height: number ): void {
+  public setSizeY( height: number ): Rectangle {
     this.setSize('y', height);
+    return this;
   }
 
   private setSize(property: AxisNames2d, value: number): void {
@@ -88,16 +96,18 @@ export class Rectangle {
     this.bottomRightCorner[property] = this.position[property] + this.halfSize[property];
   }
 
-  public setSizeXY( width: number, height: number ): void {
+  public setSizeXY( width: number, height: number ): Rectangle {
     this.size.set( width, height );
     this.setHalfSize();
     this.setCorners();
+    return this;
   }
 
-  public setSizeFromVector( size: Vector2 ): void {
+  public setSizeFromVector( size: Vector2 ): Rectangle {
     this.size.copy( size );
     this.setHalfSize();
     this.setCorners();
+    return this;
   }
 
   private setCorners(): void {

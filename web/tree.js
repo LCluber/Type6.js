@@ -17,7 +17,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           } 
         },
         copy : {
@@ -30,7 +30,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         setFromArray : {
@@ -47,7 +47,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         setFromAngle : {
@@ -60,7 +60,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         origin : {
@@ -69,7 +69,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         setOppositeAxis : {
@@ -86,18 +86,18 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new axis value' 
           }
         }
       },
       getters : {
         getAngle : {
-          description:"Compute and return the angle of the vector",
+          description:"Compute and return the angle in the plane (in radians) between the positive x-axis and the ray from (0,0) to the point (x,y)",
           params: [
           ],
           return : { 
             type: 'number',
-            description : '' 
+            description : 'The angle in radians (in [-π,π]) between the positive x-axis and the ray from (0,0) to the point' 
           }
         },
         getMagnitude : {
@@ -110,7 +110,7 @@ module.exports = {
           ],
           return : { 
             type: 'number',
-            description : '' 
+            description : 'The magnitude of the vector or the squared magnitude depending on the given parameter' 
           }
         },
         getDistance : {
@@ -127,7 +127,7 @@ module.exports = {
           ],
           return : { 
             type: 'number',
-            description : '' 
+            description : 'The distance between the vectors' 
           }
         },
         getMaxAxis : {
@@ -136,7 +136,7 @@ module.exports = {
           ],
           return : { 
             type: 'AxisNames2d',
-            description : '' 
+            description : 'The name of the axis' 
           }
         },
         getMinAxis : {
@@ -145,7 +145,7 @@ module.exports = {
           ],
           return : { 
             type: 'AxisNames2d',
-            description : '' 
+            description : 'The name of the axis' 
           }
         }
       },
@@ -156,7 +156,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The new vector' 
           }
         },
         toArray : {
@@ -165,7 +165,7 @@ module.exports = {
           ],
           return : { 
             type: 'number[]',
-            description : '' 
+            description : 'The vector exported as an array' 
           }
         },
         toString : {
@@ -174,18 +174,18 @@ module.exports = {
           ],
           return : { 
             type: 'String',
-            description : '' 
+            description : 'The vector exported as a string' 
           }
         }
       },
       check : {
         isOrigin : {
-          description:"Return true if this vector is equal to (0,0) or false otherwise",
+          description:"Test if the vector is at origin. Return true if this vector is equal to (0,0) or false otherwise",
           params: [
           ],
           return : { 
             type: 'boolean',
-            description : '' 
+            description : 'The result of the test' 
           }
         },
         isPositive : {
@@ -194,7 +194,7 @@ module.exports = {
           ],
           return : { 
             type: 'boolean',
-            description : '' 
+            description : 'The result of the test' 
           }
         }
       },
@@ -210,7 +210,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           },
           addScalar : {
@@ -223,7 +223,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           },
           addScaledVector : {
@@ -240,7 +240,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           }
         },
@@ -255,7 +255,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           },
           subtractScalar : {
@@ -268,7 +268,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           },
           subtractScaledVector : {
@@ -285,7 +285,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           }
         },
@@ -300,7 +300,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           },
           multiply : {
@@ -313,7 +313,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           },
           multiplyScaledVector : {
@@ -330,7 +330,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           }
         },
@@ -345,7 +345,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           },
           divideScaledVector : {
@@ -362,7 +362,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           },
           halve : {
@@ -371,7 +371,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           },
           normalize : {
@@ -380,7 +380,7 @@ module.exports = {
             ],
             return : { 
               type: 'Vector2',
-              description : 'Value of the Y axis' 
+              description : 'The vector with its new values' 
             }
           }
         },
@@ -394,7 +394,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         min : {
@@ -407,7 +407,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         maxScalar : {
@@ -420,7 +420,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         minScalar : {
@@ -433,7 +433,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         absolute : {
@@ -450,7 +450,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         opposite : {
@@ -459,7 +459,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         clamp : {
@@ -472,7 +472,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         lerp : {
@@ -493,11 +493,11 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         dotProduct : {
-          description:"Return the dot product of this vector",
+          description:"Return the dot product between this vector and the vector given as parameter",
           params: [
             { name: 'v',
               type: 'Vector2',
@@ -506,7 +506,7 @@ module.exports = {
           ],
           return : { 
             type: 'number',
-            description : '' 
+            description : 'the dot product' 
           }
         },
         quadraticBezier : {
@@ -531,7 +531,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         cubicBezier : {
@@ -560,7 +560,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector2',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         }
       }
@@ -580,7 +580,7 @@ module.exports = {
             },
             { name: 'z',
               type: 'number',
-              description : ''
+              description : 'The vector with its new values'
             } 
           ],
           return : { 
@@ -598,7 +598,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         setFromArray : {
@@ -614,7 +614,7 @@ module.exports = {
             },
             { name: 'z',
               type: 'number',
-              description : ''
+              description : 'The vector with its new values'
             }
           ],
           return : { 
@@ -628,7 +628,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         }
       },
@@ -643,7 +643,7 @@ module.exports = {
           ],
           return : { 
             type: 'number',
-            description : '' 
+            description : 'The magnitude of the vector or the squared magnitude depending on the given parameter' 
           }
         },
         getDistance : {
@@ -660,7 +660,7 @@ module.exports = {
           ],
           return : { 
             type: 'number',
-            description : '' 
+            description : 'the distance between the vectors' 
           }
         }
       },
@@ -671,7 +671,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The new vector' 
           }
         },
         toArray : {
@@ -680,7 +680,7 @@ module.exports = {
           ],
           return : { 
             type: 'number[]',
-            description : '' 
+            description : 'The vector as an array' 
           }
         },
         toString : {
@@ -689,7 +689,7 @@ module.exports = {
           ],
           return : { 
           type: 'String',
-          description : '' 
+          description : 'The vector as a string'
         }
         }
       },
@@ -700,7 +700,7 @@ module.exports = {
           ],
           return : { 
             type: 'boolean',
-            description : '' 
+            description : 'The result of the test' 
           }
         },
         isPositive : {
@@ -709,7 +709,7 @@ module.exports = {
           ],
           return : { 
             type: 'boolean',
-            description : '' 
+            description : 'The result of the test' 
           }
         }
       },
@@ -725,7 +725,7 @@ module.exports = {
           ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           },
           addScalar : {
@@ -738,7 +738,7 @@ module.exports = {
           ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           },
           addScaledVector : {
@@ -755,7 +755,7 @@ module.exports = {
           ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           }
         },
@@ -770,7 +770,7 @@ module.exports = {
           ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           },
           subtractScalar : {
@@ -783,7 +783,7 @@ module.exports = {
           ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           },
           subtractScaledVector : {
@@ -800,7 +800,7 @@ module.exports = {
           ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           }
         },
@@ -815,7 +815,7 @@ module.exports = {
           ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           },
           multiply : {
@@ -828,7 +828,7 @@ module.exports = {
           ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           },
           multiplyScaledVector : {
@@ -845,7 +845,7 @@ module.exports = {
           ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           }
         },
@@ -860,7 +860,7 @@ module.exports = {
             ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           },
           divideScaledVector : {
@@ -877,7 +877,7 @@ module.exports = {
             ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           },
           halve : {
@@ -886,7 +886,7 @@ module.exports = {
             ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           },
           normalize : {
@@ -895,7 +895,7 @@ module.exports = {
             ],
             return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
           }
         },
@@ -909,7 +909,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         min : {
@@ -922,7 +922,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         maxScalar : {
@@ -935,7 +935,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         minScalar : {
@@ -948,7 +948,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         absolute : {
@@ -957,7 +957,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         opposite : {
@@ -966,7 +966,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         },
         dotProduct : {
@@ -979,7 +979,7 @@ module.exports = {
           ],
           return : { 
             type: 'number',
-            description : '' 
+            description : 'The dot product' 
           }
         },
         cross : {
@@ -992,7 +992,7 @@ module.exports = {
           ],
           return : { 
             type: 'Vector3',
-            description : '' 
+            description : 'The vector with its new values' 
           }
         }
       }
@@ -1010,7 +1010,7 @@ module.exports = {
         ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the new precision' 
           }
       },
       setCosinePrecision : {
@@ -1023,7 +1023,7 @@ module.exports = {
         ],
         return : { 
             type: 'number',
-            description : '' 
+            description : 'the new precision' 
           }
       },
       setArctanPrecision : {
@@ -1036,7 +1036,7 @@ module.exports = {
         ],
         return : { 
             type: 'number',
-            description : '' 
+            description : 'the new precision' 
           }
       }
     },
@@ -1050,7 +1050,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the sine of the angle' 
           }
     },
     cosine : {
@@ -1063,7 +1063,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the cosine of the angle' 
           }
     },
     arctan : {
@@ -1076,7 +1076,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the arctan of the angle' 
           }
     },
     arctan2 : {
@@ -1093,7 +1093,7 @@ module.exports = {
       ],
       return : { 
         type: 'number|false',
-        description : '' 
+        description : 'the arctan2 of the angle or false' 
       }
     },
     arctan2Vector2 : {
@@ -1106,7 +1106,7 @@ module.exports = {
       ],
       return : { 
         type: 'number|false',
-        description : '' 
+        description : 'the arctan2 of the angle or false' 
       }
     },
     sineEquation : {
@@ -1131,7 +1131,7 @@ module.exports = {
       ],
       return : { 
         type: 'number',
-        description : '' 
+        description : 'the result of the equation' 
       }
     },
     cosineEquation : {
@@ -1156,7 +1156,7 @@ module.exports = {
       ],
       return : { 
         type: 'number',
-        description : '' 
+        description : 'the result of the equation' 
       }
     },
     arctanEquation : {
@@ -1181,7 +1181,7 @@ module.exports = {
       ],
       return : { 
         type: 'number',
-        description : '' 
+        description : 'the result of the equation' 
       }
     },
     helpers : {
@@ -1195,7 +1195,7 @@ module.exports = {
         ],
         return : { 
           type: 'number',
-          description : '' 
+          description : 'the radian' 
         }
       },
       radianToDegree: {
@@ -1208,24 +1208,20 @@ module.exports = {
         ],
         return : { 
           type: 'number',
-          description : '' 
+          description : 'the degree' 
         }
       },
       normalizeRadian: {
         description:"Normalizes an angle in radians between -Pi an Pi",
         params: [
-          { name: 'x',
+          { name: 'angle',
             type: 'number',
             description : ''
-          },
-          { name: 'y',
-            type: 'number',
-            description : ''
-          }  
+          }
         ],
         return : { 
           type: 'number',
-          description : '' 
+          description : 'the radian' 
         }
       }
     }
@@ -1242,7 +1238,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x3',
-          description : '' 
+          description : 'the Matrix4x3 with its new values' 
         }
       },
       toArray : {
@@ -1251,7 +1247,7 @@ module.exports = {
         ],
         return : { 
           type: 'Float32Array',
-          description : '' 
+          description : 'the Matrix4x3 as an array' 
         }
       },
       toString : {
@@ -1260,7 +1256,7 @@ module.exports = {
         ],
         return : { 
           type: 'String',
-          description : '' 
+          description : 'the Matrix4x3 as a string' 
         }
       },
       identity : {
@@ -1269,7 +1265,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x3',
-          description : '' 
+          description : 'the Matrix4x3 with its new values' 
         }
       },
       scale : {
@@ -1282,7 +1278,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x3',
-          description : '' 
+          description : 'the Matrix4x3 with its new values' 
         }
       },
       rotateX : {
@@ -1295,7 +1291,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x3',
-          description : '' 
+          description : 'the Matrix4x3 with its new values' 
         }
       },
       rotateY : {
@@ -1308,7 +1304,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x3',
-          description : '' 
+          description : 'the Matrix4x3 with its new values' 
         }
       },
       rotateZ : {
@@ -1321,7 +1317,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x3',
-          description : '' 
+          description : 'the Matrix4x3 with its new values' 
         }
       },
       translate : {
@@ -1334,7 +1330,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x3',
-          description : '' 
+          description : 'the Matrix4x3 with its new values' 
         }
       },
       multiply : {
@@ -1347,7 +1343,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x3',
-          description : '' 
+          description : 'the Matrix4x3 with its new values' 
         }
       },
       lookAtRH : {
@@ -1368,7 +1364,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x3',
-          description : '' 
+          description : 'the Matrix4x3 with its new values' 
         }
       }
     },
@@ -1383,7 +1379,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x4',
-          description : '' 
+          description : 'the Matrix4x4 with its new values' 
         }
       },
       toArray : {
@@ -1392,7 +1388,7 @@ module.exports = {
         ],
         return : { 
           type: 'Float32Array',
-          description : '' 
+          description : 'the Matrix4x4 as an array' 
         }
       },
       toString : {
@@ -1401,7 +1397,7 @@ module.exports = {
         ],
         return : { 
           type: 'String',
-          description : '' 
+          description : 'the Matrix4x4 as a string' 
         }
       },
       identity : {
@@ -1410,7 +1406,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x4',
-          description : '' 
+          description : 'the Matrix4x4 with its new values' 
         }
       },
       scale : {
@@ -1423,7 +1419,7 @@ module.exports = {
         ],
         return : { 
           type: 'Matrix4x4',
-          description : '' 
+          description : 'the Matrix4x4 with its new values' 
         }
       },
       rotateX : {
@@ -1436,7 +1432,7 @@ module.exports = {
       ],
         return : { 
           type: 'Matrix4x4',
-          description : '' 
+          description : 'the Matrix4x4 with its new values' 
         }
       },
       rotateY : {
@@ -1449,7 +1445,7 @@ module.exports = {
       ],
         return : { 
           type: 'Matrix4x4',
-          description : '' 
+          description : 'the Matrix4x4 with its new values' 
         }
       },
       rotateZ : {
@@ -1457,7 +1453,7 @@ module.exports = {
         params: [
           { name: 'angle',
             type: 'number',
-            description : ''
+            description : 'the Matrix4x4 with its new values'
           }  
       ],
         return : { 
@@ -1475,7 +1471,7 @@ module.exports = {
       ],
         return : { 
           type: 'Matrix4x4',
-          description : '' 
+          description : 'the Matrix4x4 with its new values' 
         }
       },
       multiply : {
@@ -1488,7 +1484,7 @@ module.exports = {
       ],
         return : { 
           type: 'Matrix4x4',
-          description : '' 
+          description : 'the Matrix4x4 with its new values' 
         }
       },
       perspective : {
@@ -1513,7 +1509,7 @@ module.exports = {
       ],
         return : { 
           type: 'Matrix4x4',
-          description : '' 
+          description : 'the Matrix4x4 with its new values' 
         }
       },
       orthographic : {
@@ -1546,7 +1542,7 @@ module.exports = {
       ],
         return : { 
           type: 'Matrix4x4',
-          description : '' 
+          description : 'the Matrix4x4 with its new values' 
         }
       }
     }
@@ -1559,7 +1555,7 @@ module.exports = {
         ],
         return : { 
           type: 'Circle',
-          description : '' 
+          description : 'the new circle' 
         }
       },
       copy : {
@@ -1571,8 +1567,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Circle',
+          description : 'the Circle with its new values' 
         }
       },
       set : {
@@ -1588,8 +1584,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Circle',
+          description : 'the Circle with its new values' 
         }
       },
       setPositionXY : {
@@ -1605,8 +1601,8 @@ module.exports = {
           }   
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Circle',
+          description : 'the Circle with its new values' 
         }
       },
       setPositionFromVector : {
@@ -1618,8 +1614,8 @@ module.exports = {
           } 
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Circle',
+          description : 'the Circle with its new values' 
         }
       },
       scale : {
@@ -1631,8 +1627,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Circle',
+          description : 'the Circle with its new values' 
         }
       },
       isIn : {
@@ -1644,8 +1640,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Boolean',
+          description : 'The result of the test' 
         }
       },
       draw : {
@@ -1681,7 +1677,7 @@ module.exports = {
         ],
         return : { 
           type: 'Rectangle',
-          description : '' 
+          description : 'the new rectangle' 
         }
       },
       copy : {
@@ -1690,15 +1686,11 @@ module.exports = {
           { name: 'rectangle',
             type: 'Rectangle',
             description : ''
-          },
-          { name: 'y',
-            type: 'number',
-            description : ''
-          }  
+          } 
         ],
         return : { 
           type: 'void',
-          description : '' 
+          description : 'the rectangle with its new values' 
         }
       },
       set : {
@@ -1722,8 +1714,8 @@ module.exports = {
           }
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Rectangle',
+          description : 'the rectangle with its new values' 
         }
       },
       setPositionX : {
@@ -1735,8 +1727,8 @@ module.exports = {
           } 
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Rectangle',
+          description : 'the rectangle with its new position' 
         }
       },
       setPositionY : {
@@ -1748,8 +1740,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Rectangle',
+          description : 'the rectangle with its new position' 
         }
       },
       setPositionXY : {
@@ -1765,8 +1757,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Rectangle',
+          description : 'the rectangle with its new position' 
         }
       },
       setPositionFromVector : {
@@ -1782,8 +1774,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Rectangle',
+          description : 'the rectangle with its new position' 
         }
       },
       setSizeX : {
@@ -1795,8 +1787,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Rectangle',
+          description : 'the rectangle with its new size' 
         }
       },
       setSizeY : {
@@ -1808,8 +1800,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Rectangle',
+          description : 'the rectangle with its new size' 
         }
       },
       setSizeXY : {
@@ -1825,8 +1817,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Rectangle',
+          description : 'the rectangle with its new size' 
         }
       },
       setSizeFromVector : {
@@ -1838,8 +1830,8 @@ module.exports = {
           }  
         ],
         return : { 
-          type: 'void',
-          description : '' 
+          type: 'Rectangle',
+          description : 'the rectangle with its new size' 
         }
       },
       isIn : {
@@ -1852,7 +1844,7 @@ module.exports = {
         ],
         return : { 
             type: 'boolean',
-            description : '' 
+            description : 'The result of the test' 
           }
       },
       draw : {
@@ -1893,7 +1885,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the time in second' 
           }
     },
     secToMillisec : {
@@ -1906,7 +1898,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the time in milliseconds' 
           }
     },
     millisecToFps : {
@@ -1914,7 +1906,7 @@ module.exports = {
       params: [
         { name: 'millisecond',
           type: 'number',
-          description : ''
+          description : 'the time in frame to second'
         }  
       ],
       return : { 
@@ -1932,7 +1924,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the time in millisecond' 
           }
     }
   },
@@ -1959,7 +1951,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     cubic : {
@@ -1988,7 +1980,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     }
   },
@@ -2007,7 +1999,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     integer : {
@@ -2024,7 +2016,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     distribution : {
@@ -2045,7 +2037,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     pick : {
@@ -2062,7 +2054,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     }
   },
@@ -2077,7 +2069,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     max : {
@@ -2090,7 +2082,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     sum : {
@@ -2103,7 +2095,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     multiply : {
@@ -2116,7 +2108,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     average : {
@@ -2129,7 +2121,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     }
   },
@@ -2148,7 +2140,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     floor : {
@@ -2165,7 +2157,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     ceil : {
@@ -2182,7 +2174,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     trunc : {
@@ -2199,7 +2191,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     roundToNearest : {
@@ -2216,7 +2208,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     mix : {
@@ -2237,7 +2229,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     getSign : {
@@ -2250,7 +2242,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the sign' 
           }
     },
     opposite : {
@@ -2263,7 +2255,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     clamp : {
@@ -2284,7 +2276,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     normalize : {
@@ -2305,7 +2297,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     lerp : {
@@ -2326,7 +2318,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     map : {
@@ -2355,7 +2347,7 @@ module.exports = {
       ],
       return : { 
             type: 'number',
-            description : '' 
+            description : 'the result' 
           }
     },
     isEven : {
@@ -2368,7 +2360,7 @@ module.exports = {
       ],
       return : { 
             type: 'boolean',
-            description : '' 
+            description : 'the result of the test' 
           }
     },
     isOdd : {
@@ -2381,7 +2373,7 @@ module.exports = {
       ],
       return : { 
             type: 'boolean',
-            description : '' 
+            description : 'the result of the test' 
           }
     },
     isOrigin : {
@@ -2394,7 +2386,7 @@ module.exports = {
       ],
       return : { 
             type: 'boolean',
-            description : '' 
+            description : 'the result of the test' 
           }
     },
     isPositive : {
@@ -2407,7 +2399,7 @@ module.exports = {
       ],
       return : { 
             type: 'boolean',
-            description : '' 
+            description : 'the result of the test' 
           }
     },
     isNegative : {
@@ -2420,7 +2412,7 @@ module.exports = {
       ],
       return : { 
             type: 'boolean',
-            description : '' 
+            description : 'the result of the test' 
           }
     },
     isIn : {
@@ -2441,7 +2433,7 @@ module.exports = {
       ],
       return : { 
             type: 'boolean',
-            description : '' 
+            description : 'the result of the test' 
           }
     },
     isOut : {
@@ -2462,7 +2454,7 @@ module.exports = {
       ],
       return : { 
             type: 'boolean',
-            description : '' 
+            description : 'the result of the test' 
           }
     }
   }
