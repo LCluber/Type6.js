@@ -265,8 +265,6 @@ module.exports = function(grunt){
         },
         files: [{
           src  : [
-            // nodeDir + 'jquery-easing/jquery.easing.1.3.js',
-            //distDir + projectNameLC + '.iife.js',
             webDir + 'js/*.js'
           ],
           dest : publicDir + 'js/main.min.js'
@@ -292,7 +290,7 @@ module.exports = function(grunt){
         src: [nodeDir   + 'jquery/dist/jquery.min.js',
               // nodeDir   + '@fortawesome/fontawesome-free/js/all.min.js',
               nodeDir   + 'bootstrap/dist/js/bootstrap.min.js',
-              nodeDir   + 'highlight.js/lib/highlight.js',
+              // nodeDir   + 'fuse.js/dist/fuse.min.js',
               publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
@@ -444,8 +442,7 @@ grunt.registerTask( 'websass',
 
 grunt.registerTask( 'webjs',
                     'Compile website js',
-                    [ 'jshint:web',
-                      'clean:webjs',
+                    [ 'clean:webjs',
                       'uglify:web',
                       'concat:webjs',
                       'copy:examples'

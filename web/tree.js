@@ -18,7 +18,7 @@ module.exports = {
           return : { 
             type: 'Vector2',
             description : 'The vector with its new values' 
-          } 
+          }
         },
         copy : {
           description:"Copy the values of the vector given as parameter",

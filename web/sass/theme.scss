@@ -60,6 +60,7 @@ $theme-text-color-secondary: lighten($theme-text-color-primary, 20%);
 
 /*************************** Import Bootstrap  *****************************/
 @import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/highlight.js/scss/atom-one-dark";
 
 
 /*************************** Theme Styles Section ****************************/

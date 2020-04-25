@@ -2,6 +2,10 @@ const fs = require('fs');
 const path = require("path");
 const pug = require('pug');
 const tree = require('./tree');
+const hljs = require("highlight.js/lib/core");  // require only the core library
+// separately require languages
+hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
+
 
 let pages = {};
 function extractMethods(object, property, pageName) {
@@ -37,10 +41,14 @@ fs.writeFile(path.join(__dirname, './public/installation.html'), html, function 
 
 for (let pageName in pages) {
   if(pages.hasOwnProperty(pageName)) {
-    html = pug.renderFile(path.join(__dirname, './views/_documentation.pug'), { menu:tree, doc: pages[pageName], name:pageName });
-    fs.writeFile(path.join(__dirname, './public/' + pageName + '.html'), html, function (err) {
-      if (err) throw err;
-      // console.log(pageName);
+    fs.readFile(path.join(__dirname, './js/usage/' + pageName + '.js'), 'utf8', function(err, content) {
+      let highlightedCode = '';
+      if (content)
+        highlightedCode = hljs.highlight('javascript', content).value;
+      html = pug.renderFile(path.join(__dirname, './views/_documentation.pug'), { menu:tree, doc: pages[pageName], name:pageName, usage:highlightedCode });
+      fs.writeFile(path.join(__dirname, './public/' + pageName + '.html'), html, function (err) {
+        if (err) throw err;
+      });
     });
   }
 }
