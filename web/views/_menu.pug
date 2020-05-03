@@ -57,4 +57,4 @@ div(id="docs-sidebar" class="docs-sidebar sidebar-visible")
             ul(class="list-group")
               each example in category
                 li( class='list-group-item nav-item' id= example.id)
-                  a( href=root + examplesFolder + example.htmlPath, target='_self' class=name === example.name ? "nav-link active" : "nav-link")= example.name
+                  a( href=root + examplesFolder + example.htmlPath, target='_self' class=name === example.id ? "nav-link active" : "nav-link")= example.name

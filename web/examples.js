@@ -16,8 +16,8 @@ module.exports = {
   ],
   random : [
     "random",
-    "1D random distribution",
-    "2D random distribution"
+    "1d random distribution",
+    "2d random distribution"
   ],
   bezier : [
     "quadratic with lerp",

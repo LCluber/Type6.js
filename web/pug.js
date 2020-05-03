@@ -34,7 +34,7 @@ function buildExamplesMenu(){
         examples[folder].push({
           id : 'examples_' + folder + '_' + underscore,
           name : example,
-          htmlPath : folder + '_' + underscore + '.html',
+          htmlPath : 'examples_' + folder + '_' + underscore + '.html',
           jsPath : folder + '/' + underscore + '.js'
         })
       }
@@ -56,7 +56,8 @@ for (let folder in examplesMenu) {
                               examplesFolder: 'examples/',
                               examplesMenu: examplesMenu,
                               docMenu: docTree,
-                              jsPath: example.jsPath
+                              jsPath: example.jsPath,
+                              name: example.id
                             });
       fs.writeFile(path.join(__dirname, './public/examples/' + example.id + '.html'), html, function (err) {
         if (err) throw err;
