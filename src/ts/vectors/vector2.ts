@@ -19,11 +19,11 @@ export class Vector2 {
 
   //true if vector is equal to (0;0)
   public isOrigin(): boolean {
-    return ( Utils.isOrigin(this.x) && Utils.isOrigin(this.y) ) ? true : false;
+    return (this.x === 0 && this.y === 0) ? true : false;
   }
 
   public isPositive(): boolean {
-    return ( Utils.isPositive(this.x) && Utils.isPositive(this.y) ) ? true : false;
+    return ( this.x >= 0 && this.y >= 0 ) ? true : false;
   }
 
   public setFromArray( array: number[], offset?: number ): Vector2 {

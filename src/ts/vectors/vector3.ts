@@ -17,11 +17,11 @@ export class Vector3 {
 
   //true if vector is equal to (0;0)
   public isOrigin(): boolean {
-    return ( Utils.isOrigin(this.x) && Utils.isOrigin(this.y) && Utils.isOrigin(this.z) ) ? true : false;
+    return (this.x === 0 && this.y === 0 && this.z === 0) ? true : false;
   }
 
   public isPositive(): boolean {
-    return ( Utils.isPositive(this.x) && Utils.isPositive(this.y) && Utils.isPositive(this.z) ) ? true : false;
+    return ( this.x >= 0 && this.y >= 0 && this.z >= 0) ? true : false;
   }
 
   public setFromArray( array: number[], offset?: number ): Vector3 {

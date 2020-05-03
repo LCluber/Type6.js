@@ -4,6 +4,7 @@ module.exports = {
     vector2 : {
       setters : {
         set : {
+          class: 'Vector2',
           description:"Set the x and y values of the vector",
           params: [
             { name: 'x',
@@ -21,6 +22,7 @@ module.exports = {
           }
         },
         copy : {
+          class: 'Vector2',
           description:"Copy the values of the vector given as parameter",
           params: [
             { name: 'v',
@@ -34,6 +36,7 @@ module.exports = {
           }
         },
         setFromArray : {
+          class: 'Vector2',
           description:"Set the x and y values of the vector from the array given as parameter. array[0] for x, array[1] for y",
           params: [
             { name: 'array',
@@ -51,6 +54,7 @@ module.exports = {
           }
         },
         setFromAngle : {
+          class: 'Vector2',
           description:"Set the x and y values of the vector from the angle given as parameter",
           params: [
             { name: 'angle',
@@ -64,6 +68,7 @@ module.exports = {
           }
         },
         origin : {
+          class: 'Vector2',
           description:"Set the x and y values of this vector to zero",
           params: [
           ],
@@ -73,6 +78,7 @@ module.exports = {
           }
         },
         setOppositeAxis : {
+          class: 'Vector2',
           description:"Read the axis given as parameter and set the other one with value given as parameter",
           params: [
             { name: 'axis',
@@ -92,6 +98,7 @@ module.exports = {
       },
       getters : {
         getAngle : {
+          class: 'Vector2',
           description:"Compute and return the angle in the plane (in radians) between the positive x-axis and the ray from (0,0) to the point (x,y)",
           params: [
           ],
@@ -101,6 +108,7 @@ module.exports = {
           }
         },
         getMagnitude : {
+          class: 'Vector2',
           description:"Compute and return the magnitude of the vector",
           params: [
             { name: 'square',
@@ -114,6 +122,7 @@ module.exports = {
           }
         },
         getDistance : {
+          class: 'Vector2',
           description:"Compute and returns the distance between this vector and the vector given as parameter",
           params: [
             { name: 'v',
@@ -131,6 +140,7 @@ module.exports = {
           }
         },
         getMaxAxis : {
+          class: 'Vector2',
           description:"Return the name of the axis with the highest value",
           params: [
           ],
@@ -140,6 +150,7 @@ module.exports = {
           }
         },
         getMinAxis : {
+          class: 'Vector2',
           description:"Return the name of the axis with the lowest value",
           params: [ 
           ],
@@ -151,6 +162,7 @@ module.exports = {
       },
       export : {
         clone : {
+          class: 'Vector2',
           description:"Return a new vector identical to this vector",
           params: [
           ],
@@ -160,6 +172,7 @@ module.exports = {
           }
         },
         toArray : {
+          class: 'Vector2',
           description:"Exports the vector as an array with two values",
           params: [
           ],
@@ -169,6 +182,7 @@ module.exports = {
           }
         },
         toString : {
+          class: 'Vector2',
           description:"Return a string containing values of each axis (x = 1; y = 1)",
           params: [
           ],
@@ -180,6 +194,7 @@ module.exports = {
       },
       check : {
         isOrigin : {
+          class: 'Vector2',
           description:"Test if the vector is at origin. Return true if this vector is equal to (0,0) or false otherwise",
           params: [
           ],
@@ -189,6 +204,7 @@ module.exports = {
           }
         },
         isPositive : {
+          class: 'Vector2',
           description:"return true if this vector is greater than or equal to (0,0) or false otherwise",
           params: [ 
           ],
@@ -201,6 +217,7 @@ module.exports = {
       operations : {
         additions : {
           add : {
+            class: 'Vector2',
             description:"Add a vector to this vector",
             params: [
               { name: 'v',
@@ -214,6 +231,7 @@ module.exports = {
             }
           },
           addScalar : {
+            class: 'Vector2',
             description:"Add a scalar number to each component of this vector",
             params: [
               { name: 'scalar',
@@ -227,6 +245,7 @@ module.exports = {
             }
           },
           addScaledVector : {
+            class: 'Vector2',
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then add the result to this vector",
             params: [
               { name: 'v',
@@ -246,6 +265,7 @@ module.exports = {
         },
         subtractions : {
           subtract : {
+            class: 'Vector2',
             description:"Subtract a vector from this vector",
             params: [
               { name: 'v',
@@ -259,6 +279,7 @@ module.exports = {
             }
           },
           subtractScalar : {
+            class: 'Vector2',
             description:"Subtract a scalar number from each component of this vector",
             params: [
               { name: 'scalar',
@@ -272,6 +293,7 @@ module.exports = {
             }
           },
           subtractScaledVector : {
+            class: 'Vector2',
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then subract the result from this vector",
             params: [
               { name: 'v',
@@ -291,6 +313,7 @@ module.exports = {
         },
         multiplications : {
           scale : {
+            class: 'Vector2',
             description:"Scale a vector by the scalar number given as parameter",
             params: [
               { name: 'value',
@@ -304,6 +327,7 @@ module.exports = {
             }
           },
           multiply : {
+            class: 'Vector2',
             description:"Multiply a vector by this vector",
             params: [
               { name: 'v',
@@ -317,6 +341,7 @@ module.exports = {
             }
           },
           multiplyScaledVector : {
+            class: 'Vector2',
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then multiply the result by this vector",
             params: [
               { name: 'v',
@@ -336,6 +361,7 @@ module.exports = {
         },
         divisions : {
           divide : {
+            class: 'Vector2',
             description:"Divide a vector by this vector",
             params: [
               { name: 'v',
@@ -349,6 +375,7 @@ module.exports = {
             }
           },
           divideScaledVector : {
+            class: 'Vector2',
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then divide the result by this vector",
             params: [
               { name: 'v',
@@ -366,6 +393,7 @@ module.exports = {
             }
           },
           halve : {
+            class: 'Vector2',
             description:"Divide this vector by 2",
             params: [
             ],
@@ -375,6 +403,7 @@ module.exports = {
             }
           },
           normalize : {
+            class: 'Vector2',
             description:"Reduce the vector to a unit vector of length 1",
             params: [
             ],
@@ -384,183 +413,196 @@ module.exports = {
             }
           }
         },
-        max : {
-          description:"Compare this vector to the vector given as parameter and set the highest value of each axis to this vector",
-          params: [
-            { name: 'v',
+        utility : {        
+          max : {
+            class: 'Vector2',
+            description:"Compare this vector to the vector given as parameter and set the highest value of each axis to this vector",
+            params: [
+              { name: 'v',
+                type: 'Vector2',
+                description : ''
+              } 
+            ],
+            return : { 
               type: 'Vector2',
-              description : ''
-            } 
-          ],
-          return : { 
-            type: 'Vector2',
-            description : 'The vector with its new values' 
-          }
-        },
-        min : {
-          description:"Compare this vector to the vector given as parameter and set the lowest value of each axis to this vector",
-          params: [
-            { name: 'v',
-              type: 'Vector2',
-              description : ''
-            }  
-          ],
-          return : { 
-            type: 'Vector2',
-            description : 'The vector with its new values' 
-          }
-        },
-        maxScalar : {
-          description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is lower",
-          params: [
-            { name: 'scalar',
-              type: 'number',
-              description : ''
-            } 
-          ],
-          return : { 
-            type: 'Vector2',
-            description : 'The vector with its new values' 
-          }
-        },
-        minScalar : {
-          description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is higher",
-          params: [
-            { name: 'scalar',
-              type: 'number',
-              description : ''
+              description : 'The vector with its new values' 
             }
-          ],
-          return : { 
-            type: 'Vector2',
-            description : 'The vector with its new values' 
-          }
-        },
-        absolute : {
-          description:"Set each axis of this vector to its absolut value",
-          params: [
-            { name: 'x',
-              type: 'number',
-              description : ''
-            },
-            { name: 'y',
-              type: 'number',
-              description : ''
-            }  
-          ],
-          return : { 
-            type: 'Vector2',
-            description : 'The vector with its new values' 
-          }
-        },
-        opposite : {
-          description:"Set each axis of this vector to its opposite value",
-          params: [
-          ],
-          return : { 
-            type: 'Vector2',
-            description : 'The vector with its new values' 
-          }
-        },
-        clamp : {
-          description:"clamp each axis of this vector so it stays within the boundaries of the given rectangle",
-          params: [
-            { name: 'rectangle',
-              type: 'Rectangle',
-              description : ''
-            } 
-          ],
-          return : { 
-            type: 'Vector2',
-            description : 'The vector with its new values' 
-          }
-        },
-        lerp : {
-          description:"Set the interpolation point between the two vectors given as first and second parameters using the normalized amount given as third parameter",
-          params: [
-            { name: 'min',
+          },
+          min : {
+            class: 'Vector2',
+            description:"Compare this vector to the vector given as parameter and set the lowest value of each axis to this vector",
+            params: [
+              { name: 'v',
+                type: 'Vector2',
+                description : ''
+              }  
+            ],
+            return : { 
               type: 'Vector2',
-              description : ''
-            },
-            { name: 'max',
-              type: 'Vector2',
-              description : ''
-            },
-            { name: 'amount',
-              type: 'number',
-              description : 'the amount of interpolation; some value between 0.0 (old vector) and 1.0 (new vector). 0.9 is very near the new vector. 0.5 is halfway in between.'
+              description : 'The vector with its new values' 
             }
-          ],
-          return : { 
-            type: 'Vector2',
-            description : 'The vector with its new values' 
-          }
-        },
-        dotProduct : {
-          description:"Return the dot product between this vector and the vector given as parameter",
-          params: [
-            { name: 'v',
+          },
+          maxScalar : {
+            class: 'Vector2',
+            description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is lower",
+            params: [
+              { name: 'scalar',
+                type: 'number',
+                description : ''
+              } 
+            ],
+            return : { 
               type: 'Vector2',
-              description : ''
-            }  
-          ],
-          return : { 
-            type: 'number',
-            description : 'the dot product' 
-          }
-        },
-        quadraticBezier : {
-          description:"Set the interpolation point between the three vectors given as first, second and third parameters using the normalized amount given as fourth parameter",
-          params: [
-            { name: 'p0',
-              type: 'Vector2',
-              description : ''
-            },
-            { name: 'p1',
-              type: 'Vector2',
-              description : ''
-            },
-            { name: 'p2',
-              type: 'Vector2',
-              description : ''
-            },
-            { name: 't',
-              type: 'number',
-              description : ''
+              description : 'The vector with its new values' 
             }
-          ],
-          return : { 
-            type: 'Vector2',
-            description : 'The vector with its new values' 
-          }
-        },
-        cubicBezier : {
-          description:"Set the interpolation point between the four vectors given as first, second, third and fourth parameters using the normalized amount given as fifth parameter",
-          params: [
-            { name: 'p0',
+          },
+          minScalar : {
+            class: 'Vector2',
+            description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is higher",
+            params: [
+              { name: 'scalar',
+                type: 'number',
+                description : ''
+              }
+            ],
+            return : { 
               type: 'Vector2',
-              description : ''
-            },
-            { name: 'p1',
+              description : 'The vector with its new values' 
+            }
+          },
+          absolute : {
+            class: 'Vector2',
+            description:"Set each axis of this vector to its absolut value",
+            params: [
+              { name: 'x',
+                type: 'number',
+                description : ''
+              },
+              { name: 'y',
+                type: 'number',
+                description : ''
+              }  
+            ],
+            return : { 
               type: 'Vector2',
-              description : ''
-            },
-            { name: 'p2',
+              description : 'The vector with its new values' 
+            }
+          },
+          opposite : {
+            class: 'Vector2',
+            description:"Set each axis of this vector to its opposite value",
+            params: [
+            ],
+            return : { 
               type: 'Vector2',
-              description : ''
-            },
-            { name: 'p3',
+              description : 'The vector with its new values' 
+            }
+          },
+          clamp : {
+            class: 'Vector2',
+            description:"clamp each axis of this vector so it stays within the boundaries of the given rectangle",
+            params: [
+              { name: 'rectangle',
+                type: 'Rectangle',
+                description : ''
+              } 
+            ],
+            return : { 
               type: 'Vector2',
-              description : ''
-            },
-            { name: 't',
+              description : 'The vector with its new values' 
+            }
+          },
+          lerp : {
+            class: 'Vector2',
+            description:"Set the interpolation point between the two vectors given as first and second parameters using the normalized amount given as third parameter",
+            params: [
+              { name: 'min',
+                type: 'Vector2',
+                description : ''
+              },
+              { name: 'max',
+                type: 'Vector2',
+                description : ''
+              },
+              { name: 'amount',
+                type: 'number',
+                description : 'the amount of interpolation; some value between 0.0 (old vector) and 1.0 (new vector). 0.9 is very near the new vector. 0.5 is halfway in between.'
+              }
+            ],
+            return : { 
+              type: 'Vector2',
+              description : 'The vector with its new values' 
+            }
+          },
+          dotProduct : {
+            class: 'Vector2',
+            description:"Return the dot product between this vector and the vector given as parameter",
+            params: [
+              { name: 'v',
+                type: 'Vector2',
+                description : ''
+              }  
+            ],
+            return : { 
               type: 'number',
-              description : ''
-            } 
-          ],
-          return : { 
-            type: 'Vector2',
-            description : 'The vector with its new values' 
+              description : 'the dot product' 
+            }
+          },
+          quadraticBezier : {
+            class: 'Vector2',
+            description:"Set the interpolation point between the three vectors given as first, second and third parameters using the normalized amount given as fourth parameter",
+            params: [
+              { name: 'p0',
+                type: 'Vector2',
+                description : ''
+              },
+              { name: 'p1',
+                type: 'Vector2',
+                description : ''
+              },
+              { name: 'p2',
+                type: 'Vector2',
+                description : ''
+              },
+              { name: 't',
+                type: 'number',
+                description : ''
+              }
+            ],
+            return : { 
+              type: 'Vector2',
+              description : 'The vector with its new values' 
+            }
+          },
+          cubicBezier : {
+            class: 'Vector2',
+            description:"Set the interpolation point between the four vectors given as first, second, third and fourth parameters using the normalized amount given as fifth parameter",
+            params: [
+              { name: 'p0',
+                type: 'Vector2',
+                description : ''
+              },
+              { name: 'p1',
+                type: 'Vector2',
+                description : ''
+              },
+              { name: 'p2',
+                type: 'Vector2',
+                description : ''
+              },
+              { name: 'p3',
+                type: 'Vector2',
+                description : ''
+              },
+              { name: 't',
+                type: 'number',
+                description : ''
+              } 
+            ],
+            return : { 
+              type: 'Vector2',
+              description : 'The vector with its new values' 
+            }
           }
         }
       }
@@ -568,6 +610,7 @@ module.exports = {
     vector3 : {
       setters : {
         set : {
+          class: 'Vector3',
           description:"Set the x, y and z values of the vector",
           params: [
             { name: 'x',
@@ -589,6 +632,7 @@ module.exports = {
           }
         },
         copy : {
+          class: 'Vector3',
           description:"Copy the values of the vector given as parameter",
           params: [
             { name: 'v',
@@ -602,6 +646,7 @@ module.exports = {
           }
         },
         setFromArray : {
+          class: 'Vector3',
           description:"Set the x, y and z values of the vector from the array given as parameter. array[0] for x, array[1] for y",
           params: [
             { name: 'x',
@@ -623,6 +668,7 @@ module.exports = {
           }
         },
         origin : {
+          class: 'Vector3',
           description:"Set the x, y and z values of this vector to zero",
           params: [ 
           ],
@@ -634,6 +680,7 @@ module.exports = {
       },
       getters : {
         getMagnitude : {
+          class: 'Vector3',
           description:"Compute and return the magnitude of the vector",
           params: [
             { name: 'square',
@@ -647,6 +694,7 @@ module.exports = {
           }
         },
         getDistance : {
+          class: 'Vector3',
           description:"Compute and returns the distance between this vector and the vector given as parameter",
           params: [
             { name: 'v',
@@ -666,6 +714,7 @@ module.exports = {
       },
       export : {
         clone : {
+          class: 'Vector3',
           description:"Return a new vector identical to this vector",
           params: [ 
           ],
@@ -675,6 +724,7 @@ module.exports = {
           }
         },
         toArray : {
+          class: 'Vector3',
           description:"Exports the vector as an array with two values",
           params: [  
           ],
@@ -684,6 +734,7 @@ module.exports = {
           }
         },
         toString : {
+          class: 'Vector3',
           description:"Return a string containing values of each axis (x = 1; y = 1; z = 1)",
           params: [
           ],
@@ -695,6 +746,7 @@ module.exports = {
       },
       check : {
         isOrigin : {
+          class: 'Vector3',
           description:"Return true if this vector is equal to (0,0,0) or false otherwise",
           params: [
           ],
@@ -704,6 +756,7 @@ module.exports = {
           }
         },
         isPositive : {
+          class: 'Vector3',
           description:"Return true if this vector is greater than or equal to (0,0,0) or false otherwise",
           params: [
           ],
@@ -716,6 +769,7 @@ module.exports = {
       operations : {
         additions : {
           add : {
+            class: 'Vector3',
             description:"Add a vector to this vector",
             params: [
             { name: 'v',
@@ -729,6 +783,7 @@ module.exports = {
           }
           },
           addScalar : {
+            class: 'Vector3',
             description:"Add a scalar number to each component of this vector",
             params: [
             { name: 'scalar',
@@ -742,6 +797,7 @@ module.exports = {
           }
           },
           addScaledVector : {
+            class: 'Vector3',
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then add the result to this vector",
             params: [
             { name: 'v',
@@ -761,6 +817,7 @@ module.exports = {
         },
         subtractions : {
           subtract : {
+            class: 'Vector3',
             description:"Subtract a vector from this vector",
             params: [
             { name: 'v',
@@ -774,6 +831,7 @@ module.exports = {
           }
           },
           subtractScalar : {
+            class: 'Vector3',
             description:"Subtract a scalar number from each component of this vector",
             params: [
             { name: 'scalar',
@@ -787,6 +845,7 @@ module.exports = {
           }
           },
           subtractScaledVector : {
+            class: 'Vector3',
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then subract the result from this vector",
             params: [
             { name: 'V',
@@ -806,6 +865,7 @@ module.exports = {
         },
         multiplications : {
           scale : {
+            class: 'Vector3',
             description:"",
             params: [
             { name: 'value',
@@ -819,6 +879,7 @@ module.exports = {
           }
           },
           multiply : {
+            class: 'Vector3',
             description:"Multiply a vector by this vector",
             params: [
             { name: 'v',
@@ -832,6 +893,7 @@ module.exports = {
           }
           },
           multiplyScaledVector : {
+            class: 'Vector3',
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then multiply the result by this vector",
             params: [
             { name: 'v',
@@ -851,6 +913,7 @@ module.exports = {
         },
         divisions : {
           divide : {
+            class: 'Vector3',
             description:"Divide a vector by this vector",
             params: [
               { name: 'v',
@@ -864,6 +927,7 @@ module.exports = {
           }
           },
           divideScaledVector : {
+            class: 'Vector3',
             description:"Scale the vector given as first parameter with the scalar number given as second parameter then divide the result by this vector",
             params: [
               { name: 'v',
@@ -881,6 +945,7 @@ module.exports = {
           }
           },
           halve : {
+            class: 'Vector3',
             description:"Divide this vector by 2",
             params: [ 
             ],
@@ -890,6 +955,7 @@ module.exports = {
           }
           },
           normalize : {
+            class: 'Vector3',
             description:"Reduce the vector to a unit vector of length 1",
             params: [ 
             ],
@@ -899,100 +965,110 @@ module.exports = {
           }
           }
         },
-        max : {
-          description:"Compare this vector to the vector given as parameter and set the highest value of each axis to this vector",
-          params: [
-            { name: 'v',
+        utility : { 
+          max : {
+            class: 'Vector3',
+            description:"Compare this vector to the vector given as parameter and set the highest value of each axis to this vector",
+            params: [
+              { name: 'v',
+                type: 'Vector3',
+                description : ''
+              } 
+            ],
+            return : { 
               type: 'Vector3',
-              description : ''
-            } 
-          ],
-          return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
-        },
-        min : {
-          description:"Compare this vector to the vector given as parameter and set the lowest value of each axis to this vector",
-          params: [
-            { name: 'v',
+              description : 'The vector with its new values' 
+            }
+          },
+          min : {
+            class: 'Vector3',
+            description:"Compare this vector to the vector given as parameter and set the lowest value of each axis to this vector",
+            params: [
+              { name: 'v',
+                type: 'Vector3',
+                description : ''
+              }  
+            ],
+            return : { 
               type: 'Vector3',
-              description : ''
-            }  
-          ],
-          return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
-        },
-        maxScalar : {
-          description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is lower",
-          params: [
-            { name: 'scalar',
+              description : 'The vector with its new values' 
+            }
+          },
+          maxScalar : {
+            class: 'Vector3',
+            description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is lower",
+            params: [
+              { name: 'scalar',
+                type: 'number',
+                description : ''
+              }  
+            ],
+            return : { 
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
+          },
+          minScalar : {
+            class: 'Vector3',
+            description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is higher",
+            params: [
+              { name: 'scalar',
+                type: 'number',
+                description : ''
+              }  
+            ],
+            return : { 
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
+          },
+          absolute : {
+            class: 'Vector3',
+            description:"Set each axis of this vector to its absolut value",
+            params: [ 
+            ],
+            return : { 
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
+          },
+          opposite : {
+            class: 'Vector3',
+            description:"Set each axis of this vector to its opposite value",
+            params: [ 
+            ],
+            return : { 
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
+          },
+          dotProduct : {
+            class: 'Vector3',
+            description:"Return the dot product of this vector",
+            params: [
+              { name: 'v',
+                type: 'Vector3',
+                description : ''
+              }  
+            ],
+            return : { 
               type: 'number',
-              description : ''
-            }  
-          ],
-          return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
-        },
-        minScalar : {
-          description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is higher",
-          params: [
-            { name: 'scalar',
-              type: 'number',
-              description : ''
-            }  
-          ],
-          return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
-        },
-        absolute : {
-          description:"Set each axis of this vector to its absolut value",
-          params: [ 
-          ],
-          return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
-        },
-        opposite : {
-          description:"Set each axis of this vector to its opposite value",
-          params: [ 
-          ],
-          return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
-        },
-        dotProduct : {
-          description:"Return the dot product of this vector",
-          params: [
-            { name: 'v',
+              description : 'The dot product' 
+            }
+          },
+          cross : {
+            class: 'Vector3',
+            description:"Return the cross product of this vector and the vector given as parameter",
+            params: [
+              { name: 'v',
+                type: 'Vector3',
+                description : ''
+              }  
+            ],
+            return : { 
               type: 'Vector3',
-              description : ''
-            }  
-          ],
-          return : { 
-            type: 'number',
-            description : 'The dot product' 
-          }
-        },
-        cross : {
-          description:"Return the cross product of this vector and the vector given as parameter",
-          params: [
-            { name: 'v',
-              type: 'Vector3',
-              description : ''
-            }  
-          ],
-          return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
+              description : 'The vector with its new values' 
+            }
           }
         }
       }
@@ -1001,7 +1077,8 @@ module.exports = {
   trigonometry : {
     setters : {
       setSinePrecision : {
-        description:"Sets the precision of the sine computation by setting the number of loops to do to estimate the value",
+        class: 'Trigonometry',
+        description:"Sets the precision of the sine computation by setting the number of decimals you need",
         params: [
           { name: 'value',
             type: 'number',
@@ -1014,7 +1091,8 @@ module.exports = {
           }
       },
       setCosinePrecision : {
-        description:"Sets the precision of the cosine computation by setting the number of loops to do to estimate the value",
+        class: 'Trigonometry',
+        description:"Sets the precision of the cosine computation by setting the number of decimals you need",
         params: [
           { name: 'value',
             type: 'number',
@@ -1027,7 +1105,8 @@ module.exports = {
           }
       },
       setArctanPrecision : {
-        description:"Sets the precision of the arctan computation by setting the number of loops to do to estimate the value",
+        class: 'Trigonometry',
+        description:"Sets the precision of the arctan computation by setting the number of decimals you need",
         params: [
           { name: 'value',
             type: 'number',
@@ -1041,6 +1120,7 @@ module.exports = {
       }
     },
     sine : {
+      class: 'Trigonometry',
       description:"Find the sine of an angle",
       params: [
         { name: 'angle',
@@ -1054,6 +1134,7 @@ module.exports = {
           }
     },
     cosine : {
+      class: 'Trigonometry',
       description:"Find the cosine of an angle",
       params: [
         { name: 'angle',
@@ -1067,6 +1148,7 @@ module.exports = {
           }
     },
     arctan : {
+      class: 'Trigonometry',
       description:"Estimate arctangent from an angle on 2 quadrants",
       params: [
         { name: 'angle',
@@ -1080,6 +1162,7 @@ module.exports = {
           }
     },
     arctan2 : {
+      class: 'Trigonometry',
       description:"Estimate arctangent on four quadrants",
       params: [
         { name: 'x',
@@ -1097,6 +1180,7 @@ module.exports = {
       }
     },
     arctan2Vector2 : {
+      class: 'Trigonometry',
       description:"Estimate arctangent on four quadrants from a vector Vec2",
       params: [
         { name: 'v',
@@ -1110,6 +1194,7 @@ module.exports = {
       }
     },
     sineEquation : {
+      class: 'Trigonometry',
       description:"Compute a classic sine equation of type amplitude * sine( period + shiftX ) + shiftY",
       params: [
         { name: 'amplitude',
@@ -1135,6 +1220,7 @@ module.exports = {
       }
     },
     cosineEquation : {
+      class: 'Trigonometry',
       description:"Compute a classic cosine equation of type amplitude * cosine( period + shiftX ) + shiftY",
       params: [
         { name: 'amplitude',
@@ -1160,6 +1246,7 @@ module.exports = {
       }
     },
     arctanEquation : {
+      class: 'Trigonometry',
       description:"Compute a classic arctan equation of type amplitude * arctan( period + shiftX ) + shiftY",
       params: [
         { name: 'amplitude',
@@ -1186,7 +1273,8 @@ module.exports = {
     },
     helpers : {
       degreeToRadian: {
-        description:"",
+        class: 'Trigonometry',
+        description:"Converts degree in radian",
         params: [
           { name: 'degree',
             type: 'number',
@@ -1199,7 +1287,8 @@ module.exports = {
         }
       },
       radianToDegree: {
-        description:"",
+        class: 'Trigonometry',
+        description:"Converts radian in degree",
         params: [
           { name: 'radian',
             type: 'number',
@@ -1212,6 +1301,7 @@ module.exports = {
         }
       },
       normalizeRadian: {
+        class: 'Trigonometry',
         description:"Normalizes an angle in radians between -Pi an Pi",
         params: [
           { name: 'angle',
@@ -1227,8 +1317,111 @@ module.exports = {
     }
   },
   matrices : {
+    matrix3x3 : {
+      copy : {
+        class: 'Matrix3x3',
+        description:"Copy the values of the matrix given as parameter to this matrix",
+        params: [
+          { name: 'matrix3x3',
+            type: 'Matrix3x3',
+            description : ''
+          }  
+        ],
+        return : { 
+          type: 'Matrix3x3',
+          description : 'the Matrix3x3 with its new values' 
+        }
+      },
+      toArray : {
+        class: 'Matrix3x3',
+        description:"Return this matrix as an array",
+        params: [
+        ],
+        return : { 
+          type: 'Float32Array',
+          description : 'the Matrix3x3 as an array' 
+        }
+      },
+      toString : {
+        class: 'Matrix3x3',
+        description:"Return a string describing the entire matrix",
+        params: [
+        ],
+        return : { 
+          type: 'String',
+          description : 'the Matrix3x3 as a string' 
+        }
+      },
+      identity : {
+        class: 'Matrix3x3',
+        description:"Set this matrix as an identity matrix",
+        params: [
+        ],
+        return : { 
+          type: 'Matrix3x3',
+          description : 'the Matrix3x3 with its new values' 
+        }
+      },
+      scale : {
+        class: 'Matrix3x3',
+        description:"Scale this matrix by the Vector2 given as parameter",
+        params: [
+          { name: 'vector2',
+            type: 'Vector2',
+            description : ''
+          }  
+        ],
+        return : { 
+          type: 'Matrix3x3',
+          description : 'the Matrix3x3 with its new values' 
+        }
+      },
+      rotate : {
+        class: 'Matrix3x3',
+        description:"Rotate this matrix on the X axis by the angle given as parameter",
+        params: [
+          { name: 'angle',
+            type: 'number',
+            description : ''
+          }  
+        ],
+        return : { 
+          type: 'Matrix3x3',
+          description : 'the Matrix3x3 with its new values' 
+        }
+      },
+      translate : {
+        class: 'Matrix3x3',
+        description:"Translate this matrix by the Vector2 given as parameter",
+        params: [
+          { name: 'vector2',
+            type: 'Vector2',
+            description : ''
+          }  
+        ],
+        return : { 
+          type: 'Matrix3x3',
+          description : 'the Matrix3x3 with its new values' 
+        }
+      },
+      multiply : {
+        class: 'Matrix3x3',
+        description:"Multiply this matrix by the matrix given as parameter",
+        params: [
+          { name: 'matrix3x3',
+            type: 'Matrix3x3',
+            description : ''
+          }  
+        ],
+        return : { 
+          type: 'Matrix3x3',
+          description : 'the Matrix3x3 with its new values' 
+        }
+      }
+    },
     matrix4x3 : {
       copy : {
+        class: 'Matrix4x3',
         description:"Copy the values of the matrix given as parameter to this matrix",
         params: [
           { name: 'matrix4x3',
@@ -1242,6 +1435,7 @@ module.exports = {
         }
       },
       toArray : {
+        class: 'Matrix4x3',
         description:"Return this matrix as an array",
         params: [
         ],
@@ -1251,6 +1445,7 @@ module.exports = {
         }
       },
       toString : {
+        class: 'Matrix4x3',
         description:"Return a string describing the entire matrix",
         params: [
         ],
@@ -1260,6 +1455,7 @@ module.exports = {
         }
       },
       identity : {
+        class: 'Matrix4x3',
         description:"Set this matrix as an identity matrix",
         params: [
         ],
@@ -1269,6 +1465,7 @@ module.exports = {
         }
       },
       scale : {
+        class: 'Matrix4x3',
         description:"Scale this matrix by the Vector3 given as parameter",
         params: [
           { name: 'vector3',
@@ -1282,6 +1479,7 @@ module.exports = {
         }
       },
       rotateX : {
+        class: 'Matrix4x3',
         description:"Rotate this matrix on the X axis by the angle given as parameter",
         params: [
           { name: 'angle',
@@ -1295,6 +1493,7 @@ module.exports = {
         }
       },
       rotateY : {
+        class: 'Matrix4x3',
         description:"Rotate this matrix on the Y axis by the angle given as parameter",
         params: [
           { name: 'angle',
@@ -1308,6 +1507,7 @@ module.exports = {
         }
       },
       rotateZ : {
+        class: 'Matrix4x3',
         description:"Rotate this matrix on the Z axis by the angle given as parameter",
         params: [
           { name: 'angle',
@@ -1321,6 +1521,7 @@ module.exports = {
         }
       },
       translate : {
+        class: 'Matrix4x3',
         description:"Translate this matrix by the Vector3 given as parameter",
         params: [
           { name: 'vector3',
@@ -1334,6 +1535,7 @@ module.exports = {
         }
       },
       multiply : {
+        class: 'Matrix4x3',
         description:"Multiply this matrix by the matrix given as parameter",
         params: [
           { name: 'matrix4x3',
@@ -1347,6 +1549,7 @@ module.exports = {
         }
       },
       lookAtRH : {
+        class: 'Matrix4x3',
         description:"Build a right-handed look-at matrix with the cameraPosition, cameraTarget and the cameraUp vectors given as parameter",
         params: [
           { name: 'eye',
@@ -1370,6 +1573,7 @@ module.exports = {
     },
     matrix4x4 : {
       copy : {
+        class: 'Matrix4x4',
         description:"Copy the values of the matrix given as parameter to this matrix",
         params: [
           { name: 'matrix4x4',
@@ -1383,6 +1587,7 @@ module.exports = {
         }
       },
       toArray : {
+        class: 'Matrix4x4',
         description:"Return this matrix as an array",
         params: [  
         ],
@@ -1392,6 +1597,7 @@ module.exports = {
         }
       },
       toString : {
+        class: 'Matrix4x4',
         description:"Return a string describing the entire matrix",
         params: [  
         ],
@@ -1401,6 +1607,7 @@ module.exports = {
         }
       },
       identity : {
+        class: 'Matrix4x4',
         description:"Set this matrix as an identity matrix",
         params: [  
         ],
@@ -1410,6 +1617,7 @@ module.exports = {
         }
       },
       scale : {
+        class: 'Matrix4x4',
         description:"Scale this matrix by the Vector3 given as parameter",
         params: [
           { name: 'vector3',
@@ -1423,6 +1631,7 @@ module.exports = {
         }
       },
       rotateX : {
+        class: 'Matrix4x4',
         description:"Rotate this matrix on the X axis by the angle given as parameter",
         params: [
           { name: 'angle',
@@ -1436,6 +1645,7 @@ module.exports = {
         }
       },
       rotateY : {
+        class: 'Matrix4x4',
         description:"Rotate this matrix on the Y axis by the angle given as parameter",
         params: [
           { name: 'angle',
@@ -1449,6 +1659,7 @@ module.exports = {
         }
       },
       rotateZ : {
+        class: 'Matrix4x4',
         description:"Rotate this matrix on the Z axis by the angle given as parameter",
         params: [
           { name: 'angle',
@@ -1462,6 +1673,7 @@ module.exports = {
         }
       },
       translate : {
+        class: 'Matrix4x4',
         description:"Translate this matrix by the Vector3 given as parameter",
         params: [
           { name: 'vector3',
@@ -1475,6 +1687,7 @@ module.exports = {
         }
       },
       multiply : {
+        class: 'Matrix4x4',
         description:"Multiply this matrix by the matrix given as parameter",
         params: [
           { name: 'matrix4x4',
@@ -1488,6 +1701,7 @@ module.exports = {
         }
       },
       perspective : {
+        class: 'Matrix4x4',
         description:"Build a perspective projection matrix",
         params: [
           { name: 'fovy',
@@ -1513,6 +1727,7 @@ module.exports = {
         }
       },
       orthographic : {
+        class: 'Matrix4x4',
         description:"Build an orthographic projection matrix",
         params: [
           { name: 'left',
@@ -1550,6 +1765,7 @@ module.exports = {
   geometry : {
     circle : {
       clone : {
+        class: 'Circle',
         description:"Return a new circle with the same properties as this circle",
         params: [ 
         ],
@@ -1559,6 +1775,7 @@ module.exports = {
         }
       },
       copy : {
+        class: 'Circle',
         description:"Copy the values of the circle given as parameter into this circle",
         params: [
           { name: 'cirle',
@@ -1572,6 +1789,7 @@ module.exports = {
         }
       },
       set : {
+        class: 'Circle',
         description:"Set this circle with position and radius given as parameter",
         params: [
           { name: 'positionX',
@@ -1589,6 +1807,7 @@ module.exports = {
         }
       },
       setPositionXY : {
+        class: 'Circle',
         description:"Set the position of this circle using two number for each axis",
         params: [
           { name: 'positionX',
@@ -1606,6 +1825,7 @@ module.exports = {
         }
       },
       setPositionFromVector : {
+        class: 'Circle',
         description:"Set the position of the circle using a vector2",
         params: [
           { name: 'position',
@@ -1619,6 +1839,7 @@ module.exports = {
         }
       },
       scale : {
+        class: 'Circle',
         description:"Scale the radius of the circle by the number given as parameter",
         params: [
           { name: 'scalar',
@@ -1632,6 +1853,7 @@ module.exports = {
         }
       },
       isIn : {
+        class: 'Circle',
         description:"Check if the vector given as parameter is in this circle",
         params: [
           { name: 'v',
@@ -1645,6 +1867,7 @@ module.exports = {
         }
       },
       draw : {
+        class: 'Circle',
         description:"Draw this circle onto a canvas",
         params: [
           { name: 'context',
@@ -1672,6 +1895,7 @@ module.exports = {
     },
     rectangle : {
       clone : {
+        class: 'Rectangle',
         description:"Return a new rectangle with the same properties as this rectangle",
         params: [ 
         ],
@@ -1681,6 +1905,7 @@ module.exports = {
         }
       },
       copy : {
+        class: 'Rectangle',
         description:"Copy the values of the rectangle given as parameter into this rectangle",
         params: [
           { name: 'rectangle',
@@ -1694,6 +1919,7 @@ module.exports = {
         }
       },
       set : {
+        class: 'Rectangle',
         description:"Set this rectangle with position and size given as parameter",
         params: [
           { name: 'positionX',
@@ -1719,6 +1945,7 @@ module.exports = {
         }
       },
       setPositionX : {
+        class: 'Rectangle',
         description:"Set the position of the rectangle on the X axis",
         params: [
           { name: 'x',
@@ -1732,6 +1959,7 @@ module.exports = {
         }
       },
       setPositionY : {
+        class: 'Rectangle',
         description:"Set the position of the rectangle on the Y axis",
         params: [
           { name: 'y',
@@ -1745,6 +1973,7 @@ module.exports = {
         }
       },
       setPositionXY : {
+        class: 'Rectangle',
         description:"Set the position of the rectangle",
         params: [
           { name: 'positionX',
@@ -1762,6 +1991,7 @@ module.exports = {
         }
       },
       setPositionFromVector : {
+        class: 'Rectangle',
         description:"Set the position of the rectangle with the Vector2 given as parameter",
         params: [
           { name: 'position',
@@ -1779,6 +2009,7 @@ module.exports = {
         }
       },
       setSizeX : {
+        class: 'Rectangle',
         description:"Set the width of this rectangle",
         params: [
           { name: 'width',
@@ -1792,6 +2023,7 @@ module.exports = {
         }
       },
       setSizeY : {
+        class: 'Rectangle',
         description:"Set the height of this rectangle",
         params: [
           { name: 'height',
@@ -1805,6 +2037,7 @@ module.exports = {
         }
       },
       setSizeXY : {
+        class: 'Rectangle',
         description:"Set the size of the rectangle",
         params: [
           { name: 'width',
@@ -1822,6 +2055,7 @@ module.exports = {
         }
       },
       setSizeFromVector : {
+        class: 'Rectangle',
         description:"Set the size of the rectangle with the Vector2 given as parameter",
         params: [
           { name: 'size',
@@ -1835,6 +2069,7 @@ module.exports = {
         }
       },
       isIn : {
+        class: 'Rectangle',
         description:"Check if the vector given as parameter is in this rectangle",
         params: [
           { name: 'vector',
@@ -1848,6 +2083,7 @@ module.exports = {
           }
       },
       draw : {
+        class: 'Rectangle',
         description:"Draw this circle onto a canvas",
         params: [
           { name: 'context',
@@ -1876,6 +2112,7 @@ module.exports = {
   },
   time : {
     millisecToSec : {
+      class: 'Time',
       description:"Convert milliseconds to seconds",
       params: [
         { name: 'millisecond',
@@ -1889,6 +2126,7 @@ module.exports = {
           }
     },
     secToMillisec : {
+      class: 'Time',
       description:"Convert seconds to milliseconds",
       params: [
         { name: 'second',
@@ -1902,6 +2140,7 @@ module.exports = {
           }
     },
     millisecToFps : {
+      class: 'Time',
       description:"Convert milliseconds to frames per second",
       params: [
         { name: 'millisecond',
@@ -1915,6 +2154,7 @@ module.exports = {
           }
     },
     fpsToMillisec : {
+      class: 'Time',
       description:"Convert frame per second to millisecond",
       params: [
         { name: 'refreshRate',
@@ -1930,6 +2170,7 @@ module.exports = {
   },
   bezier : {
     quadratic : {
+      class: 'Bezier',
       description:"Compute one dimension quadratic bezier curve",
       params: [
         { name: 'p0',
@@ -1955,6 +2196,7 @@ module.exports = {
           }
     },
     cubic : {
+      class: 'Bezier',
       description:"Compute one dimension cubic bezier",
       params: [
         { name: 'p0',
@@ -1986,6 +2228,7 @@ module.exports = {
   },
   random : {
     float : {
+      class: 'Random',
       description:"Return a random floating number between min and max numbers given as parameters",
       params: [
         { name: 'min',
@@ -2003,6 +2246,7 @@ module.exports = {
           }
     },
     integer : {
+      class: 'Random',
       description:"Return an integer floating number between min and max numbers given as parameters",
       params: [
         { name: 'min',
@@ -2020,6 +2264,7 @@ module.exports = {
           }
     },
     distribution : {
+      class: 'Random',
       description:"Compute random distribution with min, max and iteration numbers given as parameters",
       params: [
         { name: 'min',
@@ -2041,6 +2286,7 @@ module.exports = {
           }
     },
     pick : {
+      class: 'Random',
       description:"Pick randomly between the two numbers given as parameter",
       params: [
         { name: 'value1',
@@ -2060,6 +2306,7 @@ module.exports = {
   },
   array : {
     min : {
+      class: 'Array',
       description:"Return the lowest number of the array",
       params: [
         { name: 'array',
@@ -2073,6 +2320,7 @@ module.exports = {
           }
     },
     max : {
+      class: 'Array',
       description:"Return the highest number of the array",
       params: [
         { name: 'array',
@@ -2086,6 +2334,7 @@ module.exports = {
           }
     },
     sum : {
+      class: 'Array',
       description:"Return the sum of all numbers of the array",
       params: [
         { name: 'array',
@@ -2099,6 +2348,7 @@ module.exports = {
           }
     },
     multiply : {
+      class: 'Array',
       description:"Return the product of all numbers of the array",
       params: [
         { name: 'array',
@@ -2112,6 +2362,7 @@ module.exports = {
           }
     },
     average : {
+      class: 'Array',
       description:"Return the average of all numbers of the array",
       params: [
         { name: 'array',
@@ -2127,6 +2378,7 @@ module.exports = {
   },
   utils : {
     round : {
+      class: 'Utils',
       description:"Return the number given as first parameter rounded with the number of decimals given as second parameter",
       params: [
         { name: 'x',
@@ -2144,6 +2396,7 @@ module.exports = {
           }
     },
     floor : {
+      class: 'Utils',
       description:"Return the number given as first parameter floored with the number of decimals given as second parameter",
       params: [
         { name: 'x',
@@ -2161,6 +2414,7 @@ module.exports = {
           }
     },
     ceil : {
+      class: 'Utils',
       description:"Return the number given as first parameter ceiled with the number of decimals given as second parameter",
       params: [
         { name: 'x',
@@ -2178,6 +2432,7 @@ module.exports = {
           }
     },
     trunc : {
+      class: 'Utils',
       description:"Return the number given as first parameter truncated with the number of decimals given as second parameter",
       params: [
         { name: 'x',
@@ -2195,6 +2450,7 @@ module.exports = {
           }
     },
     roundToNearest : {
+      class: 'Utils',
       description:"Return the number given as first parameter rounded to the nearest multiple of the number given as second parameter",
       params: [
         { name: 'x',
@@ -2212,6 +2468,7 @@ module.exports = {
           }
     },
     mix : {
+      class: 'Utils',
       description:"Return the linear blend of x and y, i.e. the product of x and (1 - a) plus the product of y and a",
       params: [
         { name: 'x',
@@ -2233,6 +2490,7 @@ module.exports = {
           }
     },
     getSign : {
+      class: 'Utils',
       description:"Return the sign (-1, 1 or 0) of the number given as parameter",
       params: [
         { name: 'x',
@@ -2246,6 +2504,7 @@ module.exports = {
           }
     },
     opposite : {
+      class: 'Utils',
       description:"Return the opposite of the number given as parameter",
       params: [
         { name: 'x',
@@ -2259,6 +2518,7 @@ module.exports = {
           }
     },
     clamp : {
+      class: 'Utils',
       description:"Clamp the number givens as first parameter into the limits of the min and max numbers given as second ans third parameters",
       params: [
         { name: 'x',
@@ -2280,6 +2540,7 @@ module.exports = {
           }
     },
     normalize : {
+      class: 'Utils',
       description:"Convert the number given as first parameter to a number from zero to one that indicates where it lies in the range given as second and third parameters",
       params: [
         { name: 'x',
@@ -2301,6 +2562,7 @@ module.exports = {
           }
     },
     lerp : {
+      class: 'Utils',
       description:"Return the interpolation value between the two numbers given as first and second parameters using the normalized amount given as third parameter",
       params: [
         { name: 'min',
@@ -2322,6 +2584,7 @@ module.exports = {
           }
     },
     map : {
+      class: 'Utils',
       description:"Interpolate the number given as first parameter between boundaies given as second and third parameter then map it to boundaries given as fourth and fifth parameters",
       params: [
         { name: 'x',
@@ -2351,6 +2614,7 @@ module.exports = {
           }
     },
     isEven : {
+      class: 'Utils',
       description:"Check if the number given a parameter is even",
       params: [
         { name: 'x',
@@ -2364,6 +2628,7 @@ module.exports = {
           }
     },
     isOdd : {
+      class: 'Utils',
       description:"Check if the number given a parameter is even",
       params: [
         { name: 'x',
@@ -2377,6 +2642,7 @@ module.exports = {
           }
     },
     isOrigin : {
+      class: 'Utils',
       description:"Check if the number given as parameter is equal to zero",
       params: [
         { name: 'x',
@@ -2390,6 +2656,7 @@ module.exports = {
           }
     },
     isPositive : {
+      class: 'Utils',
       description:"Check if the number given as parameter is positive",
       params: [
         { name: 'x',
@@ -2403,6 +2670,7 @@ module.exports = {
           }
     },
     isNegative : {
+      class: 'Utils',
       description:"Check if the number given as parameter is negative",
       params: [
         { name: 'x',
@@ -2416,6 +2684,7 @@ module.exports = {
           }
     },
     isIn : {
+      class: 'Utils',
       description:"Check if the number given as first parameter is within the boundaries given as second and third parameter",
       params: [
         { name: 'x',
@@ -2437,6 +2706,7 @@ module.exports = {
           }
     },
     isOut : {
+      class: 'Utils',
       description:"Check if the number given as first parameter is outside the boundaries given as second and third parameter",
       params: [
         { name: 'x',

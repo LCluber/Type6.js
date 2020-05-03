@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
 	/* ====== Toggle Sidebar ======= */
 	$('#sidebarToggler').on('click', function () {
 		if ($('#docs-sidebar').hasClass('sidebar-visible')) {
@@ -8,10 +7,9 @@ $(document).ready(function () {
 			$("#docs-sidebar").removeClass('sidebar-hidden').addClass('sidebar-visible');
 		}
 	});
-
-	// $(document).delegate('*[data-toggle="lightbox"]', 'click', function (e) {
-	// 	e.preventDefault();
-	// 	$(this).ekkoLightbox();
-	// });
-
 });
+
+var path = window.location.pathname;
+var page = path.split("/").pop().split(".")[0];
+var elmnt = document.getElementById(page);
+elmnt.scrollIntoView(true);

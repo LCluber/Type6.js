@@ -58,26 +58,6 @@ export class Utils {
     return this.lerp(this.normalize(x, sourceMin, sourceMax), destMin, destMax);
   }
 
-  static isEven(x: number): boolean {
-    return !(x&1);
-  }
-
-  static isOdd(x: number): boolean {
-    return x&1 ? true : false;
-  }
-
-  static isOrigin(x: number): boolean {
-    return (x === 0) ? true : false;
-  }
-
-  static isPositive(x: number): boolean {
-    return x >= 0 ? true : false;
-  }
-
-  static isNegative(x: number): boolean {
-    return x < 0 ? true : false;
-  }
-
   static isIn( x: number, min: number, max: number ): boolean {
     return x >= min && x <= max;
   }

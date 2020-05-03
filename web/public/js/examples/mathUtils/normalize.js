@@ -9,8 +9,8 @@ window.onload = function() {
   var slice     = width / qty;
   var min       = Math.min.apply(null, values);
   var max       = Math.max.apply(null, values);
-  var positions = new Array(qty);
-  var position = {};
+  var positions = [qty];
+  var position  = {};
 
   //compute positions
   for ( var i = 0; i <= qty; i++ ) {

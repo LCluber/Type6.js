@@ -9,6 +9,7 @@ export { Circle }       from './geometry/circle';
 export { Rectangle }    from './geometry/rectangle';
 export { Vector2 }      from './vectors/vector2';
 export { Vector3 }      from './vectors/vector3';
+export { Matrix3x3 }    from './matrices/matrix3x3';
 export { Matrix4x3 }    from './matrices/matrix4x3';
 export { Matrix4x4 }    from './matrices/matrix4x4';
 export { AxisNames2d, AxisNames3d } from './types';

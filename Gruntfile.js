@@ -335,6 +335,13 @@ module.exports = function(grunt){
         src: ['examples/**/*.js'],
         dest: publicDir + 'js/' ,
         filter: 'isFile'
+      },
+      type6:{
+        expand: true,
+        cwd: distDir,
+        src: ['type6.iife.min.js'],
+        dest: publicDir + 'js/' ,
+        filter: 'isFile'
       }
     },
     nodemon: {
@@ -445,7 +452,8 @@ grunt.registerTask( 'webjs',
                     [ 'clean:webjs',
                       'uglify:web',
                       'concat:webjs',
-                      'copy:examples'
+                      'copy:examples',
+                      'copy:type6'
                      ]
                   );
 
