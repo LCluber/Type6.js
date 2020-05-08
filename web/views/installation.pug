@@ -3,15 +3,15 @@ extends _layout
 block content
 
   h2 npm
-  p ```bash
-    | $ npm install @lcluber/type6js
-    | ```
+  pre
+    code(class="hljs bash")!= npmHighlightedCode
 
   h2 Yarn 
-
-  p ```bash
-    | $ yarn install @lcluber/type6js
-    | ```
+  pre
+    code(class="hljs bash")!= yarnHighlightedCode
 
   h2 Get started
+
+  pre
+    code(class="hljs javascript")!= usage
           

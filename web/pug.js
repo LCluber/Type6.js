@@ -5,6 +5,7 @@ const docTree = require('./tree');
 const examplesTree = require('./examples');
 const hljs = require("highlight.js/lib/core");  // require only the core library
 hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript')); // separately require languages
+hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash')); // separately require languages
 
 let methods = {};
 let examples = {};
@@ -79,17 +80,27 @@ fs.writeFile(path.join(__dirname, './public/index.html'), html, function (err) {
   // console.log('index');
 });
 
-html = pug.renderFile(path.join(__dirname, './views/installation.pug'),
-                      { root: './',
-                        docFolder: 'doc/',
-                        examplesFolder: 'examples/',
-                        examplesMenu: examplesMenu,
-                        docMenu: docTree,
-                        name:'Installation'
-                      });
-fs.writeFile(path.join(__dirname, './public/installation.html'), html, function (err) {
-  if (err) throw err;
-  // console.log('index');
+fs.readFile(path.join(__dirname, './js/installation.js'), 'utf8', function(err, content) {
+  let highlightedCode = '';
+  if (content)
+    highlightedCode = hljs.highlight('javascript', content).value;
+  let npmHighlightedCode = hljs.highlight('bash', 'npm install @lcluber/type6js').value;
+  let yarnHighlightedCode = hljs.highlight('bash', 'yarn install @lcluber/type6js').value;
+  html = pug.renderFile(path.join(__dirname, './views/installation.pug'),
+                        { root: './',
+                          docFolder: 'doc/',
+                          examplesFolder: 'examples/',
+                          examplesMenu: examplesMenu,
+                          docMenu: docTree,
+                          name:'Installation',
+                          npmHighlightedCode: npmHighlightedCode,
+                          yarnHighlightedCode: yarnHighlightedCode,
+                          usage:highlightedCode
+                        });
+  fs.writeFile(path.join(__dirname, './public/installation.html'), html, function (err) {
+    if (err) throw err;
+    // console.log('index');
+  });
 });
 
 for (let method in methods) {

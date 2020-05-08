@@ -413,196 +413,196 @@ module.exports = {
             }
           }
         },
-        utility : {        
-          max : {
-            class: 'Vector2',
-            description:"Compare this vector to the vector given as parameter and set the highest value of each axis to this vector",
-            params: [
-              { name: 'v',
-                type: 'Vector2',
-                description : ''
-              } 
-            ],
-            return : { 
+      },
+      utility : {        
+        max : {
+          class: 'Vector2',
+          description:"Compare this vector to the vector given as parameter and set the highest value of each axis to this vector",
+          params: [
+            { name: 'v',
               type: 'Vector2',
-              description : 'The vector with its new values' 
-            }
-          },
-          min : {
-            class: 'Vector2',
-            description:"Compare this vector to the vector given as parameter and set the lowest value of each axis to this vector",
-            params: [
-              { name: 'v',
-                type: 'Vector2',
-                description : ''
-              }  
-            ],
-            return : { 
+              description : ''
+            } 
+          ],
+          return : { 
+            type: 'Vector2',
+            description : 'The vector with its new values' 
+          }
+        },
+        min : {
+          class: 'Vector2',
+          description:"Compare this vector to the vector given as parameter and set the lowest value of each axis to this vector",
+          params: [
+            { name: 'v',
               type: 'Vector2',
-              description : 'The vector with its new values' 
-            }
-          },
-          maxScalar : {
-            class: 'Vector2',
-            description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is lower",
-            params: [
-              { name: 'scalar',
-                type: 'number',
-                description : ''
-              } 
-            ],
-            return : { 
-              type: 'Vector2',
-              description : 'The vector with its new values' 
-            }
-          },
-          minScalar : {
-            class: 'Vector2',
-            description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is higher",
-            params: [
-              { name: 'scalar',
-                type: 'number',
-                description : ''
-              }
-            ],
-            return : { 
-              type: 'Vector2',
-              description : 'The vector with its new values' 
-            }
-          },
-          absolute : {
-            class: 'Vector2',
-            description:"Set each axis of this vector to its absolut value",
-            params: [
-              { name: 'x',
-                type: 'number',
-                description : ''
-              },
-              { name: 'y',
-                type: 'number',
-                description : ''
-              }  
-            ],
-            return : { 
-              type: 'Vector2',
-              description : 'The vector with its new values' 
-            }
-          },
-          opposite : {
-            class: 'Vector2',
-            description:"Set each axis of this vector to its opposite value",
-            params: [
-            ],
-            return : { 
-              type: 'Vector2',
-              description : 'The vector with its new values' 
-            }
-          },
-          clamp : {
-            class: 'Vector2',
-            description:"clamp each axis of this vector so it stays within the boundaries of the given rectangle",
-            params: [
-              { name: 'rectangle',
-                type: 'Rectangle',
-                description : ''
-              } 
-            ],
-            return : { 
-              type: 'Vector2',
-              description : 'The vector with its new values' 
-            }
-          },
-          lerp : {
-            class: 'Vector2',
-            description:"Set the interpolation point between the two vectors given as first and second parameters using the normalized amount given as third parameter",
-            params: [
-              { name: 'min',
-                type: 'Vector2',
-                description : ''
-              },
-              { name: 'max',
-                type: 'Vector2',
-                description : ''
-              },
-              { name: 'amount',
-                type: 'number',
-                description : 'the amount of interpolation; some value between 0.0 (old vector) and 1.0 (new vector). 0.9 is very near the new vector. 0.5 is halfway in between.'
-              }
-            ],
-            return : { 
-              type: 'Vector2',
-              description : 'The vector with its new values' 
-            }
-          },
-          dotProduct : {
-            class: 'Vector2',
-            description:"Return the dot product between this vector and the vector given as parameter",
-            params: [
-              { name: 'v',
-                type: 'Vector2',
-                description : ''
-              }  
-            ],
-            return : { 
+              description : ''
+            }  
+          ],
+          return : { 
+            type: 'Vector2',
+            description : 'The vector with its new values' 
+          }
+        },
+        maxScalar : {
+          class: 'Vector2',
+          description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is lower",
+          params: [
+            { name: 'scalar',
               type: 'number',
-              description : 'the dot product' 
+              description : ''
+            } 
+          ],
+          return : { 
+            type: 'Vector2',
+            description : 'The vector with its new values' 
+          }
+        },
+        minScalar : {
+          class: 'Vector2',
+          description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is higher",
+          params: [
+            { name: 'scalar',
+              type: 'number',
+              description : ''
             }
-          },
-          quadraticBezier : {
-            class: 'Vector2',
-            description:"Set the interpolation point between the three vectors given as first, second and third parameters using the normalized amount given as fourth parameter",
-            params: [
-              { name: 'p0',
-                type: 'Vector2',
-                description : ''
-              },
-              { name: 'p1',
-                type: 'Vector2',
-                description : ''
-              },
-              { name: 'p2',
-                type: 'Vector2',
-                description : ''
-              },
-              { name: 't',
-                type: 'number',
-                description : ''
-              }
-            ],
-            return : { 
+          ],
+          return : { 
+            type: 'Vector2',
+            description : 'The vector with its new values' 
+          }
+        },
+        absolute : {
+          class: 'Vector2',
+          description:"Set each axis of this vector to its absolute value",
+          params: [
+            { name: 'x',
+              type: 'number',
+              description : ''
+            },
+            { name: 'y',
+              type: 'number',
+              description : ''
+            }  
+          ],
+          return : { 
+            type: 'Vector2',
+            description : 'The vector with its new values' 
+          }
+        },
+        opposite : {
+          class: 'Vector2',
+          description:"Set each axis of this vector to its opposite value",
+          params: [
+          ],
+          return : { 
+            type: 'Vector2',
+            description : 'The vector with its new values' 
+          }
+        },
+        clamp : {
+          class: 'Vector2',
+          description:"clamp each axis of this vector so it stays within the boundaries of the given rectangle",
+          params: [
+            { name: 'rectangle',
+              type: 'Rectangle',
+              description : ''
+            } 
+          ],
+          return : { 
+            type: 'Vector2',
+            description : 'The vector with its new values' 
+          }
+        },
+        lerp : {
+          class: 'Vector2',
+          description:"Set the interpolation point between the two vectors given as first and second parameters using the normalized amount given as third parameter",
+          params: [
+            { name: 'min',
               type: 'Vector2',
-              description : 'The vector with its new values' 
-            }
-          },
-          cubicBezier : {
-            class: 'Vector2',
-            description:"Set the interpolation point between the four vectors given as first, second, third and fourth parameters using the normalized amount given as fifth parameter",
-            params: [
-              { name: 'p0',
-                type: 'Vector2',
-                description : ''
-              },
-              { name: 'p1',
-                type: 'Vector2',
-                description : ''
-              },
-              { name: 'p2',
-                type: 'Vector2',
-                description : ''
-              },
-              { name: 'p3',
-                type: 'Vector2',
-                description : ''
-              },
-              { name: 't',
-                type: 'number',
-                description : ''
-              } 
-            ],
-            return : { 
+              description : ''
+            },
+            { name: 'max',
               type: 'Vector2',
-              description : 'The vector with its new values' 
+              description : ''
+            },
+            { name: 'amount',
+              type: 'number',
+              description : 'the amount of interpolation; some value between 0.0 (old vector) and 1.0 (new vector). 0.9 is very near the new vector. 0.5 is halfway in between.'
             }
+          ],
+          return : { 
+            type: 'Vector2',
+            description : 'The vector with its new values' 
+          }
+        },
+        dotProduct : {
+          class: 'Vector2',
+          description:"Return the dot product between this vector and the vector given as parameter",
+          params: [
+            { name: 'v',
+              type: 'Vector2',
+              description : ''
+            }  
+          ],
+          return : { 
+            type: 'number',
+            description : 'the dot product' 
+          }
+        },
+        quadraticBezier : {
+          class: 'Vector2',
+          description:"Set the interpolation point between the three vectors given as first, second and third parameters using the normalized amount given as fourth parameter",
+          params: [
+            { name: 'p0',
+              type: 'Vector2',
+              description : ''
+            },
+            { name: 'p1',
+              type: 'Vector2',
+              description : ''
+            },
+            { name: 'p2',
+              type: 'Vector2',
+              description : ''
+            },
+            { name: 't',
+              type: 'number',
+              description : ''
+            }
+          ],
+          return : { 
+            type: 'Vector2',
+            description : 'The vector with its new values' 
+          }
+        },
+        cubicBezier : {
+          class: 'Vector2',
+          description:"Set the interpolation point between the four vectors given as first, second, third and fourth parameters using the normalized amount given as fifth parameter",
+          params: [
+            { name: 'p0',
+              type: 'Vector2',
+              description : ''
+            },
+            { name: 'p1',
+              type: 'Vector2',
+              description : ''
+            },
+            { name: 'p2',
+              type: 'Vector2',
+              description : ''
+            },
+            { name: 'p3',
+              type: 'Vector2',
+              description : ''
+            },
+            { name: 't',
+              type: 'number',
+              description : ''
+            } 
+          ],
+          return : { 
+            type: 'Vector2',
+            description : 'The vector with its new values' 
           }
         }
       }
@@ -739,9 +739,9 @@ module.exports = {
           params: [
           ],
           return : { 
-          type: 'String',
-          description : 'The vector as a string'
-        }
+            type: 'String',
+            description : 'The vector as a string'
+          }
         }
       },
       check : {
@@ -778,9 +778,9 @@ module.exports = {
             }  
           ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           },
           addScalar : {
             class: 'Vector3',
@@ -792,9 +792,9 @@ module.exports = {
             } 
           ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           },
           addScaledVector : {
             class: 'Vector3',
@@ -810,9 +810,9 @@ module.exports = {
             }  
           ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           }
         },
         subtractions : {
@@ -840,9 +840,9 @@ module.exports = {
             }  
           ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           },
           subtractScaledVector : {
             class: 'Vector3',
@@ -858,9 +858,9 @@ module.exports = {
             }  
           ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           }
         },
         multiplications : {
@@ -874,9 +874,9 @@ module.exports = {
             }  
           ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           },
           multiply : {
             class: 'Vector3',
@@ -888,9 +888,9 @@ module.exports = {
             }  
           ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           },
           multiplyScaledVector : {
             class: 'Vector3',
@@ -906,9 +906,9 @@ module.exports = {
             }  
           ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           }
         },
         divisions : {
@@ -922,9 +922,9 @@ module.exports = {
               }  
             ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           },
           divideScaledVector : {
             class: 'Vector3',
@@ -940,9 +940,9 @@ module.exports = {
               }  
             ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           },
           halve : {
             class: 'Vector3',
@@ -950,9 +950,9 @@ module.exports = {
             params: [ 
             ],
             return : { 
-            type: 'Vector3',
-            description : 'The vector with its new values' 
-          }
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
           },
           normalize : {
             class: 'Vector3',
@@ -960,115 +960,115 @@ module.exports = {
             params: [ 
             ],
             return : { 
+              type: 'Vector3',
+              description : 'The vector with its new values' 
+            }
+          }
+        },
+      },
+      utility : { 
+        max : {
+          class: 'Vector3',
+          description:"Compare this vector to the vector given as parameter and set the highest value of each axis to this vector",
+          params: [
+            { name: 'v',
+              type: 'Vector3',
+              description : ''
+            } 
+          ],
+          return : { 
             type: 'Vector3',
             description : 'The vector with its new values' 
           }
+        },
+        min : {
+          class: 'Vector3',
+          description:"Compare this vector to the vector given as parameter and set the lowest value of each axis to this vector",
+          params: [
+            { name: 'v',
+              type: 'Vector3',
+              description : ''
+            }  
+          ],
+          return : { 
+            type: 'Vector3',
+            description : 'The vector with its new values' 
           }
         },
-        utility : { 
-          max : {
-            class: 'Vector3',
-            description:"Compare this vector to the vector given as parameter and set the highest value of each axis to this vector",
-            params: [
-              { name: 'v',
-                type: 'Vector3',
-                description : ''
-              } 
-            ],
-            return : { 
-              type: 'Vector3',
-              description : 'The vector with its new values' 
-            }
-          },
-          min : {
-            class: 'Vector3',
-            description:"Compare this vector to the vector given as parameter and set the lowest value of each axis to this vector",
-            params: [
-              { name: 'v',
-                type: 'Vector3',
-                description : ''
-              }  
-            ],
-            return : { 
-              type: 'Vector3',
-              description : 'The vector with its new values' 
-            }
-          },
-          maxScalar : {
-            class: 'Vector3',
-            description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is lower",
-            params: [
-              { name: 'scalar',
-                type: 'number',
-                description : ''
-              }  
-            ],
-            return : { 
-              type: 'Vector3',
-              description : 'The vector with its new values' 
-            }
-          },
-          minScalar : {
-            class: 'Vector3',
-            description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is higher",
-            params: [
-              { name: 'scalar',
-                type: 'number',
-                description : ''
-              }  
-            ],
-            return : { 
-              type: 'Vector3',
-              description : 'The vector with its new values' 
-            }
-          },
-          absolute : {
-            class: 'Vector3',
-            description:"Set each axis of this vector to its absolut value",
-            params: [ 
-            ],
-            return : { 
-              type: 'Vector3',
-              description : 'The vector with its new values' 
-            }
-          },
-          opposite : {
-            class: 'Vector3',
-            description:"Set each axis of this vector to its opposite value",
-            params: [ 
-            ],
-            return : { 
-              type: 'Vector3',
-              description : 'The vector with its new values' 
-            }
-          },
-          dotProduct : {
-            class: 'Vector3',
-            description:"Return the dot product of this vector",
-            params: [
-              { name: 'v',
-                type: 'Vector3',
-                description : ''
-              }  
-            ],
-            return : { 
+        maxScalar : {
+          class: 'Vector3',
+          description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is lower",
+          params: [
+            { name: 'scalar',
               type: 'number',
-              description : 'The dot product' 
-            }
-          },
-          cross : {
-            class: 'Vector3',
-            description:"Return the cross product of this vector and the vector given as parameter",
-            params: [
-              { name: 'v',
-                type: 'Vector3',
-                description : ''
-              }  
-            ],
-            return : { 
+              description : ''
+            }  
+          ],
+          return : { 
+            type: 'Vector3',
+            description : 'The vector with its new values' 
+          }
+        },
+        minScalar : {
+          class: 'Vector3',
+          description:"Compare each axis of this vector to the scalar given as parameter and apply the scalar if the value of the axis is higher",
+          params: [
+            { name: 'scalar',
+              type: 'number',
+              description : ''
+            }  
+          ],
+          return : { 
+            type: 'Vector3',
+            description : 'The vector with its new values' 
+          }
+        },
+        absolute : {
+          class: 'Vector3',
+          description:"Set each axis of this vector to its absolute value",
+          params: [ 
+          ],
+          return : { 
+            type: 'Vector3',
+            description : 'The vector with its new values' 
+          }
+        },
+        opposite : {
+          class: 'Vector3',
+          description:"Set each axis of this vector to its opposite value",
+          params: [ 
+          ],
+          return : { 
+            type: 'Vector3',
+            description : 'The vector with its new values' 
+          }
+        },
+        dotProduct : {
+          class: 'Vector3',
+          description:"Return the dot product of this vector",
+          params: [
+            { name: 'v',
               type: 'Vector3',
-              description : 'The vector with its new values' 
-            }
+              description : ''
+            }  
+          ],
+          return : { 
+            type: 'number',
+            description : 'The dot product' 
+          }
+        },
+        cross : {
+          class: 'Vector3',
+          description:"Return the cross product of this vector and the vector given as parameter",
+          params: [
+            { name: 'v',
+              type: 'Vector3',
+              description : ''
+            }  
+          ],
+          return : { 
+            type: 'Vector3',
+            description : 'The vector with its new values' 
           }
         }
       }
