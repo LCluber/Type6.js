@@ -27,7 +27,7 @@
   "contributors": [
   ],
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node ./web/pug && grunt website",
     "docsite": "grunt website && node ./web/pug"
   },
   "files": [
@@ -58,9 +58,8 @@
     "grunt-strip-code": "1.0.6",
     "grunt-ts": "6.0.0-beta.19",
     "grunt-tslint": "5.0.1",
-    "highlight.js": "^10.0.0",
+    "highlight.js": "10.0.0",
     "jquery": "3.4.1",
-    "jquery-easing": "0.0.1",
     "node-sass": "4.13.1",
     "pug": "2.0.4",
     "rollup-plugin-babel": "3.0.4",

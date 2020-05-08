@@ -1,4 +1,3 @@
-import {Utils} from '../utils';
 
 export interface Vector3 {
   [key: string]: any;

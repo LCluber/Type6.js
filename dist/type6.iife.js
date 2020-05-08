@@ -66,26 +66,11 @@ var Type6 = (function (exports) {
         Utils.normalize = function (x, min, max) {
             return (x - min) / (max - min);
         };
-        Utils.lerp = function (normal, min, max) {
-            return (max - min) * normal + min;
+        Utils.lerp = function (min, max, amount) {
+            return (max - min) * amount + min;
         };
         Utils.map = function (x, sourceMin, sourceMax, destMin, destMax) {
             return this.lerp(this.normalize(x, sourceMin, sourceMax), destMin, destMax);
-        };
-        Utils.isEven = function (x) {
-            return !(x & 1);
-        };
-        Utils.isOdd = function (x) {
-            return x & 1;
-        };
-        Utils.isOrigin = function (x) {
-            return x === 0 ? true : false;
-        };
-        Utils.isPositive = function (x) {
-            return x >= 0 ? true : false;
-        };
-        Utils.isNegative = function (x) {
-            return x < 0 ? true : false;
         };
         Utils.isIn = function (x, min, max) {
             return x >= min && x <= max;
@@ -192,8 +177,8 @@ var Type6 = (function (exports) {
                 }
             }
         };
-        Trigonometry.arctan2Vector2 = function (vector2) {
-            return this.arctan2(vector2.x, vector2.y);
+        Trigonometry.arctan2Vector2 = function (v) {
+            return this.arctan2(v.x, v.y);
         };
         Trigonometry.arctan = function (angle) {
             var loops = Trigonometry.arctanLoops[this.arctanDecimals];
@@ -244,16 +229,16 @@ var Type6 = (function (exports) {
 
     var Time = function () {
         function Time() {}
-        Time.millisecondToSecond = function (millisecond) {
+        Time.millisecToSec = function (millisecond) {
             return millisecond * 0.001;
         };
-        Time.secondToMilliecond = function (second) {
+        Time.secToMillisec = function (second) {
             return second * 1000;
         };
-        Time.millisecondToFramePerSecond = function (millisecond) {
+        Time.millisecToFps = function (millisecond) {
             return 1000 / millisecond;
         };
-        Time.framePerSecondToMillisecond = function (refreshRate) {
+        Time.fpsToMillisec = function (refreshRate) {
             return 1000 / refreshRate;
         };
         return Time;
@@ -324,16 +309,10 @@ var Type6 = (function (exports) {
             this.y = y || 0.0;
         }
         Vector2.prototype.isOrigin = function () {
-            return Utils.isOrigin(this.x) && Utils.isOrigin(this.y) ? true : false;
-        };
-        Vector2.prototype.isNotOrigin = function () {
-            return !Utils.isOrigin(this.x) || !Utils.isOrigin(this.y) ? true : false;
+            return this.x === 0 && this.y === 0 ? true : false;
         };
         Vector2.prototype.isPositive = function () {
-            return Utils.isPositive(this.x) && Utils.isPositive(this.y) ? true : false;
-        };
-        Vector2.prototype.isNegative = function () {
-            return Utils.isNegative(this.x) && Utils.isNegative(this.y) ? true : false;
+            return this.x >= 0 && this.y >= 0 ? true : false;
         };
         Vector2.prototype.setFromArray = function (array, offset) {
             if (offset === undefined) {
@@ -347,7 +326,7 @@ var Type6 = (function (exports) {
             return [this.x, this.y];
         };
         Vector2.prototype.toString = function () {
-            return '(x = ' + this.x + ';y = ' + this.y + ')';
+            return '(x = ' + this.x + '; y = ' + this.y + ')';
         };
         Vector2.prototype.set = function (x, y) {
             this.x = x;
@@ -522,9 +501,9 @@ var Type6 = (function (exports) {
             this.y = Utils.clamp(this.y, rectangle.topLeftCorner.y, rectangle.bottomRightCorner.y);
             return this;
         };
-        Vector2.prototype.lerp = function (normal, min, max) {
-            this.x = Utils.lerp(normal, min.x, max.x);
-            this.y = Utils.lerp(normal, min.y, max.y);
+        Vector2.prototype.lerp = function (min, max, amount) {
+            this.x = Utils.lerp(amount, min.x, max.x);
+            this.y = Utils.lerp(amount, min.y, max.y);
             return this;
         };
         Vector2.prototype.dotProduct = function (v) {
@@ -569,25 +548,27 @@ var Type6 = (function (exports) {
         Circle.prototype.copy = function (circle) {
             this.position.copy(circle.position);
             this.radius = circle.radius;
+            return this;
         };
         Circle.prototype.set = function (positionX, positionY, radius) {
             this.position.set(positionX, positionY);
             this.radius = radius;
+            return this;
         };
         Circle.prototype.setPositionXY = function (positionX, positionY) {
             this.position.set(positionX, positionY);
+            return this;
         };
         Circle.prototype.setPositionFromVector = function (position) {
             this.position.copy(position);
+            return this;
         };
         Circle.prototype.scale = function (scalar) {
             this.radius *= scalar;
+            return this;
         };
         Circle.prototype.isIn = function (v) {
             return v.getDistance(this.position, true) <= this.radius * this.radius;
-        };
-        Circle.prototype.isOut = function (v) {
-            return v.getDistance(this.position, true) > this.radius * this.radius;
         };
         Circle.prototype.draw = function (context, fillColor, strokeColor, strokeWidth) {
             context.beginPath();
@@ -621,16 +602,20 @@ var Type6 = (function (exports) {
         Rectangle.prototype.copy = function (rectangle) {
             this.setSizeFromVector(rectangle.size);
             this.setPositionFromVector(rectangle.position);
+            return this;
         };
         Rectangle.prototype.set = function (positionX, positionY, sizeX, sizeY) {
             this.setSizeXY(sizeX, sizeY);
             this.setPositionXY(positionX, positionY);
+            return this;
         };
         Rectangle.prototype.setPositionX = function (x) {
             this.setPosition('x', x);
+            return this;
         };
         Rectangle.prototype.setPositionY = function (y) {
             this.setPosition('y', y);
+            return this;
         };
         Rectangle.prototype.setPosition = function (property, value) {
             this.position[property] = value;
@@ -640,16 +625,20 @@ var Type6 = (function (exports) {
         Rectangle.prototype.setPositionXY = function (positionX, positionY) {
             this.position.set(positionX, positionY);
             this.setCorners();
+            return this;
         };
         Rectangle.prototype.setPositionFromVector = function (position) {
             this.position.copy(position);
             this.setCorners();
+            return this;
         };
         Rectangle.prototype.setSizeX = function (width) {
             this.setSize('x', width);
+            return this;
         };
         Rectangle.prototype.setSizeY = function (height) {
             this.setSize('y', height);
+            return this;
         };
         Rectangle.prototype.setSize = function (property, value) {
             this.size[property] = value;
@@ -661,11 +650,13 @@ var Type6 = (function (exports) {
             this.size.set(width, height);
             this.setHalfSize();
             this.setCorners();
+            return this;
         };
         Rectangle.prototype.setSizeFromVector = function (size) {
             this.size.copy(size);
             this.setHalfSize();
             this.setCorners();
+            return this;
         };
         Rectangle.prototype.setCorners = function () {
             this.topLeftCorner.set(this.position.x - this.halfSize.x, this.position.y - this.halfSize.y);
@@ -701,18 +692,12 @@ var Type6 = (function (exports) {
             this.z = z || 0.0;
         }
         Vector3.prototype.isOrigin = function () {
-            return Utils.isOrigin(this.x) && Utils.isOrigin(this.y) && Utils.isOrigin(this.z) ? true : false;
-        };
-        Vector3.prototype.isNotOrigin = function () {
-            return !Utils.isOrigin(this.x) || !Utils.isOrigin(this.y) || !Utils.isOrigin(this.z) ? true : false;
+            return this.x === 0 && this.y === 0 && this.z === 0 ? true : false;
         };
         Vector3.prototype.isPositive = function () {
-            return Utils.isPositive(this.x) && Utils.isPositive(this.y) && Utils.isPositive(this.z) ? true : false;
+            return this.x >= 0 && this.y >= 0 && this.z >= 0 ? true : false;
         };
-        Vector3.prototype.isNegative = function () {
-            return Utils.isNegative(this.x) && Utils.isNegative(this.y) && Utils.isNegative(this.z) ? true : false;
-        };
-        Vector3.prototype.fromArray = function (array, offset) {
+        Vector3.prototype.setFromArray = function (array, offset) {
             if (offset === undefined) {
                 offset = 0;
             }
@@ -725,7 +710,7 @@ var Type6 = (function (exports) {
             return [this.x, this.y, this.z];
         };
         Vector3.prototype.toString = function () {
-            return '(x = ' + this.x + ';y = ' + this.y + ';z = ' + this.z + ')';
+            return '(x = ' + this.x + '; y = ' + this.y + '; z = ' + this.z + ')';
         };
         Vector3.prototype.set = function (x, y, z) {
             this.x = x;
@@ -869,6 +854,18 @@ var Type6 = (function (exports) {
             }
             return this;
         };
+        Vector3.prototype.absolute = function () {
+            this.x = Math.abs(this.x);
+            this.y = Math.abs(this.y);
+            this.z = Math.abs(this.z);
+            return this;
+        };
+        Vector3.prototype.opposite = function () {
+            this.x = -this.x;
+            this.y = -this.y;
+            this.z = -this.z;
+            return this;
+        };
         Vector3.prototype.dotProduct = function (v) {
             return this.x * v.x + this.y * v.y + this.z * v.z;
         };
@@ -882,6 +879,60 @@ var Type6 = (function (exports) {
             return this;
         };
         return Vector3;
+    }();
+
+    var Matrix3x3 = function () {
+        function Matrix3x3(x1, x2, x3, y1, y2, y3, t1, t2, t3) {
+            this.m = new Float32Array(9);
+            this.make(x1, x2, x3, y1, y2, y3, t1, t2, t3);
+        }
+        Matrix3x3.prototype.make = function (x1, x2, x3, y1, y2, y3, t1, t2, t3) {
+            this.m[0] = x1 || 0.0;
+            this.m[1] = x2 || 0.0;
+            this.m[2] = x3 || 0.0;
+            this.m[3] = y1 || 0.0;
+            this.m[4] = y2 || 0.0;
+            this.m[5] = y3 || 0.0;
+            this.m[6] = t1 || 0.0;
+            this.m[7] = t2 || 0.0;
+            this.m[8] = t3 || 0.0;
+        };
+        Matrix3x3.prototype.copy = function (matrix3x3) {
+            var m = matrix3x3.m;
+            this.make(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8]);
+            return this;
+        };
+        Matrix3x3.prototype.toArray = function () {
+            return this.m;
+        };
+        Matrix3x3.prototype.toString = function () {
+            return '(' + this.m[0] + ',' + this.m[1] + ',' + this.m[2] + ';' + this.m[3] + ',' + this.m[4] + ',' + this.m[5] + ';' + this.m[6] + ',' + this.m[7] + ',' + this.m[8] + ')';
+        };
+        Matrix3x3.prototype.identity = function () {
+            this.make(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0);
+            return this;
+        };
+        Matrix3x3.prototype.scale = function (vector2) {
+            this.make(vector2.x, 0.0, 0.0, 0.0, vector2.y, 0.0, 0.0, 0.0, 1.0);
+            return this;
+        };
+        Matrix3x3.prototype.rotate = function (angle) {
+            var cos = Trigonometry.cosine(angle);
+            var sin = Trigonometry.sine(angle);
+            this.make(cos, sin, 0.0, -sin, cos, 0.0, 0.0, 0.0, 1.0);
+            return this;
+        };
+        Matrix3x3.prototype.translate = function (vector2) {
+            this.make(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, vector2.x, vector2.y, 1.0);
+            return this;
+        };
+        Matrix3x3.prototype.multiply = function (matrix3x3) {
+            var m1 = this.m;
+            var m2 = matrix3x3.m;
+            this.make(m1[0] * m2[0] + m1[3] * m2[1] + m1[6] * m2[2], m1[1] * m2[0] + m1[4] * m2[1] + m1[7] * m2[2], m1[2] * m2[0] + m1[5] * m2[1] + m1[8] * m2[2], m1[0] * m2[3] + m1[3] * m2[4] + m1[6] * m2[5], m1[1] * m2[3] + m1[4] * m2[4] + m1[7] * m2[5], m1[2] * m2[3] + m1[5] * m2[4] + m1[8] * m2[5], m1[0] * m2[6] + m1[3] * m2[7] + m1[6] * m2[8], m1[1] * m2[6] + m1[4] * m2[7] + m1[7] * m2[8], m1[2] * m2[6] + m1[5] * m2[7] + m1[8] * m2[8]);
+            return this;
+        };
+        return Matrix3x3;
     }();
 
     var Matrix4x3 = function () {
@@ -1066,6 +1117,7 @@ var Type6 = (function (exports) {
     exports.Rectangle = Rectangle;
     exports.Vector2 = Vector2;
     exports.Vector3 = Vector3;
+    exports.Matrix3x3 = Matrix3x3;
     exports.Matrix4x3 = Matrix4x3;
     exports.Matrix4x4 = Matrix4x4;
 

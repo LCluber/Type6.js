@@ -43,16 +43,14 @@ export declare class Circle {
     radius: number;
     diameter: number;
     clone(): Circle;
-    copy(circle: Circle): void;
-    set(positionX: number, positionY: number, radius: number): void;
-    setPositionXY(positionX: number, positionY: number): void;
-    setPositionFromVector(position: Vector2): void;
-    scale(scalar: number): void;
+    copy(circle: Circle): Circle;
+    set(positionX: number, positionY: number, radius: number): Circle;
+    setPositionXY(positionX: number, positionY: number): Circle;
+    setPositionFromVector(position: Vector2): Circle;
+    scale(scalar: number): Circle;
     isIn(v: Vector2): boolean;
-    isOut(v: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
-
 
 export declare class Rectangle {
     position: Vector2;
@@ -63,22 +61,36 @@ export declare class Rectangle {
     readonly shape: 'aabb';
     constructor(positionX: number, positionY: number, sizeX: number, sizeY: number);
     clone(): Rectangle;
-    copy(rectangle: Rectangle): void;
-    set(positionX: number, positionY: number, sizeX: number, sizeY: number): void;
-    setPositionX(x: number): void;
-    setPositionY(y: number): void;
-    setPosition(property: AxisNames2d, value: number): void;
-    setPositionXY(positionX: number, positionY: number): void;
-    setPositionFromVector(position: Vector2): void;
-    setSizeX(width: number): void;
-    setSizeY(height: number): void;
-    setSize(property: AxisNames2d, value: number): void;
-    setSizeXY(width: number, height: number): void;
-    setSizeFromVector(size: Vector2): void;
+    copy(rectangle: Rectangle): Rectangle;
+    set(positionX: number, positionY: number, sizeX: number, sizeY: number): Rectangle;
+    setPositionX(x: number): Rectangle;
+    setPositionY(y: number): Rectangle;
+    private setPosition;
+    setPositionXY(positionX: number, positionY: number): Rectangle;
+    setPositionFromVector(position: Vector2): Rectangle;
+    setSizeX(width: number): Rectangle;
+    setSizeY(height: number): Rectangle;
+    private setSize;
+    setSizeXY(width: number, height: number): Rectangle;
+    setSizeFromVector(size: Vector2): Rectangle;
     private setCorners;
     private setHalfSize;
     isIn(vector: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
+}
+
+export declare class Matrix3x3 {
+    private m;
+    constructor(x1?: number, x2?: number, x3?: number, y1?: number, y2?: number, y3?: number, t1?: number, t2?: number, t3?: number);
+    private make;
+    copy(matrix3x3: Matrix3x3): Matrix3x3;
+    toArray(): Float32Array;
+    toString(): string;
+    identity(): Matrix3x3;
+    scale(vector2: Vector2): Matrix3x3;
+    rotate(angle: number): Matrix3x3;
+    translate(vector2: Vector2): Matrix3x3;
+    multiply(matrix3x3: Matrix3x3): Matrix3x3;
 }
 
 export declare class Matrix4x3 {
@@ -125,10 +137,10 @@ export declare class Random {
     static pick(value1: number, value2: number): number;
 }
 export declare class Time {
-    static millisecondToSecond(millisecond: number): number;
-    static secondToMilliecond(second: number): number;
-    static millisecondToFramePerSecond(millisecond: number): number;
-    static framePerSecondToMillisecond(refreshRate: number): number;
+    static millisecToSec(millisecond: number): number;
+    static secToMillisec(second: number): number;
+    static millisecToFps(millisecond: number): number;
+    static fpsToMillisec(refreshRate: number): number;
 }
 
 export declare class Trigonometry {
@@ -155,13 +167,14 @@ export declare class Trigonometry {
     static sine(angle: number): number;
     static cosine(angle: number): number;
     static arctan2(x: number, y: number): number | false;
-    static arctan2Vector2(vector2: Vector2): number | false;
+    static arctan2Vector2(v: Vector2): number | false;
     static arctan(angle: number): number;
     static sineEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;
     static cosineEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;
     static arctanEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;
     private static taylorSerie;
 }
+
 
 
 
@@ -188,13 +201,8 @@ export declare class Utils {
     static opposite(x: number): number;
     static clamp(x: number, min: number, max: number): number;
     static normalize(x: number, min: number, max: number): number;
-    static lerp(normal: number, min: number, max: number): number;
+    static lerp(min: number, max: number, amount: number): number;
     static map(x: number, sourceMin: number, sourceMax: number, destMin: number, destMax: number): number;
-    static isEven(x: number): boolean;
-    static isOdd(x: number): number;
-    static isOrigin(x: number): boolean;
-    static isPositive(x: number): boolean;
-    static isNegative(x: number): boolean;
     static isIn(x: number, min: number, max: number): boolean;
     static isOut(x: number, min: number, max: number): boolean;
 }
@@ -205,9 +213,7 @@ export declare class Vector2 {
     y: number;
     constructor(x?: number, y?: number);
     isOrigin(): boolean;
-    isNotOrigin(): boolean;
     isPositive(): boolean;
-    isNegative(): boolean;
     setFromArray(array: number[], offset?: number): Vector2;
     toArray(): number[];
     toString(): string;
@@ -245,7 +251,7 @@ export declare class Vector2 {
     absolute(): Vector2;
     opposite(): Vector2;
     clamp(rectangle: Rectangle): Vector2;
-    lerp(normal: number, min: Vector2, max: Vector2): Vector2;
+    lerp(min: Vector2, max: Vector2, amount: number): Vector2;
     dotProduct(v: Vector2): number;
 }
 export interface Vector3 {
@@ -257,10 +263,8 @@ export declare class Vector3 {
     z: number;
     constructor(x?: number, y?: number, z?: number);
     isOrigin(): boolean;
-    isNotOrigin(): boolean;
     isPositive(): boolean;
-    isNegative(): boolean;
-    fromArray(array: number[], offset?: number): Vector3;
+    setFromArray(array: number[], offset?: number): Vector3;
     toArray(): number[];
     toString(): string;
     set(x: number, y: number, z: number): Vector3;
@@ -287,6 +291,8 @@ export declare class Vector3 {
     maxScalar(scalar: number): Vector3;
     minScalar(scalar: number): Vector3;
     normalize(): Vector3;
+    absolute(): Vector3;
+    opposite(): Vector3;
     dotProduct(v: Vector3): number;
     cross(v: Vector3): Vector3;
 }

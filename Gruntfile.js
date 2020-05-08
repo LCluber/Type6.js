@@ -77,13 +77,6 @@ module.exports = function(grunt){
         ]
       }
     },
-    jshint: {
-      options: {
-        // jshintrc: 'config/.jshintrc'
-      },
-      //lib: [ 'Gruntfile.js', srcDir + '**/*.js'],
-      web: [ webDir + 'js/**/*.js'],
-    },
     sass: {
       options: {
         implementation: sass,
@@ -97,14 +90,6 @@ module.exports = function(grunt){
           dest: webDir + 'sass/build/',
           ext: '.css'
         }]
-      }
-    },
-    csslint: {
-      dist: {
-        options: {
-          import: false
-        },
-        src: [webDir + 'sass/build/**/*.css']
       }
     },
     cssmin:{
@@ -394,7 +379,6 @@ module.exports = function(grunt){
 
   grunt.loadNpmTasks( 'grunt-contrib-copy' );
   grunt.loadNpmTasks( 'grunt-contrib-clean' );
-  grunt.loadNpmTasks( 'grunt-contrib-jshint' );
   grunt.loadNpmTasks( 'grunt-contrib-uglify' );
   grunt.loadNpmTasks( 'grunt-contrib-csslint' );
   grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
@@ -426,14 +410,7 @@ module.exports = function(grunt){
                         'strip_code:declaration',
                       ]
                     );
-
-  grunt.registerTask( 'doc',
-                      'Compile lib documentation',
-                      [ 'clean:doc',
-                        'typedoc'
-                      ]
-                    );
-
+                    
   grunt.registerTask( 'serve',
                       'launch server, open website and watch for changes',
                       [ 'concurrent' ]

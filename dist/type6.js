@@ -62,26 +62,11 @@ class Utils {
     static normalize(x, min, max) {
         return (x - min) / (max - min);
     }
-    static lerp(normal, min, max) {
-        return (max - min) * normal + min;
+    static lerp(min, max, amount) {
+        return (max - min) * amount + min;
     }
     static map(x, sourceMin, sourceMax, destMin, destMax) {
         return this.lerp(this.normalize(x, sourceMin, sourceMax), destMin, destMax);
-    }
-    static isEven(x) {
-        return !(x & 1);
-    }
-    static isOdd(x) {
-        return x & 1;
-    }
-    static isOrigin(x) {
-        return (x === 0) ? true : false;
-    }
-    static isPositive(x) {
-        return x >= 0 ? true : false;
-    }
-    static isNegative(x) {
-        return x < 0 ? true : false;
     }
     static isIn(x, min, max) {
         return x >= min && x <= max;
@@ -193,8 +178,8 @@ class Trigonometry {
             }
         }
     }
-    static arctan2Vector2(vector2) {
-        return this.arctan2(vector2.x, vector2.y);
+    static arctan2Vector2(v) {
+        return this.arctan2(v.x, v.y);
     }
     static arctan(angle) {
         let loops = Trigonometry.arctanLoops[this.arctanDecimals];
@@ -275,16 +260,16 @@ Trigonometry.factorialArray = [];
 Trigonometry.init();
 
 class Time {
-    static millisecondToSecond(millisecond) {
+    static millisecToSec(millisecond) {
         return millisecond * 0.001;
     }
-    static secondToMilliecond(second) {
+    static secToMillisec(second) {
         return second * 1000;
     }
-    static millisecondToFramePerSecond(millisecond) {
+    static millisecToFps(millisecond) {
         return 1000 / millisecond;
     }
-    static framePerSecondToMillisecond(refreshRate) {
+    static fpsToMillisec(refreshRate) {
         return 1000 / refreshRate;
     }
 }
@@ -349,16 +334,10 @@ class Vector2 {
         this.y = y || 0.0;
     }
     isOrigin() {
-        return (Utils.isOrigin(this.x) && Utils.isOrigin(this.y)) ? true : false;
-    }
-    isNotOrigin() {
-        return (!Utils.isOrigin(this.x) || !Utils.isOrigin(this.y)) ? true : false;
+        return (this.x === 0 && this.y === 0) ? true : false;
     }
     isPositive() {
-        return (Utils.isPositive(this.x) && Utils.isPositive(this.y)) ? true : false;
-    }
-    isNegative() {
-        return (Utils.isNegative(this.x) && Utils.isNegative(this.y)) ? true : false;
+        return (this.x >= 0 && this.y >= 0) ? true : false;
     }
     setFromArray(array, offset) {
         if (offset === undefined) {
@@ -372,7 +351,7 @@ class Vector2 {
         return [this.x, this.y];
     }
     toString() {
-        return '(x = ' + this.x + ';y = ' + this.y + ')';
+        return '(x = ' + this.x + '; y = ' + this.y + ')';
     }
     set(x, y) {
         this.x = x;
@@ -542,9 +521,9 @@ class Vector2 {
         this.y = Utils.clamp(this.y, rectangle.topLeftCorner.y, rectangle.bottomRightCorner.y);
         return this;
     }
-    lerp(normal, min, max) {
-        this.x = Utils.lerp(normal, min.x, max.x);
-        this.y = Utils.lerp(normal, min.y, max.y);
+    lerp(min, max, amount) {
+        this.x = Utils.lerp(amount, min.x, max.x);
+        this.y = Utils.lerp(amount, min.y, max.y);
         return this;
     }
     dotProduct(v) {
@@ -580,25 +559,27 @@ class Circle {
     copy(circle) {
         this.position.copy(circle.position);
         this.radius = circle.radius;
+        return this;
     }
     set(positionX, positionY, radius) {
         this.position.set(positionX, positionY);
         this.radius = radius;
+        return this;
     }
     setPositionXY(positionX, positionY) {
         this.position.set(positionX, positionY);
+        return this;
     }
     setPositionFromVector(position) {
         this.position.copy(position);
+        return this;
     }
     scale(scalar) {
         this.radius *= scalar;
+        return this;
     }
     isIn(v) {
         return v.getDistance(this.position, true) <= this.radius * this.radius;
-    }
-    isOut(v) {
-        return v.getDistance(this.position, true) > this.radius * this.radius;
     }
     draw(context, fillColor, strokeColor, strokeWidth) {
         context.beginPath();
@@ -631,16 +612,20 @@ class Rectangle {
     copy(rectangle) {
         this.setSizeFromVector(rectangle.size);
         this.setPositionFromVector(rectangle.position);
+        return this;
     }
     set(positionX, positionY, sizeX, sizeY) {
         this.setSizeXY(sizeX, sizeY);
         this.setPositionXY(positionX, positionY);
+        return this;
     }
     setPositionX(x) {
         this.setPosition('x', x);
+        return this;
     }
     setPositionY(y) {
         this.setPosition('y', y);
+        return this;
     }
     setPosition(property, value) {
         this.position[property] = value;
@@ -650,16 +635,20 @@ class Rectangle {
     setPositionXY(positionX, positionY) {
         this.position.set(positionX, positionY);
         this.setCorners();
+        return this;
     }
     setPositionFromVector(position) {
         this.position.copy(position);
         this.setCorners();
+        return this;
     }
     setSizeX(width) {
         this.setSize('x', width);
+        return this;
     }
     setSizeY(height) {
         this.setSize('y', height);
+        return this;
     }
     setSize(property, value) {
         this.size[property] = value;
@@ -671,11 +660,13 @@ class Rectangle {
         this.size.set(width, height);
         this.setHalfSize();
         this.setCorners();
+        return this;
     }
     setSizeFromVector(size) {
         this.size.copy(size);
         this.setHalfSize();
         this.setCorners();
+        return this;
     }
     setCorners() {
         this.topLeftCorner.set(this.position.x - this.halfSize.x, this.position.y - this.halfSize.y);
@@ -711,18 +702,12 @@ class Vector3 {
         this.z = z || 0.0;
     }
     isOrigin() {
-        return (Utils.isOrigin(this.x) && Utils.isOrigin(this.y) && Utils.isOrigin(this.z)) ? true : false;
-    }
-    isNotOrigin() {
-        return (!Utils.isOrigin(this.x) || !Utils.isOrigin(this.y) || !Utils.isOrigin(this.z)) ? true : false;
+        return (this.x === 0 && this.y === 0 && this.z === 0) ? true : false;
     }
     isPositive() {
-        return (Utils.isPositive(this.x) && Utils.isPositive(this.y) && Utils.isPositive(this.z)) ? true : false;
+        return (this.x >= 0 && this.y >= 0 && this.z >= 0) ? true : false;
     }
-    isNegative() {
-        return (Utils.isNegative(this.x) && Utils.isNegative(this.y) && Utils.isNegative(this.z)) ? true : false;
-    }
-    fromArray(array, offset) {
+    setFromArray(array, offset) {
         if (offset === undefined) {
             offset = 0;
         }
@@ -735,7 +720,7 @@ class Vector3 {
         return [this.x, this.y, this.z];
     }
     toString() {
-        return '(x = ' + this.x + ';y = ' + this.y + ';z = ' + this.z + ')';
+        return '(x = ' + this.x + '; y = ' + this.y + '; z = ' + this.z + ')';
     }
     set(x, y, z) {
         this.x = x;
@@ -873,6 +858,18 @@ class Vector3 {
         }
         return this;
     }
+    absolute() {
+        this.x = Math.abs(this.x);
+        this.y = Math.abs(this.y);
+        this.z = Math.abs(this.z);
+        return this;
+    }
+    opposite() {
+        this.x = -this.x;
+        this.y = -this.y;
+        this.z = -this.z;
+        return this;
+    }
     dotProduct(v) {
         return this.x * v.x + this.y * v.y + this.z * v.z;
     }
@@ -881,6 +878,61 @@ class Vector3 {
         this.x = y * v.z - z * v.y;
         this.y = z * v.x - x * v.z;
         this.z = x * v.y - y * v.x;
+        return this;
+    }
+}
+
+class Matrix3x3 {
+    constructor(x1, x2, x3, y1, y2, y3, t1, t2, t3) {
+        this.m = new Float32Array(9);
+        this.make(x1, x2, x3, y1, y2, y3, t1, t2, t3);
+    }
+    make(x1, x2, x3, y1, y2, y3, t1, t2, t3) {
+        this.m[0] = x1 || 0.0;
+        this.m[1] = x2 || 0.0;
+        this.m[2] = x3 || 0.0;
+        this.m[3] = y1 || 0.0;
+        this.m[4] = y2 || 0.0;
+        this.m[5] = y3 || 0.0;
+        this.m[6] = t1 || 0.0;
+        this.m[7] = t2 || 0.0;
+        this.m[8] = t3 || 0.0;
+    }
+    copy(matrix3x3) {
+        let m = matrix3x3.m;
+        this.make(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8]);
+        return this;
+    }
+    toArray() {
+        return this.m;
+    }
+    toString() {
+        return '(' + this.m[0] + ',' + this.m[1] + ',' + this.m[2] + ';' +
+            this.m[3] + ',' + this.m[4] + ',' + this.m[5] + ';' +
+            this.m[6] + ',' + this.m[7] + ',' + this.m[8] + ')';
+    }
+    identity() {
+        this.make(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0);
+        return this;
+    }
+    scale(vector2) {
+        this.make(vector2.x, 0.0, 0.0, 0.0, vector2.y, 0.0, 0.0, 0.0, 1.0);
+        return this;
+    }
+    rotate(angle) {
+        var cos = Trigonometry.cosine(angle);
+        var sin = Trigonometry.sine(angle);
+        this.make(cos, sin, 0.0, -sin, cos, 0.0, 0.0, 0.0, 1.0);
+        return this;
+    }
+    translate(vector2) {
+        this.make(1.0, 0.0, 0.0, 0.0, 1.0, 0.0, vector2.x, vector2.y, 1.0);
+        return this;
+    }
+    multiply(matrix3x3) {
+        let m1 = this.m;
+        let m2 = matrix3x3.m;
+        this.make(m1[0] * m2[0] + m1[3] * m2[1] + m1[6] * m2[2], m1[1] * m2[0] + m1[4] * m2[1] + m1[7] * m2[2], m1[2] * m2[0] + m1[5] * m2[1] + m1[8] * m2[2], m1[0] * m2[3] + m1[3] * m2[4] + m1[6] * m2[5], m1[1] * m2[3] + m1[4] * m2[4] + m1[7] * m2[5], m1[2] * m2[3] + m1[5] * m2[4] + m1[8] * m2[5], m1[0] * m2[6] + m1[3] * m2[7] + m1[6] * m2[8], m1[1] * m2[6] + m1[4] * m2[7] + m1[7] * m2[8], m1[2] * m2[6] + m1[5] * m2[7] + m1[8] * m2[8]);
         return this;
     }
 }
@@ -1063,4 +1115,4 @@ class Matrix4x4 {
     }
 }
 
-export { Trigonometry, Utils, Time, Random, NumArray, Bezier, Circle, Rectangle, Vector2, Vector3, Matrix4x3, Matrix4x4 };
+export { Trigonometry, Utils, Time, Random, NumArray, Bezier, Circle, Rectangle, Vector2, Vector3, Matrix3x3, Matrix4x3, Matrix4x4 };

@@ -1,3 +1,9 @@
+Version 2.0.0 (May 14th 2020)
+-----------------------------
+ * New Matrix3x3 class
+ * New website
+ * New documentation
+
 Version 1.1.0 (September 14th 2019)
 -----------------------------
  * Added NumArray static class to work with array of numbers. Get min value, max value, sum, average...
