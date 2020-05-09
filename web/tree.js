@@ -1081,12 +1081,12 @@ module.exports = {
         description:"Sets the precision of the sine computation by setting the number of decimals you need",
         params: [
           { name: 'value',
-            type: 'number',
-            description : ''
+            type: 'integer',
+            description : 'an integer between 0 and 8'
           } 
         ],
       return : { 
-            type: 'number',
+            type: 'integer',
             description : 'the new precision' 
           }
       },
@@ -1095,8 +1095,8 @@ module.exports = {
         description:"Sets the precision of the cosine computation by setting the number of decimals you need",
         params: [
           { name: 'value',
-            type: 'number',
-            description : ''
+            type: 'integer',
+            description : 'an integer between 0 and 8'
           }  
         ],
         return : { 
@@ -1110,7 +1110,7 @@ module.exports = {
         params: [
           { name: 'value',
             type: 'number',
-            description : ''
+            description : 'an integer between 0 and 8'
           }  
         ],
         return : { 
@@ -1173,20 +1173,6 @@ module.exports = {
           type: 'number',
           description : ''
         }  
-      ],
-      return : { 
-        type: 'number|false',
-        description : 'the arctan2 of the angle or false' 
-      }
-    },
-    arctan2Vector2 : {
-      class: 'Trigonometry',
-      description:"Estimate arctangent on four quadrants from a vector Vec2",
-      params: [
-        { name: 'v',
-          type: 'number',
-          description : ''
-        }
       ],
       return : { 
         type: 'number|false',

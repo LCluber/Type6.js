@@ -66,7 +66,7 @@ class Utils {
         return (max - min) * amount + min;
     }
     static map(x, sourceMin, sourceMax, destMin, destMax) {
-        return this.lerp(this.normalize(x, sourceMin, sourceMax), destMin, destMax);
+        return this.lerp(destMin, destMax, this.normalize(x, sourceMin, sourceMax));
     }
     static isIn(x, min, max) {
         return x >= min && x <= max;
@@ -99,28 +99,25 @@ class Trigonometry {
         return i > 1 ? (i - 1) : 1;
     }
     static setSinePrecision(value) {
-        if (value < this.sineLoops.length) {
+        if (value >= 0 && value <= this.maxDecimals) {
             this.sineDecimals = value;
             return value;
         }
-        this.sineDecimals = 2;
-        return 2;
+        return this.sineDecimals = this.maxDecimals;
     }
     static setCosinePrecision(value) {
-        if (value < Trigonometry.cosineLoops.length) {
+        if (value >= 0 && value <= this.maxDecimals) {
             this.cosineDecimals = value;
             return value;
         }
-        this.cosineDecimals = 2;
-        return 2;
+        return this.cosineDecimals = this.maxDecimals;
     }
     static setArctanPrecision(value) {
-        if (value < Trigonometry.arctanLoops.length) {
-            this.cosineDecimals = value;
+        if (value >= 0 && value <= this.maxDecimals) {
+            this.arctanDecimals = value;
             return value;
         }
-        this.arctanDecimals = 2;
-        return 2;
+        return this.arctanDecimals = this.maxDecimals;
     }
     static degreeToRadian(degree) {
         return degree * this.pi / 180;
@@ -177,9 +174,6 @@ class Trigonometry {
                 return false;
             }
         }
-    }
-    static arctan2Vector2(v) {
-        return this.arctan2(v.x, v.y);
     }
     static arctan(angle) {
         let loops = Trigonometry.arctanLoops[this.arctanDecimals];
@@ -256,6 +250,7 @@ Trigonometry.arctanLoops = [
 Trigonometry.sineDecimals = 2;
 Trigonometry.cosineDecimals = 2;
 Trigonometry.arctanDecimals = 2;
+Trigonometry.maxDecimals = 8;
 Trigonometry.factorialArray = [];
 Trigonometry.init();
 
@@ -522,8 +517,8 @@ class Vector2 {
         return this;
     }
     lerp(min, max, amount) {
-        this.x = Utils.lerp(amount, min.x, max.x);
-        this.y = Utils.lerp(amount, min.y, max.y);
+        this.x = Utils.lerp(min.x, max.x, amount);
+        this.y = Utils.lerp(min.y, max.y, amount);
         return this;
     }
     dotProduct(v) {

@@ -80,26 +80,34 @@ fs.writeFile(path.join(__dirname, './public/index.html'), html, function (err) {
   // console.log('index');
 });
 
-fs.readFile(path.join(__dirname, './js/installation.js'), 'utf8', function(err, content) {
-  let highlightedCode = '';
-  if (content)
-    highlightedCode = hljs.highlight('javascript', content).value;
-  let npmHighlightedCode = hljs.highlight('bash', 'npm install @lcluber/type6js').value;
-  let yarnHighlightedCode = hljs.highlight('bash', 'yarn install @lcluber/type6js').value;
-  html = pug.renderFile(path.join(__dirname, './views/installation.pug'),
-                        { root: './',
-                          docFolder: 'doc/',
-                          examplesFolder: 'examples/',
-                          examplesMenu: examplesMenu,
-                          docMenu: docTree,
-                          name:'Installation',
-                          npmHighlightedCode: npmHighlightedCode,
-                          yarnHighlightedCode: yarnHighlightedCode,
-                          usage:highlightedCode
-                        });
-  fs.writeFile(path.join(__dirname, './public/installation.html'), html, function (err) {
-    if (err) throw err;
-    // console.log('index');
+fs.readFile(path.join(__dirname, './js/installation-es6.js'), 'utf8', function(err, content) {
+  let highlightedCodeEs6 = '';
+  if (content){
+    highlightedCodeEs6 = hljs.highlight('javascript', content).value;
+  }
+  fs.readFile(path.join(__dirname, './js/installation-iife.js'), 'utf8', function(err, content) {
+    let highlightedCodeIife = '';
+    if (content){
+      highlightedCodeIife = hljs.highlight('javascript', content).value;
+    }
+    let npmHighlightedCode = hljs.highlight('bash', 'npm install @lcluber/type6js').value;
+    let yarnHighlightedCode = hljs.highlight('bash', 'yarn install @lcluber/type6js').value;
+    html = pug.renderFile(path.join(__dirname, './views/installation.pug'),
+                          { root: './',
+                            docFolder: 'doc/',
+                            examplesFolder: 'examples/',
+                            examplesMenu: examplesMenu,
+                            docMenu: docTree,
+                            name:'Installation',
+                            npmHighlightedCode: npmHighlightedCode,
+                            yarnHighlightedCode: yarnHighlightedCode,
+                            usageEs6:highlightedCodeEs6,
+                            usageIife:highlightedCodeIife,
+                          });
+    fs.writeFile(path.join(__dirname, './public/installation.html'), html, function (err) {
+      if (err) throw err;
+      // console.log('index');
+    });
   });
 });
 

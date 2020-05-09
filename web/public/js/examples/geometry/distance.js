@@ -12,7 +12,7 @@ window.onload = function() {
 
   document.body.addEventListener("mousemove", function(event) {
     context.clearRect(0, 0, width, height);
-    mousePosition.set(event.clientX, event.clientY);
+    mousePosition.set(event.clientX - 80, event.clientY + 60);
     context.fillStyle = "#66FF66";
     var distance = circle.position.getDistance(mousePosition);
     if( distance <= circle.radius ){

@@ -70,7 +70,7 @@ var Type6 = (function (exports) {
             return (max - min) * amount + min;
         };
         Utils.map = function (x, sourceMin, sourceMax, destMin, destMax) {
-            return this.lerp(this.normalize(x, sourceMin, sourceMax), destMin, destMax);
+            return this.lerp(destMin, destMax, this.normalize(x, sourceMin, sourceMax));
         };
         Utils.isIn = function (x, min, max) {
             return x >= min && x <= max;
@@ -105,28 +105,25 @@ var Type6 = (function (exports) {
             return i > 1 ? i - 1 : 1;
         };
         Trigonometry.setSinePrecision = function (value) {
-            if (value < this.sineLoops.length) {
+            if (value >= 0 && value <= this.maxDecimals) {
                 this.sineDecimals = value;
                 return value;
             }
-            this.sineDecimals = 2;
-            return 2;
+            return this.sineDecimals = this.maxDecimals;
         };
         Trigonometry.setCosinePrecision = function (value) {
-            if (value < Trigonometry.cosineLoops.length) {
+            if (value >= 0 && value <= this.maxDecimals) {
                 this.cosineDecimals = value;
                 return value;
             }
-            this.cosineDecimals = 2;
-            return 2;
+            return this.cosineDecimals = this.maxDecimals;
         };
         Trigonometry.setArctanPrecision = function (value) {
-            if (value < Trigonometry.arctanLoops.length) {
-                this.cosineDecimals = value;
+            if (value >= 0 && value <= this.maxDecimals) {
+                this.arctanDecimals = value;
                 return value;
             }
-            this.arctanDecimals = 2;
-            return 2;
+            return this.arctanDecimals = this.maxDecimals;
         };
         Trigonometry.degreeToRadian = function (degree) {
             return degree * this.pi / 180;
@@ -177,9 +174,6 @@ var Type6 = (function (exports) {
                 }
             }
         };
-        Trigonometry.arctan2Vector2 = function (v) {
-            return this.arctan2(v.x, v.y);
-        };
         Trigonometry.arctan = function (angle) {
             var loops = Trigonometry.arctanLoops[this.arctanDecimals];
             if (angle < 1 && angle > -1) {
@@ -222,6 +216,7 @@ var Type6 = (function (exports) {
         Trigonometry.sineDecimals = 2;
         Trigonometry.cosineDecimals = 2;
         Trigonometry.arctanDecimals = 2;
+        Trigonometry.maxDecimals = 8;
         Trigonometry.factorialArray = [];
         return Trigonometry;
     }();
@@ -502,8 +497,8 @@ var Type6 = (function (exports) {
             return this;
         };
         Vector2.prototype.lerp = function (min, max, amount) {
-            this.x = Utils.lerp(amount, min.x, max.x);
-            this.y = Utils.lerp(amount, min.y, max.y);
+            this.x = Utils.lerp(min.x, max.x, amount);
+            this.y = Utils.lerp(min.y, max.y, amount);
             return this;
         };
         Vector2.prototype.dotProduct = function (v) {

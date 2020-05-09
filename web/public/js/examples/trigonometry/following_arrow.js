@@ -35,11 +35,11 @@ window.onload = function() {
 
   document.body.addEventListener("mousemove", function(event) {
     mousePosition.set(
-      event.clientX,
-      event.clientY
+      event.clientX - 80,
+      event.clientY + 60
     );
     mousePosition.subtract(arrowPosition);
-    angle = Type6.Trigonometry.arctan2Vector2(mousePosition);
+    angle = Type6.Trigonometry.arctan2(mousePosition.x, mousePosition.y);
   });
 
 

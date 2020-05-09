@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "start": "node ./web/pug && grunt website",
-    "docsite": "grunt website && node ./web/pug"
+    "build": "grunt build"
   },
   "files": [
     "dist/"

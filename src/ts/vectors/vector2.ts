@@ -255,8 +255,8 @@ export class Vector2 {
   }
 
   public lerp(min: Vector2, max: Vector2, amount: number): Vector2 {
-    this.x = Utils.lerp( amount, min.x, max.x );
-    this.y = Utils.lerp( amount, min.y, max.y );
+    this.x = Utils.lerp( min.x, max.x, amount );
+    this.y = Utils.lerp( min.y, max.y, amount );
     return this;
   }
 

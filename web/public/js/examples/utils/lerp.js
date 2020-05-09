@@ -15,12 +15,12 @@ window.onload = function() {
   function render() {
     context.clearRect(0, 0, width, height);
 
-    context.globalAlpha = Type6.Utils.lerp(time, alpha.x, alpha.y);
+    context.globalAlpha = Type6.Utils.lerp( alpha.x, alpha.y, time );
     context.beginPath();
     context.arc(
-      Type6.Utils.lerp(time, x.x, x.y ),
-      Type6.Utils.lerp(time, y.x, y.y ),
-      Type6.Utils.lerp(time, radius.x, radius.y),
+      Type6.Utils.lerp(x.x, x.y, time),
+      Type6.Utils.lerp(y.x, y.y, time),
+      Type6.Utils.lerp(radius.x, radius.y, time),
       0,
       Type6.Trigonometry.twopi,
       false

@@ -55,7 +55,7 @@ export class Utils {
   }
 
   static map(x: number, sourceMin: number, sourceMax: number, destMin: number, destMax: number): number {
-    return this.lerp(this.normalize(x, sourceMin, sourceMax), destMin, destMax);
+    return this.lerp(destMin, destMax, this.normalize(x, sourceMin, sourceMax));
   }
 
   static isIn( x: number, min: number, max: number ): boolean {

@@ -142,7 +142,6 @@ export declare class Time {
     static millisecToFps(millisecond: number): number;
     static fpsToMillisec(refreshRate: number): number;
 }
-
 export declare class Trigonometry {
     static readonly sineLoops: number[];
     static readonly cosineLoops: number[];
@@ -153,6 +152,7 @@ export declare class Trigonometry {
     private static sineDecimals;
     private static cosineDecimals;
     private static arctanDecimals;
+    private static maxDecimals;
     private static factorialArray;
     static init(): void;
     private static createRoundedPis;
@@ -167,7 +167,6 @@ export declare class Trigonometry {
     static sine(angle: number): number;
     static cosine(angle: number): number;
     static arctan2(x: number, y: number): number | false;
-    static arctan2Vector2(v: Vector2): number | false;
     static arctan(angle: number): number;
     static sineEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;
     static cosineEquation(amplitude: number, period: number, shiftX: number, shiftY: number): number;

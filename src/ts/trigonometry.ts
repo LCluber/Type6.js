@@ -1,4 +1,4 @@
-import { Vector2 } from './vectors/vector2';
+// import { Vector2 } from './vectors/vector2';
 import { Utils } from './utils';
 
 export class Trigonometry {
@@ -49,7 +49,7 @@ export class Trigonometry {
   private static sineDecimals: number = 2;
   private static cosineDecimals: number = 2;
   private static arctanDecimals : number = 2;
-
+  private static maxDecimals : number = 8;
   private static factorialArray: number[] = [];
 
   static init(){
@@ -80,30 +80,27 @@ export class Trigonometry {
   }
 
   static setSinePrecision(value: number): number {
-    if(value < this.sineLoops.length) {
+    if(value >= 0 && value <= this.maxDecimals) {
       this.sineDecimals = value;
       return value;
     }
-    this.sineDecimals = 2;
-    return 2;
+    return this.sineDecimals = this.maxDecimals;
   }
 
   static setCosinePrecision(value: number): number {
-    if(value < Trigonometry.cosineLoops.length) {
+    if(value >= 0 && value <= this.maxDecimals) {
       this.cosineDecimals = value;
       return value;
     }
-    this.cosineDecimals = 2;
-    return 2;
+    return this.cosineDecimals = this.maxDecimals;
   }
 
   static setArctanPrecision(value: number): number {
-    if(value < Trigonometry.arctanLoops.length) {
-      this.cosineDecimals = value;
+    if(value >= 0 && value <= this.maxDecimals) {
+      this.arctanDecimals = value;
       return value;
     }
-    this.arctanDecimals = 2;
-    return 2;
+    return this.arctanDecimals = this.maxDecimals;
   }
 
   static degreeToRadian( degree: number ): number {
@@ -179,13 +176,6 @@ export class Trigonometry {
         return false;
       }
     }
-  }
-
-  /**
-  * Estimate arctangent from a vector Vec2
-  */
-  static arctan2Vector2(v: Vector2): number|false {
-    return this.arctan2(v.x, v.y);
   }
 
   /**

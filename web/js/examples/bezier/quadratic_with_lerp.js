@@ -44,9 +44,9 @@ window.onload = function() {
     context.moveTo(p0.x, p0.y);
 
     for(t = 0; t <= maxT; t += step) {
-      pA.lerp(t, p0, p1);
-      pB.lerp(t, p1, p2);
-      pFinal.lerp(t, pA, pB);
+      pA.lerp(p0, p1, t);
+      pB.lerp(p1, p2, t);
+      pFinal.lerp(pA, pB, t);
 
       context.lineTo(pFinal.x, pFinal.y);
     }

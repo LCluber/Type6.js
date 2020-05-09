@@ -12,8 +12,8 @@ window.onload = function() {
     drawGrid();
 
     circle.position.set(
-      Type6.Utils.roundToNearest(event.clientX, gridSize),
-      Type6.Utils.roundToNearest(event.clientY, gridSize)
+      Type6.Utils.roundToNearest(event.clientX - 80, gridSize),
+      Type6.Utils.roundToNearest(event.clientY + 60, gridSize)
     );
 
     circle.draw( context, 'rgba(0,0,0,1)', null, null );

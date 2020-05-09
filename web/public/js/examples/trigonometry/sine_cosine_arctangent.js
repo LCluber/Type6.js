@@ -6,7 +6,8 @@ window.onload = function() {
 
   context.translate( width * 0.5, height * 0.5 );
   context.scale( 1, -1 );
-
+  Type6.Trigonometry.setArctanPrecision(8);
+  
   for(var angle = -Type6.Trigonometry.pi; angle <= Type6.Trigonometry.pi; angle += 0.04) {
 
     var x = angle * 200;
