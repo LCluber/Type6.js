@@ -40,8 +40,10 @@ export declare class Circle {
     private _diameter;
     readonly shape: 'circle';
     constructor(positionX: number, positionY: number, radius: number);
-    radius: number;
-    diameter: number;
+    set radius(radius: number);
+    get radius(): number;
+    set diameter(diameter: number);
+    get diameter(): number;
     clone(): Circle;
     copy(circle: Circle): Circle;
     set(positionX: number, positionY: number, radius: number): Circle;
