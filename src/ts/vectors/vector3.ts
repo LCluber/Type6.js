@@ -14,11 +14,19 @@ export class Vector3 {
     this.z = z||0.0;
   }
 
-  public fromArray( array: number[], offset?: number ): Vector3 {
+  //true if vector is equal to (0;0)
+  public isOrigin(): boolean {
+    return (this.x === 0 && this.y === 0 && this.z === 0) ? true : false;
+  }
+
+  public isPositive(): boolean {
+    return ( this.x >= 0 && this.y >= 0 && this.z >= 0) ? true : false;
+  }
+
+  public setFromArray( array: number[], offset?: number ): Vector3 {
     if ( offset === undefined ){
       offset = 0;
     }
-
     this.x = array[ offset ];
     this.y = array[ offset + 1 ];
     this.z = array[ offset + 2 ];
@@ -30,7 +38,7 @@ export class Vector3 {
   }
 
   public toString(): string {
-    return '(x = ' + this.x + ';y = ' + this.y + ';z = ' + this.z + ')';
+    return '(x = ' + this.x + '; y = ' + this.y + '; z = ' + this.z + ')';
   }
 
   public set(x:number, y:number, z:number): Vector3 {
@@ -44,10 +52,10 @@ export class Vector3 {
     return new Vector3(this.x,this.y,this.z);
   }
 
-  public copy(vector3: Vector3 ): Vector3 {
-    this.x = vector3.x;
-    this.y = vector3.y;
-    this.z = vector3.z;
+  public copy(v: Vector3 ): Vector3 {
+    this.x = v.x;
+    this.y = v.y;
+    this.z = v.z;
     return this;
 	}
 
@@ -58,32 +66,25 @@ export class Vector3 {
     return this;
   }
 
-  public getMagnitude(): number {
-    return Math.sqrt(this.getSquaredMagnitude());
+  public getMagnitude(square: boolean = false): number {
+    return square ? this.getSquaredMagnitude() : Math.sqrt(this.getSquaredMagnitude());
   }
 
-  public getSquaredMagnitude(): number {
+  private getSquaredMagnitude(): number {
     return this.x * this.x + this.y * this.y + this.z * this.z;
   }
 
-  public getDistance(vector3: Vector3): number {
-    this.subtract(vector3);
-    let magnitude = this.getMagnitude();
-    this.add(vector3);
+  public getDistance(v: Vector3, square: boolean = false): number {
+    this.subtract(v);
+    const magnitude = this.getMagnitude(square);
+    this.add(v);
     return magnitude;
   }
 
-  public getSquaredDistance(vector3: Vector3): number {
-    this.subtract(vector3);
-    let squaredMagnitude = this.getSquaredMagnitude();
-    this.add(vector3);
-    return squaredMagnitude;
-  }
-
-  public add(vector3: Vector3): Vector3 {
-    this.x += vector3.x;
-    this.y += vector3.y;
-    this.z += vector3.z;
+  public add(v: Vector3): Vector3 {
+    this.x += v.x;
+    this.y += v.y;
+    this.z += v.z;
     return this;
   }
 
@@ -94,24 +95,17 @@ export class Vector3 {
     return this;
   }
 
-  public addScaledVector(vector3: Vector3, scalar: number): Vector3 {
-    this.x += vector3.x * scalar;
-    this.y += vector3.y * scalar;
-    this.z += vector3.z * scalar;
+  public addScaledVector(v: Vector3, scalar: number): Vector3 {
+    this.x += v.x * scalar;
+    this.y += v.y * scalar;
+    this.z += v.z * scalar;
     return this;
   }
 
-  public addVectors ( v1: Vector3, v2: Vector3 ): Vector3 {
-    this.x = v1.x + v2.x;
-    this.y = v1.y + v2.y;
-    this.z = v1.z + v2.z;
-    return this;
-  }
-
-  public subtract(vector3: Vector3): Vector3 {
-    this.x -= vector3.x;
-    this.y -= vector3.y;
-    this.z -= vector3.z;
+  public subtract(v: Vector3): Vector3 {
+    this.x -= v.x;
+    this.y -= v.y;
+    this.z -= v.z;
     return this;
   }
 
@@ -122,17 +116,10 @@ export class Vector3 {
     return this;
   }
 
-  public subtractScaledVector(vector3: Vector3, scalar: number): Vector3 {
-    this.x -= vector3.x * scalar;
-    this.y -= vector3.y * scalar;
-    this.z -= vector3.z * scalar;
-    return this;
-  }
-
-  public subtractVectors ( v1: Vector3, v2: Vector3 ): Vector3 {
-    this.x = v1.x - v2.x;
-    this.y = v1.y - v2.y;
-    this.z = v1.z - v2.z;
+  public subtractScaledVector(v: Vector3, scalar: number): Vector3 {
+    this.x -= v.x * scalar;
+    this.y -= v.y * scalar;
+    this.z -= v.z * scalar;
     return this;
   }
 
@@ -144,45 +131,31 @@ export class Vector3 {
   }
 
   //component product
-  public multiply(vector3: Vector3): Vector3 {
-    this.x *= vector3.x;
-    this.y *= vector3.y;
-    this.z *= vector3.z;
+  public multiply(v: Vector3): Vector3 {
+    this.x *= v.x;
+    this.y *= v.y;
+    this.z *= v.z;
     return this;
   }
 
-  public multiplyScaledVector(vector3: Vector3, scalar: number): Vector3 {
-    this.x *= vector3.x * scalar;
-    this.y *= vector3.y * scalar;
-    this.z *= vector3.z * scalar;
+  public multiplyScaledVector(v: Vector3, scalar: number): Vector3 {
+    this.x *= v.x * scalar;
+    this.y *= v.y * scalar;
+    this.z *= v.z * scalar;
     return this;
   }
 
-  public multiplyVectors ( v1: Vector3, v2: Vector3 ): Vector3 {
-    this.x = v1.x * v2.x;
-    this.y = v1.y * v2.y;
-    this.z = v1.z * v2.z;
+  public divide(v: Vector3): Vector3 {
+    this.x /= v.x;
+    this.y /= v.y;
+    this.z /= v.z;
     return this;
   }
 
-  public divide(vector3: Vector3): Vector3 {
-    this.x /= vector3.x;
-    this.y /= vector3.y;
-    this.z /= vector3.z;
-    return this;
-  }
-
-  public divideScaledVector(vector3: Vector3, scalar: number): Vector3 {
-    this.x /= vector3.x * scalar;
-    this.y /= vector3.y * scalar;
-    this.z /= vector3.z * scalar;
-    return this;
-  }
-
-  public divideVectors ( v1: Vector3, v2: Vector3 ): Vector3 {
-    this.x = v1.x / v2.x;
-    this.y = v1.y / v2.y;
-    this.z = v1.z / v2.z;
+  public divideScaledVector(v: Vector3, scalar: number): Vector3 {
+    this.x /= v.x * scalar;
+    this.y /= v.y * scalar;
+    this.z /= v.z * scalar;
     return this;
   }
 
@@ -193,17 +166,17 @@ export class Vector3 {
     return this;
   }
 
-  public max(vector3: Vector3): Vector3 {
-    this.x = Math.max( this.x, vector3.x );
-    this.y = Math.max( this.y, vector3.y );
-    this.z = Math.max( this.z, vector3.z );
+  public max(v: Vector3): Vector3 {
+    this.x = Math.max( this.x, v.x );
+    this.y = Math.max( this.y, v.y );
+    this.z = Math.max( this.z, v.z );
     return this;
   }
 
-  public min(vector3: Vector3): Vector3 {
-    this.x = Math.min( this.x, vector3.x );
-    this.y = Math.min( this.y, vector3.y );
-    this.z = Math.min( this.z, vector3.z );
+  public min(v: Vector3): Vector3 {
+    this.x = Math.min( this.x, v.x );
+    this.y = Math.min( this.y, v.y );
+    this.z = Math.min( this.z, v.z );
     return this;
   }
 
@@ -229,26 +202,29 @@ export class Vector3 {
     return this;
   }
 
-  public dotProduct(vector3: Vector3): number { //scalar product
-    return this.x * vector3.x + this.y * vector3.y + this.z * vector3.z;
-  }
-
-  public cross(vector3: Vector3 ): Vector3 {
-    let x = this.x, y = this.y, z = this.z;
-    this.x =  y * vector3.z - z * vector3.y;
-    this.y =  z * vector3.x - x * vector3.z;
-    this.z =  x * vector3.y - y * vector3.x;
+  public absolute(): Vector3 {
+    this.x = Math.abs(this.x);
+    this.y = Math.abs(this.y);
+    this.z = Math.abs(this.z);
     return this;
   }
 
-  public crossVectors( v1: Vector3, v2: Vector3 ): Vector3 {
+  public opposite(): Vector3 {
+    this.x = -this.x;
+    this.y = -this.y;
+    this.z = -this.z;
+    return this;
+  }
 
-    let v1x = v1.x, v1y = v1.y, v1z = v1.z;
-    let v2x = v2.x, v2y = v2.y, v2z = v2.z;
+  public dotProduct(v: Vector3): number { //scalar product
+    return this.x * v.x + this.y * v.y + this.z * v.z;
+  }
 
-    this.x = v1y * v2z - v1z * v2y;
-    this.y = v1z * v2x - v1x * v2z;
-    this.z = v1x * v2y - v1y * v2x;
+  public cross(v: Vector3 ): Vector3 {
+    let x = this.x, y = this.y, z = this.z;
+    this.x =  y * v.z - z * v.y;
+    this.y =  z * v.x - x * v.z;
+    this.z =  x * v.y - y * v.x;
     return this;
   }
 

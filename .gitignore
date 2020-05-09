@@ -5,3 +5,5 @@ build/
 .sass-cache/
 .tscache/
 npm-debug.log
+firebase-debug.log
+.firebase

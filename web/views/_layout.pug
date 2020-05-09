@@ -7,15 +7,19 @@ html( lang='en')
     meta( name='description' content='' )
     meta( name='author' content='Ludovic Cluber' )
     title Type6.js
-    link( rel='stylesheet' type='text/css' href='public/css/style.min.css')
-    link( rel="icon" href="public/img/favicon.ico")
+    link( rel='stylesheet' type='text/css' href= root+'css/style.min.css')
+    link( rel="icon" href= root + 'img/favicon.ico')
 
-  body( id='page-top' data-spy='scroll' data-target='.navbar-fixed-top' )
-    
-    include _menu
+  body( class="docs-page" )
 
-    block content
+    include _header
+
+    div(class="docs-wrapper")
+      include _menu
+
+      div( class="container")
+        article( class="" id="")
+          block content
+        include _footer
     
-    include _footer
-        
-    script( src = 'public/js/main.min.js' )
+    script( src = root+'js/main.min.js' )

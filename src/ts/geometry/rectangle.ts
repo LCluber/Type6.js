@@ -38,66 +38,76 @@ export class Rectangle {
     return new Rectangle(this.position.x, this.position.y, this.size.x, this.size.y);
   }
 
-  public copy( rectangle: Rectangle ): void {
+  public copy( rectangle: Rectangle ): Rectangle {
     this.setSizeFromVector( rectangle.size );
     this.setPositionFromVector( rectangle.position );
+    return this;
   }
 
-  public set( positionX: number, positionY: number, sizeX: number, sizeY: number ): void {
+  public set( positionX: number, positionY: number, sizeX: number, sizeY: number ): Rectangle {
     this.setSizeXY( sizeX, sizeY );
     this.setPositionXY( positionX, positionY );
+    return this;
   }
 
-  public setPositionX(x: number): void {
+  public setPositionX(x: number): Rectangle {
     this.setPosition('x', x);
+    return this;
   }
 
-  public setPositionY(y: number): void {
+  public setPositionY(y: number): Rectangle {
     this.setPosition('y', y);
+    return this;
   }
 
-  public setPosition(property: AxisNames2d, value: number): void {
+  private setPosition(property: AxisNames2d, value: number): void {
     this.position[property] = value;
     this.topLeftCorner[property] = value - this.halfSize[property];
     this.bottomRightCorner[property] = value + this.halfSize[property] ;
   }
 
-  public setPositionXY( positionX: number, positionY: number ): void {
+  public setPositionXY( positionX: number, positionY: number ): Rectangle {
     this.position.set( positionX, positionY );
     this.setCorners();
+    return this;
   }
 
-  public setPositionFromVector( position: Vector2 ): void {
+  public setPositionFromVector( position: Vector2 ): Rectangle {
     this.position.copy( position );
     this.setCorners();
+    return this;
   }
 
 
-  public setSizeX( width: number ): void {
+  public setSizeX( width: number ): Rectangle {
     this.setSize('x', width);
+    return this;
   }
 
-  public setSizeY( height: number ): void {
+  public setSizeY( height: number ): Rectangle {
     this.setSize('y', height);
+    return this;
   }
 
-  public setSize(property: AxisNames2d, value: number): void {
+  private setSize(property: AxisNames2d, value: number): void {
     this.size[property] = value;
     this.setHalfSize();
     this.topLeftCorner[property] = this.position[property] - this.halfSize[property];
     this.bottomRightCorner[property] = this.position[property] + this.halfSize[property];
   }
 
-  public setSizeXY( width: number, height: number ): void {
+  public setSizeXY( width: number, height: number ): Rectangle {
     this.size.set( width, height );
     this.setHalfSize();
     this.setCorners();
+    return this;
   }
 
-  public setSizeFromVector( size: Vector2 ): void {
+  public setSizeFromVector( size: Vector2 ): Rectangle {
     this.size.copy( size );
     this.setHalfSize();
     this.setCorners();
+    return this;
   }
 
   private setCorners(): void {
@@ -112,15 +122,15 @@ export class Rectangle {
     this.halfSize.halve();
   }
 
-  public contains(vector: Vector2): boolean {
-    return (Utils.contains(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x)
-            && Utils.contains(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y));
+  public isIn(vector: Vector2): boolean {
+    return (Utils.isIn(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x)
+            && Utils.isIn(vector.y, this.topLeftCorner.y, this.bottomRightCorner.y));
   }
 
   /**
   * draw the rectangle in a canvas.
   */
-  public draw( context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number ){
+  public draw( context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number ): void {
     context.beginPath();
     context.rect( this.topLeftCorner.x,
                   this.topLeftCorner.y,

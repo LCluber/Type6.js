@@ -77,25 +77,6 @@ module.exports = function(grunt){
         ]
       }
     },
-    typedoc: {
-  		build: {
-  			options: {
-  				out: docDir,
-  				target: 'es6',
-          name: projectName + '.js - Documentation',
-          includeDeclarations: false,
-          hideGenerator: true
-  			},
-  			src: [srcDir + 'ts/*.ts']
-  		}
-  	},
-    jshint: {
-      options: {
-        // jshintrc: 'config/.jshintrc'
-      },
-      //lib: [ 'Gruntfile.js', srcDir + '**/*.js'],
-      web: [ webDir + 'js/**/*.js'],
-    },
     sass: {
       options: {
         implementation: sass,
@@ -111,14 +92,6 @@ module.exports = function(grunt){
         }]
       }
     },
-    csslint: {
-      dist: {
-        options: {
-          import: false
-        },
-        src: [webDir + 'sass/build/**/*.css']
-      }
-    },
     cssmin:{
       options: {
         shorthandCompacting: false,
@@ -127,11 +100,8 @@ module.exports = function(grunt){
       target: {
         files: [
           {
-            src: webDir  + 'sass/build/grayscale.css',
+            src: webDir  + 'sass/build/*.css',
             dest: publicDir + 'css/style.min.css'
-          },
-          { src: webDir  + 'sass/build/examples.css',
-            dest: publicDir + 'css/examples.min.css'
           }
         ]
       }
@@ -242,7 +212,7 @@ module.exports = function(grunt){
             if_return:true,
             join_vars:true,
             warnings: true,
-            drop_console: true,
+            drop_console: false,
             keep_fargs: false,
             keep_fnames: false
           }
@@ -280,9 +250,7 @@ module.exports = function(grunt){
         },
         files: [{
           src  : [
-            nodeDir + 'jquery-easing/jquery.easing.1.3.js',
-            //distDir + projectNameLC + '.iife.js',
-            webDir + 'js/*.js'
+            webDir + 'js/main.js'
           ],
           dest : publicDir + 'js/main.min.js'
         }]
@@ -300,29 +268,30 @@ module.exports = function(grunt){
       },
       webjs: {
         options: {
-          separator: '',
+          separator: ';\n',
           stripBanners: true,
           banner: ''
         },
         src: [nodeDir   + 'jquery/dist/jquery.min.js',
-              nodeDir   + '@fortawesome/fontawesome-free/js/all.min.js',
+              // nodeDir   + '@fortawesome/fontawesome-free/js/all.min.js',
               nodeDir   + 'bootstrap/dist/js/bootstrap.min.js',
+              // nodeDir   + 'fuse.js/dist/fuse.min.js',
               publicDir + 'js/main.min.js'
             ],
         dest: publicDir + 'js/main.min.js'
-      },
-      webcss: {
-        options: {
-          separator: '',
-          stripBanners: true,
-          banner: ''
-        },
-        src: [// nodeDir   + 'font-awesome/css/font-awesome.min.css',
-              nodeDir   + 'bootstrap/dist/css/bootstrap.min.css',
-              publicDir + 'css/style.min.css'
-            ],
-        dest: publicDir + 'css/style.min.css'
       }
+      // webcss: {
+      //   options: {
+      //     separator: '',
+      //     stripBanners: true,
+      //     banner: ''
+      //   },
+      //   src: [// nodeDir   + 'font-awesome/css/font-awesome.min.css',
+      //         //nodeDir   + 'bootstrap/dist/css/bootstrap.min.css',
+      //         publicDir + 'css/style.min.css'
+      //       ],
+      //   dest: publicDir + 'css/style.min.css'
+      // }
     },
     strip_code: {
       options: {
@@ -349,6 +318,13 @@ module.exports = function(grunt){
         expand: true,
         cwd: webDir + 'js/',
         src: ['examples/**/*.js'],
+        dest: publicDir + 'js/' ,
+        filter: 'isFile'
+      },
+      type6:{
+        expand: true,
+        cwd: distDir,
+        src: ['type6.iife.min.js'],
         dest: publicDir + 'js/' ,
         filter: 'isFile'
       }
@@ -403,7 +379,6 @@ module.exports = function(grunt){
 
   grunt.loadNpmTasks( 'grunt-contrib-copy' );
   grunt.loadNpmTasks( 'grunt-contrib-clean' );
-  grunt.loadNpmTasks( 'grunt-contrib-jshint' );
   grunt.loadNpmTasks( 'grunt-contrib-uglify' );
   grunt.loadNpmTasks( 'grunt-contrib-csslint' );
   grunt.loadNpmTasks( 'grunt-contrib-cssmin' );
@@ -417,7 +392,6 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-tslint' );
   grunt.loadNpmTasks( 'grunt-ts' );
   grunt.loadNpmTasks( 'grunt-rollup' );
-  grunt.loadNpmTasks( 'grunt-typedoc' );
   grunt.loadNpmTasks( 'grunt-sass' );
 
   grunt.registerTask( 'lib',
@@ -436,14 +410,7 @@ module.exports = function(grunt){
                         'strip_code:declaration',
                       ]
                     );
-
-  grunt.registerTask( 'doc',
-                      'Compile lib documentation',
-                      [ 'clean:doc',
-                        'typedoc'
-                      ]
-                    );
-
+                    
   grunt.registerTask( 'serve',
                       'launch server, open website and watch for changes',
                       [ 'concurrent' ]
@@ -453,18 +420,17 @@ grunt.registerTask( 'websass',
                     'Compile website css',
                     [ 'clean:websass',
                       'sass',
-                      'cssmin',
-                      'concat:webcss'
+                      'cssmin'
                      ]
                   );
 
 grunt.registerTask( 'webjs',
                     'Compile website js',
-                    [ 'jshint:web',
-                      'clean:webjs',
+                    [ 'clean:webjs',
                       'uglify:web',
                       'concat:webjs',
-                      'copy:examples'
+                      'copy:examples',
+                      'copy:type6'
                      ]
                   );
 
@@ -492,9 +458,9 @@ grunt.registerTask( 'build',
                       //build site
                       grunt.task.run('website');
                       //build documentation
-                      grunt.task.run('doc');
+                      // grunt.task.run('doc');
                       // launch server and watch for changes
-                      grunt.task.run('serve');
+                      // grunt.task.run('serve');
                     }
                   );
 

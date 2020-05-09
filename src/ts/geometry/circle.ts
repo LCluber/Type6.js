@@ -37,36 +37,45 @@ export class Circle {
     return new Circle(this.position.x, this.position.y, this.radius);
   }
 
-  public copy( circle: Circle ): void {
+  public copy( circle: Circle ): Circle {
     this.position.copy(circle.position);
     this.radius = circle.radius;
+    return this;
   }
 
-  public set( positionX: number, positionY: number, radius: number ): void {
+  public set( positionX: number, positionY: number, radius: number ): Circle {
     this.position.set(positionX, positionY);
     this.radius = radius;
+    return this;
   }
 
-  public setPositionXY( positionX: number, positionY: number ): void {
+  public setPositionXY( positionX: number, positionY: number ): Circle {
     this.position.set( positionX, positionY );
+    return this;
   }
 
-  public setPositionFromVector( position: Vector2 ): void {
+  public setPositionFromVector( position: Vector2 ): Circle {
     this.position.copy( position );
+    return this;
   }
 
-  public scale(scalar: number): void {
+  public scale(scalar: number): Circle {
     this.radius *= scalar;
+    return this;
   }
 
-  public contains(vector: Vector2): boolean {
-    return vector.getSquaredDistance(this.position) <= this.radius * this.radius;
+  public isIn(v: Vector2): boolean {
+    return v.getDistance(this.position, true) <= this.radius * this.radius;
   }
+
+  // public isOut(v: Vector2): boolean {
+  //   return v.getDistance(this.position, true) > this.radius * this.radius;
+  // }
 
   /**
   * draw the circle in a canvas.
   */
-  draw( context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number ){
+  draw( context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number ): void {
     context.beginPath();
     context.arc(  this.position.x,
                   this.position.y,

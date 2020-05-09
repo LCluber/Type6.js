@@ -60,7 +60,7 @@ export class Matrix4x3 {
     return this;
   }
 
-  public toArray(): Float32Array{
+  public toArray(): Float32Array {
     return this.m;
   }
 

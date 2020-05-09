@@ -14,7 +14,7 @@ window.onload = function() {
   drawRectangles();
 
   document.body.addEventListener("mousemove", function(event) {
-    circle.position.set(event.clientX, event.clientY);
+    circle.position.set(event.clientX - 80, event.clientY + 60);
     circle.position.clamp(innerRect);
 
     context.clearRect(0, 0, width, height);
