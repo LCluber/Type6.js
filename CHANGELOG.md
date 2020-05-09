@@ -1,4 +1,4 @@
-Version 2.0.0 (May 14th 2020)
+Version 2.0.0 (May 09th 2020)
 -----------------------------
  * New Matrix3x3 class
  * New website
