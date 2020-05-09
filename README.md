@@ -12,15 +12,14 @@ The main purpose of this library is to provide a comprehensive tool for all proj
 ```bash
 $ npm install @lcluber/type6js
 ```
-Or download it **[here](http://type6js.lcluber.com/#download)**.
 
 ## Demo
 
-See a basic example **[here](http://type6js.lcluber.com/#example)**.
+See a basic example **[here](http://type6js.lcluber.com/examples/examples_trigonometry_sine_cosine_arctangent.html)**.
 
 ## API Reference
 
-Read the documentation **[here](http://type6js.lcluber.com/doc/)**.
+Read the documentation **[here](http://type6js.lcluber.com/installation.html)**.
 
 ## Tests
 
