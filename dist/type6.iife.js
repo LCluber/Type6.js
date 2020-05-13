@@ -1004,9 +1004,9 @@ var Type6 = (function (exports) {
             return this;
         };
         Matrix4x3.prototype.lookAtRH = function (eye, target, up) {
-            this.zAxis.subtractVectors(eye, target).normalize();
-            this.xAxis.crossVectors(up, this.zAxis).normalize();
-            this.yAxis.crossVectors(this.zAxis, this.xAxis);
+            this.zAxis.copy(eye).subtract(target).normalize();
+            this.xAxis.copy(up).cross(this.zAxis).normalize();
+            this.yAxis.copy(this.zAxis).cross(this.xAxis);
             this.make(this.xAxis.x, this.yAxis.x, this.zAxis.x, this.xAxis.y, this.yAxis.y, this.zAxis.y, this.xAxis.z, this.yAxis.z, this.zAxis.z, -this.xAxis.dotProduct(eye), -this.yAxis.dotProduct(eye), -this.zAxis.dotProduct(eye));
             return this;
         };

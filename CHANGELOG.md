@@ -1,3 +1,7 @@
+Version 2.0.1 (May 13th 2020)
+-----------------------------
+ * fix lookAtRH() method in Matrix4x3 class
+
 Version 2.0.0 (May 09th 2020)
 -----------------------------
  * New Matrix3x3 class
