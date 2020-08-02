@@ -1,7 +1,7 @@
 {
   "name": "@lcluber/type6js",
   "version": "2.0.1",
-  "description": "Mathematics library written in TypeScript",
+  "description": "Mathematics library for Javascript",
   "keywords": [
     "maths",
     "geometry",

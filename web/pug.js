@@ -80,6 +80,18 @@ fs.writeFile(path.join(__dirname, './public/index.html'), html, function (err) {
   // console.log('index');
 });
 
+html = pug.renderFile(path.join(__dirname, './views/license.pug'),
+                          { root: './', 
+                            docFolder: 'doc/',
+                            examplesFolder: 'examples/',
+                            examplesMenu: examplesMenu,
+                            docMenu: docTree,
+                            name:'License' 
+                          });
+fs.writeFile(path.join(__dirname, './public/license.html'), html, function (err) {
+  if (err) throw err;
+});
+
 fs.readFile(path.join(__dirname, './js/installation-es6.js'), 'utf8', function(err, content) {
   let highlightedCodeEs6 = '';
   if (content){

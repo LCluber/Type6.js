@@ -456,7 +456,7 @@ grunt.registerTask( 'build',
                       //build lib
                       grunt.task.run('lib');
                       //build site
-                      grunt.task.run('website');
+                      // grunt.task.run('website');
                       //build documentation
                       // grunt.task.run('doc');
                       // launch server and watch for changes

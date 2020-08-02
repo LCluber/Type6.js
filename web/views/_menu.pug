@@ -8,12 +8,12 @@ div(id="docs-sidebar" class="docs-sidebar sidebar-visible")
   //- nav(id="" class="docs-nav navbar")
   br
   ul(class="list-group")
-    li(class="list-group-item nav-item")
+    li(class="list-group-item nav-item" id="index")
       a(class=name === 'Introduction' ? "nav-link active" : "nav-link" href= root + 'index.html')
         //- span( class="theme-icon-holder mr-2")
         //-   i( class="fas fa-map-signs") 
         | Introduction
-    li(class="list-group-item nav-item")
+    li(class="list-group-item nav-item" id="installation")
       a(class=name === 'Installation' ? "nav-link active" : "nav-link" href= root + 'installation.html')
         //- span( class="theme-icon-holder mr-2")
         //-   i( class="fas fa-arrow-down") 
@@ -59,3 +59,8 @@ div(id="docs-sidebar" class="docs-sidebar sidebar-visible")
               each example in category
                 li( class='list-group-item nav-item' id= example.id)
                   a( href=root + examplesFolder + example.htmlPath, target='_self' class=name === example.id ? "nav-link active" : "nav-link")= example.name
+    li(class="list-group-item nav-item" id="license")
+      a(class=name === 'License' ? "nav-link active" : "nav-link" href= root + 'license.html')
+        //- span( class="theme-icon-holder mr-2")
+        //-   i( class="fas fa-arrow-down") 
+        | License
