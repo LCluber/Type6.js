@@ -13,3 +13,8 @@ var path = window.location.pathname;
 var page = path.split("/").pop().split(".")[0];
 var elmnt = document.getElementById(page);
 elmnt.scrollIntoView(true);
+
+
+function search(expression){
+	
+}

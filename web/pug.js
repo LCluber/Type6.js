@@ -9,7 +9,33 @@ hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash')); // se
 
 let methods = {};
 let examples = {};
+let menu = '';
 function extractMethods(object, property, method) {
+  if (!object.hasOwnProperty('params')) {
+    for (let prop in object) {
+      menu = 'li(class="list-group-item nav-item" id= index)';
+      if(object.hasOwnProperty(prop)) {
+        let pn = method ? method + '_' + prop : prop;
+        extractMethods(object[prop], prop, pn);
+      }
+    }
+    return;
+  }
+  // let link = method.slice(1);
+  object.name = property;
+  object.path = method;
+  methods[method] = object;
+}
+
+// ul(class="list-group" id=index)
+//  each val, index in docMenu
+//    li(class="list-group-item nav-item" id= index)
+//      if val.params
+//        a(href='#' class="nav-link")= index
+//      else
+//        = index
+//        ul(class="list-group" id=index)
+function buildDocMenu(object, property, method){
   if (!object.hasOwnProperty('params')) {
     for (let prop in object) {
       if(object.hasOwnProperty(prop)) {
@@ -122,7 +148,7 @@ fs.readFile(path.join(__dirname, './js/installation-es6.js'), 'utf8', function(e
     });
   });
 });
-
+console.log(methods);
 for (let method in methods) {
   if(methods.hasOwnProperty(method)) {
     fs.readFile(path.join(__dirname, './js/usage/' + method + '.js'), 'utf8', function(err, content) {
