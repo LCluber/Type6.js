@@ -85,8 +85,8 @@ canvas {
   overflow: hidden;
 
   .docs-sidebar {
-    // height: calc(100vh - #{$headerHeight});
-    height: 100%;
+    height: calc(100vh - #{$headerHeight});
+    // height: 100%;
     background-color: #222;
     overflow-y: auto;
     overflow-x: hidden;
