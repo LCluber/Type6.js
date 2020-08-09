@@ -56,7 +56,14 @@ function displaySearchResult(expression, object) {
 }
 
 function searchExpression(string, substring) {
-	return string.indexOf(substring) !== -1;
+	var substringArray = substring.trim().toLowerCase().split(" ", 4);
+	var sanitizeString = string.toLowerCase();
+	for (var i=0; i < substringArray.length ; i++ ) {
+		if (sanitizeString.indexOf(substringArray[i]) === -1) {
+			return false;
+		}
+	}
+	return true;
 }
 
 function hideMenuItem(id) {

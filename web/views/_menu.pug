@@ -2,7 +2,7 @@
 div(id="docs-sidebar" class="docs-sidebar sidebar-visible")
 
   div(class="form-group")
-    input(type="text" class="form-control" placeholder="Search Method..." aria-label="Search Method..." aria-describedby="inputGroup-sizing-sm" id="search")
+    input(type="text" class="form-control" placeholder="Search doc..." aria-label="Search doc..." aria-describedby="inputGroup-sizing-sm" id="search")
 
   ul(class="list-group")
     li(class="list-group-item nav-item" id="index")
@@ -29,14 +29,14 @@ div(id="docs-sidebar" class="docs-sidebar sidebar-visible")
 
       +menu(docTree, root, docFolder)
 
-    li(class="list-group-item nav-item") Examples
-      ul(class="list-group")
-        each category, key in examplesMenu
-          li( class='list-group-item nav-item')= key 
-            ul(class="list-group")
-              each example in category
-                li( class='list-group-item nav-item' id= example.id)
-                  a( href=root + examplesFolder + example.htmlPath, target='_self' class=name === example.id ? "nav-link active" : "nav-link")= example.name
+    //- li(class="list-group-item nav-item") Examples
+    //-   ul(class="list-group")
+    //-     each category, key in examplesMenu
+    //-       li( class='list-group-item nav-item')= key 
+    //-         ul(class="list-group")
+    //-           each example in category
+    //-             li( class='list-group-item nav-item' id= example.id)
+    //-               a( href=root + examplesFolder + example.htmlPath, target='_self' class=name === example.id ? "nav-link active" : "nav-link")= example.name
     li(class="list-group-item nav-item" id="license")
       a(class=name === 'License' ? "nav-link active" : "nav-link" href= root + 'license.html')
         //- span( class="theme-icon-holder mr-2")
