@@ -1,13 +1,9 @@
 
 div(id="docs-sidebar" class="docs-sidebar sidebar-visible")
 
-  div(class="input-group input-group-sm mb-3")
-    div(class="input-group-prepend")
-      i( class="fas fa-search")
-    input(type="text" class="form-control" aria-label="Search..." aria-describedby="inputGroup-sizing-sm")
+  div(class="form-group")
+    input(type="text" class="form-control" placeholder="Search Method..." aria-label="Search Method..." aria-describedby="inputGroup-sizing-sm" id="search")
 
-  //- nav(id="" class="docs-nav navbar")
-  br
   ul(class="list-group")
     li(class="list-group-item nav-item" id="index")
       a(class=name === 'Introduction' ? "nav-link active" : "nav-link" href= root + 'index.html')
@@ -20,38 +16,19 @@ div(id="docs-sidebar" class="docs-sidebar sidebar-visible")
         //-   i( class="fas fa-arrow-down") 
         | Installation
     li(class="list-group-item nav-item") Documentation
-      ul(class="list-group" id=index)
-        each val, index in docMenu
-          li(class="list-group-item nav-item" id= index)
-            if val.params
-              a(href='#' class="nav-link")= index
-            else
-              = index
-              ul(class="list-group" id=index)
-                each val2, index2 in val
-                  li(class="list-group-item nav-item" id= index+'_'+index2)
-                    if val2.params
-                      a(href=val2.params?root + docFolder+index+'_'+index2+'.html':'#' class=name === val2.path ? "nav-link active" : "nav-link")= index2
-                    else
-                      = index2
-                      ul(class="list-group" id=index2)
-                        each val3, index3 in val2
-                          li(class="list-group-item nav-item" id= index+'_'+index2+'_'+index3)
-                            if val3.params
-                              a(href= val3.params?root + docFolder+index+'_'+index2+'_'+index3+'.html':'#' class=name === val3.path ? "nav-link active" : "nav-link")= index3
-                            else
-                              = index3
-                              ul(class="list-group" id=index3)
-                                each val4, index4 in val3
-                                  li(class="list-group-item nav-item" id= index+'_'+index2+'_'+index3+'_'+index4)
-                                    if val4.params
-                                      a(href= val4.params?root + docFolder+index+'_'+index2+'_'+index3+'_'+index4+'.html':'#' class=name === val4.path ? "nav-link active" : "nav-link")= index4
-                                    else
-                                      = index4
-                                      ul(class="list-group" id=index4)
-                                        each val5, index5 in val4
-                                          li(class="list-group-item nav-item" id= index+'_'+index2+'_'+index3+'_'+index4+'_'+index5)
-                                            a(href= val5.params?root + docFolder+index+'_'+index2+'_'+index3+'_'+index4+'_'+index5+'.html':'#' class=name === val5.path ? "nav-link active" : "nav-link")= index5
+      mixin menu(docTree, root, docFolder)
+        ul(class="list-group")
+          each val, index in docTree
+            if val.path
+              li(class="list-group-item nav-item" id= val.path)
+                if val.params
+                  a(href = root + docFolder + val.path + '.html' class = pageName === val.path ? "nav-link active" : "nav-link")= index
+                else
+                  = index
+                  +menu(val, root, docFolder)
+
+      +menu(docTree, root, docFolder)
+
     li(class="list-group-item nav-item") Examples
       ul(class="list-group")
         each category, key in examplesMenu

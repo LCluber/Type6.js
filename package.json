@@ -26,7 +26,8 @@
   },
   "contributors": [],
   "scripts": {
-    "start": "node ./web/pug && grunt website",
+    "start": "npm run clean && node ./web/pug && grunt website",
+    "clean": "rimraf web/public/doc/* web/sass/build/* web/public/css/*",
     "build": "grunt build"
   },
   "files": [
@@ -38,7 +39,6 @@
     "babel-preset-es2015": "6.24.1",
     "bootstrap": "4.4.1",
     "connect-livereload": "0.6.0",
-    "fuse.js": "5.2.3",
     "grunt": "1.0.1",
     "grunt-concurrent": "2.3.1",
     "grunt-contrib-clean": "1.1.0",
@@ -61,6 +61,7 @@
     "jquery": "3.5.1",
     "node-sass": "4.14.1",
     "pug": "2.0.4",
+    "rimraf": "3.0.2",
     "rollup-plugin-babel": "3.0.4",
     "rollup-plugin-node-resolve": "3.3.0",
     "time-grunt": "1.4.0",

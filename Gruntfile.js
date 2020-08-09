@@ -58,23 +58,6 @@ module.exports = function(grunt){
                 compiledES5Dir + '*',
                 compiledES6Dir + '*'
               ]
-      },
-      doc:{
-        src: [  docDir + '*'
-              ]
-      },
-      websass:{
-        src: [  webDir + 'sass/build/*',
-                publicDir + 'css/*'
-        ]
-      },
-      webjs:{
-        src: [  publicDir + 'js/*'
-        ]
-      },
-      webmisc: {
-        src: [  publicDir + 'fonts/*'
-        ]
       }
     },
     sass: {
@@ -397,7 +380,7 @@ module.exports = function(grunt){
   grunt.registerTask( 'lib',
                       'build the library in the dist/ folder',
                       [ //'tslint:lib',
-                        'clean:lib',
+                        //'clean:lib',
                         //lib es6
                         'ts:es6',
                         'rollup:es6',
@@ -418,7 +401,7 @@ module.exports = function(grunt){
 
 grunt.registerTask( 'websass',
                     'Compile website css',
-                    [ 'clean:websass',
+                    [ //'clean:websass',
                       'sass',
                       'cssmin'
                      ]
@@ -426,7 +409,7 @@ grunt.registerTask( 'websass',
 
 grunt.registerTask( 'webjs',
                     'Compile website js',
-                    [ 'clean:webjs',
+                    [ //'clean:webjs',
                       'uglify:web',
                       'concat:webjs',
                       'copy:examples',
@@ -436,7 +419,7 @@ grunt.registerTask( 'webjs',
 
 grunt.registerTask( 'webmisc',
                     'Compile website misc',
-                    [ 'clean:webmisc',
+                    [ //'clean:webmisc',
                       'copy:fonts'
                      ]
                   );

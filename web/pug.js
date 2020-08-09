@@ -1,54 +1,89 @@
 const fs = require('fs');
 const path = require("path");
 const pug = require('pug');
-const docTree = require('./tree');
+const docTree = require('./tree.json');
 const examplesTree = require('./examples');
 const hljs = require("highlight.js/lib/core");  // require only the core library
 hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript')); // separately require languages
 hljs.registerLanguage('bash', require('highlight.js/lib/languages/bash')); // separately require languages
 
 let methods = {};
-let examples = {};
-let menu = '';
-function extractMethods(object, property, method) {
+function extractMethods(object, method) {
   if (!object.hasOwnProperty('params')) {
     for (let prop in object) {
-      menu = 'li(class="list-group-item nav-item" id= index)';
-      if(object.hasOwnProperty(prop)) {
+      if(object.hasOwnProperty(prop) && prop !== 'path') {
         let pn = method ? method + '_' + prop : prop;
-        extractMethods(object[prop], prop, pn);
+        extractMethods(object[prop], pn);
       }
     }
     return;
   }
-  // let link = method.slice(1);
-  object.name = property;
-  object.path = method;
   methods[method] = object;
 }
 
-// ul(class="list-group" id=index)
-//  each val, index in docMenu
-//    li(class="list-group-item nav-item" id= index)
-//      if val.params
-//        a(href='#' class="nav-link")= index
-//      else
-//        = index
-//        ul(class="list-group" id=index)
-function buildDocMenu(object, property, method){
+function createDocTree(object, property, method) {
+  if(method) {
+    object.path = method;
+  }
   if (!object.hasOwnProperty('params')) {
     for (let prop in object) {
-      if(object.hasOwnProperty(prop)) {
+      if(object.hasOwnProperty(prop) && prop !== 'path') {
         let pn = method ? method + '_' + prop : prop;
-        extractMethods(object[prop], prop, pn);
+        createDocTree(object[prop], prop, pn);
       }
     }
     return;
   }
-  // let link = method.slice(1);
   object.name = property;
-  object.path = method;
-  methods[method] = object;
+  // object.display = true;
+  createDocpages(object);
+}
+
+function createMethodsArray(object, property) {
+  if (!object.hasOwnProperty('params')) {
+    // if (property) {
+      let array = getObjectMethods(property);
+      object.methods = array;
+    // }
+    for (let prop in object) {
+      if(object.hasOwnProperty(prop) && prop !== 'methods' && prop !== 'path') {
+        createMethodsArray(object[prop], prop);
+      }
+    }
+  }
+  return;
+}
+
+function getObjectMethods(property) {
+  let array = [];
+  for (let prop in methods) {
+    if(methods.hasOwnProperty(prop) && methods[prop].hasOwnProperty('path')) {
+      if (searchExpression(methods[prop].path, property)){
+        array.push(methods[prop].path);
+      }
+    }
+  }
+  // console.log('array', array);
+  return array;
+}
+
+function createDocpages(method) {
+  fs.readFile(path.join(__dirname, './js/usage/' + method.path + '.js'), 'utf8', function(err, content) {
+    let highlightedCode = '';
+    if (content)
+      highlightedCode = hljs.highlight('javascript', content).value;
+    html = pug.renderFile(path.join(__dirname, './views/_documentation.pug'),
+                          { root: '../',
+                            docFolder: 'doc/',
+                            examplesFolder: 'examples/',
+                            examplesMenu: examplesMenu,
+                            docTree: docTree,
+                            doc: method,
+                            pageName: method.path,
+                            usage:highlightedCode
+                          });
+    fs.writeFileSync(path.join(__dirname, './public/doc/' + method.path + '.html'), html);
+  });
 }
 
 function buildExamplesMenu(){
@@ -57,12 +92,12 @@ function buildExamplesMenu(){
     if(examplesTree.hasOwnProperty(folder)) {
       examples[folder] = [];
       for (let example of examplesTree[folder]) {
-        let underscore = example.replace(/\s+/g, '_').toLowerCase();
+        let spaceToUnderscore = example.replace(/\s+/g, '_').toLowerCase();
         examples[folder].push({
-          id : 'examples_' + folder + '_' + underscore,
+          id : 'examples_' + folder + '_' + spaceToUnderscore,
           name : example,
-          htmlPath : 'examples_' + folder + '_' + underscore + '.html',
-          jsPath : folder + '/' + underscore + '.js'
+          htmlPath : 'examples_' + folder + '_' + spaceToUnderscore + '.html',
+          jsPath : folder + '/' + spaceToUnderscore + '.js'
         })
       }
     }
@@ -70,9 +105,14 @@ function buildExamplesMenu(){
   return examples;
 }
 
+function searchExpression(string, substring) {
+	return string.indexOf(substring) !== -1;
+}
+
+createDocTree(docTree,'','');
 extractMethods(docTree, '', '');
+
 let examplesMenu = buildExamplesMenu();
-// Compile static pages
 
 for (let folder in examplesMenu) {
   if(examplesMenu.hasOwnProperty(folder)) {
@@ -82,13 +122,11 @@ for (let folder in examplesMenu) {
                               docFolder: 'doc/',
                               examplesFolder: 'examples/',
                               examplesMenu: examplesMenu,
-                              docMenu: docTree,
+                              docTree: docTree,
                               jsPath: example.jsPath,
                               name: example.id
                             });
-      fs.writeFile(path.join(__dirname, './public/examples/' + example.id + '.html'), html, function (err) {
-        if (err) throw err;
-      });
+      fs.writeFileSync(path.join(__dirname, './public/examples/' + example.id + '.html'), html);
     }
   }
 }
@@ -98,76 +136,50 @@ let html = pug.renderFile(path.join(__dirname, './views/index.pug'),
                             docFolder: 'doc/',
                             examplesFolder: 'examples/',
                             examplesMenu: examplesMenu,
-                            docMenu: docTree,
+                            docTree: docTree,
                             name:'Introduction' 
                           });
-fs.writeFile(path.join(__dirname, './public/index.html'), html, function (err) {
-  if (err) throw err;
-  // console.log('index');
-});
+fs.writeFileSync(path.join(__dirname, './public/index.html'), html);
 
 html = pug.renderFile(path.join(__dirname, './views/license.pug'),
                           { root: './', 
                             docFolder: 'doc/',
                             examplesFolder: 'examples/',
                             examplesMenu: examplesMenu,
-                            docMenu: docTree,
+                            docTree: docTree,
                             name:'License' 
                           });
-fs.writeFile(path.join(__dirname, './public/license.html'), html, function (err) {
-  if (err) throw err;
-});
+fs.writeFileSync(path.join(__dirname, './public/license.html'), html);
 
-fs.readFile(path.join(__dirname, './js/installation-es6.js'), 'utf8', function(err, content) {
-  let highlightedCodeEs6 = '';
-  if (content){
-    highlightedCodeEs6 = hljs.highlight('javascript', content).value;
-  }
-  fs.readFile(path.join(__dirname, './js/installation-iife.js'), 'utf8', function(err, content) {
-    let highlightedCodeIife = '';
-    if (content){
-      highlightedCodeIife = hljs.highlight('javascript', content).value;
-    }
-    let npmHighlightedCode = hljs.highlight('bash', 'npm install @lcluber/type6js').value;
-    let yarnHighlightedCode = hljs.highlight('bash', 'yarn install @lcluber/type6js').value;
-    html = pug.renderFile(path.join(__dirname, './views/installation.pug'),
+let content = fs.readFileSync(path.join(__dirname, './js/installation-es6.js'), 'utf8');
+let highlightedCodeEs6 = '';
+if (content){
+  highlightedCodeEs6 = hljs.highlight('javascript', content).value;
+}
+content = fs.readFileSync(path.join(__dirname, './js/installation-iife.js'), 'utf8');
+let highlightedCodeIife = '';
+if (content){
+  highlightedCodeIife = hljs.highlight('javascript', content).value;
+}
+let npmHighlightedCode = hljs.highlight('bash', 'npm install @lcluber/type6js').value;
+let yarnHighlightedCode = hljs.highlight('bash', 'yarn install @lcluber/type6js').value;
+html = pug.renderFile(path.join(__dirname, './views/installation.pug'),
                           { root: './',
                             docFolder: 'doc/',
                             examplesFolder: 'examples/',
                             examplesMenu: examplesMenu,
-                            docMenu: docTree,
+                            docTree: docTree,
                             name:'Installation',
                             npmHighlightedCode: npmHighlightedCode,
                             yarnHighlightedCode: yarnHighlightedCode,
                             usageEs6:highlightedCodeEs6,
                             usageIife:highlightedCodeIife,
                           });
-    fs.writeFile(path.join(__dirname, './public/installation.html'), html, function (err) {
-      if (err) throw err;
-      // console.log('index');
-    });
-  });
-});
-console.log(methods);
-for (let method in methods) {
-  if(methods.hasOwnProperty(method)) {
-    fs.readFile(path.join(__dirname, './js/usage/' + method + '.js'), 'utf8', function(err, content) {
-      let highlightedCode = '';
-      if (content)
-        highlightedCode = hljs.highlight('javascript', content).value;
-      html = pug.renderFile(path.join(__dirname, './views/_documentation.pug'),
-                            { root: '../',
-                              docFolder: 'doc/',
-                              examplesFolder: 'examples/',
-                              examplesMenu: examplesMenu,
-                              docMenu: docTree,
-                              doc: methods[method],
-                              name:method,
-                              usage:highlightedCode
-                            });
-      fs.writeFile(path.join(__dirname, './public/doc/' + method + '.html'), html, function (err) {
-        if (err) throw err;
-      });
-    });
-  }
-}
+fs.writeFileSync(path.join(__dirname, './public/installation.html'), html);
+
+setTimeout(() => {
+  createMethodsArray(docTree, '');
+  // console.log(docTree);
+  let treeContent = "var docTree = " + JSON.stringify(docTree) + ";";
+  fs.writeFileSync(path.join(__dirname, './public/js/tree.js'), treeContent );
+}, 1000);
