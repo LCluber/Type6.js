@@ -33,11 +33,16 @@ canvas {
   box-shadow: 0 1px 4px 0 rgba(255,255,255,.1);
   color: $theme-color-primary;
 
+  .form-group {
+    margin-left:10px;
+    margin-bottom: 0px;
+  }
+
   .menu-toggler {
     height: 100%;
     #sidebarToggler {
       cursor: pointer;
-      padding-right: 3rem;
+      padding-right: 2rem;
       span {
         display: block;
         height: 3px;

@@ -9,15 +9,28 @@ $(document).ready(function () {
 	});
 });
 
-console.log(docTree);
+// console.log(docTree);
+var type6DocSearch = localStorage.getItem('type6DocSearch');
+if (type6DocSearch) {
+	var searchInput = document.getElementById('search');
+	searchInput.value = type6DocSearch;
+	searchDoc(type6DocSearch);
+}
+
 var path = window.location.pathname;
 var page = path.split("/").pop().split(".")[0];
 var elmnt = document.getElementById(page);
 elmnt.scrollIntoView(true);
 
 search.addEventListener("input", function (e) {
-	displaySearchResult(this.value, docTree);
+	searchDoc(this.value);
+	localStorage.setItem('type6DocSearch', this.value);
 });
+
+function searchDoc(string) {
+	var expression = sanitizeString(string);
+	displaySearchResult(expression, docTree);
+}
 
 function displaySearchResult(expression, object) {
 	if (!object.hasOwnProperty('params')) {
@@ -55,11 +68,14 @@ function displaySearchResult(expression, object) {
 	}
 }
 
+function sanitizeString(string) {
+	return string.trim().toLowerCase().split(" ", 4);
+}
+
 function searchExpression(string, substring) {
-	var substringArray = substring.trim().toLowerCase().split(" ", 4);
 	var sanitizeString = string.toLowerCase();
-	for (var i=0; i < substringArray.length ; i++ ) {
-		if (sanitizeString.indexOf(substringArray[i]) === -1) {
+	for (var i=0; i < substring.length ; i++ ) {
+		if (sanitizeString.indexOf(substring[i]) === -1) {
 			return false;
 		}
 	}
