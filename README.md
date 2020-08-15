@@ -7,6 +7,8 @@ Vectors, matrices, trigonometry, bezier curves, lerp, random distribution and so
 
 The main purpose of this library is to provide a comprehensive tool for all projects involving mathematics functions.
 
+## Installation
+
 ### NPM
 
 ```bash
