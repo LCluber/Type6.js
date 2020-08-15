@@ -17,10 +17,6 @@ $ npm install @lcluber/type6js
 
 Read the documentation **[here](http://type6js.lcluber.com/installation.html)**.
 
-## Tests
-
-No tests to run yet
-
 ## Contributors
 
 Type6.js is still in development and I would be glad to get all the help you can provide.
