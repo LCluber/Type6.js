@@ -13,7 +13,7 @@
     "suppressImplicitAnyIndexErrors":true,
     "declaration":false,
     "outDir":"build/es5/",
-    "rootDir":"src/ts/"
+    "rootDir":"src/"
   },
   "exclude": [
     "node_modules"

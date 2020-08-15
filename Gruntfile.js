@@ -71,11 +71,11 @@ module.exports = function(grunt){
       },
       es6: {
         tsconfig: './tsconfig.json',
-        src: [ srcDir + 'ts/**/*.ts', '!node_modules/**/*.ts' ]
+        src: [ srcDir + '**/*.ts', '!node_modules/**/*.ts' ]
       },
       es5: {
         tsconfig: './tsconfig.es5.json',
-        src: [ srcDir + 'ts/**/*.ts', '!node_modules/**/*.ts' ]
+        src: [ srcDir + '**/*.ts', '!node_modules/**/*.ts' ]
       }
     },
     rollup: {
