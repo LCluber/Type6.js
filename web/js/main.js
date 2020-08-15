@@ -17,15 +17,21 @@ if (type6DocSearch) {
 	searchDoc(type6DocSearch);
 }
 
-var path = window.location.pathname;
-var page = path.split("/").pop().split(".")[0];
-var elmnt = document.getElementById(page);
-elmnt.scrollIntoView(true);
+scrollIntoPage();
 
 search.addEventListener("input", function (e) {
 	searchDoc(this.value);
+	scrollIntoPage();
 	localStorage.setItem('type6DocSearch', this.value);
 });
+
+
+function scrollIntoPage() {
+	var path = window.location.pathname;
+	var page = path.split("/").pop().split(".")[0];
+	var elmnt = document.getElementById(page);
+	elmnt.scrollIntoView(true);
+}
 
 function searchDoc(string) {
 	var expression = sanitizeString(string);

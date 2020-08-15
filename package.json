@@ -37,8 +37,7 @@
   "devDependencies": {
     "babel-core": "6.26.3",
     "babel-preset-es2015": "6.24.1",
-    "bootstrap": "4.4.1",
-    "connect-livereload": "0.6.0",
+    "bootstrap": "4.5.2",
     "grunt": "1.0.1",
     "grunt-concurrent": "2.3.1",
     "grunt-contrib-clean": "1.1.0",
@@ -57,7 +56,7 @@
     "grunt-strip-code": "1.0.6",
     "grunt-ts": "6.0.0-beta.22",
     "grunt-tslint": "5.0.2",
-    "highlight.js": "10.0.2",
+    "highlight.js": "10.1.2",
     "jquery": "3.5.1",
     "node-sass": "4.14.1",
     "pug": "2.0.4",
@@ -65,7 +64,7 @@
     "rollup-plugin-babel": "3.0.4",
     "rollup-plugin-node-resolve": "3.3.0",
     "time-grunt": "1.4.0",
-    "tslint": "6.1.2",
-    "typescript": "3.8.3"
+    "tslint": "6.1.3",
+    "typescript": "3.9.7"
   }
 }
