@@ -176,6 +176,19 @@ export declare class Trigonometry {
     private static taylorSerie;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 export declare type AxisNames2d = 'x' | 'y';
 export declare type AxisNames3d = AxisNames2d & 'z';
 export declare class Utils {

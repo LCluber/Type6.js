@@ -1,3 +1,0 @@
-import {Trigonometry} from '@lcluber/type6js';
-
-console.log(Trigonometry.radianToDegree(2)); //114.59...

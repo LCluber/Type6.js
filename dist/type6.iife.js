@@ -523,7 +523,7 @@ var Type6 = (function (exports) {
                 this._radius = radius;
                 this._diameter = this._radius * 2;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(Circle.prototype, "diameter", {
@@ -534,7 +534,7 @@ var Type6 = (function (exports) {
                 this._diameter = diameter;
                 this._radius = this._diameter * 0.5;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Circle.prototype.clone = function () {
