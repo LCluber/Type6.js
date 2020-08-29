@@ -1,3 +1,7 @@
+Version 2.1.0 (August 29th 2020)
+-----------------------------
+ * delete setFromArray() method in Vector2 and Vector3 classes
+
 Version 2.0.1 (May 13th 2020)
 -----------------------------
  * fix lookAtRH() method in Matrix4x3 class

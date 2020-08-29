@@ -26,15 +26,6 @@ export class Vector2 {
     return ( this.x >= 0 && this.y >= 0 ) ? true : false;
   }
 
-  public setFromArray( array: number[], offset?: number ): Vector2 {
-    if ( offset === undefined ){
-      offset = 0;
-    }
-    this.x = array[ offset ];
-    this.y = array[ offset + 1 ];
-    return this;
-  }
-
   public toArray(): number[] {
     return [ this.x, this.y ];
   }

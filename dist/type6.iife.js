@@ -309,14 +309,6 @@ var Type6 = (function (exports) {
         Vector2.prototype.isPositive = function () {
             return this.x >= 0 && this.y >= 0 ? true : false;
         };
-        Vector2.prototype.setFromArray = function (array, offset) {
-            if (offset === undefined) {
-                offset = 0;
-            }
-            this.x = array[offset];
-            this.y = array[offset + 1];
-            return this;
-        };
         Vector2.prototype.toArray = function () {
             return [this.x, this.y];
         };
@@ -691,15 +683,6 @@ var Type6 = (function (exports) {
         };
         Vector3.prototype.isPositive = function () {
             return this.x >= 0 && this.y >= 0 && this.z >= 0 ? true : false;
-        };
-        Vector3.prototype.setFromArray = function (array, offset) {
-            if (offset === undefined) {
-                offset = 0;
-            }
-            this.x = array[offset];
-            this.y = array[offset + 1];
-            this.z = array[offset + 2];
-            return this;
         };
         Vector3.prototype.toArray = function () {
             return [this.x, this.y, this.z];

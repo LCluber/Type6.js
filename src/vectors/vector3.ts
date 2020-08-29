@@ -1,7 +1,7 @@
 
-export interface Vector3 {
-  [key: string]: any;
-}
+// export interface Vector3 {
+//   [key: string]: any;
+// }
 
 export class Vector3 {
   public x: number;
@@ -21,16 +21,6 @@ export class Vector3 {
 
   public isPositive(): boolean {
     return ( this.x >= 0 && this.y >= 0 && this.z >= 0) ? true : false;
-  }
-
-  public setFromArray( array: number[], offset?: number ): Vector3 {
-    if ( offset === undefined ){
-      offset = 0;
-    }
-    this.x = array[ offset ];
-    this.y = array[ offset + 1 ];
-    this.z = array[ offset + 2 ];
-    return this;
   }
 
   public toArray(): number[] {

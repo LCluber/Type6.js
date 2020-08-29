@@ -215,7 +215,6 @@ export declare class Vector2 {
     constructor(x?: number, y?: number);
     isOrigin(): boolean;
     isPositive(): boolean;
-    setFromArray(array: number[], offset?: number): Vector2;
     toArray(): number[];
     toString(): string;
     set(x: number, y: number): Vector2;
@@ -255,9 +254,6 @@ export declare class Vector2 {
     lerp(min: Vector2, max: Vector2, amount: number): Vector2;
     dotProduct(v: Vector2): number;
 }
-export interface Vector3 {
-    [key: string]: any;
-}
 export declare class Vector3 {
     x: number;
     y: number;
@@ -265,7 +261,6 @@ export declare class Vector3 {
     constructor(x?: number, y?: number, z?: number);
     isOrigin(): boolean;
     isPositive(): boolean;
-    setFromArray(array: number[], offset?: number): Vector3;
     toArray(): number[];
     toString(): string;
     set(x: number, y: number, z: number): Vector3;

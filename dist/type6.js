@@ -334,14 +334,6 @@ class Vector2 {
     isPositive() {
         return (this.x >= 0 && this.y >= 0) ? true : false;
     }
-    setFromArray(array, offset) {
-        if (offset === undefined) {
-            offset = 0;
-        }
-        this.x = array[offset];
-        this.y = array[offset + 1];
-        return this;
-    }
     toArray() {
         return [this.x, this.y];
     }
@@ -701,15 +693,6 @@ class Vector3 {
     }
     isPositive() {
         return (this.x >= 0 && this.y >= 0 && this.z >= 0) ? true : false;
-    }
-    setFromArray(array, offset) {
-        if (offset === undefined) {
-            offset = 0;
-        }
-        this.x = array[offset];
-        this.y = array[offset + 1];
-        this.z = array[offset + 2];
-        return this;
     }
     toArray() {
         return [this.x, this.y, this.z];
