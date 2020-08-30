@@ -1,3 +1,8 @@
+Version 2.1.1 (August 30th 2020)
+-----------------------------
+ * smaller package size
+ * Vector Classes refactor
+
 Version 2.1.0 (August 29th 2020)
 -----------------------------
  * delete setFromArray() method in Vector2 and Vector3 classes

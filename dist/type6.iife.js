@@ -298,23 +298,277 @@ var Type6 = (function (exports) {
         return Bezier;
     }();
 
-    var Vector2 = function () {
+    var Vector = function () {
+        function Vector() {}
+        Vector.prototype.isOrigin = function () {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    if (this[axis] !== 0) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        };
+        Vector.prototype.isPositive = function () {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    if (this[axis] <= 0) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        };
+        Vector.prototype.toArray = function () {
+            var array = [];
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    array.push(this[axis]);
+                }
+            }
+            return array;
+        };
+        Vector.prototype.toString = function () {
+            var str = '(';
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    str += axis + " = " + this[axis] + " ; ";
+                }
+            }
+            return str.slice(0, -2) + ')';
+        };
+        Vector.prototype.copy = function (v) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] = v[axis];
+                }
+            }
+            return this;
+        };
+        Vector.prototype.origin = function () {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    this[axis] = 0.0;
+                }
+            }
+            return this;
+        };
+        Vector.prototype.getMagnitude = function (square) {
+            if (square === void 0) {
+                square = false;
+            }
+            var squaredMagnitude = this.getSquaredMagnitude();
+            return square ? squaredMagnitude : Math.sqrt(squaredMagnitude);
+        };
+        Vector.prototype.getSquaredMagnitude = function () {
+            var squaredMagnitude = 0;
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    squaredMagnitude += Math.pow(this[axis], 2);
+                }
+            }
+            return squaredMagnitude;
+        };
+        Vector.prototype.getDistance = function (v, square) {
+            if (square === void 0) {
+                square = false;
+            }
+            this.subtract(v);
+            var magnitude = this.getMagnitude(square);
+            this.add(v);
+            return magnitude;
+        };
+        Vector.prototype.add = function (v) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] += v[axis];
+                }
+            }
+            return this;
+        };
+        Vector.prototype.addScaledVector = function (v, scalar) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] += v[axis] * scalar;
+                }
+            }
+            return this;
+        };
+        Vector.prototype.addScalar = function (scalar) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    this[axis] += scalar;
+                }
+            }
+            return this;
+        };
+        Vector.prototype.subtract = function (v) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] -= v[axis];
+                }
+            }
+            return this;
+        };
+        Vector.prototype.subtractScaledVector = function (v, scalar) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] -= v[axis] * scalar;
+                }
+            }
+            return this;
+        };
+        Vector.prototype.subtractScalar = function (scalar) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    this[axis] -= scalar;
+                }
+            }
+            return this;
+        };
+        Vector.prototype.multiply = function (v) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] *= v[axis];
+                }
+            }
+            return this;
+        };
+        Vector.prototype.multiplyScaledVector = function (v, scalar) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] *= v[axis] * scalar;
+                }
+            }
+            return this;
+        };
+        Vector.prototype.scale = function (scalar) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    this[axis] *= scalar;
+                }
+            }
+            return this;
+        };
+        Vector.prototype.divide = function (v) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] /= v[axis];
+                }
+            }
+            return this;
+        };
+        Vector.prototype.divideScaledVector = function (v, scalar) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] /= v[axis] * scalar;
+                }
+            }
+            return this;
+        };
+        Vector.prototype.halve = function () {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    this[axis] *= 0.5;
+                }
+            }
+            return this;
+        };
+        Vector.prototype.max = function (v) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] = Math.max(this[axis], v[axis]);
+                }
+            }
+            return this;
+        };
+        Vector.prototype.min = function (v) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    this[axis] = Math.min(this[axis], v[axis]);
+                }
+            }
+            return this;
+        };
+        Vector.prototype.maxScalar = function (scalar) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    this[axis] = Math.max(this[axis], scalar);
+                }
+            }
+            return this;
+        };
+        Vector.prototype.minScalar = function (scalar) {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    this[axis] = Math.min(this[axis], scalar);
+                }
+            }
+            return this;
+        };
+        Vector.prototype.normalize = function () {
+            var length = this.getMagnitude();
+            if (length && length != 1) {
+                this.scale(1 / length);
+            }
+            return this;
+        };
+        Vector.prototype.absolute = function () {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    this[axis] = Math.abs(this[axis]);
+                }
+            }
+            return this;
+        };
+        Vector.prototype.opposite = function () {
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis)) {
+                    this[axis] -= this[axis];
+                }
+            }
+            return this;
+        };
+        Vector.prototype.dotProduct = function (v) {
+            var dotProduct = 0;
+            for (var axis in this) {
+                if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                    dotProduct += this[axis] * v[axis];
+                }
+            }
+            return dotProduct;
+        };
+        return Vector;
+    }();
+
+    var __extends = undefined && undefined.__extends || function () {
+        var _extendStatics = function extendStatics(d, b) {
+            _extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
+                d.__proto__ = b;
+            } || function (d, b) {
+                for (var p in b) {
+                    if (b.hasOwnProperty(p)) d[p] = b[p];
+                }
+            };
+            return _extendStatics(d, b);
+        };
+        return function (d, b) {
+            _extendStatics(d, b);
+            function __() {
+                this.constructor = d;
+            }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    }();
+    var Vector2 = function (_super) {
+        __extends(Vector2, _super);
         function Vector2(x, y) {
-            this.x = x || 0.0;
-            this.y = y || 0.0;
+            var _this = _super.call(this) || this;
+            _this.x = x !== null && x !== void 0 ? x : 0.0;
+            _this.y = y !== null && y !== void 0 ? y : 0.0;
+            return _this;
         }
-        Vector2.prototype.isOrigin = function () {
-            return this.x === 0 && this.y === 0 ? true : false;
-        };
-        Vector2.prototype.isPositive = function () {
-            return this.x >= 0 && this.y >= 0 ? true : false;
-        };
-        Vector2.prototype.toArray = function () {
-            return [this.x, this.y];
-        };
-        Vector2.prototype.toString = function () {
-            return '(x = ' + this.x + '; y = ' + this.y + ')';
-        };
         Vector2.prototype.set = function (x, y) {
             this.x = x;
             this.y = y;
@@ -322,16 +576,6 @@ var Type6 = (function (exports) {
         };
         Vector2.prototype.clone = function () {
             return new Vector2(this.x, this.y);
-        };
-        Vector2.prototype.copy = function (v) {
-            this.x = v.x;
-            this.y = v.y;
-            return this;
-        };
-        Vector2.prototype.origin = function () {
-            this.x = 0.0;
-            this.y = 0.0;
-            return this;
         };
         Vector2.prototype.setFromAngle = function (angle) {
             if (angle) {
@@ -342,25 +586,7 @@ var Type6 = (function (exports) {
             return this;
         };
         Vector2.prototype.getAngle = function () {
-            return Math.atan2(this.y, this.x);
-        };
-        Vector2.prototype.getMagnitude = function (square) {
-            if (square === void 0) {
-                square = false;
-            }
-            return square ? this.getSquaredMagnitude() : Math.sqrt(this.getSquaredMagnitude());
-        };
-        Vector2.prototype.getSquaredMagnitude = function () {
-            return this.x * this.x + this.y * this.y;
-        };
-        Vector2.prototype.getDistance = function (v, square) {
-            if (square === void 0) {
-                square = false;
-            }
-            this.subtract(v);
-            var magnitude = this.getMagnitude(square);
-            this.add(v);
-            return magnitude;
+            return Trigonometry.arctan2(this.y, this.x);
         };
         Vector2.prototype.quadraticBezier = function (p0, p1, p2, t) {
             this.x = Bezier.quadratic(p0.x, p1.x, p2.x, t);
@@ -370,86 +596,6 @@ var Type6 = (function (exports) {
         Vector2.prototype.cubicBezier = function (p0, p1, p2, p3, t) {
             this.x = Bezier.cubic(p0.x, p1.x, p2.x, p3.x, t);
             this.y = Bezier.cubic(p0.y, p1.y, p2.y, p3.y, t);
-            return this;
-        };
-        Vector2.prototype.add = function (v) {
-            this.x += v.x;
-            this.y += v.y;
-            return this;
-        };
-        Vector2.prototype.addScalar = function (scalar) {
-            this.x += scalar;
-            this.y += scalar;
-            return this;
-        };
-        Vector2.prototype.addScaledVector = function (v, scalar) {
-            this.x += v.x * scalar;
-            this.y += v.y * scalar;
-            return this;
-        };
-        Vector2.prototype.subtract = function (v) {
-            this.x -= v.x;
-            this.y -= v.y;
-            return this;
-        };
-        Vector2.prototype.subtractScalar = function (scalar) {
-            this.x -= scalar;
-            this.y -= scalar;
-            return this;
-        };
-        Vector2.prototype.subtractScaledVector = function (v, scalar) {
-            this.x -= v.x * scalar;
-            this.y -= v.y * scalar;
-            return this;
-        };
-        Vector2.prototype.scale = function (value) {
-            this.x *= value;
-            this.y *= value;
-            return this;
-        };
-        Vector2.prototype.multiply = function (v) {
-            this.x *= v.x;
-            this.y *= v.y;
-            return this;
-        };
-        Vector2.prototype.multiplyScaledVector = function (v, scalar) {
-            this.x *= v.x * scalar;
-            this.y *= v.y * scalar;
-            return this;
-        };
-        Vector2.prototype.divide = function (v) {
-            this.x /= v.x;
-            this.y /= v.y;
-            return this;
-        };
-        Vector2.prototype.divideScaledVector = function (v, scalar) {
-            this.x /= v.x * scalar;
-            this.y /= v.y * scalar;
-            return this;
-        };
-        Vector2.prototype.halve = function () {
-            this.x *= 0.5;
-            this.y *= 0.5;
-            return this;
-        };
-        Vector2.prototype.max = function (v) {
-            this.x = Math.max(this.x, v.x);
-            this.y = Math.max(this.y, v.y);
-            return this;
-        };
-        Vector2.prototype.min = function (v) {
-            this.x = Math.min(this.x, v.x);
-            this.y = Math.min(this.y, v.y);
-            return this;
-        };
-        Vector2.prototype.maxScalar = function (scalar) {
-            this.x = Math.max(this.x, scalar);
-            this.y = Math.max(this.y, scalar);
-            return this;
-        };
-        Vector2.prototype.minScalar = function (scalar) {
-            this.x = Math.min(this.x, scalar);
-            this.y = Math.min(this.y, scalar);
             return this;
         };
         Vector2.prototype.getMaxAxis = function () {
@@ -466,23 +612,6 @@ var Type6 = (function (exports) {
             }
             return this;
         };
-        Vector2.prototype.normalize = function () {
-            var length = this.getMagnitude();
-            if (length && length != 1) {
-                this.scale(1 / length);
-            }
-            return this;
-        };
-        Vector2.prototype.absolute = function () {
-            this.x = Math.abs(this.x);
-            this.y = Math.abs(this.y);
-            return this;
-        };
-        Vector2.prototype.opposite = function () {
-            this.x = -this.x;
-            this.y = -this.y;
-            return this;
-        };
         Vector2.prototype.clamp = function (rectangle) {
             this.x = Utils.clamp(this.x, rectangle.topLeftCorner.x, rectangle.bottomRightCorner.x);
             this.y = Utils.clamp(this.y, rectangle.topLeftCorner.y, rectangle.bottomRightCorner.y);
@@ -493,11 +622,8 @@ var Type6 = (function (exports) {
             this.y = Utils.lerp(min.y, max.y, amount);
             return this;
         };
-        Vector2.prototype.dotProduct = function (v) {
-            return this.x * v.x + this.y * v.y;
-        };
         return Vector2;
-    }();
+    }(Vector);
 
     var Circle = function () {
         function Circle(positionX, positionY, radius) {
@@ -672,24 +798,34 @@ var Type6 = (function (exports) {
         return Rectangle;
     }();
 
-    var Vector3 = function () {
+    var __extends$1 = undefined && undefined.__extends || function () {
+        var _extendStatics = function extendStatics(d, b) {
+            _extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
+                d.__proto__ = b;
+            } || function (d, b) {
+                for (var p in b) {
+                    if (b.hasOwnProperty(p)) d[p] = b[p];
+                }
+            };
+            return _extendStatics(d, b);
+        };
+        return function (d, b) {
+            _extendStatics(d, b);
+            function __() {
+                this.constructor = d;
+            }
+            d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+        };
+    }();
+    var Vector3 = function (_super) {
+        __extends$1(Vector3, _super);
         function Vector3(x, y, z) {
-            this.x = x || 0.0;
-            this.y = y || 0.0;
-            this.z = z || 0.0;
+            var _this = _super.call(this) || this;
+            _this.x = x !== null && x !== void 0 ? x : 0.0;
+            _this.y = y !== null && y !== void 0 ? y : 0.0;
+            _this.z = z !== null && z !== void 0 ? z : 0.0;
+            return _this;
         }
-        Vector3.prototype.isOrigin = function () {
-            return this.x === 0 && this.y === 0 && this.z === 0 ? true : false;
-        };
-        Vector3.prototype.isPositive = function () {
-            return this.x >= 0 && this.y >= 0 && this.z >= 0 ? true : false;
-        };
-        Vector3.prototype.toArray = function () {
-            return [this.x, this.y, this.z];
-        };
-        Vector3.prototype.toString = function () {
-            return '(x = ' + this.x + '; y = ' + this.y + '; z = ' + this.z + ')';
-        };
         Vector3.prototype.set = function (x, y, z) {
             this.x = x;
             this.y = y;
@@ -698,154 +834,6 @@ var Type6 = (function (exports) {
         };
         Vector3.prototype.clone = function () {
             return new Vector3(this.x, this.y, this.z);
-        };
-        Vector3.prototype.copy = function (v) {
-            this.x = v.x;
-            this.y = v.y;
-            this.z = v.z;
-            return this;
-        };
-        Vector3.prototype.origin = function () {
-            this.x = 0.0;
-            this.y = 0.0;
-            this.z = 0.0;
-            return this;
-        };
-        Vector3.prototype.getMagnitude = function (square) {
-            if (square === void 0) {
-                square = false;
-            }
-            return square ? this.getSquaredMagnitude() : Math.sqrt(this.getSquaredMagnitude());
-        };
-        Vector3.prototype.getSquaredMagnitude = function () {
-            return this.x * this.x + this.y * this.y + this.z * this.z;
-        };
-        Vector3.prototype.getDistance = function (v, square) {
-            if (square === void 0) {
-                square = false;
-            }
-            this.subtract(v);
-            var magnitude = this.getMagnitude(square);
-            this.add(v);
-            return magnitude;
-        };
-        Vector3.prototype.add = function (v) {
-            this.x += v.x;
-            this.y += v.y;
-            this.z += v.z;
-            return this;
-        };
-        Vector3.prototype.addScalar = function (scalar) {
-            this.x += scalar;
-            this.y += scalar;
-            this.z += scalar;
-            return this;
-        };
-        Vector3.prototype.addScaledVector = function (v, scalar) {
-            this.x += v.x * scalar;
-            this.y += v.y * scalar;
-            this.z += v.z * scalar;
-            return this;
-        };
-        Vector3.prototype.subtract = function (v) {
-            this.x -= v.x;
-            this.y -= v.y;
-            this.z -= v.z;
-            return this;
-        };
-        Vector3.prototype.subtractScalar = function (scalar) {
-            this.x -= scalar;
-            this.y -= scalar;
-            this.z -= scalar;
-            return this;
-        };
-        Vector3.prototype.subtractScaledVector = function (v, scalar) {
-            this.x -= v.x * scalar;
-            this.y -= v.y * scalar;
-            this.z -= v.z * scalar;
-            return this;
-        };
-        Vector3.prototype.scale = function (value) {
-            this.x *= value;
-            this.y *= value;
-            this.z *= value;
-            return this;
-        };
-        Vector3.prototype.multiply = function (v) {
-            this.x *= v.x;
-            this.y *= v.y;
-            this.z *= v.z;
-            return this;
-        };
-        Vector3.prototype.multiplyScaledVector = function (v, scalar) {
-            this.x *= v.x * scalar;
-            this.y *= v.y * scalar;
-            this.z *= v.z * scalar;
-            return this;
-        };
-        Vector3.prototype.divide = function (v) {
-            this.x /= v.x;
-            this.y /= v.y;
-            this.z /= v.z;
-            return this;
-        };
-        Vector3.prototype.divideScaledVector = function (v, scalar) {
-            this.x /= v.x * scalar;
-            this.y /= v.y * scalar;
-            this.z /= v.z * scalar;
-            return this;
-        };
-        Vector3.prototype.halve = function () {
-            this.x *= 0.5;
-            this.y *= 0.5;
-            this.z *= 0.5;
-            return this;
-        };
-        Vector3.prototype.max = function (v) {
-            this.x = Math.max(this.x, v.x);
-            this.y = Math.max(this.y, v.y);
-            this.z = Math.max(this.z, v.z);
-            return this;
-        };
-        Vector3.prototype.min = function (v) {
-            this.x = Math.min(this.x, v.x);
-            this.y = Math.min(this.y, v.y);
-            this.z = Math.min(this.z, v.z);
-            return this;
-        };
-        Vector3.prototype.maxScalar = function (scalar) {
-            this.x = Math.max(this.x, scalar);
-            this.y = Math.max(this.y, scalar);
-            this.z = Math.max(this.z, scalar);
-            return this;
-        };
-        Vector3.prototype.minScalar = function (scalar) {
-            this.x = Math.min(this.x, scalar);
-            this.y = Math.min(this.y, scalar);
-            this.z = Math.min(this.z, scalar);
-            return this;
-        };
-        Vector3.prototype.normalize = function () {
-            var length = this.getMagnitude();
-            if (length && length != 1) {
-                this.scale(1 / length);
-            }
-            return this;
-        };
-        Vector3.prototype.absolute = function () {
-            this.x = Math.abs(this.x);
-            this.y = Math.abs(this.y);
-            this.z = Math.abs(this.z);
-            return this;
-        };
-        Vector3.prototype.opposite = function () {
-            this.x = -this.x;
-            this.y = -this.y;
-            this.z = -this.z;
-            return this;
-        };
-        Vector3.prototype.dotProduct = function (v) {
-            return this.x * v.x + this.y * v.y + this.z * v.z;
         };
         Vector3.prototype.cross = function (v) {
             var x = this.x,
@@ -857,7 +845,7 @@ var Type6 = (function (exports) {
             return this;
         };
         return Vector3;
-    }();
+    }(Vector);
 
     var Matrix3x3 = function () {
         function Matrix3x3(x1, x2, x3, y1, y2, y3, t1, t2, t3) {

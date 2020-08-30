@@ -1,37 +1,18 @@
+import {Vector} from './vector';
 import {AxisNames2d} from '../types';
 import {Trigonometry} from '../trigonometry';
 import {Bezier} from '../bezier';
 import {Rectangle} from '../geometry/rectangle';
 import {Utils} from '../utils';
 
-// export interface Vector2 {
-//   [key: string]: any;
-// }
-
-export class Vector2 {
+export class Vector2 extends Vector {
   public x: number;
   public y: number;
 
   constructor(x?: number, y?: number) {
-    this.x = x||0.0;
-    this.y = y||0.0;
-  }
-
-  //true if vector is equal to (0;0)
-  public isOrigin(): boolean {
-    return (this.x === 0 && this.y === 0) ? true : false;
-  }
-
-  public isPositive(): boolean {
-    return ( this.x >= 0 && this.y >= 0 ) ? true : false;
-  }
-
-  public toArray(): number[] {
-    return [ this.x, this.y ];
-  }
-
-  public toString(): string {
-    return '(x = ' + this.x + '; y = ' + this.y + ')';
+    super();
+    this.x = x ?? 0.0;
+    this.y = y ?? 0.0;
   }
 
   public set(x:number, y:number): Vector2 {
@@ -44,18 +25,6 @@ export class Vector2 {
     return new Vector2(this.x,this.y);
   }
 
-  public copy(v: Vector2 ): Vector2 {
-    this.x = v.x;
-    this.y = v.y;
-    return this;
-	}
-
-  public origin(): Vector2 {
-    this.x = 0.0;
-    this.y = 0.0;
-    return this;
-  }
-
   public setFromAngle(angle: number): Vector2 {
     if (angle) {
       let length = this.getMagnitude();
@@ -65,23 +34,8 @@ export class Vector2 {
     return this;
   }
 
-  public getAngle(): number {
-    return Math.atan2(this.y, this.x);
-  }
-
-  public getMagnitude(square: boolean = false): number{
-    return square ? this.getSquaredMagnitude() : Math.sqrt(this.getSquaredMagnitude());
-  }
-
-  private getSquaredMagnitude(): number {
-    return this.x * this.x + this.y * this.y;
-  }
-
-  public getDistance(v: Vector2, square: boolean = false): number {
-    this.subtract(v);
-    const magnitude = this.getMagnitude(square);
-    this.add(v);
-    return magnitude;
+  public getAngle(): number|false {
+    return Trigonometry.arctan2(this.y, this.x);
   }
 
   public quadraticBezier(p0:Vector2, p1:Vector2, p2:Vector2, t:number): Vector2 {
@@ -93,104 +47,6 @@ export class Vector2 {
   public cubicBezier(p0:Vector2, p1:Vector2, p2:Vector2, p3:Vector2, t:number): Vector2 {
     this.x = Bezier.cubic( p0.x, p1.x, p2.x, p3.x, t );
     this.y = Bezier.cubic( p0.y, p1.y, p2.y, p3.y, t );
-    return this;
-  }
-
-  public add(v: Vector2): Vector2 {
-    this.x += v.x;
-    this.y += v.y;
-    return this;
-  }
-
-  public addScalar(scalar: number): Vector2 {
-    this.x += scalar;
-    this.y += scalar;
-    return this;
-  }
-
-  public addScaledVector(v: Vector2, scalar: number): Vector2 {
-    this.x += v.x * scalar;
-    this.y += v.y * scalar;
-    return this;
-  }
-
-  public subtract(v: Vector2): Vector2 {
-    this.x -= v.x;
-    this.y -= v.y;
-    return this;
-  }
-
-  public subtractScalar(scalar: number): Vector2 {
-    this.x -= scalar;
-    this.y -= scalar;
-    return this;
-  }
-
-  public subtractScaledVector(v: Vector2, scalar: number): Vector2 {
-    this.x -= v.x * scalar;
-    this.y -= v.y * scalar;
-    return this;
-  }
-
-  public scale(value: number): Vector2 {
-    this.x *= value;
-    this.y *= value;
-    return this;
-  }
-
-  //component product
-  public multiply(v: Vector2): Vector2 {
-    this.x *= v.x;
-    this.y *= v.y;
-    return this;
-  }
-
-  public multiplyScaledVector(v: Vector2, scalar: number): Vector2 {
-    this.x *= v.x * scalar;
-    this.y *= v.y * scalar;
-    return this;
-  }
-
-  //Prefer scale by value inferior to 1 if possible
-  public divide(v: Vector2): Vector2 {
-    this.x /= v.x;
-    this.y /= v.y;
-    return this;
-  }
-
-  public divideScaledVector(v: Vector2, scalar: number): Vector2 {
-    this.x /= v.x * scalar;
-    this.y /= v.y * scalar;
-    return this;
-  }
-
-  public halve(): Vector2 {
-    this.x *= 0.5;
-    this.y *= 0.5;
-    return this;
-  }
-
-  public max(v: Vector2): Vector2 {
-    this.x = Math.max( this.x, v.x );
-    this.y = Math.max( this.y, v.y );
-    return this;
-  }
-
-  public min(v: Vector2): Vector2 {
-    this.x = Math.min( this.x, v.x );
-    this.y = Math.min( this.y, v.y );
-    return this;
-  }
-
-  public maxScalar(scalar: number): Vector2 {
-    this.x = Math.max( this.x, scalar );
-    this.y = Math.max( this.y, scalar );
-    return this;
-  }
-
-  public minScalar(scalar: number): Vector2 {
-    this.x = Math.min( this.x, scalar );
-    this.y = Math.min( this.y, scalar );
     return this;
   }
 
@@ -208,26 +64,6 @@ export class Vector2 {
     } else {
       this.y = value;
     }
-    return this;
-  }
-
-  public normalize(): Vector2 {
-    let length = this.getMagnitude();
-    if( length && length != 1) {
-      this.scale(1/length);
-    }
-    return this;
-  }
-
-  public absolute(): Vector2 {
-    this.x = Math.abs(this.x);
-    this.y = Math.abs(this.y);
-    return this;
-  }
-
-  public opposite(): Vector2 {
-    this.x = -this.x;
-    this.y = -this.y;
     return this;
   }
 
@@ -249,10 +85,6 @@ export class Vector2 {
     this.x = Utils.lerp( min.x, max.x, amount );
     this.y = Utils.lerp( min.y, max.y, amount );
     return this;
-  }
-
-  public dotProduct(v: Vector2): number { //scalar product
-    return this.x * v.x + this.y * v.y;
   }
 
 };

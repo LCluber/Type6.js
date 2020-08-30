@@ -207,88 +207,67 @@ export declare class Utils {
     static isIn(x: number, min: number, max: number): boolean;
     static isOut(x: number, min: number, max: number): boolean;
 }
-
-
-export declare class Vector2 {
-    x: number;
-    y: number;
-    constructor(x?: number, y?: number);
+export interface Vector {
+    [key: string]: any;
+}
+export declare class Vector {
+    constructor();
     isOrigin(): boolean;
     isPositive(): boolean;
     toArray(): number[];
     toString(): string;
-    set(x: number, y: number): Vector2;
-    clone(): Vector2;
-    copy(v: Vector2): Vector2;
-    origin(): Vector2;
-    setFromAngle(angle: number): Vector2;
-    getAngle(): number;
+    copy(v: Vector): Vector;
+    origin(): Vector;
     getMagnitude(square?: boolean): number;
     private getSquaredMagnitude;
-    getDistance(v: Vector2, square?: boolean): number;
+    getDistance(v: Vector, square?: boolean): number;
+    add(v: Vector): Vector;
+    addScaledVector(v: Vector, scalar: number): Vector;
+    addScalar(scalar: number): Vector;
+    subtract(v: Vector): Vector;
+    subtractScaledVector(v: Vector, scalar: number): Vector;
+    subtractScalar(scalar: number): Vector;
+    multiply(v: Vector): Vector;
+    multiplyScaledVector(v: Vector, scalar: number): Vector;
+    scale(scalar: number): Vector;
+    divide(v: Vector): Vector;
+    divideScaledVector(v: Vector, scalar: number): Vector;
+    halve(): Vector;
+    max(v: Vector): Vector;
+    min(v: Vector): Vector;
+    maxScalar(scalar: number): Vector;
+    minScalar(scalar: number): Vector;
+    normalize(): Vector;
+    absolute(): Vector;
+    opposite(): Vector;
+    dotProduct(v: Vector): number;
+}
+
+
+
+export declare class Vector2 extends Vector {
+    x: number;
+    y: number;
+    constructor(x?: number, y?: number);
+    set(x: number, y: number): Vector2;
+    clone(): Vector2;
+    setFromAngle(angle: number): Vector2;
+    getAngle(): number | false;
     quadraticBezier(p0: Vector2, p1: Vector2, p2: Vector2, t: number): Vector2;
     cubicBezier(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: number): Vector2;
-    add(v: Vector2): Vector2;
-    addScalar(scalar: number): Vector2;
-    addScaledVector(v: Vector2, scalar: number): Vector2;
-    subtract(v: Vector2): Vector2;
-    subtractScalar(scalar: number): Vector2;
-    subtractScaledVector(v: Vector2, scalar: number): Vector2;
-    scale(value: number): Vector2;
-    multiply(v: Vector2): Vector2;
-    multiplyScaledVector(v: Vector2, scalar: number): Vector2;
-    divide(v: Vector2): Vector2;
-    divideScaledVector(v: Vector2, scalar: number): Vector2;
-    halve(): Vector2;
-    max(v: Vector2): Vector2;
-    min(v: Vector2): Vector2;
-    maxScalar(scalar: number): Vector2;
-    minScalar(scalar: number): Vector2;
     getMaxAxis(): AxisNames2d;
     getMinAxis(): AxisNames2d;
     setOppositeAxis(axis: AxisNames2d, value: number): Vector2;
-    normalize(): Vector2;
-    absolute(): Vector2;
-    opposite(): Vector2;
     clamp(rectangle: Rectangle): Vector2;
     lerp(min: Vector2, max: Vector2, amount: number): Vector2;
-    dotProduct(v: Vector2): number;
 }
-export declare class Vector3 {
+
+export declare class Vector3 extends Vector {
     x: number;
     y: number;
     z: number;
     constructor(x?: number, y?: number, z?: number);
-    isOrigin(): boolean;
-    isPositive(): boolean;
-    toArray(): number[];
-    toString(): string;
     set(x: number, y: number, z: number): Vector3;
     clone(): Vector3;
-    copy(v: Vector3): Vector3;
-    origin(): Vector3;
-    getMagnitude(square?: boolean): number;
-    private getSquaredMagnitude;
-    getDistance(v: Vector3, square?: boolean): number;
-    add(v: Vector3): Vector3;
-    addScalar(scalar: number): Vector3;
-    addScaledVector(v: Vector3, scalar: number): Vector3;
-    subtract(v: Vector3): Vector3;
-    subtractScalar(scalar: number): Vector3;
-    subtractScaledVector(v: Vector3, scalar: number): Vector3;
-    scale(value: number): Vector3;
-    multiply(v: Vector3): Vector3;
-    multiplyScaledVector(v: Vector3, scalar: number): Vector3;
-    divide(v: Vector3): Vector3;
-    divideScaledVector(v: Vector3, scalar: number): Vector3;
-    halve(): Vector3;
-    max(v: Vector3): Vector3;
-    min(v: Vector3): Vector3;
-    maxScalar(scalar: number): Vector3;
-    minScalar(scalar: number): Vector3;
-    normalize(): Vector3;
-    absolute(): Vector3;
-    opposite(): Vector3;
-    dotProduct(v: Vector3): number;
     cross(v: Vector3): Vector3;
 }
