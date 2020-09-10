@@ -11,8 +11,8 @@ export class Vector2 extends Vector {
 
   constructor(x?: number, y?: number) {
     super();
-    this.x = x ?? 0.0;
-    this.y = y ?? 0.0;
+    this.x = x || 0.0;
+    this.y = y || 0.0;
   }
 
   public set(x:number, y:number): Vector2 {

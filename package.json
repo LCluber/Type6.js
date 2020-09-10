@@ -1,6 +1,6 @@
 {
   "name": "@lcluber/type6js",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "Mathematics library for Javascript",
   "keywords": [
     "maths",
@@ -26,30 +26,50 @@
   },
   "contributors": [],
   "scripts": {
-    "start": "grunt build"
+    "start": "npm run clean && npm run tsc:esm && npm run rollup:esm && npm run rollup:cjs && npm run rollup:iife && npm run uglify:iife && npm run banner:esm && npm run banner:iife && npm run banner:iife:min && npm run banner:cjs && grunt build",
+    "build:esm": "npm run clean:esm && npm run tsc:esm && npm run rollup:esm && banner:esm && grunt build",
+    "build:iife": "npm run clean:iife && npm run rollup:iife && npm run uglify:iife && npm run banner:iife && npm run banner:iife:min",
+    "build:cjs": "npm run clean:iife && npm run rollup:cjs && npm run banner:cjs",
+    "clean": "rimraf dist/* build/*",
+    "clean:esm": "rimraf dist/*.d.ts dist/*6.js build/*6.js build/es6/*",
+    "clean:iife": "rimraf dist/*.iife.* build/*.iife.*",
+    "clean:cjs": "rimraf dist/*.cjs.* build/*.cjs.* build/cjs/*",
+    "tsc:esm": "tsc",
+    "rollup:esm": "rollup --config rollup.config.mjs",
+    "rollup:iife": "rollup --config rollup.config.js",
+    "rollup:cjs": "rollup --config rollup.config.cjs.js",
+    "uglify:iife": "uglifyjs build/type6.iife.js --config-file uglify.config.json --output build/type6.iife.min.js",
+    "banner:esm": "cat license.js build/type6.js > dist/type6.js",
+    "banner:iife": "cat license.js build/type6.iife.js > dist/type6.iife.js",
+    "banner:iife:min": "cat license.js build/type6.iife.min.js > dist/type6.iife.min.js",
+    "banner:decl": "cat license.js build/type6.d.ts > dist/type6.d.ts",
+    "banner:cjs": "cat license.js build/type6.cjs.js > dist/type6.cjs.js"
   },
   "files": [
     "dist/"
   ],
   "dependencies": {},
   "devDependencies": {
-    "babel-core": "6.26.3",
-    "babel-preset-es2015": "6.24.1",
-    "grunt": "1.0.1",
-    "grunt-contrib-clean": "1.1.0",
+    "@babel/core": "7.11.6",
+    "@babel/preset-env": "7.11.5",
+    "@rollup/plugin-babel": "5.2.0",
+    "@rollup/plugin-node-resolve": "9.0.0",
+    "grunt": "1.3.0",
     "grunt-contrib-concat": "1.0.1",
     "grunt-contrib-copy": "1.0.0",
-    "grunt-contrib-uglify": "3.0.1",
-    "grunt-rollup": "9.0.0",
     "grunt-strip-code": "1.0.6",
     "grunt-ts": "6.0.0-beta.22",
     "grunt-tslint": "5.0.2",
     "node-sass": "4.14.1",
     "rimraf": "3.0.2",
-    "rollup-plugin-babel": "3.0.4",
-    "rollup-plugin-node-resolve": "3.3.0",
+    "rollup": "2.26.11",
+    "rollup-plugin-analyzer": "3.3.0",
+    "rollup-plugin-progress": "1.1.2",
+    "rollup-plugin-size-snapshot": "0.12.0",
+    "rollup-plugin-sizes": "1.0.3",
     "time-grunt": "1.4.0",
     "tslint": "6.1.3",
-    "typescript": "3.9.7"
+    "typescript": "4.0.2",
+    "uglify-js": "3.10.4"
   }
 }

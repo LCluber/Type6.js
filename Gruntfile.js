@@ -1,6 +1,4 @@
 module.exports = function(grunt){
-  var babel = require('rollup-plugin-babel');
-  var resolve = require('rollup-plugin-node-resolve');
 
   require('time-grunt')(grunt);
 
@@ -43,118 +41,6 @@ module.exports = function(grunt){
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    clean: {
-      lib:{
-        dot: true,
-        src: [  distDir        + '*',
-                compiledES5Dir + '*',
-                compiledES6Dir + '*'
-              ]
-      }
-    },
-    // tslint: {
-    //   options: {
-    //     configuration: 'config/tslint.json',
-    //     force: false
-    //   },
-    //   lib: {
-    //     files: [{
-    //       expand: true,
-    //       cwd: srcDir,
-    //       src: [ srcDir + '**/*.ts' ]
-    //     }]
-    //   }
-    // },
-    ts: {
-      options: {
-        fast: 'never'
-      },
-      es6: {
-        tsconfig: './tsconfig.json',
-        src: [ srcDir + '**/*.ts', '!node_modules/**/*.ts' ]
-      },
-      es5: {
-        tsconfig: './tsconfig.es5.json',
-        src: [ srcDir + '**/*.ts', '!node_modules/**/*.ts' ]
-      }
-    },
-    rollup: {
-      es6: {
-        options: {
-          format:'es',
-          // moduleName: projectName,
-          banner: banner,
-          // sourceMap: 'inline'
-          plugins: [
-            resolve({
-            //   //exclude: './node_modules/**'
-            })
-          ]//,
-          // external: [
-          //
-          // ]
-        },
-        files: [ {
-          src : compiledES6Dir + projectNameLC + '.js',
-          dest : distDir + projectNameLC + '.js'
-        } ]
-      },
-      iife: {
-        options: {
-          format:'iife',
-          moduleName: projectName,
-          banner: banner,
-          plugins: [
-            babel({
-            //   //exclude: './node_modules/**'
-            }),
-            resolve({
-              //   //exclude: './node_modules/**'
-            })
-          ]
-          // sourceMap: 'inline'
-          // external: [
-
-          // ]
-        },
-        files: [ {
-          src : compiledES5Dir + projectNameLC + '.js',
-          dest : distDir + projectNameLC + '.iife.js'
-        } ]
-      }
-    },
-    uglify: {
-      libIife: {
-        options: {
-          sourceMap: false,
-          sourceMapName: srcDir + 'sourcemap.map',
-          banner: banner,
-          mangle: {
-            reserved: [projectName],
-          },
-          compress: {
-            sequences: true,
-            properties: true,
-            dead_code: true,
-            unsafe: false,
-            conditionals:true,
-            comparisons:true,
-            booleans:true,
-            loops:true,
-            unused: true,
-            hoist_funs:true,
-            if_return:true,
-            join_vars:true,
-            warnings: true,
-            drop_console: false,
-            keep_fargs: false,
-            keep_fnames: false
-          }
-        },
-        src: distDir + projectNameLC + '.iife.js',
-        dest: distDir + projectNameLC + '.iife.min.js'
-      }
-    },
     concat:{
       declaration: {
         options: {
@@ -188,20 +74,18 @@ module.exports = function(grunt){
   grunt.loadNpmTasks( 'grunt-contrib-concat' );
   grunt.loadNpmTasks( 'grunt-strip-code' );
   grunt.loadNpmTasks( 'grunt-tslint' );
-  grunt.loadNpmTasks( 'grunt-ts' );
-  grunt.loadNpmTasks( 'grunt-rollup' );
 
   grunt.registerTask( 'lib',
                       'build the library in the dist/ folder',
                       [ //'tslint:lib',
                         //'clean:lib',
                         //lib es6
-                        'ts:es6',
-                        'rollup:es6',
+                        //'ts:es6',
+                        //'rollup:es6',
                         //lib es5
-                        'ts:es5',
-                        'rollup:iife',
-                        'uglify:libIife',
+                        //'ts:es5',
+                        //'rollup:iife',
+                        // 'uglify:libIife',
                         //declaration
                         'concat:declaration',
                         'strip_code:declaration',

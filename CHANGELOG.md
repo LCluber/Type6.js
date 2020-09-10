@@ -1,9 +1,14 @@
+Version 2.2.0 (September 06th 2020)
+-----------------------------
+ * Update Typescript to version 4
+ * Export Type6 as CommonJS module
+
 Version 2.1.1 (August 30th 2020)
 -----------------------------
- * smaller package size
+ * Smaller package size
  * Vector Classes refactor
 
-Version 2.1.0 (August 29th 2020)
+Version 2.1.0 (Augulst 29th 2020)
 -----------------------------
  * delete setFromArray() method in Vector2 and Vector3 classes
 

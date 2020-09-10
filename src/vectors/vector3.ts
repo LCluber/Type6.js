@@ -7,9 +7,9 @@ export class Vector3 extends Vector {
 
   constructor(x?: number, y?: number, z?: number) {
     super();
-    this.x = x ?? 0.0;
-    this.y = y ?? 0.0;
-    this.z = z ?? 0.0;
+    this.x = x || 0.0;
+    this.y = y || 0.0;
+    this.z = z || 0.0;
   }
 
   public set(x:number, y:number, z:number): Vector3 {
