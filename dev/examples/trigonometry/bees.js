@@ -7,7 +7,6 @@ window.onload = function() {
   var bees    = [];
   var numBees = 30;
   var center  = new Type6.Vector2(width, height).halve();
-
   var bee = {
     create: function() {
       var obj = Object.create(this);
@@ -25,7 +24,6 @@ window.onload = function() {
         this.randomSpeedGenerator()
       );
       this.circle = new Type6.Circle( 0, 0, Type6.Random.integer(100,200) );
-
     },
 
     update: function() {
@@ -33,7 +31,6 @@ window.onload = function() {
         Type6.Trigonometry.cosineEquation( this.circle.radius, this.angle.x, 0, 0 ),
         Type6.Trigonometry.sineEquation( this.circle.radius, this.angle.y, 0, 0 )
       ).add(center);
-
       this.angle.add( this.speed );
       this.draw();
     },
@@ -65,7 +62,7 @@ window.onload = function() {
       bees[i].update();
     }
 
-    requestAnimationFrame(draw);
+    // requestAnimationFrame(draw);
   }
 
 };
