@@ -27,9 +27,10 @@ window.onload = function() {
     },
 
     update: function() {
+      var radius = this.circle.radius;
       this.circle.position.set(
-        Type6.Trigonometry.cosineEquation( this.circle.radius, this.angle.x, 0, 0 ),
-        Type6.Trigonometry.sineEquation( this.circle.radius, this.angle.y, 0, 0 )
+        Type6.Trigonometry.cosineEquation( radius, this.angle.x, 0, 0 ),
+        Type6.Trigonometry.sineEquation(   radius, this.angle.y, 0, 0 )
       ).add(center);
       this.angle.add( this.speed );
       this.draw();
@@ -62,7 +63,7 @@ window.onload = function() {
       bees[i].update();
     }
 
-    // requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
   }
 
 };

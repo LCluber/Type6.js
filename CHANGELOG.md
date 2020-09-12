@@ -1,7 +1,8 @@
 Version 2.2.0 (September 06th 2020)
 -----------------------------
- * Update Typescript to version 4
  * Export Type6 as CommonJS module
+ * Update Typescript to version 4
+ * Automated Unit tests with Jest
 
 Version 2.1.1 (August 30th 2020)
 -----------------------------

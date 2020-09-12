@@ -43,7 +43,15 @@
     "banner:iife": "cat license.js build/type6.iife.js > dist/type6.iife.js",
     "banner:iife:min": "cat license.js build/type6.iife.min.js > dist/type6.iife.min.js",
     "banner:decl": "cat license.js build/type6.d.ts > dist/type6.d.ts",
-    "banner:cjs": "cat license.js build/type6.cjs.js > dist/type6.cjs.js"
+    "banner:cjs": "cat license.js build/type6.cjs.js > dist/type6.cjs.js",
+    "test": "jest --coverage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test",
+      "commit-msg": "",
+      "pre-push": ""
+    }
   },
   "files": [
     "dist/"
@@ -54,13 +62,13 @@
     "@babel/preset-env": "7.11.5",
     "@rollup/plugin-babel": "5.2.0",
     "@rollup/plugin-node-resolve": "9.0.0",
+    "core-js": "3.6.5",
     "grunt": "1.3.0",
     "grunt-contrib-concat": "1.0.1",
     "grunt-contrib-copy": "1.0.0",
     "grunt-strip-code": "1.0.6",
-    "grunt-ts": "6.0.0-beta.22",
-    "grunt-tslint": "5.0.2",
-    "node-sass": "4.14.1",
+    "husky": "4.3.0",
+    "jest": "26.4.2",
     "rimraf": "3.0.2",
     "rollup": "2.26.11",
     "rollup-plugin-analyzer": "3.3.0",
