@@ -46,13 +46,6 @@
     "banner:cjs": "cat license.js build/type6.cjs.js > dist/type6.cjs.js",
     "test": "jest --coverage"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test",
-      "commit-msg": "",
-      "pre-push": ""
-    }
-  },
   "files": [
     "dist/"
   ],
@@ -67,7 +60,6 @@
     "grunt-contrib-concat": "1.0.1",
     "grunt-contrib-copy": "1.0.0",
     "grunt-strip-code": "1.0.6",
-    "husky": "4.3.0",
     "jest": "26.4.2",
     "rimraf": "3.0.2",
     "rollup": "2.26.11",
