@@ -30,7 +30,7 @@ window.onload = function() {
       var radius = this.circle.radius;
       this.circle.position.set(
         Type6.Trigonometry.cosineEquation( radius, this.angle.x, 0, 0 ),
-        Type6.Trigonometry.sineEquation(   radius, this.angle.y, 0, 0 )
+        Type6.Trigonometry.sineEquation( radius, this.angle.y, 0, 0 )
       ).add(center);
       this.angle.add( this.speed );
       this.draw();
