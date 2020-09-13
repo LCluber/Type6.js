@@ -1,6 +1,5 @@
 [![License: MIT](https://img.shields.io/npm/l/@lcluber/type6js.svg)](https://opensource.org/licenses/MIT)
 [![npm version](https://badge.fury.io/js/%40lcluber%2Ftype6js.svg)](https://www.npmjs.com/package/@lcluber/type6js)
-![Jest:coverage](https://img.shields.io/badge/Jest:coverage-80%25-brightgreen.svg)
 [![minified size](https://img.shields.io/bundlephobia/min/@lcluber/type6js)](https://www.npmjs.com/package/@lcluber/type6js)
 
 ## Synopsis
