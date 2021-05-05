@@ -1,125 +1,45 @@
-import {AxisNames2d} from '../types';
-import {Vector2 } from '../vectors/vector2';
-import {Utils} from '../utils';
+import { Vector2 } from '../vectors/vector2';
+import { Vector } from '../vectors/Vector';
+import { Utils } from '../utils';
 
 export class Rectangle {
 
   public position : Vector2;
-  public topLeftCorner : Vector2;
-  public bottomRightCorner : Vector2;
+  public topLeftCorner : Vector;
+  public bottomRightCorner : Vector;
   public size : Vector2;
   public halfSize : Vector2;
   readonly shape: 'aabb' = 'aabb';
 
-
-  constructor( positionX: number, positionY: number, sizeX: number, sizeY: number ) {
-    //this.initSize( sizeX, sizeY );
-    //this.initPosition( positionX, positionY );
-    this.size = new Vector2( sizeX, sizeY );
+  constructor( width: number, height: number, positionX: number | number[] | Vector2, positionY?: number ) {
+    this.position = new Vector2(positionX, positionY);
+    this.size = new Vector2( width, height );
     this.halfSize = new Vector2();
+    this.topLeftCorner = new Vector2();
+    this.bottomRightCorner = new Vector2();
     this.setHalfSize();
-    this.position          = new Vector2( positionX, positionY );
-    this.topLeftCorner     = new Vector2( positionX - this.halfSize.x, positionY - this.halfSize.y );
-    this.bottomRightCorner = new Vector2( positionX + this.halfSize.x, positionY + this.halfSize.y );
+    this.setCorners();
   }
 
-  // private initSize( sizeX: number, sizeY: number ): void {
-  //   this.size = new Vector2( sizeX, sizeY );
-  //   this.setHalfSize();
-  // }
-  //
-  // private initPosition( positionX: number, positionY: number ): void {
-  //   this.position          = new Vector2( positionX, positionY );
-  //   this.topLeftCorner     = new Vector2( positionX - this.halfSize.x, positionY - this.halfSize.y );
-  //   this.bottomRightCorner = new Vector2( positionX + this.halfSize.x, positionY + this.halfSize.y );
-  // }
-
   public clone(): Rectangle {
-    return new Rectangle(this.position.x, this.position.y, this.size.x, this.size.y);
+    return new Rectangle(this.size.x, this.size.y, this.position);
   }
 
   public copy( rectangle: Rectangle ): Rectangle {
-    this.setSizeFromVector( rectangle.size );
-    this.setPositionFromVector( rectangle.position );
+    this.setSize( rectangle.size );
+    this.setPosition( rectangle.position );
     return this;
   }
-
-  public set( positionX: number, positionY: number, sizeX: number, sizeY: number ): Rectangle {
-    this.setSizeXY( sizeX, sizeY );
-    this.setPositionXY( positionX, positionY );
-    return this;
-  }
-
-  public setPositionX(x: number): Rectangle {
-    this.setPosition('x', x);
-    return this;
-  }
-
-  public setPositionY(y: number): Rectangle {
-    this.setPosition('y', y);
-    return this;
-  }
-
-  private setPosition(property: AxisNames2d, value: number): void {
-    this.position[property] = value;
-    this.topLeftCorner[property] = value - this.halfSize[property];
-    this.bottomRightCorner[property] = value + this.halfSize[property] ;
-  }
-
-  public setPositionXY( positionX: number, positionY: number ): Rectangle {
+  
+  public setPosition(positionX: number | number[] | Vector2, positionY?: number): void {
     this.position.set( positionX, positionY );
     this.setCorners();
-    return this;
   }
 
-  public setPositionFromVector( position: Vector2 ): Rectangle {
-    this.position.copy( position );
-    this.setCorners();
-    return this;
-  }
-
-
-  public setSizeX( width: number ): Rectangle {
-    this.setSize('x', width);
-    return this;
-  }
-
-  public setSizeY( height: number ): Rectangle {
-    this.setSize('y', height);
-    return this;
-  }
-
-  private setSize(property: AxisNames2d, value: number): void {
-    this.size[property] = value;
-    this.setHalfSize();
-    this.topLeftCorner[property] = this.position[property] - this.halfSize[property];
-    this.bottomRightCorner[property] = this.position[property] + this.halfSize[property];
-  }
-
-  public setSizeXY( width: number, height: number ): Rectangle {
-    this.size.set( width, height );
+  public setSize(width: number | number[] | Vector2, height?: number): void {
+    this.size.set(width, height);
     this.setHalfSize();
     this.setCorners();
-    return this;
-  }
-
-  public setSizeFromVector( size: Vector2 ): Rectangle {
-    this.size.copy( size );
-    this.setHalfSize();
-    this.setCorners();
-    return this;
-  }
-
-  private setCorners(): void {
-    this.topLeftCorner.set( this.position.x - this.halfSize.x,
-                            this.position.y - this.halfSize.y );
-    this.bottomRightCorner.set( this.position.x + this.halfSize.x,
-                                this.position.y + this.halfSize.y );
-  }
-
-  private setHalfSize(): void {
-    this.halfSize.copy(this.size);
-    this.halfSize.halve();
   }
 
   public isIn(vector: Vector2): boolean {
@@ -148,31 +68,17 @@ export class Rectangle {
     }
   }
 
+  private setCorners(): void {
+    this.topLeftCorner.set(this.position).subtract(this.halfSize);
+    this.bottomRightCorner.set(this.position).add(this.halfSize);
+  }
+
+  private setHalfSize(): void {
+    this.halfSize.set(this.size).halve();
+  }
+
   // clampTo:function(rectangle){
   //   this.position.clampTo(rectangle);
-  // },
-
-  // /**
-  // * set cosine decimals precision.
-  // * @since 0.0.3
-  // * @param {float} value The number of decimals.
-  // * @returns {Vector2}
-  // */
-  // scale: function(scalar) {
-  //   return this.create( this.position.getX(), this.position.getY(),
-  //                       this.radius * scalar
-  //                     );
-  // },
-
-  // /**
-  // * set cosine decimals precision.
-  // * @since 0.0.3
-  // * @param {float} value The number of decimals.
-  // * @returns {Vector2}
-  // */
-  // scaleBy: function(scalar) {
-  //   this.setRadius( this.radius * scalar);
-  //   return this.radius;
   // },
 
 };

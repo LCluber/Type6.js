@@ -1,3 +1,31 @@
+Version 3.0.0-beta.0 (May 5th 2021)
+-----------------------------
+ * Vector class:
+    * Replace isOrigin() method by isEqualTo(scalar) method
+    * Fix Vector opposite method
+ * Vector2 class:
+    * Constructor now accept numbers, array or Vector2 as parameters
+    * set() method now accept numbers, array or Vector2 as parameters 
+    * Delete copy() and setFromAngle() methods
+    * Add setFromRadian(), setFromDegree, setMinAxis(), setMaxAxis() methods
+    * opposite() and absolute() methods now accept an axis name as parameter to set only this axis.
+ * Vector3 class:
+    * Constructor now accept numbers, array or Vector3 as parameters
+    * set() method now accept numbers, array or Vector3 as parameters
+    * Delete copy() method
+ * Circle class:
+    * First parameter of set() method and constructor is now Radius.
+    * Position parameters of constructor can be given as numbers, array, angle or Vector2
+    * Delete set(), setPositionXY() and setPositionFromVector() methods 
+    * Add setPosition(), setRadius() and setDiameter() methods
+ * Rectangle class:
+    * First parameters of constructor are now width and height.
+    * Position parameters constructor can be given as numbers, array, angle or Vector2
+    * setPosition() method now accept numbers, array, angle or Vector2
+    * setSize() method now accept numbers, array, angle or Vector2
+    * delete setPositionXY(), setPositionX(), setPositionFromVector() and setPositionY() methods
+    * delete set(), setSizeXY(), setSizeX(), setSizeFromVector() and setSizeY() methods
+
 Version 2.2.0 (September 06th 2020)
 -----------------------------
  * Export Type6 as CommonJS module
@@ -11,11 +39,13 @@ Version 2.1.1 (August 30th 2020)
 
 Version 2.1.0 (Augulst 29th 2020)
 -----------------------------
- * delete setFromArray() method in Vector2 and Vector3 classes
+ * Vector2 and Vector3 classes: 
+    * delete setFromArray() method in 
 
 Version 2.0.1 (May 13th 2020)
 -----------------------------
- * fix lookAtRH() method in Matrix4x3 class
+ * Matrix4x3 class:
+    * fix lookAtRH() method in 
 
 Version 2.0.0 (May 09th 2020)
 -----------------------------

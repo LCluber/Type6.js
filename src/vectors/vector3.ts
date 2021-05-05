@@ -1,21 +1,27 @@
 import {Vector} from './vector';
+import { isArray, isNumber, isObject } from '@dwtechs/checkhard';
 
 export class Vector3 extends Vector {
-  public x: number;
-  public y: number;
-  public z: number;
+  public x: number = 0.0;
+  public y: number = 0.0;
+  public z: number = 0.0;
 
-  constructor(x?: number, y?: number, z?: number) {
+  constructor(x?: number | number[] | Vector3, y?: number, z?: number) {
     super();
-    this.x = x || 0.0;
-    this.y = y || 0.0;
-    this.z = z || 0.0;
+    this.set(x, y, z);
   }
 
-  public set(x:number, y:number, z:number): Vector3 {
-    this.x = x;
-    this.y = y;
-    this.z = z;
+  public set( x?: number | number[] | Vector3, 
+              y?: number | null,
+              z?: number | null): Vector3 {
+
+    if (isNumber(x) || isNumber(y) || isNumber(z)) { // set from scalars
+      this.setAxis(x as number | null, y as number | undefined | null, z as number | undefined | null);
+    } else if (isArray(x, 3)) { // set from array
+      this.setFromArray(x as number[]);
+    } else if (isObject(x)) { // set from Vector
+      this.copy(x as Vector3);
+    }
     return this;
   }
 
@@ -30,5 +36,18 @@ export class Vector3 extends Vector {
     this.z =  x * v.y - y * v.x;
     return this;
   }
+
+  private setAxis(x? : number | null, y?: number | null, z?: number | null): void {
+    let i = 0;
+    for(const axis in this) {
+      if (this.hasOwnProperty(axis)) {
+        if (isNumber(arguments[i])) {
+          this[axis] = arguments[i];
+        }
+        i++;
+      }
+    }
+  }
+
 
 };

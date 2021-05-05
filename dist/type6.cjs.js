@@ -330,25 +330,11 @@ class Bezier {
 class Vector {
     constructor() {
     }
-    isOrigin() {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis)) {
-                if (this[axis] !== 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
     isPositive() {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis)) {
-                if (this[axis] <= 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return this.compareAxes('<=', 0);
+    }
+    isEqualTo(scalar) {
+        return this.compareAxes('!==', scalar);
     }
     toArray() {
         let array = [];
@@ -368,24 +354,11 @@ class Vector {
         }
         return str.slice(0, -2) + ')';
     }
-    copy(v) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] = v[axis];
-            }
-        }
-        return this;
-    }
     origin() {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis)) {
-                this[axis] = 0.0;
-            }
-        }
-        return this;
+        return this.updateAxes('=', 0.0);
     }
     getMagnitude(square = false) {
-        let squaredMagnitude = this.getSquaredMagnitude();
+        const squaredMagnitude = this.getSquaredMagnitude();
         return square ? squaredMagnitude : Math.sqrt(squaredMagnitude);
     }
     getSquaredMagnitude() {
@@ -404,132 +377,52 @@ class Vector {
         return magnitude;
     }
     add(v) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] += v[axis];
-            }
-        }
-        return this;
+        return this.updateAxesByVector('+=', v, null);
     }
     addScaledVector(v, scalar) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] += v[axis] * scalar;
-            }
-        }
-        return this;
+        return this.updateAxesByVector('+=', v, scalar);
     }
     addScalar(scalar) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis)) {
-                this[axis] += scalar;
-            }
-        }
-        return this;
+        return this.updateAxes('+=', scalar);
     }
     subtract(v) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] -= v[axis];
-            }
-        }
-        return this;
+        return this.updateAxesByVector('-=', v, null);
     }
     subtractScaledVector(v, scalar) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] -= v[axis] * scalar;
-            }
-        }
-        return this;
+        return this.updateAxesByVector('-=', v, scalar);
     }
     subtractScalar(scalar) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis)) {
-                this[axis] -= scalar;
-            }
-        }
-        return this;
+        return this.updateAxes('-=', scalar);
     }
     multiply(v) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] *= v[axis];
-            }
-        }
-        return this;
+        return this.updateAxesByVector('*=', v, null);
     }
     multiplyScaledVector(v, scalar) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] *= v[axis] * scalar;
-            }
-        }
-        return this;
+        return this.updateAxesByVector('*=', v, scalar);
     }
     scale(scalar) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis)) {
-                this[axis] *= scalar;
-            }
-        }
-        return this;
+        return this.updateAxes('*=', scalar);
     }
     divide(v) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] /= v[axis];
-            }
-        }
-        return this;
+        return this.updateAxesByVector('/=', v, null);
     }
     divideScaledVector(v, scalar) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] /= v[axis] * scalar;
-            }
-        }
-        return this;
+        return this.updateAxesByVector('/=', v, scalar);
     }
     halve() {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis)) {
-                this[axis] *= 0.5;
-            }
-        }
-        return this;
+        return this.updateAxes('*=', 0.5);
     }
     max(v) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] = Math.max(this[axis], v[axis]);
-            }
-        }
-        return this;
+        return this.updateAxesWithMathByVector(v, 'max');
     }
     min(v) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-                this[axis] = Math.min(this[axis], v[axis]);
-            }
-        }
-        return this;
+        return this.updateAxesWithMathByVector(v, 'min');
     }
     maxScalar(scalar) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis)) {
-                this[axis] = Math.max(this[axis], scalar);
-            }
-        }
-        return this;
+        return this.updateAxesWithMath(scalar, 'max');
     }
     minScalar(scalar) {
-        for (const axis in this) {
-            if (this.hasOwnProperty(axis)) {
-                this[axis] = Math.min(this[axis], scalar);
-            }
-        }
-        return this;
+        return this.updateAxesWithMath(scalar, 'min');
     }
     normalize() {
         let length = this.getMagnitude();
@@ -538,18 +431,22 @@ class Vector {
         }
         return this;
     }
-    absolute() {
+    absolute(a) {
         for (const axis in this) {
             if (this.hasOwnProperty(axis)) {
-                this[axis] = Math.abs(this[axis]);
+                if (!a || a === axis) {
+                    this[axis] = Math.abs(this[axis]);
+                }
             }
         }
         return this;
     }
-    opposite() {
+    opposite(a) {
         for (const axis in this) {
             if (this.hasOwnProperty(axis)) {
-                this[axis] -= this[axis];
+                if (!a || a === axis) {
+                    this[axis] = -this[axis];
+                }
             }
         }
         return this;
@@ -563,29 +460,213 @@ class Vector {
         }
         return dotProduct;
     }
+    setFromArray(array) {
+        let i = 0;
+        for (const axis in this) {
+            if (this.hasOwnProperty(axis) && array.length > i) {
+                this[axis] = array[i];
+            }
+            i++;
+        }
+    }
+    copy(v) {
+        return this.updateAxesByVector('=', v, null);
+    }
+    compareAxes(operator, value) {
+        for (const axis in this) {
+            if (this.hasOwnProperty(axis)) {
+                if (this[operator](axis, value)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    updateAxes(operator, scalar) {
+        for (const axis in this) {
+            if (this.hasOwnProperty(axis)) {
+                this[operator](axis, scalar);
+            }
+        }
+        return this;
+    }
+    updateAxesByVector(operator, vector, scalar) {
+        for (const axis in this) {
+            if (this.hasOwnProperty(axis) && vector.hasOwnProperty(axis)) {
+                this[operator](axis, vector[axis] * (scalar !== null && scalar !== void 0 ? scalar : 1.0));
+            }
+        }
+        return this;
+    }
+    updateAxesWithMath(scalar, operator) {
+        for (const axis in this) {
+            if (this.hasOwnProperty(axis)) {
+                this[axis] = Math[operator](this[axis], scalar);
+            }
+        }
+        return this;
+    }
+    updateAxesWithMathByVector(v, operator) {
+        for (const axis in this) {
+            if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+                this[axis] = Math[operator](this[axis], v[axis]);
+            }
+        }
+        return this;
+    }
+    '<='(axis, value) {
+        return this[axis] <= value;
+    }
+    '!=='(axis, value) {
+        return this[axis] !== value;
+    }
+    '='(axis, value) {
+        this[axis] = value;
+    }
+    '+='(axis, value) {
+        this[axis] += value;
+    }
+    '-='(axis, value) {
+        this[axis] -= value;
+    }
+    '*='(axis, value) {
+        this[axis] *= value;
+    }
+    '/='(axis, value) {
+        this[axis] /= value;
+    }
+}
+
+/*
+MIT License
+
+Copyright (c) 2009 DWTechs
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+https://github.com/DWTechs/CheckHard.js
+*/
+
+function isNumeric(number) {
+  return !isNaN(number - parseFloat(number));
+}
+
+function getTag(tag) {
+  if (tag == null) {
+    return tag === undefined ? '[object Undefined]' : '[object Null]';
+  }
+
+  return toString.call(tag);
+}
+
+function isNumber(number, typeCheck) {
+  if (typeCheck === void 0) {
+    typeCheck = true;
+  }
+
+  if (isSymbol(number)) {
+    return false;
+  }
+
+  return typeCheck ? Number(number) === number : isNumeric(number);
+}
+
+function isSymbol(sym) {
+  var type = typeof sym;
+  return type == 'symbol' || type === 'object' && sym != null && getTag(sym) == '[object Symbol]';
+}
+
+function isArray(array, length) {
+  return !isNil(array) && array.constructor === Array && (length ? array.length === length : true);
+}
+
+function isObject(object) {
+  return object !== null && typeof object === "object" && !isArray(object);
+}
+
+function isNil(nil) {
+  return nil == null;
 }
 
 class Vector2 extends Vector {
     constructor(x, y) {
         super();
-        this.x = x || 0.0;
-        this.y = y || 0.0;
+        this.x = 0.0;
+        this.y = 0.0;
+        this.set(x, y);
     }
     set(x, y) {
-        this.x = x;
-        this.y = y;
+        if (isNumber(x) || isNumber(y)) {
+            this.setAxis(x, y);
+        }
+        else if (isArray(x, 2)) {
+            this.setFromArray(x);
+        }
+        else if (isObject(x)) {
+            this.copy(x);
+        }
         return this;
     }
-    clone() {
-        return new Vector2(this.x, this.y);
-    }
-    setFromAngle(angle) {
+    setFromRadian(angle) {
         if (angle) {
             let length = this.getMagnitude();
             this.x = Trigonometry.cosine(angle) * length;
             this.y = Trigonometry.sine(angle) * length;
         }
         return this;
+    }
+    setFromDegree(angle) {
+        if (angle) {
+            angle = Trigonometry.degreeToRadian(angle);
+            this.setFromRadian(angle);
+        }
+        return this;
+    }
+    setMinAxis(scalar) {
+        if (this.y < this.x) {
+            this.y = scalar;
+        }
+        else {
+            this.x = scalar;
+        }
+        return this;
+    }
+    setMaxAxis(scalar) {
+        if (this.y > this.x) {
+            this.y = scalar;
+        }
+        else {
+            this.x = scalar;
+        }
+        return this;
+    }
+    setOppositeAxis(axis, value) {
+        if (axis === 'y') {
+            this.x = value;
+        }
+        else {
+            this.y = value;
+        }
+        return this;
+    }
+    clone() {
+        return new Vector2(this.x, this.y);
     }
     getAngle() {
         return Trigonometry.arctan2(this.y, this.x);
@@ -606,15 +687,6 @@ class Vector2 extends Vector {
     getMinAxis() {
         return (this.y < this.x) ? 'y' : 'x';
     }
-    setOppositeAxis(axis, value) {
-        if (axis === 'y') {
-            this.x = value;
-        }
-        else {
-            this.y = value;
-        }
-        return this;
-    }
     clamp(rectangle) {
         this.x = Utils.clamp(this.x, rectangle.topLeftCorner.x, rectangle.bottomRightCorner.x);
         this.y = Utils.clamp(this.y, rectangle.topLeftCorner.y, rectangle.bottomRightCorner.y);
@@ -625,10 +697,21 @@ class Vector2 extends Vector {
         this.y = Utils.lerp(min.y, max.y, amount);
         return this;
     }
+    setAxis(x, y) {
+        let i = 0;
+        for (const axis in this) {
+            if (this.hasOwnProperty(axis)) {
+                if (isNumber(arguments[i])) {
+                    this[axis] = arguments[i];
+                }
+                i++;
+            }
+        }
+    }
 }
 
 class Circle {
-    constructor(positionX, positionY, radius) {
+    constructor(radius, positionX, positionY) {
         this.shape = 'circle';
         this._radius = 0.0;
         this._diameter = 0.0;
@@ -650,24 +733,23 @@ class Circle {
         return this._diameter;
     }
     clone() {
-        return new Circle(this.position.x, this.position.y, this.radius);
+        return new Circle(this.radius, this.position);
     }
     copy(circle) {
-        this.position.copy(circle.position);
+        this.position.set(circle.position);
         this.radius = circle.radius;
         return this;
     }
-    set(positionX, positionY, radius) {
+    setPosition(positionX, positionY) {
         this.position.set(positionX, positionY);
+        return this;
+    }
+    setRadius(radius) {
         this.radius = radius;
         return this;
     }
-    setPositionXY(positionX, positionY) {
-        this.position.set(positionX, positionY);
-        return this;
-    }
-    setPositionFromVector(position) {
-        this.position.copy(position);
+    setDiameter(diameter) {
+        this.diameter = diameter;
         return this;
     }
     scale(scalar) {
@@ -693,84 +775,32 @@ class Circle {
 }
 
 class Rectangle {
-    constructor(positionX, positionY, sizeX, sizeY) {
+    constructor(width, height, positionX, positionY) {
         this.shape = 'aabb';
-        this.size = new Vector2(sizeX, sizeY);
-        this.halfSize = new Vector2();
-        this.setHalfSize();
         this.position = new Vector2(positionX, positionY);
-        this.topLeftCorner = new Vector2(positionX - this.halfSize.x, positionY - this.halfSize.y);
-        this.bottomRightCorner = new Vector2(positionX + this.halfSize.x, positionY + this.halfSize.y);
+        this.size = new Vector2(width, height);
+        this.halfSize = new Vector2();
+        this.topLeftCorner = new Vector2();
+        this.bottomRightCorner = new Vector2();
+        this.setHalfSize();
+        this.setCorners();
     }
     clone() {
-        return new Rectangle(this.position.x, this.position.y, this.size.x, this.size.y);
+        return new Rectangle(this.size.x, this.size.y, this.position);
     }
     copy(rectangle) {
-        this.setSizeFromVector(rectangle.size);
-        this.setPositionFromVector(rectangle.position);
+        this.setSize(rectangle.size);
+        this.setPosition(rectangle.position);
         return this;
     }
-    set(positionX, positionY, sizeX, sizeY) {
-        this.setSizeXY(sizeX, sizeY);
-        this.setPositionXY(positionX, positionY);
-        return this;
-    }
-    setPositionX(x) {
-        this.setPosition('x', x);
-        return this;
-    }
-    setPositionY(y) {
-        this.setPosition('y', y);
-        return this;
-    }
-    setPosition(property, value) {
-        this.position[property] = value;
-        this.topLeftCorner[property] = value - this.halfSize[property];
-        this.bottomRightCorner[property] = value + this.halfSize[property];
-    }
-    setPositionXY(positionX, positionY) {
+    setPosition(positionX, positionY) {
         this.position.set(positionX, positionY);
         this.setCorners();
-        return this;
     }
-    setPositionFromVector(position) {
-        this.position.copy(position);
-        this.setCorners();
-        return this;
-    }
-    setSizeX(width) {
-        this.setSize('x', width);
-        return this;
-    }
-    setSizeY(height) {
-        this.setSize('y', height);
-        return this;
-    }
-    setSize(property, value) {
-        this.size[property] = value;
-        this.setHalfSize();
-        this.topLeftCorner[property] = this.position[property] - this.halfSize[property];
-        this.bottomRightCorner[property] = this.position[property] + this.halfSize[property];
-    }
-    setSizeXY(width, height) {
+    setSize(width, height) {
         this.size.set(width, height);
         this.setHalfSize();
         this.setCorners();
-        return this;
-    }
-    setSizeFromVector(size) {
-        this.size.copy(size);
-        this.setHalfSize();
-        this.setCorners();
-        return this;
-    }
-    setCorners() {
-        this.topLeftCorner.set(this.position.x - this.halfSize.x, this.position.y - this.halfSize.y);
-        this.bottomRightCorner.set(this.position.x + this.halfSize.x, this.position.y + this.halfSize.y);
-    }
-    setHalfSize() {
-        this.halfSize.copy(this.size);
-        this.halfSize.halve();
     }
     isIn(vector) {
         return (Utils.isIn(vector.x, this.topLeftCorner.x, this.bottomRightCorner.x)
@@ -789,19 +819,33 @@ class Rectangle {
             context.stroke();
         }
     }
+    setCorners() {
+        this.topLeftCorner.set(this.position).subtract(this.halfSize);
+        this.bottomRightCorner.set(this.position).add(this.halfSize);
+    }
+    setHalfSize() {
+        this.halfSize.set(this.size).halve();
+    }
 }
 
 class Vector3 extends Vector {
     constructor(x, y, z) {
         super();
-        this.x = x || 0.0;
-        this.y = y || 0.0;
-        this.z = z || 0.0;
+        this.x = 0.0;
+        this.y = 0.0;
+        this.z = 0.0;
+        this.set(x, y, z);
     }
     set(x, y, z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        if (isNumber(x) || isNumber(y) || isNumber(z)) {
+            this.setAxis(x, y, z);
+        }
+        else if (isArray(x, 3)) {
+            this.setFromArray(x);
+        }
+        else if (isObject(x)) {
+            this.copy(x);
+        }
         return this;
     }
     clone() {
@@ -813,6 +857,17 @@ class Vector3 extends Vector {
         this.y = z * v.x - x * v.z;
         this.z = x * v.y - y * v.x;
         return this;
+    }
+    setAxis(x, y, z) {
+        let i = 0;
+        for (const axis in this) {
+            if (this.hasOwnProperty(axis)) {
+                if (isNumber(arguments[i])) {
+                    this[axis] = arguments[i];
+                }
+                i++;
+            }
+        }
     }
 }
 
@@ -949,9 +1004,9 @@ class Matrix4x3 {
         return this;
     }
     lookAtRH(eye, target, up) {
-        this.zAxis.copy(eye).subtract(target).normalize();
-        this.xAxis.copy(up).cross(this.zAxis).normalize();
-        this.yAxis.copy(this.zAxis).cross(this.xAxis);
+        this.zAxis.set(eye).subtract(target).normalize();
+        this.xAxis.set(up).cross(this.zAxis).normalize();
+        this.yAxis.set(this.zAxis).cross(this.xAxis);
         this.make(this.xAxis.x, this.yAxis.x, this.zAxis.x, this.xAxis.y, this.yAxis.y, this.zAxis.y, this.xAxis.z, this.yAxis.z, this.zAxis.z, -this.xAxis.dotProduct(eye), -this.yAxis.dotProduct(eye), -this.zAxis.dotProduct(eye));
         return this;
     }

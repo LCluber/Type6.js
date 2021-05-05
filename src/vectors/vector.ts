@@ -1,6 +1,14 @@
+
 export interface Vector {
+  'x': number;
+  'y': number;
+  'z'?: number;
   [key: string]: any;
 }
+
+// type Axis = 'x' | 'y' | 'z';
+type CompareOperator = '<=' | '!==';
+type UpdateOperator  = '=' | '+=' | '-=' | '*=' | '/=';
 
 export class Vector {
 
@@ -8,27 +16,13 @@ export class Vector {
 
   }
 
-  //true if vector is equal to (0;0)
-  public isOrigin(): boolean {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis)) {
-        if (this[axis] !== 0) {
-          return false;
-        }
-      }
-    }
-    return true;
+  public isPositive(): boolean {
+    return this.compareAxes('<=', 0);
   }
 
-  public isPositive(): boolean {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis)) {
-        if (this[axis] <= 0) {
-          return false;
-        }
-      }
-    }
-    return true;
+  //true if vector is equal to (scalar;scalar)
+  public isEqualTo(scalar: number): boolean {
+    return this.compareAxes('!==', scalar);
   }
 
   public toArray(): number[] {
@@ -52,26 +46,12 @@ export class Vector {
     // '(x = ' + this.x + '; y = ' + this.y + '; z = ' + this.z + ')';
   }
 
-  public copy(v: Vector): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) = v[axis];
-      }
-    }
-    return this;
-  }
-
   public origin(): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis)) {
-        (<number>this[axis]) = 0.0;
-      }
-    }
-    return this;
+    return this.updateAxes('=', 0.0);
   }
 
   public getMagnitude(square: boolean = false): number{
-    let squaredMagnitude: number = this.getSquaredMagnitude();
+    const squaredMagnitude: number = this.getSquaredMagnitude();
     return square ? squaredMagnitude : Math.sqrt(squaredMagnitude);
   }
 
@@ -93,148 +73,68 @@ export class Vector {
   }
 
   public add(v: Vector): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) += v[axis];
-      }
-    }
-    return this;
+    return this.updateAxesByVector('+=', v, null);
   }
 
   public addScaledVector(v: Vector, scalar: number): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) += v[axis] * scalar;
-      }
-    }
-    return this;
+    return this.updateAxesByVector('+=', v, scalar);
   }
 
   public addScalar(scalar: number): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis)) {
-        (<number>this[axis]) += scalar;
-      }
-    }
-    return this;
+    return this.updateAxes('+=', scalar);
   }
 
   public subtract(v: Vector): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) -= v[axis];
-      }
-    }
-    return this;
+    return this.updateAxesByVector('-=', v, null);
   }
 
   public subtractScaledVector(v: Vector, scalar: number): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) -= v[axis] * scalar;
-      }
-    }
-    return this;
+    return this.updateAxesByVector('-=', v, scalar);
   }
 
   public subtractScalar(scalar: number): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis)) {
-        (<number>this[axis]) -= scalar;
-      }
-    }
-    return this;
+    return this.updateAxes('-=', scalar);
   }
 
   //component product
   public multiply(v: Vector): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) *= v[axis];
-      }
-    }
-    return this;
+    return this.updateAxesByVector('*=', v, null);
   }
 
   public multiplyScaledVector(v: Vector, scalar: number): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) *= v[axis] * scalar;
-      }
-    }
-    return this;
+    return this.updateAxesByVector('*=', v, scalar);
   }
 
   public scale(scalar: number): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis)) {
-        (<number>this[axis]) *= scalar;
-      }
-    }
-    return this;
+    return this.updateAxes('*=', scalar);
   }
 
   public divide(v: Vector): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) /= v[axis];
-      }
-    }
-    return this;
+    return this.updateAxesByVector('/=', v, null);
   }
 
   public divideScaledVector(v: Vector, scalar: number): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) /= v[axis] * scalar;
-      }
-    }
-    return this;
+    return this.updateAxesByVector('/=', v, scalar);
   }
 
   public halve(): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis)) {
-        (<number>this[axis]) *= 0.5;
-      }
-    }
-    return this;
+    return this.updateAxes('*=', 0.5);
   }
 
   public max(v: Vector): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) = Math.max( this[axis], v[axis] );
-      }
-    }
-    return this;
+    return this.updateAxesWithMathByVector(v, 'max');
   }
 
   public min(v: Vector): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (<number>this[axis]) = Math.min( this[axis], v[axis] );
-      }
-    }
-    return this;
+    return this.updateAxesWithMathByVector(v, 'min');
   }
 
   public maxScalar(scalar: number): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis)) {
-        (<number>this[axis]) = Math.max( this[axis], scalar );
-      }
-    }
-    return this;
+    return this.updateAxesWithMath(scalar, 'max');
   }
 
   public minScalar(scalar: number): Vector {
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis)) {
-        (<number>this[axis]) = Math.min( this[axis], scalar );
-      }
-    }
-    return this;
+    return this.updateAxesWithMath(scalar, 'min');
   }
 
   public normalize(): Vector {
@@ -245,19 +145,23 @@ export class Vector {
     return this;
   }
 
-  public absolute(): Vector {
+  public absolute(a?: 'x' | 'y' | 'z'): Vector {
     for(const axis in this) {
       if (this.hasOwnProperty(axis)) {
-        (<number>this[axis]) = Math.abs(this[axis]);
+        if (!a || a === axis) {
+          (this[axis] as number) = Math.abs(this[axis]);
+        }
       }
     }
     return this;
   }
 
-  public opposite(): Vector {
+  public opposite(a?: 'x' | 'y' | 'z'): Vector {
     for(const axis in this) {
       if (this.hasOwnProperty(axis)) {
-        (<number>this[axis]) -= this[axis];
+        if (!a || a === axis) {
+          (this[axis] as number) = -this[axis];
+        }
       }
     }
     return this;
@@ -272,6 +176,97 @@ export class Vector {
     }
     return dotProduct;
     // return this.x * v.x + this.y * v.y + this.z * v.z;
+  }
+
+
+
+  protected setFromArray(array: number[]): void {
+    let i = 0;
+    for(const axis in this) {
+      if (this.hasOwnProperty(axis) && array.length > i) {
+        (this[axis] as number) = array[i];
+      }
+      i++;
+    }
+  }
+
+  protected copy(v: Vector): Vector {
+    return this.updateAxesByVector('=', v, null);
+  }
+
+  private compareAxes(operator: CompareOperator, value: number): boolean {
+    for(const axis in this) {
+      if (this.hasOwnProperty(axis)) {
+        if (this[operator](axis, value)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  protected updateAxes(operator: UpdateOperator, scalar: number): Vector {
+    for(const axis in this) {
+      if (this.hasOwnProperty(axis)) {
+        this[operator](axis, scalar);
+      }
+    }
+    return this;
+  }
+
+  private updateAxesByVector(operator: UpdateOperator, vector: Vector, scalar: number | null): Vector {
+    for(const axis in this) {
+      if (this.hasOwnProperty(axis) && vector.hasOwnProperty(axis)) {
+        this[operator](axis, vector[axis] * (scalar ?? 1.0));
+      }
+    }
+    return this;
+  }
+
+  private updateAxesWithMath(scalar: number, operator: 'max' | 'min'): Vector {
+    for(const axis in this) {
+      if (this.hasOwnProperty(axis)) {
+        (this[axis] as number) = Math[operator](this[axis], scalar);
+      }
+    }
+    return this;
+  }
+
+  private updateAxesWithMathByVector(v: Vector, operator: 'max' | 'min'): Vector {
+    for(const axis in this) {
+      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
+        (this[axis] as number) = Math[operator](this[axis], v[axis]);
+      }
+    }
+    return this;
+  }
+
+  private '<='(axis: Extract<keyof this, string>, value: number): boolean {
+    return this[axis] <= value;
+  }
+  
+  private '!=='(axis: Extract<keyof this, string>, value: number): boolean {
+    return this[axis] !== value;
+  }
+  
+  private '='(axis: Extract<keyof this, string>, value: number) {
+    (this[axis] as number) = value;
+  }
+  
+  private '+='(axis: Extract<keyof this, string>, value: number) {
+    (this[axis] as number) += value;
+  }
+  
+  private '-='(axis: Extract<keyof this, string>, value: number) {
+    (this[axis] as number) -= value;
+  }
+  
+  private '*='(axis: Extract<keyof this, string>, value: number) {
+    (this[axis] as number) *= value;
+  }
+  
+  private '/='(axis: Extract<keyof this, string>, value: number) {
+    (this[axis] as number) /= value;
   }
 
 };

@@ -29,16 +29,16 @@
     "gzipped": 4836
   },
   "type6.js": {
-    "bundled": 31863,
-    "minified": 16444,
-    "gzipped": 3840,
+    "bundled": 31154,
+    "minified": 16069,
+    "gzipped": 4042,
     "treeshaked": {
       "rollup": {
-        "code": 2917,
-        "import_statements": 0
+        "code": 2944,
+        "import_statements": 27
       },
       "webpack": {
-        "code": 3868
+        "code": 3928
       }
     }
   },

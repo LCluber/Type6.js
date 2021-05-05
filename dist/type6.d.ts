@@ -39,46 +39,38 @@ export declare class Circle {
     private _radius;
     private _diameter;
     readonly shape: 'circle';
-    constructor(positionX: number, positionY: number, radius: number);
+    constructor(radius: number, positionX: number | number[] | Vector2, positionY?: number);
     set radius(radius: number);
     get radius(): number;
     set diameter(diameter: number);
     get diameter(): number;
     clone(): Circle;
     copy(circle: Circle): Circle;
-    set(positionX: number, positionY: number, radius: number): Circle;
-    setPositionXY(positionX: number, positionY: number): Circle;
-    setPositionFromVector(position: Vector2): Circle;
+    setPosition(positionX: number, positionY?: number): this;
+    setRadius(radius: number): this;
+    setDiameter(diameter: number): this;
     scale(scalar: number): Circle;
     isIn(v: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
 
+
 export declare class Rectangle {
     position: Vector2;
-    topLeftCorner: Vector2;
-    bottomRightCorner: Vector2;
+    topLeftCorner: Vector;
+    bottomRightCorner: Vector;
     size: Vector2;
     halfSize: Vector2;
     readonly shape: 'aabb';
-    constructor(positionX: number, positionY: number, sizeX: number, sizeY: number);
+    constructor(width: number, height: number, positionX: number | number[] | Vector2, positionY?: number);
     clone(): Rectangle;
     copy(rectangle: Rectangle): Rectangle;
-    set(positionX: number, positionY: number, sizeX: number, sizeY: number): Rectangle;
-    setPositionX(x: number): Rectangle;
-    setPositionY(y: number): Rectangle;
-    private setPosition;
-    setPositionXY(positionX: number, positionY: number): Rectangle;
-    setPositionFromVector(position: Vector2): Rectangle;
-    setSizeX(width: number): Rectangle;
-    setSizeY(height: number): Rectangle;
-    private setSize;
-    setSizeXY(width: number, height: number): Rectangle;
-    setSizeFromVector(size: Vector2): Rectangle;
-    private setCorners;
-    private setHalfSize;
+    setPosition(positionX: number | number[] | Vector2, positionY?: number): void;
+    setSize(width: number | number[] | Vector2, height?: number): void;
     isIn(vector: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
+    private setCorners;
+    private setHalfSize;
 }
 
 export declare class Matrix3x3 {
@@ -131,6 +123,21 @@ export declare class Matrix4x4 {
     multiply(matrix4x4: Matrix4x4): Matrix4x4;
     perspective(fovy: number, aspect: number, znear: number, zfar: number): Matrix4x4;
     orthographic(left: number, right: number, top: number, bottom: number, near: number, far: number): Matrix4x4;
+}
+
+export declare class Quaternion {
+    angle: number;
+    vector: Vector3;
+    private vCv1;
+    private vCv2;
+    private v;
+    constructor(angle: number, vector: Vector3);
+    toArray(): number[];
+    toString(): string;
+    copy(q: Quaternion): Quaternion;
+    conjugate(): Quaternion;
+    multiply(q: Quaternion): Quaternion;
+    multiplyVector(vector: Vector3): Vector3;
 }
 export declare class Random {
     static float(min: number, max: number): number;
@@ -188,9 +195,6 @@ export declare class Trigonometry {
 
 
 
-
-export declare type AxisNames2d = 'x' | 'y';
-export declare type AxisNames3d = AxisNames2d & 'z';
 export declare class Utils {
     static round(x: number, decimals: number): number;
     static floor(x: number, decimals: number): number;
@@ -208,15 +212,18 @@ export declare class Utils {
     static isOut(x: number, min: number, max: number): boolean;
 }
 export interface Vector {
+    'x': number;
+    'y': number;
+    'z'?: number;
     [key: string]: any;
 }
+declare type UpdateOperator = '=' | '+=' | '-=' | '*=' | '/=';
 export declare class Vector {
     constructor();
-    isOrigin(): boolean;
     isPositive(): boolean;
+    isEqualTo(scalar: number): boolean;
     toArray(): number[];
     toString(): string;
-    copy(v: Vector): Vector;
     origin(): Vector;
     getMagnitude(square?: boolean): number;
     private getSquaredMagnitude;
@@ -238,36 +245,55 @@ export declare class Vector {
     maxScalar(scalar: number): Vector;
     minScalar(scalar: number): Vector;
     normalize(): Vector;
-    absolute(): Vector;
-    opposite(): Vector;
+    absolute(a?: 'x' | 'y' | 'z'): Vector;
+    opposite(a?: 'x' | 'y' | 'z'): Vector;
     dotProduct(v: Vector): number;
+    protected setFromArray(array: number[]): void;
+    protected copy(v: Vector): Vector;
+    private compareAxes;
+    protected updateAxes(operator: UpdateOperator, scalar: number): Vector;
+    private updateAxesByVector;
+    private updateAxesWithMath;
+    private updateAxesWithMathByVector;
+    private '<=';
+    private '!==';
+    private '=';
+    private '+=';
+    private '-=';
+    private '*=';
+    private '/=';
 }
-
+export {};
 
 
 export declare class Vector2 extends Vector {
     x: number;
     y: number;
-    constructor(x?: number, y?: number);
-    set(x: number, y: number): Vector2;
+    constructor(x?: number | number[] | Vector2, y?: number);
+    set(x?: number | number[] | Vector2, y?: number | null): Vector2;
+    setFromRadian(angle: number): Vector2;
+    setFromDegree(angle: number): Vector2;
+    setMinAxis(scalar: number): Vector2;
+    setMaxAxis(scalar: number): Vector2;
+    setOppositeAxis(axis: 'x' | 'y', value: number): Vector2;
     clone(): Vector2;
-    setFromAngle(angle: number): Vector2;
     getAngle(): number | false;
     quadraticBezier(p0: Vector2, p1: Vector2, p2: Vector2, t: number): Vector2;
     cubicBezier(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: number): Vector2;
-    getMaxAxis(): AxisNames2d;
-    getMinAxis(): AxisNames2d;
-    setOppositeAxis(axis: AxisNames2d, value: number): Vector2;
+    getMaxAxis(): 'x' | 'y';
+    getMinAxis(): 'x' | 'y';
     clamp(rectangle: Rectangle): Vector2;
     lerp(min: Vector2, max: Vector2, amount: number): Vector2;
+    private setAxis;
 }
 
 export declare class Vector3 extends Vector {
     x: number;
     y: number;
     z: number;
-    constructor(x?: number, y?: number, z?: number);
-    set(x: number, y: number, z: number): Vector3;
+    constructor(x?: number | number[] | Vector3, y?: number, z?: number);
+    set(x?: number | number[] | Vector3, y?: number | null, z?: number | null): Vector3;
     clone(): Vector3;
     cross(v: Vector3): Vector3;
+    private setAxis;
 }
