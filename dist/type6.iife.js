@@ -85,7 +85,7 @@ var Type6 = (function (exports) {
     if (typeof Proxy === "function") return true;
 
     try {
-      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
       return true;
     } catch (e) {
       return false;
@@ -136,7 +136,7 @@ var Type6 = (function (exports) {
   }
 
   function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
 
   function _unsupportedIterableToArray(o, minLen) {
@@ -1128,6 +1128,24 @@ var Type6 = (function (exports) {
     }
 
     _createClass(Circle, [{
+      key: "radius",
+      get: function get() {
+        return this._radius;
+      },
+      set: function set(radius) {
+        this._radius = radius;
+        this._diameter = this._radius * 2;
+      }
+    }, {
+      key: "diameter",
+      get: function get() {
+        return this._diameter;
+      },
+      set: function set(diameter) {
+        this._diameter = diameter;
+        this._radius = this._diameter * 0.5;
+      }
+    }, {
       key: "clone",
       value: function clone() {
         return new Circle(this.radius, this.position);
@@ -1184,24 +1202,6 @@ var Type6 = (function (exports) {
           context.lineWidth = strokeWidth;
           context.stroke();
         }
-      }
-    }, {
-      key: "radius",
-      set: function set(radius) {
-        this._radius = radius;
-        this._diameter = this._radius * 2;
-      },
-      get: function get() {
-        return this._radius;
-      }
-    }, {
-      key: "diameter",
-      set: function set(diameter) {
-        this._diameter = diameter;
-        this._radius = this._diameter * 0.5;
-      },
-      get: function get() {
-        return this._diameter;
       }
     }]);
 
@@ -1676,6 +1676,8 @@ var Type6 = (function (exports) {
   exports.Utils = Utils;
   exports.Vector2 = Vector2;
   exports.Vector3 = Vector3;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
 
   return exports;
 
