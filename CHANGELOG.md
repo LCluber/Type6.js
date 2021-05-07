@@ -1,3 +1,7 @@
+Version 3.0.0-beta.1 (May 7th 2021)
+-----------------------------
+ * improved typings for Vector2 and Vector3 use with Typescript
+
 Version 3.0.0-beta.0 (May 5th 2021)
 -----------------------------
  * Vector class:
@@ -7,11 +11,12 @@ Version 3.0.0-beta.0 (May 5th 2021)
     * Constructor now accept numbers, array or Vector2 as parameters
     * set() method now accept numbers, array or Vector2 as parameters 
     * Delete copy() and setFromAngle() methods
-    * Add setFromRadian(), setFromDegree, setMinAxis(), setMaxAxis() methods
+    * Add isEqualTo(), setFromRadian(), setFromDegree, setMinAxis(), setMaxAxis() methods
     * opposite() and absolute() methods now accept an axis name as parameter to set only this axis.
  * Vector3 class:
     * Constructor now accept numbers, array or Vector3 as parameters
     * set() method now accept numbers, array or Vector3 as parameters
+    * Add isEqualTo() method
     * Delete copy() method
  * Circle class:
     * First parameter of set() method and constructor is now Radius.

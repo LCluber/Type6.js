@@ -587,6 +587,11 @@ var Type6 = (function (exports) {
         return this.compareAxes('!==', scalar);
       }
     }, {
+      key: "isOrigin",
+      value: function isOrigin() {
+        return this.compareAxes('!==', 0);
+      }
+    }, {
       key: "toArray",
       value: function toArray() {
         var array = [];

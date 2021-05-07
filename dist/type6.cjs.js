@@ -336,6 +336,9 @@ class Vector {
     isEqualTo(scalar) {
         return this.compareAxes('!==', scalar);
     }
+    isOrigin() {
+        return this.compareAxes('!==', 0);
+    }
     toArray() {
         let array = [];
         for (const axis in this) {

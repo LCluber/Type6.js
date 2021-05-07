@@ -29,9 +29,9 @@
     "gzipped": 4836
   },
   "type6.js": {
-    "bundled": 31154,
-    "minified": 16069,
-    "gzipped": 4042,
+    "bundled": 31220,
+    "minified": 16113,
+    "gzipped": 4047,
     "treeshaked": {
       "rollup": {
         "code": 2944,
