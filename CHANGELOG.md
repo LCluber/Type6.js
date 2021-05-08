@@ -1,6 +1,7 @@
 Version 3.0.0-beta.2 (May 8th 2021)
 -----------------------------
  * improved typings for Vector2 and Vector3 use with Typescript
+ * improved performances
 
 Version 3.0.0-beta.1 (May 7th 2021)
 -----------------------------
@@ -9,8 +10,9 @@ Version 3.0.0-beta.1 (May 7th 2021)
 Version 3.0.0-beta.0 (May 5th 2021)
 -----------------------------
  * Vector class:
-    * Replace isOrigin() method by isEqualTo(scalar) method
+    * Add isEqualTo(scalar) method
     * Fix Vector opposite method
+    * improved performances
  * Vector2 class:
     * Add setFromScalar(), isEqualTo(), setFromRadian(), setFromDegree, setMinAxis(), setMaxAxis() methods
     * Delete set() and setFromAngle() methods
