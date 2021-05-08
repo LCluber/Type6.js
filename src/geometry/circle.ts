@@ -8,7 +8,7 @@ export class Circle {
   private _diameter: number;
   readonly shape: 'circle' = 'circle';
 
-  constructor(radius: number, positionX: number | number[] | Vector2, positionY?: number) {
+  constructor(radius: number, positionX: number, positionY: number) {
     this._radius = 0.0;
     this._diameter = 0.0;
     this.position = new Vector2( positionX, positionY );
@@ -34,17 +34,17 @@ export class Circle {
   }
 
   public clone(): Circle {
-    return new Circle(this.radius, this.position);
+    return new Circle(this.radius, this.position.x, this.position.y);
   }
 
   public copy( circle: Circle ): Circle {
-    this.position.set(circle.position);
+    this.position.copy(circle.position);
     this.radius = circle.radius;
     return this;
   }
 
-  public setPosition( positionX: number | number[] | Vector2, positionY?: number ) {
-    this.position.set(positionX, positionY);
+  public setPosition( positionX: number, positionY: number ) {
+    this.position.setFromScalar(positionX, positionY);
     return this;
   }
 

@@ -11,7 +11,7 @@ export class Rectangle {
   public halfSize : Vector2;
   readonly shape: 'aabb' = 'aabb';
 
-  constructor( width: number, height: number, positionX: number | number[] | Vector2, positionY?: number ) {
+  constructor( width: number, height: number, positionX: number, positionY: number ) {
     this.position = new Vector2(positionX, positionY);
     this.size = new Vector2( width, height );
     this.halfSize = new Vector2();
@@ -22,22 +22,22 @@ export class Rectangle {
   }
 
   public clone(): Rectangle {
-    return new Rectangle(this.size.x, this.size.y, this.position);
+    return new Rectangle(this.size.x, this.size.y, this.position.x, this.position.y);
   }
 
   public copy( rectangle: Rectangle ): Rectangle {
-    this.setSize( rectangle.size );
-    this.setPosition( rectangle.position );
+    this.setSize( rectangle.size.x, rectangle.size.y );
+    this.setPosition( rectangle.position.x, rectangle.position.y );
     return this;
   }
   
-  public setPosition(positionX: number | number[] | Vector2, positionY?: number): void {
-    this.position.set( positionX, positionY );
+  public setPosition(positionX: number, positionY: number): void {
+    this.position.setFromScalar( positionX, positionY );
     this.setCorners();
   }
 
-  public setSize(width: number | number[] | Vector2, height?: number): void {
-    this.size.set(width, height);
+  public setSize(width: number, height: number): void {
+    this.size.setFromScalar(width, height);
     this.setHalfSize();
     this.setCorners();
   }
@@ -69,12 +69,12 @@ export class Rectangle {
   }
 
   private setCorners(): void {
-    this.topLeftCorner.set(this.position).subtract(this.halfSize);
-    this.bottomRightCorner.set(this.position).add(this.halfSize);
+    this.topLeftCorner.copy(this.position).subtract(this.halfSize);
+    this.bottomRightCorner.copy(this.position).add(this.halfSize);
   }
 
   private setHalfSize(): void {
-    this.halfSize.set(this.size).halve();
+    this.halfSize.copy(this.size).halve();
   }
 
   // clampTo:function(rectangle){

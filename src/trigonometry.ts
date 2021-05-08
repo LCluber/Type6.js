@@ -131,11 +131,10 @@ export class Trigonometry {
   static sine( angle: number ): number {//estim sine
     //x - (1/3!)x3 + (1/5!)x5 - (1/7!)x7
     angle = this.normalizeRadian(angle);
-    if( Trigonometry.sineDecimals <= 2 && (angle < 0.28 && angle > -0.28) ) {
+    if( Trigonometry.sineDecimals <= 2 && (angle < 0.28 && angle > -0.28) )
       return angle;
-    }else{
+    else
       return this.taylorSerie(3, Trigonometry.sineLoops[this.sineDecimals], angle, angle, true);
-    }
   }
 
   /**
@@ -146,11 +145,10 @@ export class Trigonometry {
     //1 - (1/2!)x2 + (1/4!)x4 - (1/6!)x6
     angle = this.normalizeRadian(angle);
     var squaredAngle = angle * angle;
-    if( this.cosineDecimals <= 2 && (angle <= 0.5 && angle >= -0.5) ){
+    if( this.cosineDecimals <= 2 && (angle <= 0.5 && angle >= -0.5) )
       return 1 - ( squaredAngle * 0.5 );
-    }else{
+    else
       return this.taylorSerie(2, Trigonometry.cosineLoops[this.cosineDecimals], 1, angle, true);
-    }
   }
 
   /**
@@ -161,20 +159,20 @@ export class Trigonometry {
     let angle = y/x;
     if (x > 0) {
       return this.arctan(angle);
-    }else if (x < 0) {
-      if (y < 0) {
+    } else if (x < 0) {
+      if (y < 0)
         return this.arctan(angle) - this.pi;
-      }else {
+      else
         return this.arctan(angle) + this.pi;
-      }
+
     }else { // x = 0
-      if (y < 0){
+      if (y < 0)
         return - this.halfpi;
-      }else if (y > 0 ){
+      else if (y > 0 )
         return this.halfpi;
-      }else { //y = 0
+      else //y = 0
         return false;
-      }
+      
     }
   }
 
@@ -185,9 +183,9 @@ export class Trigonometry {
   static arctan(angle: number): number {
     //x−x3/3+x5/5−x7/7+ for -1 < x < 1
     let loops = Trigonometry.arctanLoops[this.arctanDecimals];
-    if(angle < 1 && angle > -1) {
+    if(angle < 1 && angle > -1)
       return this.taylorSerie(3, loops, angle, angle, false);
-    }else{
+    else{
       //- arctan (x) = actan (1/x) - pi/2
       if(angle >= 1) {
         angle = 1/angle;

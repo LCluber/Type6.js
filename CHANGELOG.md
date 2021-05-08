@@ -1,3 +1,7 @@
+Version 3.0.0-beta.2 (May 8th 2021)
+-----------------------------
+ * improved typings for Vector2 and Vector3 use with Typescript
+
 Version 3.0.0-beta.1 (May 7th 2021)
 -----------------------------
  * improved typings for Vector2 and Vector3 use with Typescript
@@ -8,16 +12,12 @@ Version 3.0.0-beta.0 (May 5th 2021)
     * Replace isOrigin() method by isEqualTo(scalar) method
     * Fix Vector opposite method
  * Vector2 class:
-    * Constructor now accept numbers, array or Vector2 as parameters
-    * set() method now accept numbers, array or Vector2 as parameters 
-    * Delete copy() and setFromAngle() methods
-    * Add isEqualTo(), setFromRadian(), setFromDegree, setMinAxis(), setMaxAxis() methods
+    * Add setFromScalar(), isEqualTo(), setFromRadian(), setFromDegree, setMinAxis(), setMaxAxis() methods
+    * Delete set() and setFromAngle() methods
     * opposite() and absolute() methods now accept an axis name as parameter to set only this axis.
  * Vector3 class:
-    * Constructor now accept numbers, array or Vector3 as parameters
-    * set() method now accept numbers, array or Vector3 as parameters
-    * Add isEqualTo() method
-    * Delete copy() method
+    * Add setFromScalar() and isEqualTo() method
+    * Delete set() method
  * Circle class:
     * First parameter of set() method and constructor is now Radius.
     * Position parameters of constructor can be given as numbers, array, angle or Vector2

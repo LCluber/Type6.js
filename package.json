@@ -50,7 +50,7 @@
     "dist/"
   ],
   "dependencies": {
-    "@dwtechs/checkhard": "2.16.0"
+
   },
   "devDependencies": {
     "@babel/core": "7.14.0",

@@ -3,29 +3,14 @@ import {Trigonometry} from '../trigonometry';
 import {Bezier} from '../bezier';
 import {Rectangle} from '../geometry/rectangle';
 import {Utils} from '../utils';
-import { isArray, isNumber, isObject } from '@dwtechs/checkhard';
 
 export class Vector2 extends Vector {
   public x: number = 0.0;
   public y: number = 0.0;
 
-  constructor(x?: number | number[] | Vector2, y?: number) {
+  constructor(x?: number, y?: number) {
     super();
-    this.set(x, y);    
-  }
-
-  public set( x?: number | number[] | Vector2, 
-              y?: number | null
-            ): Vector2 {
-    
-    if (isNumber(x) || isNumber(y)) { // set from scalars
-      this.setAxis(x as number | null, y as number | undefined | null);
-    } else if (isArray(x, 2)) { // set from Array
-      this.setFromArray(x as number[]);
-    } else if (isObject(x)) { // set from vector
-      this.copy(x as Vector2);
-    }
-    return this;
+    this.setFromScalar(x, y);    
   }
 
   public setFromRadian(angle: number): Vector2 {
@@ -46,29 +31,29 @@ export class Vector2 extends Vector {
   }
 
   public setMinAxis(scalar: number): Vector2 {
-    if (this.y < this.x) {
+    if (this.y < this.x)
       this.y = scalar;
-    } else {
+    else
       this.x = scalar;
-    }
+    
     return this;
   }
 
   public setMaxAxis(scalar: number): Vector2 {
-    if (this.y > this.x) {
+    if (this.y > this.x)
       this.y = scalar;
-    } else {
+    else
       this.x = scalar;
-    }
+    
     return this;
   }
 
   public setOppositeAxis(axis: 'x' | 'y', value: number): Vector2 {
-    if(axis === 'y' ) {
+    if(axis === 'y' )
       this.x = value;
-    } else {
+    else
       this.y = value;
-    }
+    
     return this;
   }
 
@@ -119,18 +104,6 @@ export class Vector2 extends Vector {
     this.x = Utils.lerp( min.x, max.x, amount );
     this.y = Utils.lerp( min.y, max.y, amount );
     return this;
-  }
-
-  private setAxis(x: number | null, y?: number | null ): void {
-    let i = 0;
-    for(const axis in this) {
-      if (this.hasOwnProperty(axis)) {
-        if (isNumber(arguments[i])) {
-          this[axis] = arguments[i];
-        }
-        i++;
-      }
-    }
   }
 
 };

@@ -77,17 +77,7 @@ module.exports = function(grunt){
 
   grunt.registerTask( 'lib',
                       'build the library in the dist/ folder',
-                      [ //'tslint:lib',
-                        //'clean:lib',
-                        //lib es6
-                        //'ts:es6',
-                        //'rollup:es6',
-                        //lib es5
-                        //'ts:es5',
-                        //'rollup:iife',
-                        // 'uglify:libIife',
-                        //declaration
-                        'concat:declaration',
+                      [ 'concat:declaration',
                         'strip_code:declaration',
                       ]
                     );
@@ -95,14 +85,7 @@ module.exports = function(grunt){
 grunt.registerTask( 'build',
                     'build library and website',
                     function() {
-                      //build lib
                       grunt.task.run('lib');
-                      //build site
-                      // grunt.task.run('website');
-                      //build documentation
-                      // grunt.task.run('doc');
-                      // launch server and watch for changes
-                      // grunt.task.run('serve');
                     }
                   );
 

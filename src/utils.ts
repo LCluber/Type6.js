@@ -19,9 +19,9 @@ export class Utils {
   static trunc(x: number, decimals: number): number {
     decimals = 10 ** decimals;
     let v = + x * decimals;
-    if (!isFinite(v)) {
+    if (!isFinite(v))
      return v;
-    }
+    
     return ((v - v % 1) / decimals) || (v < 0 ? -0 : v === 0 ? v : 0);
     //return Math.trunc( x * decimals ) / decimals;
   }

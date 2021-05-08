@@ -7,6 +7,12 @@
 [Type6.js](http://type6js.lcluber.com) is an open source mathematics library written in TypeScript.
 Vectors, matrices, trigonometry, bezier curves, lerp, random distribution and so on.
 
+- No dependency
+- Very lightweight
+- Thoroughly tested
+- Works in browsers and Node.js
+- Old browsers support (IE9)
+
 ## Motivation
 
 The main purpose of this library is to provide a comprehensive tool for all projects involving mathematics functions.

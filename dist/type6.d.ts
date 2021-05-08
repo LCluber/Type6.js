@@ -39,14 +39,14 @@ export declare class Circle {
     private _radius;
     private _diameter;
     readonly shape: 'circle';
-    constructor(radius: number, positionX: number | number[] | Vector2, positionY?: number);
+    constructor(radius: number, positionX: number, positionY: number);
     set radius(radius: number);
     get radius(): number;
     set diameter(diameter: number);
     get diameter(): number;
     clone(): Circle;
     copy(circle: Circle): Circle;
-    setPosition(positionX: number | number[] | Vector2, positionY?: number): this;
+    setPosition(positionX: number, positionY: number): this;
     setRadius(radius: number): this;
     setDiameter(diameter: number): this;
     scale(scalar: number): Circle;
@@ -62,11 +62,11 @@ export declare class Rectangle {
     size: Vector2;
     halfSize: Vector2;
     readonly shape: 'aabb';
-    constructor(width: number, height: number, positionX: number | number[] | Vector2, positionY?: number);
+    constructor(width: number, height: number, positionX: number, positionY: number);
     clone(): Rectangle;
     copy(rectangle: Rectangle): Rectangle;
-    setPosition(positionX: number | number[] | Vector2, positionY?: number): void;
-    setSize(width: number | number[] | Vector2, height?: number): void;
+    setPosition(positionX: number, positionY: number): void;
+    setSize(width: number, height: number): void;
     isIn(vector: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
     private setCorners;
@@ -132,7 +132,6 @@ export declare class Quaternion {
     private vCv2;
     private v;
     constructor(angle: number, vector: Vector3);
-    toArray(): number[];
     toString(): string;
     copy(q: Quaternion): Quaternion;
     conjugate(): Quaternion;
@@ -217,9 +216,11 @@ export interface Vector {
     'z'?: number;
     [key: string]: any;
 }
-declare type UpdateOperator = '=' | '+=' | '-=' | '*=' | '/=';
 export declare class Vector {
     constructor();
+    setFromScalar(x?: number | null, y?: number | null, z?: number | null): any;
+    setFromArray(array: number[]): any;
+    copy(vector: Vector): any;
     isPositive(): boolean;
     isEqualTo(scalar: number): boolean;
     isOrigin(): boolean;
@@ -240,38 +241,23 @@ export declare class Vector {
     scale(scalar: number): any;
     divide(vector: any): any;
     divideScaledVector(vector: any, scalar: number): any;
+    divideByScalar(scalar: number): any;
     halve(): any;
     max(vector: any): any;
     min(vector: any): any;
     maxScalar(scalar: number): any;
     minScalar(scalar: number): any;
     normalize(): any;
-    absolute(a?: 'x' | 'y' | 'z'): any;
-    opposite(a?: 'x' | 'y' | 'z'): any;
+    absolute(axis?: 'x' | 'y' | 'z'): any;
+    opposite(axis?: 'x' | 'y' | 'z'): any;
     dotProduct(vector: any): number;
-    protected setFromArray(array: number[]): void;
-    protected copy(vector: Vector): void;
-    private compareAxes;
-    protected updateAxes(operator: UpdateOperator, scalar: number): Vector;
-    private updateAxesByVector;
-    private updateAxesWithMath;
-    private updateAxesWithMathByVector;
-    private '<=';
-    private '!==';
-    private '=';
-    private '+=';
-    private '-=';
-    private '*=';
-    private '/=';
 }
-export {};
 
 
 export declare class Vector2 extends Vector {
     x: number;
     y: number;
-    constructor(x?: number | number[] | Vector2, y?: number);
-    set(x?: number | number[] | Vector2, y?: number | null): Vector2;
+    constructor(x?: number, y?: number);
     setFromRadian(angle: number): Vector2;
     setFromDegree(angle: number): Vector2;
     setMinAxis(scalar: number): Vector2;
@@ -285,16 +271,13 @@ export declare class Vector2 extends Vector {
     getMinAxis(): 'x' | 'y';
     clamp(rectangle: Rectangle): Vector2;
     lerp(min: Vector2, max: Vector2, amount: number): Vector2;
-    private setAxis;
 }
 
 export declare class Vector3 extends Vector {
     x: number;
     y: number;
     z: number;
-    constructor(x?: number | number[] | Vector3, y?: number, z?: number);
-    set(x?: number | number[] | Vector3, y?: number | null, z?: number | null): Vector3;
+    constructor(x?: number, y?: number, z?: number);
     clone(): Vector3;
     cross(v: Vector3): Vector3;
-    private setAxis;
 }

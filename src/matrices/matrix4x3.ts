@@ -156,9 +156,9 @@ export class Matrix4x3 {
 
   public lookAtRH(eye: Vector3, target: Vector3, up: Vector3): Matrix4x3 {
 
-    this.zAxis.set(eye).subtract(target).normalize(); // The "forward" vector.
-    this.xAxis.set(up).cross(this.zAxis).normalize(); // The "right" vector.
-    this.yAxis.set(this.zAxis).cross(this.xAxis);// The "up" vector.
+    this.zAxis.copy(eye).subtract(target).normalize(); // The "forward" vector.
+    this.xAxis.copy(up).cross(this.zAxis).normalize(); // The "right" vector.
+    this.yAxis.copy(this.zAxis).cross(this.xAxis);// The "up" vector.
 
     // Create a view matrix from the right, up, forward and eye position vectors
     this.make( this.xAxis.x, this.yAxis.x, this.zAxis.x,
