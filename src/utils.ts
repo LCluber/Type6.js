@@ -2,22 +2,22 @@
 export class Utils {
 
   static round(x: number, decimals: number): number {
-    decimals = Math.pow( 10, decimals );
+    decimals = 10 ** decimals;
     return Math.round( x * decimals ) / decimals;
   }
 
   static floor(x: number, decimals: number): number {
-    decimals = Math.pow( 10, decimals );
+    decimals = 10 ** decimals;
     return Math.floor( x * decimals ) / decimals;
   }
 
   static ceil(x: number, decimals: number): number {
-    decimals = Math.pow( 10, decimals );
+    decimals = 10 ** decimals;
     return Math.ceil( x * decimals ) / decimals;
   }
 
   static trunc(x: number, decimals: number): number {
-    decimals = Math.pow(10,decimals);
+    decimals = 10 ** decimals;
     let v = + x * decimals;
     if (!isFinite(v)) {
      return v;

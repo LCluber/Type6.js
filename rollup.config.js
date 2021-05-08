@@ -1,7 +1,7 @@
 import resolve from "@rollup/plugin-node-resolve";
 import babel from "@rollup/plugin-babel";
 
-module.exports = {
+export default {
   input: "build/es6/type6.js",
   output: {
     name: "Type6",

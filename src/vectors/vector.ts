@@ -1,5 +1,3 @@
-// import { Vector2 } from './vector2';
-// import { Vector3 } from './vector3';
 
 export interface Vector {
   'x': number;
@@ -8,7 +6,6 @@ export interface Vector {
   [key: string]: any;
 }
 
-// type Axis = 'x' | 'y' | 'z';
 type CompareOperator = '<=' | '!==';
 type UpdateOperator  = '=' | '+=' | '-=' | '*=' | '/=';
 
@@ -199,8 +196,8 @@ export class Vector {
     }
   }
 
-  protected copy(vector: Vector): Vector {
-    return this.updateAxesByVector('=', vector, null);
+  protected copy(vector: Vector): void {
+    this.updateAxesByVector('=', vector, null);
   }
 
   private compareAxes(operator: CompareOperator, value: number): boolean {
@@ -224,9 +221,10 @@ export class Vector {
   }
 
   private updateAxesByVector(operator: UpdateOperator, vector: Vector, scalar: number | null): Vector {
+    scalar = scalar ?? 1.0;
     for(const axis in this) {
       if (this.hasOwnProperty(axis) && vector.hasOwnProperty(axis)) {
-        this[operator](axis, vector[axis] * (scalar ?? 1.0));
+        this[operator](axis, vector[axis] * scalar);
       }
     }
     return this;
