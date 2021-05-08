@@ -1,5 +1,5 @@
-import { Vector2 } from './vector2';
-import { Vector3 } from './vector3';
+// import { Vector2 } from './vector2';
+// import { Vector3 } from './vector3';
 
 export interface Vector {
   'x': number;
@@ -22,12 +22,12 @@ export class Vector {
     return this.compareAxes('<=', 0);
   }
 
-  //true if vector2 is equal to (scalar;scalar)
+  //true if vector is equal to (scalar;scalar)
   public isEqualTo(scalar: number): boolean {
     return this.compareAxes('!==', scalar);
   }
 
-  //true if vector2 is equal to (0;0)
+  //true if vector is equal to (0;0)
   public isOrigin(): boolean {
     return this.compareAxes('!==', 0);
   }
@@ -53,7 +53,7 @@ export class Vector {
     // '(x = ' + this.x + '; y = ' + this.y + '; z = ' + this.z + ')';
   }
 
-  public origin(): Vector2 | Vector3 {
+  public origin(): any {
     return this.updateAxes('=', 0.0);
   }
 
@@ -72,87 +72,87 @@ export class Vector {
     return squaredMagnitude;
   }
 
-  public getDistance(v: Vector2 | Vector3, square: boolean = false): number {
-    this.subtract(v);
+  public getDistance(vector: any, square: boolean = false): number {
+    this.subtract(vector);
     const magnitude = this.getMagnitude(square);
-    this.add(v);
+    this.add(vector);
     return magnitude;
   }
 
-  public add(v: Vector2 | Vector3): Vector2 | Vector3 {
-    return this.updateAxesByVector('+=', v, null);
+  public add(vector: any): any {
+    return this.updateAxesByVector('+=', vector, null);
   }
 
-  public addScaledVector(v: Vector2 | Vector3, scalar: number): Vector2 | Vector3 {
-    return this.updateAxesByVector('+=', v, scalar);
+  public addScaledVector(vector: any, scalar: number): any {
+    return this.updateAxesByVector('+=', vector, scalar);
   }
 
-  public addScalar(scalar: number): Vector2 | Vector3 {
+  public addScalar(scalar: number): any {
     return this.updateAxes('+=', scalar);
   }
 
-  public subtract(v: Vector2 | Vector3): Vector2 | Vector3 {
-    return this.updateAxesByVector('-=', v, null);
+  public subtract(vector: any): any {
+    return this.updateAxesByVector('-=', vector, null);
   }
 
-  public subtractScaledVector(v: Vector2 | Vector3, scalar: number): Vector2 | Vector3 {
-    return this.updateAxesByVector('-=', v, scalar);
+  public subtractScaledVector(vector: any, scalar: number): any {
+    return this.updateAxesByVector('-=', vector, scalar);
   }
 
-  public subtractScalar(scalar: number): Vector2 | Vector3 {
+  public subtractScalar(scalar: number): any {
     return this.updateAxes('-=', scalar);
   }
 
   //component product
-  public multiply(v: Vector2 | Vector3): Vector2 | Vector3 {
-    return this.updateAxesByVector('*=', v, null);
+  public multiply(vector: any): any {
+    return this.updateAxesByVector('*=', vector, null);
   }
 
-  public multiplyScaledVector(v: Vector2 | Vector3, scalar: number): Vector2 | Vector3 {
-    return this.updateAxesByVector('*=', v, scalar);
+  public multiplyScaledVector(vector: any, scalar: number): any {
+    return this.updateAxesByVector('*=', vector, scalar);
   }
 
-  public scale(scalar: number): Vector2 | Vector3 {
+  public scale(scalar: number): any {
     return this.updateAxes('*=', scalar);
   }
 
-  public divide(v: Vector2 | Vector3): Vector2 | Vector3 {
-    return this.updateAxesByVector('/=', v, null);
+  public divide(vector: any): any {
+    return this.updateAxesByVector('/=', vector, null);
   }
 
-  public divideScaledVector(v: Vector2 | Vector3, scalar: number): Vector2 | Vector3 {
-    return this.updateAxesByVector('/=', v, scalar);
+  public divideScaledVector(vector: any, scalar: number): any {
+    return this.updateAxesByVector('/=', vector, scalar);
   }
 
-  public halve(): Vector2 | Vector3 {
+  public halve(): any {
     return this.updateAxes('*=', 0.5);
   }
 
-  public max(v: Vector2 | Vector3): Vector2 | Vector3 {
-    return this.updateAxesWithMathByVector(v, 'max');
+  public max(vector: any): any {
+    return this.updateAxesWithMathByVector(vector, 'max');
   }
 
-  public min(v: Vector2 | Vector3): Vector2 | Vector3 {
-    return this.updateAxesWithMathByVector(v, 'min');
+  public min(vector: any): any {
+    return this.updateAxesWithMathByVector(vector, 'min');
   }
 
-  public maxScalar(scalar: number): Vector2 | Vector3 {
+  public maxScalar(scalar: number): any {
     return this.updateAxesWithMath(scalar, 'max');
   }
 
-  public minScalar(scalar: number): Vector2 | Vector3 {
+  public minScalar(scalar: number): any {
     return this.updateAxesWithMath(scalar, 'min');
   }
 
-  public normalize(): Vector2 | Vector3 {
+  public normalize(): any {
     let length = this.getMagnitude();
     if( length && length != 1) {
       this.scale(1/length);
     }
-    return this as unknown as Vector2 | Vector3;
+    return this
   }
 
-  public absolute(a?: 'x' | 'y' | 'z'): Vector2 | Vector3 {
+  public absolute(a?: 'x' | 'y' | 'z'): any {
     for(const axis in this) {
       if (this.hasOwnProperty(axis)) {
         if (!a || a === axis) {
@@ -160,10 +160,10 @@ export class Vector {
         }
       }
     }
-    return this as unknown as Vector2 | Vector3;
+    return this
   }
 
-  public opposite(a?: 'x' | 'y' | 'z'): Vector2 | Vector3 {
+  public opposite(a?: 'x' | 'y' | 'z'): any {
     for(const axis in this) {
       if (this.hasOwnProperty(axis)) {
         if (!a || a === axis) {
@@ -171,20 +171,22 @@ export class Vector {
         }
       }
     }
-    return this as unknown as Vector2 | Vector3;
+    return this
   }
 
-  public dotProduct(v: Vector2 | Vector3): number { //scalar product
+  public dotProduct(vector: any): number { //scalar product
     let dotProduct = 0;
     for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        dotProduct += this[axis] * v[axis];
+      if (this.hasOwnProperty(axis) && vector.hasOwnProperty(axis)) {
+        dotProduct += this[axis] * vector[axis];
       }
     }
     return dotProduct;
     // return this.x * v.x + this.y * v.y + this.z * v.z;
   }
 
+
+  // utils methods
 
 
   protected setFromArray(array: number[]): void {
@@ -197,8 +199,8 @@ export class Vector {
     }
   }
 
-  protected copy(v: Vector2 | Vector3): Vector2 | Vector3 {
-    return this.updateAxesByVector('=', v, null);
+  protected copy(vector: Vector): Vector {
+    return this.updateAxesByVector('=', vector, null);
   }
 
   private compareAxes(operator: CompareOperator, value: number): boolean {
@@ -212,40 +214,40 @@ export class Vector {
     return true;
   }
 
-  protected updateAxes(operator: UpdateOperator, scalar: number): Vector2 | Vector3 {
+  protected updateAxes(operator: UpdateOperator, scalar: number): Vector {
     for(const axis in this) {
       if (this.hasOwnProperty(axis)) {
         this[operator](axis, scalar);
       }
     }
-    return this as unknown as Vector2 | Vector3;
+    return this;
   }
 
-  private updateAxesByVector(operator: UpdateOperator, vector: Vector2 | Vector3, scalar: number | null): Vector2 | Vector3 {
+  private updateAxesByVector(operator: UpdateOperator, vector: Vector, scalar: number | null): Vector {
     for(const axis in this) {
       if (this.hasOwnProperty(axis) && vector.hasOwnProperty(axis)) {
         this[operator](axis, vector[axis] * (scalar ?? 1.0));
       }
     }
-    return this as unknown as Vector2 | Vector3;
+    return this;
   }
 
-  private updateAxesWithMath(scalar: number, operator: 'max' | 'min'): Vector2 | Vector3 {
+  private updateAxesWithMath(scalar: number, operator: 'max' | 'min'): Vector {
     for(const axis in this) {
       if (this.hasOwnProperty(axis)) {
         (this[axis] as number) = Math[operator](this[axis], scalar);
       }
     }
-    return this as unknown as Vector2 | Vector3;
+    return this;
   }
 
-  private updateAxesWithMathByVector(v: Vector2 | Vector3, operator: 'max' | 'min'): Vector2 | Vector3 {
+  private updateAxesWithMathByVector(vector: Vector, operator: 'max' | 'min'): Vector {
     for(const axis in this) {
-      if (this.hasOwnProperty(axis) && v.hasOwnProperty(axis)) {
-        (this[axis] as number) = Math[operator](this[axis], v[axis]);
+      if (this.hasOwnProperty(axis) && vector.hasOwnProperty(axis)) {
+        (this[axis] as number) = Math[operator](this[axis], vector[axis]);
       }
     }
-    return this as unknown as Vector2 | Vector3;
+    return this;
   }
 
   private '<='(axis: Extract<keyof this, string>, value: number): boolean {

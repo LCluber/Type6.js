@@ -43,7 +43,7 @@ export class Circle {
     return this;
   }
 
-  public setPosition( positionX: number, positionY?: number ) {
+  public setPosition( positionX: number | number[] | Vector2, positionY?: number ) {
     this.position.set(positionX, positionY);
     return this;
   }
