@@ -12,7 +12,7 @@ export class Vector {
 
   }
 
-  public setFromScalar(x? : number | null, y?: number | null, z?: number | null): any {
+  public setScalar(x? : number | null, y?: number | null, z?: number | null): any {
     this.x = x ?? this.x;
     this.y = y ?? this.y;
     if (this.hasOwnProperty('z'))
@@ -21,11 +21,14 @@ export class Vector {
     return this;
   }
 
-  public setFromArray(array: number[]): any {
-    this.x = array[0] ?? this.x;
-    this.y = array[1] ?? this.y;
+  public setArray(array: number[], offset?: number): any {
+    if ( offset === undefined ){
+      offset = 0;
+    }
+    this.x = array[ offset ] ?? this.x;
+    this.y = array[ offset + 1 ] ?? this.y;
     if (this.hasOwnProperty('z'))
-      this.z = array[2] ?? this.z;
+      this.z = array[offset + 2] ?? this.z;
 
     return this;
   }
@@ -197,7 +200,7 @@ export class Vector {
     return this;
   }
 
-  public divideByScalar(scalar: number): any {
+  public divideScalar(scalar: number): any {
     this.x /= scalar;
     this.y /= scalar;
     if (this.hasOwnProperty('z'))

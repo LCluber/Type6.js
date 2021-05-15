@@ -218,8 +218,8 @@ export interface Vector {
 }
 export declare class Vector {
     constructor();
-    setFromScalar(x?: number | null, y?: number | null, z?: number | null): any;
-    setFromArray(array: number[]): any;
+    setScalar(x?: number | null, y?: number | null, z?: number | null): any;
+    setArray(array: number[], offset?: number): any;
     copy(vector: Vector): any;
     isPositive(): boolean;
     isEqualTo(scalar: number): boolean;
@@ -241,7 +241,7 @@ export declare class Vector {
     scale(scalar: number): any;
     divide(vector: any): any;
     divideScaledVector(vector: any, scalar: number): any;
-    divideByScalar(scalar: number): any;
+    divideScalar(scalar: number): any;
     halve(): any;
     max(vector: any): any;
     min(vector: any): any;
@@ -258,8 +258,8 @@ export declare class Vector2 extends Vector {
     x: number;
     y: number;
     constructor(x?: number, y?: number);
-    setFromRadian(angle: number): Vector2;
-    setFromDegree(angle: number): Vector2;
+    setRadian(angle: number): Vector2;
+    setDegree(angle: number): Vector2;
     setMinAxis(scalar: number): Vector2;
     setMaxAxis(scalar: number): Vector2;
     setOppositeAxis(axis: 'x' | 'y', value: number): Vector2;

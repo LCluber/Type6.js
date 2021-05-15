@@ -10,10 +10,10 @@ export class Vector2 extends Vector {
 
   constructor(x?: number, y?: number) {
     super();
-    this.setFromScalar(x, y);    
+    this.setScalar(x, y);    
   }
 
-  public setFromRadian(angle: number): Vector2 {
+  public setRadian(angle: number): Vector2 {
     if (angle) {
       let length = this.getMagnitude();
       this.x = Trigonometry.cosine( angle ) * length;
@@ -22,10 +22,10 @@ export class Vector2 extends Vector {
     return this;
   }
 
-  public setFromDegree(angle: number): Vector2 {
+  public setDegree(angle: number): Vector2 {
     if (angle) {
       angle = Trigonometry.degreeToRadian(angle);
-      this.setFromRadian(angle);
+      this.setRadian(angle);
     }
     return this;
   }

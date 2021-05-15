@@ -1,3 +1,8 @@
+Version 3.0.0-beta.3 (May 13th 2021)
+-----------------------------
+ * setFromScalar(), setFromArray(), setFromRadian() and setFromDegree() methods from Vector2 class becomes setScalar(), setArray(), setRadian() and setDegree()
+ * setFromScalar(), setFromArray() methods from Vector3 class becomes setScalar(), setArray()
+
 Version 3.0.0-beta.2 (May 8th 2021)
 -----------------------------
  * improved typings for Vector2 and Vector3 use with Typescript
@@ -14,7 +19,7 @@ Version 3.0.0-beta.0 (May 5th 2021)
     * Fix Vector opposite method
     * improved performances
  * Vector2 class:
-    * Add setFromScalar(), isEqualTo(), setFromRadian(), setFromDegree, setMinAxis(), setMaxAxis() methods
+    * Add setFromScalar(), isEqualTo(), setFromRadian(), setFromDegree(), setMinAxis(), setMaxAxis() methods
     * Delete set() and setFromAngle() methods
     * opposite() and absolute() methods now accept an axis name as parameter to set only this axis.
  * Vector3 class:
@@ -47,7 +52,7 @@ Version 2.1.1 (August 30th 2020)
 Version 2.1.0 (Augulst 29th 2020)
 -----------------------------
  * Vector2 and Vector3 classes: 
-    * delete setFromArray() method in 
+    * delete setFromArray() method
 
 Version 2.0.1 (May 13th 2020)
 -----------------------------

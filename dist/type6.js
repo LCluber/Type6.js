@@ -315,19 +315,22 @@ class Bezier {
 class Vector {
     constructor() {
     }
-    setFromScalar(x, y, z) {
+    setScalar(x, y, z) {
         this.x = x !== null && x !== void 0 ? x : this.x;
         this.y = y !== null && y !== void 0 ? y : this.y;
         if (this.hasOwnProperty('z'))
             this.z = z !== null && z !== void 0 ? z : this.z;
         return this;
     }
-    setFromArray(array) {
+    setArray(array, offset) {
         var _a, _b, _c;
-        this.x = (_a = array[0]) !== null && _a !== void 0 ? _a : this.x;
-        this.y = (_b = array[1]) !== null && _b !== void 0 ? _b : this.y;
+        if (offset === undefined) {
+            offset = 0;
+        }
+        this.x = (_a = array[offset]) !== null && _a !== void 0 ? _a : this.x;
+        this.y = (_b = array[offset + 1]) !== null && _b !== void 0 ? _b : this.y;
         if (this.hasOwnProperty('z'))
-            this.z = (_c = array[2]) !== null && _c !== void 0 ? _c : this.z;
+            this.z = (_c = array[offset + 2]) !== null && _c !== void 0 ? _c : this.z;
         return this;
     }
     copy(vector) {
@@ -458,7 +461,7 @@ class Vector {
             this.z /= vector.z * scalar;
         return this;
     }
-    divideByScalar(scalar) {
+    divideScalar(scalar) {
         this.x /= scalar;
         this.y /= scalar;
         if (this.hasOwnProperty('z'))
@@ -534,9 +537,9 @@ class Vector2 extends Vector {
         super();
         this.x = 0.0;
         this.y = 0.0;
-        this.setFromScalar(x, y);
+        this.setScalar(x, y);
     }
-    setFromRadian(angle) {
+    setRadian(angle) {
         if (angle) {
             let length = this.getMagnitude();
             this.x = Trigonometry.cosine(angle) * length;
@@ -544,10 +547,10 @@ class Vector2 extends Vector {
         }
         return this;
     }
-    setFromDegree(angle) {
+    setDegree(angle) {
         if (angle) {
             angle = Trigonometry.degreeToRadian(angle);
-            this.setFromRadian(angle);
+            this.setRadian(angle);
         }
         return this;
     }
