@@ -960,7 +960,7 @@ var Type6 = (function (exports) {
     }, {
       key: "setPosition",
       value: function setPosition(positionX, positionY) {
-        this.position.setFromScalar(positionX, positionY);
+        this.position.setScalar(positionX, positionY);
         return this;
       }
     }, {
@@ -1037,13 +1037,13 @@ var Type6 = (function (exports) {
     }, {
       key: "setPosition",
       value: function setPosition(positionX, positionY) {
-        this.position.setFromScalar(positionX, positionY);
+        this.position.setScalar(positionX, positionY);
         this.setCorners();
       }
     }, {
       key: "setSize",
       value: function setSize(width, height) {
-        this.size.setFromScalar(width, height);
+        this.size.setScalar(width, height);
         this.setHalfSize();
         this.setCorners();
       }
@@ -1100,7 +1100,7 @@ var Type6 = (function (exports) {
       _this.y = 0.0;
       _this.z = 0.0;
 
-      _this.setFromScalar(x, y, z);
+      _this.setScalar(x, y, z);
 
       return _this;
     }

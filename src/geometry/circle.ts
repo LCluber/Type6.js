@@ -44,7 +44,7 @@ export class Circle {
   }
 
   public setPosition( positionX: number, positionY: number ) {
-    this.position.setFromScalar(positionX, positionY);
+    this.position.setScalar(positionX, positionY);
     return this;
   }
 

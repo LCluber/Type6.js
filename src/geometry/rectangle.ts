@@ -32,12 +32,12 @@ export class Rectangle {
   }
   
   public setPosition(positionX: number, positionY: number): void {
-    this.position.setFromScalar( positionX, positionY );
+    this.position.setScalar( positionX, positionY );
     this.setCorners();
   }
 
   public setSize(width: number, height: number): void {
-    this.size.setFromScalar(width, height);
+    this.size.setScalar(width, height);
     this.setHalfSize();
     this.setCorners();
   }

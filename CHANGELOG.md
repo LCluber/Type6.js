@@ -1,4 +1,8 @@
-Version 3.0.0-beta.3 (May 15th 2021)
+Version 3.0.0-beta.4 (May 15th 2021)
+-----------------------------
+ * fix Rectangle and Circle classes 
+
+Version 3.0.0-beta.3 (May 14th 2021)
 -----------------------------
  * setFromScalar(), setFromArray(), setFromRadian() and setFromDegree() methods from Vector2 class becomes setScalar(), setArray(), setRadian() and setDegree()
  * setFromScalar(), setFromArray() methods from Vector3 class becomes setScalar(), setArray()

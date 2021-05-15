@@ -7,7 +7,7 @@ export class Vector3 extends Vector {
 
   constructor(x?: number, y?: number, z?: number) {
     super();
-    this.setFromScalar(x, y, z);
+    this.setScalar(x, y, z);
   }
 
   public clone(): Vector3 {

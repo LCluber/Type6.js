@@ -644,7 +644,7 @@ class Circle {
         return this;
     }
     setPosition(positionX, positionY) {
-        this.position.setFromScalar(positionX, positionY);
+        this.position.setScalar(positionX, positionY);
         return this;
     }
     setRadius(radius) {
@@ -697,11 +697,11 @@ class Rectangle {
         return this;
     }
     setPosition(positionX, positionY) {
-        this.position.setFromScalar(positionX, positionY);
+        this.position.setScalar(positionX, positionY);
         this.setCorners();
     }
     setSize(width, height) {
-        this.size.setFromScalar(width, height);
+        this.size.setScalar(width, height);
         this.setHalfSize();
         this.setCorners();
     }
@@ -737,7 +737,7 @@ class Vector3 extends Vector {
         this.x = 0.0;
         this.y = 0.0;
         this.z = 0.0;
-        this.setFromScalar(x, y, z);
+        this.setScalar(x, y, z);
     }
     clone() {
         return new Vector3(this.x, this.y, this.z);
