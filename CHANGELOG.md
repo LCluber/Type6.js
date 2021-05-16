@@ -1,34 +1,15 @@
-Version 3.0.0-beta.4 (May 15th 2021)
------------------------------
- * fix Rectangle and Circle classes 
-
-Version 3.0.0-beta.3 (May 14th 2021)
------------------------------
- * setFromScalar(), setFromArray(), setFromRadian() and setFromDegree() methods from Vector2 class becomes setScalar(), setArray(), setRadian() and setDegree()
- * setFromScalar(), setFromArray() methods from Vector3 class becomes setScalar(), setArray()
-
-Version 3.0.0-beta.2 (May 8th 2021)
------------------------------
- * improved typings for Vector2 and Vector3 use with Typescript
- * improved performances
-
-Version 3.0.0-beta.1 (May 7th 2021)
------------------------------
- * improved typings for Vector2 and Vector3 use with Typescript
-
-Version 3.0.0-beta.0 (May 5th 2021)
+Version 3.0.0 (May 17th 2021)
 -----------------------------
  * Vector class:
-    * Add isEqualTo(scalar) method
     * Fix Vector opposite method
     * improved performances
  * Vector2 class:
-    * Add setFromScalar(), isEqualTo(), setFromRadian(), setFromDegree(), setMinAxis(), setMaxAxis() methods
-    * Delete set() and setFromAngle() methods
+    * Add setScalar(), setArray(), isEqualTo(), setRadian(), setDegree(), setMinAxis(), setMaxAxis() methods
+    * Delete set(), clone(), setFromArray() and setFromAngle() methods
     * opposite() and absolute() methods now accept an axis name as parameter to set only this axis.
  * Vector3 class:
-    * Add setFromScalar() and isEqualTo() method
-    * Delete set() method
+    * Add setScalar(), setArray() and isEqualTo() method
+    * Delete set(), setFromArray() and clone() methods
  * Circle class:
     * First parameter of set() method and constructor is now Radius.
     * Position parameters of constructor can be given as numbers, array, angle or Vector2
