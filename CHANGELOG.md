@@ -1,4 +1,4 @@
-Version 3.0.0 (May 17th 2021)
+Version 3.0.0 (May 18th 2021)
 -----------------------------
  * Vector class:
     * Fix Vector opposite method
@@ -12,14 +12,10 @@ Version 3.0.0 (May 17th 2021)
     * Delete set(), setFromArray() and clone() methods
  * Circle class:
     * First parameter of set() method and constructor is now Radius.
-    * Position parameters of constructor can be given as numbers, array, angle or Vector2
     * Delete set(), setPositionXY() and setPositionFromVector() methods 
     * Add setPosition(), setRadius() and setDiameter() methods
  * Rectangle class:
     * First parameters of constructor are now width and height.
-    * Position parameters constructor can be given as numbers, array, angle or Vector2
-    * setPosition() method now accept numbers, array, angle or Vector2
-    * setSize() method now accept numbers, array, angle or Vector2
     * delete setPositionXY(), setPositionX(), setPositionFromVector() and setPositionY() methods
     * delete set(), setSizeXY(), setSizeX(), setSizeFromVector() and setSizeY() methods
 
