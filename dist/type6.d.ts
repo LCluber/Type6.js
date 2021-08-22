@@ -124,20 +124,6 @@ export declare class Matrix4x4 {
     perspective(fovy: number, aspect: number, znear: number, zfar: number): Matrix4x4;
     orthographic(left: number, right: number, top: number, bottom: number, near: number, far: number): Matrix4x4;
 }
-
-export declare class Quaternion {
-    angle: number;
-    vector: Vector3;
-    private vCv1;
-    private vCv2;
-    private v;
-    constructor(angle: number, vector: Vector3);
-    toString(): string;
-    copy(q: Quaternion): Quaternion;
-    conjugate(): Quaternion;
-    multiply(q: Quaternion): Quaternion;
-    multiplyVector(vector: Vector3): Vector3;
-}
 export declare class Random {
     static float(min: number, max: number): number;
     static integer(min: number, max: number): number;
@@ -194,6 +180,7 @@ export declare class Trigonometry {
 
 
 
+
 export declare class Utils {
     static round(x: number, decimals: number): number;
     static floor(x: number, decimals: number): number;
@@ -210,15 +197,28 @@ export declare class Utils {
     static isIn(x: number, min: number, max: number): boolean;
     static isOut(x: number, min: number, max: number): boolean;
 }
+
+
+export declare class Quaternion extends Vector {
+    x: number;
+    y: number;
+    z: number;
+    w: number;
+    constructor(x?: number, y?: number, z?: number, w?: number);
+    conjugate(): Quaternion;
+    multiply(q: Quaternion): Quaternion;
+    multiplyByVector(v: Vector3): Vector3;
+}
 export interface Vector {
     'x': number;
     'y': number;
     'z'?: number;
+    'w'?: number;
     [key: string]: any;
 }
 export declare class Vector {
     constructor();
-    setScalar(x?: number | null, y?: number | null, z?: number | null): any;
+    setScalar(x?: number | null, y?: number | null, z?: number | null, w?: number | null): any;
     setArray(array: number[], offset?: number): any;
     copy(vector: Vector): any;
     isPositive(): boolean;
@@ -248,8 +248,8 @@ export declare class Vector {
     maxScalar(scalar: number): any;
     minScalar(scalar: number): any;
     normalize(): any;
-    absolute(axis?: 'x' | 'y' | 'z'): any;
-    opposite(axis?: 'x' | 'y' | 'z'): any;
+    absolute(axis?: 'x' | 'y' | 'z' | 'w'): any;
+    opposite(axis?: 'x' | 'y' | 'z' | 'w'): any;
     dotProduct(vector: any): number;
 }
 

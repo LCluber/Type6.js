@@ -29,7 +29,7 @@ test("vector1 isOrigin = true", () => {
 });
 
 test("vector1 to be (1,1)", () => {
-  vector1.set(1.0,1.0);
+  vector1.setScalar(1.0,1.0);
   expect(vector1.x).toBe(1.0);
   expect(vector1.y).toBe(1.0);
 });

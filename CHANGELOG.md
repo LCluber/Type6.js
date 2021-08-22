@@ -1,3 +1,7 @@
+Version 3.1.0 (Aug 23th 2021)
+-----------------------------
+ * Add quaternion class
+
 Version 3.0.0 (May 18th 2021)
 -----------------------------
  * Vector class:

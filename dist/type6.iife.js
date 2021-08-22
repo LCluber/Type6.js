@@ -551,16 +551,17 @@ var Type6 = (function (exports) {
 
     _createClass(Vector, [{
       key: "setScalar",
-      value: function setScalar(x, y, z) {
+      value: function setScalar(x, y, z, w) {
         this.x = x !== null && x !== void 0 ? x : this.x;
         this.y = y !== null && y !== void 0 ? y : this.y;
         if (this.hasOwnProperty('z')) this.z = z !== null && z !== void 0 ? z : this.z;
+        if (this.hasOwnProperty('w')) this.w = w !== null && w !== void 0 ? w : this.w;
         return this;
       }
     }, {
       key: "setArray",
       value: function setArray(array, offset) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
 
         if (offset === undefined) {
           offset = 0;
@@ -569,32 +570,34 @@ var Type6 = (function (exports) {
         this.x = (_a = array[offset]) !== null && _a !== void 0 ? _a : this.x;
         this.y = (_b = array[offset + 1]) !== null && _b !== void 0 ? _b : this.y;
         if (this.hasOwnProperty('z')) this.z = (_c = array[offset + 2]) !== null && _c !== void 0 ? _c : this.z;
+        if (this.hasOwnProperty('w')) this.w = (_d = array[offset + 3]) !== null && _d !== void 0 ? _d : this.w;
         return this;
       }
     }, {
       key: "copy",
       value: function copy(vector) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
 
         this.x = (_a = vector.x) !== null && _a !== void 0 ? _a : this.x;
         this.y = (_b = vector.y) !== null && _b !== void 0 ? _b : this.y;
         if (this.hasOwnProperty('z')) this.z = (_c = vector.z) !== null && _c !== void 0 ? _c : this.z;
+        if (this.hasOwnProperty('w')) this.w = (_d = vector.w) !== null && _d !== void 0 ? _d : this.w;
         return this;
       }
     }, {
       key: "isPositive",
       value: function isPositive() {
-        return this.x >= 0 && this.y >= 0 && (!this.hasOwnProperty('z') || this.z >= 0) ? true : false;
+        return this.x >= 0 && this.y >= 0 && (!this.hasOwnProperty('z') || this.z >= 0) && (!this.hasOwnProperty('w') || this.w >= 0) ? true : false;
       }
     }, {
       key: "isEqualTo",
       value: function isEqualTo(scalar) {
-        return this.x === scalar && this.y === scalar && (!this.hasOwnProperty('z') || this.z === scalar) ? true : false;
+        return this.x === scalar && this.y === scalar && (!this.hasOwnProperty('z') || this.z === scalar) && (!this.hasOwnProperty('w') || this.w === scalar) ? true : false;
       }
     }, {
       key: "isOrigin",
       value: function isOrigin() {
-        return this.x === 0 && this.y === 0 && (!this.hasOwnProperty('z') || this.z === 0) ? true : false;
+        return this.x === 0 && this.y === 0 && (!this.hasOwnProperty('z') || this.z === 0) && (!this.hasOwnProperty('w') || this.w === 0) ? true : false;
       }
     }, {
       key: "toArray",
@@ -604,9 +607,11 @@ var Type6 = (function (exports) {
     }, {
       key: "toString",
       value: function toString() {
-        var z = ')';
+        var z = '',
+            w = '';
         if (this.hasOwnProperty('z')) z = "; z = ".concat(this.z, ")");
-        return "(x = ".concat(this.x, "; y = ").concat(this.y).concat(z);
+        if (this.hasOwnProperty('w')) w = "; w = ".concat(this.w, ")");
+        return "(x = ".concat(this.x, "; y = ").concat(this.y).concat(z).concat(w, ")");
       }
     }, {
       key: "origin",
@@ -614,6 +619,7 @@ var Type6 = (function (exports) {
         this.x = 0.0;
         this.y = 0.0;
         if (this.hasOwnProperty('z')) this.z = 0.0;
+        if (this.hasOwnProperty('w')) this.w = 0.0;
         return this;
       }
     }, {
@@ -625,7 +631,7 @@ var Type6 = (function (exports) {
     }, {
       key: "getSquaredMagnitude",
       value: function getSquaredMagnitude() {
-        return Math.pow(this.x, 2) + Math.pow(this.y, 2) + (this.hasOwnProperty('z') ? Math.pow(this.z, 2) : 0);
+        return Math.pow(this.x, 2) + Math.pow(this.y, 2) + (this.hasOwnProperty('z') ? Math.pow(this.z, 2) : 0) + (this.hasOwnProperty('w') ? Math.pow(this.w, 2) : 0);
       }
     }, {
       key: "getDistance",
@@ -642,6 +648,7 @@ var Type6 = (function (exports) {
         this.x += vector.x;
         this.y += vector.y;
         if (this.hasOwnProperty('z')) this.z += vector.z;
+        if (this.hasOwnProperty('w')) this.w += vector.w;
         return this;
       }
     }, {
@@ -650,6 +657,7 @@ var Type6 = (function (exports) {
         this.x += vector.x * scalar;
         this.y += vector.y * scalar;
         if (this.hasOwnProperty('z')) this.z += vector.z * scalar;
+        if (this.hasOwnProperty('w')) this.w += vector.w * scalar;
         return this;
       }
     }, {
@@ -658,6 +666,7 @@ var Type6 = (function (exports) {
         this.x += scalar;
         this.y += scalar;
         if (this.hasOwnProperty('z')) this.z += scalar;
+        if (this.hasOwnProperty('w')) this.w += scalar;
         return this;
       }
     }, {
@@ -666,6 +675,7 @@ var Type6 = (function (exports) {
         this.x -= vector.x;
         this.y -= vector.y;
         if (this.hasOwnProperty('z')) this.z -= vector.z;
+        if (this.hasOwnProperty('w')) this.w -= vector.w;
         return this;
       }
     }, {
@@ -674,6 +684,7 @@ var Type6 = (function (exports) {
         this.x -= vector.x * scalar;
         this.y -= vector.y * scalar;
         if (this.hasOwnProperty('z')) this.z -= vector.z * scalar;
+        if (this.hasOwnProperty('w')) this.w -= vector.w * scalar;
         return this;
       }
     }, {
@@ -682,6 +693,7 @@ var Type6 = (function (exports) {
         this.x -= scalar;
         this.y -= scalar;
         if (this.hasOwnProperty('z')) this.z -= scalar;
+        if (this.hasOwnProperty('w')) this.w -= scalar;
         return this;
       }
     }, {
@@ -690,6 +702,7 @@ var Type6 = (function (exports) {
         this.x *= vector.x;
         this.y *= vector.y;
         if (this.hasOwnProperty('z')) this.z *= vector.z;
+        if (this.hasOwnProperty('w')) this.w *= vector.w;
         return this;
       }
     }, {
@@ -698,6 +711,7 @@ var Type6 = (function (exports) {
         this.x *= vector.x * scalar;
         this.y *= vector.y * scalar;
         if (this.hasOwnProperty('z')) this.z *= vector.z * scalar;
+        if (this.hasOwnProperty('z')) this.w *= vector.w * scalar;
         return this;
       }
     }, {
@@ -706,6 +720,7 @@ var Type6 = (function (exports) {
         this.x *= scalar;
         this.y *= scalar;
         if (this.hasOwnProperty('z')) this.z *= scalar;
+        if (this.hasOwnProperty('w')) this.w *= scalar;
         return this;
       }
     }, {
@@ -714,6 +729,7 @@ var Type6 = (function (exports) {
         this.x /= vector.x;
         this.y /= vector.y;
         if (this.hasOwnProperty('z')) this.z /= vector.z;
+        if (this.hasOwnProperty('w')) this.w /= vector.w;
         return this;
       }
     }, {
@@ -722,6 +738,7 @@ var Type6 = (function (exports) {
         this.x /= vector.x * scalar;
         this.y /= vector.y * scalar;
         if (this.hasOwnProperty('z')) this.z /= vector.z * scalar;
+        if (this.hasOwnProperty('w')) this.w /= vector.w * scalar;
         return this;
       }
     }, {
@@ -730,6 +747,7 @@ var Type6 = (function (exports) {
         this.x /= scalar;
         this.y /= scalar;
         if (this.hasOwnProperty('z')) this.z /= scalar;
+        if (this.hasOwnProperty('w')) this.w /= scalar;
         return this;
       }
     }, {
@@ -738,6 +756,7 @@ var Type6 = (function (exports) {
         this.x *= 0.5;
         this.y *= 0.5;
         if (this.hasOwnProperty('z')) this.z *= 0.5;
+        if (this.hasOwnProperty('w')) this.w *= 0.5;
         return this;
       }
     }, {
@@ -746,6 +765,7 @@ var Type6 = (function (exports) {
         this.x = Math.max(this.x, vector.x);
         this.y = Math.max(this.y, vector.y);
         if (this.hasOwnProperty('z')) this.z = Math.max(this.z, vector.z);
+        if (this.hasOwnProperty('w')) this.w = Math.max(this.w, vector.w);
         return this;
       }
     }, {
@@ -754,6 +774,7 @@ var Type6 = (function (exports) {
         this.x = Math.min(this.x, vector.x);
         this.y = Math.min(this.y, vector.y);
         if (this.hasOwnProperty('z')) this.z = Math.min(this.z, vector.z);
+        if (this.hasOwnProperty('w')) this.w = Math.min(this.w, vector.w);
         return this;
       }
     }, {
@@ -762,6 +783,7 @@ var Type6 = (function (exports) {
         this.x = Math.max(this.x, scalar);
         this.y = Math.max(this.y, scalar);
         if (this.hasOwnProperty('z')) this.z = Math.max(this.z, scalar);
+        if (this.hasOwnProperty('w')) this.w = Math.max(this.w, scalar);
         return this;
       }
     }, {
@@ -770,6 +792,7 @@ var Type6 = (function (exports) {
         this.x = Math.min(this.x, scalar);
         this.y = Math.min(this.y, scalar);
         if (this.hasOwnProperty('z')) this.z = Math.min(this.z, scalar);
+        if (this.hasOwnProperty('w')) this.w = Math.min(this.w, scalar);
         return this;
       }
     }, {
@@ -785,6 +808,7 @@ var Type6 = (function (exports) {
         if (!axis || axis === 'x') this.x = Math.abs(this.x);
         if (!axis || axis === 'y') this.y = Math.abs(this.y);
         if (this.hasOwnProperty('z') && (!axis || axis === 'z')) this.z = Math.abs(this.z);
+        if (this.hasOwnProperty('w') && (!axis || axis === 'w')) this.w = Math.abs(this.w);
         return this;
       }
     }, {
@@ -793,12 +817,13 @@ var Type6 = (function (exports) {
         if (!axis || axis === 'x') this.x = -this.x;
         if (!axis || axis === 'y') this.y = -this.y;
         if (this.hasOwnProperty('z') && (!axis || axis === 'z')) this.z = -this.z;
+        if (this.hasOwnProperty('w') && (!axis || axis === 'w')) this.w = -this.w;
         return this;
       }
     }, {
       key: "dotProduct",
       value: function dotProduct(vector) {
-        return this.x * vector.x + this.y * vector.y + (this.hasOwnProperty('z') ? this.z * vector.z : 0);
+        return this.x * vector.x + this.y * vector.y + (this.hasOwnProperty('z') ? this.z * vector.z : 0) + (this.hasOwnProperty('w') ? this.w * vector.w : 0);
       }
     }]);
 
@@ -1126,6 +1151,73 @@ var Type6 = (function (exports) {
     return Vector3;
   }(Vector);
 
+  var Quaternion = /*#__PURE__*/function (_Vector) {
+    _inherits(Quaternion, _Vector);
+
+    var _super = _createSuper(Quaternion);
+
+    function Quaternion(x, y, z, w) {
+      var _this;
+
+      _classCallCheck(this, Quaternion);
+
+      _this = _super.call(this);
+      _this.x = 0.0;
+      _this.y = 0.0;
+      _this.z = 0.0;
+      _this.w = 0.0;
+
+      _this.setScalar(x, y, z, w);
+
+      return _this;
+    }
+
+    _createClass(Quaternion, [{
+      key: "conjugate",
+      value: function conjugate() {
+        this.x = -this.x;
+        this.y = -this.y;
+        this.z = -this.z;
+        return this;
+      }
+    }, {
+      key: "multiply",
+      value: function multiply(q) {
+        var qax = this.x,
+            qay = this.y,
+            qaz = this.z,
+            qaw = this.w;
+        var qbx = q.x,
+            qby = q.y,
+            qbz = q.z,
+            qbw = q.w;
+        this.x = qax * qbw + qaw * qbx + qay * qbz - qaz * qby;
+        this.y = qay * qbw + qaw * qby + qaz * qbx - qax * qbz;
+        this.z = qaz * qbw + qaw * qbz + qax * qby - qay * qbx;
+        this.w = qaw * qbw - qax * qbx - qay * qby - qaz * qbz;
+        return this;
+      }
+    }, {
+      key: "multiplyByVector",
+      value: function multiplyByVector(v) {
+        var qx = this.x,
+            qy = this.y,
+            qz = this.z,
+            qw = this.w;
+        var vx = v.x,
+            vy = v.y,
+            vz = v.z;
+        this.x = qw * vx + qy * vz - qz * vy;
+        this.y = qw * vy + qz * vx - qx * vz;
+        this.z = qw * vz + qx * vy - qy * vx;
+        this.w = -qx * vx - qy * vy - qz * vz;
+        return this.v;
+      }
+    }]);
+
+    return Quaternion;
+  }(Vector);
+
   var Matrix3x3 = /*#__PURE__*/function () {
     function Matrix3x3(x1, x2, x3, y1, y2, y3, t1, t2, t3) {
       _classCallCheck(this, Matrix3x3);
@@ -1441,6 +1533,7 @@ var Type6 = (function (exports) {
   exports.Matrix4x3 = Matrix4x3;
   exports.Matrix4x4 = Matrix4x4;
   exports.NumArray = NumArray;
+  exports.Quaternion = Quaternion;
   exports.Random = Random;
   exports.Rectangle = Rectangle;
   exports.Time = Time;

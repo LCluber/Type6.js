@@ -319,15 +319,17 @@ class Bezier {
 class Vector {
     constructor() {
     }
-    setScalar(x, y, z) {
+    setScalar(x, y, z, w) {
         this.x = x !== null && x !== void 0 ? x : this.x;
         this.y = y !== null && y !== void 0 ? y : this.y;
         if (this.hasOwnProperty('z'))
             this.z = z !== null && z !== void 0 ? z : this.z;
+        if (this.hasOwnProperty('w'))
+            this.w = w !== null && w !== void 0 ? w : this.w;
         return this;
     }
     setArray(array, offset) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         if (offset === undefined) {
             offset = 0;
         }
@@ -335,52 +337,66 @@ class Vector {
         this.y = (_b = array[offset + 1]) !== null && _b !== void 0 ? _b : this.y;
         if (this.hasOwnProperty('z'))
             this.z = (_c = array[offset + 2]) !== null && _c !== void 0 ? _c : this.z;
+        if (this.hasOwnProperty('w'))
+            this.w = (_d = array[offset + 3]) !== null && _d !== void 0 ? _d : this.w;
         return this;
     }
     copy(vector) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         this.x = (_a = vector.x) !== null && _a !== void 0 ? _a : this.x;
         this.y = (_b = vector.y) !== null && _b !== void 0 ? _b : this.y;
         if (this.hasOwnProperty('z'))
             this.z = (_c = vector.z) !== null && _c !== void 0 ? _c : this.z;
+        if (this.hasOwnProperty('w'))
+            this.w = (_d = vector.w) !== null && _d !== void 0 ? _d : this.w;
         return this;
     }
     isPositive() {
         return (this.x >= 0
             && this.y >= 0
-            && (!this.hasOwnProperty('z') || this.z >= 0)) ? true : false;
+            && (!this.hasOwnProperty('z') || this.z >= 0)
+            && (!this.hasOwnProperty('w') || this.w >= 0)) ? true : false;
     }
     isEqualTo(scalar) {
         return (this.x === scalar
             && this.y === scalar
-            && (!this.hasOwnProperty('z') || this.z === scalar)) ? true : false;
+            && (!this.hasOwnProperty('z') || this.z === scalar)
+            && (!this.hasOwnProperty('w') || this.w === scalar)) ? true : false;
     }
     isOrigin() {
         return (this.x === 0
             && this.y === 0
-            && (!this.hasOwnProperty('z') || this.z === 0)) ? true : false;
+            && (!this.hasOwnProperty('z') || this.z === 0)
+            && (!this.hasOwnProperty('w') || this.w === 0)) ? true : false;
     }
     toArray() {
         return Object.values(this);
     }
     toString() {
-        let z = ')';
+        let z = '', w = '';
         if (this.hasOwnProperty('z'))
             z = `; z = ${this.z})`;
-        return `(x = ${this.x}; y = ${this.y}${z}`;
+        if (this.hasOwnProperty('w'))
+            w = `; w = ${this.w})`;
+        return `(x = ${this.x}; y = ${this.y}${z}${w})`;
     }
     origin() {
         this.x = 0.0;
         this.y = 0.0;
         if (this.hasOwnProperty('z'))
             this.z = 0.0;
+        if (this.hasOwnProperty('w'))
+            this.w = 0.0;
         return this;
     }
     getMagnitude(square = false) {
         return square ? this.getSquaredMagnitude() : Math.sqrt(this.getSquaredMagnitude());
     }
     getSquaredMagnitude() {
-        return Math.pow(this.x, 2) + Math.pow(this.y, 2) + (this.hasOwnProperty('z') ? Math.pow(this.z, 2) : 0);
+        return Math.pow(this.x, 2) +
+            Math.pow(this.y, 2) +
+            (this.hasOwnProperty('z') ? Math.pow(this.z, 2) : 0) +
+            (this.hasOwnProperty('w') ? Math.pow(this.w, 2) : 0);
     }
     getDistance(vector, square = false) {
         this.subtract(vector);
@@ -393,6 +409,8 @@ class Vector {
         this.y += vector.y;
         if (this.hasOwnProperty('z'))
             this.z += vector.z;
+        if (this.hasOwnProperty('w'))
+            this.w += vector.w;
         return this;
     }
     addScaledVector(vector, scalar) {
@@ -400,6 +418,8 @@ class Vector {
         this.y += vector.y * scalar;
         if (this.hasOwnProperty('z'))
             this.z += vector.z * scalar;
+        if (this.hasOwnProperty('w'))
+            this.w += vector.w * scalar;
         return this;
     }
     addScalar(scalar) {
@@ -407,6 +427,8 @@ class Vector {
         this.y += scalar;
         if (this.hasOwnProperty('z'))
             this.z += scalar;
+        if (this.hasOwnProperty('w'))
+            this.w += scalar;
         return this;
     }
     subtract(vector) {
@@ -414,6 +436,8 @@ class Vector {
         this.y -= vector.y;
         if (this.hasOwnProperty('z'))
             this.z -= vector.z;
+        if (this.hasOwnProperty('w'))
+            this.w -= vector.w;
         return this;
     }
     subtractScaledVector(vector, scalar) {
@@ -421,6 +445,8 @@ class Vector {
         this.y -= vector.y * scalar;
         if (this.hasOwnProperty('z'))
             this.z -= vector.z * scalar;
+        if (this.hasOwnProperty('w'))
+            this.w -= vector.w * scalar;
         return this;
     }
     subtractScalar(scalar) {
@@ -428,6 +454,8 @@ class Vector {
         this.y -= scalar;
         if (this.hasOwnProperty('z'))
             this.z -= scalar;
+        if (this.hasOwnProperty('w'))
+            this.w -= scalar;
         return this;
     }
     multiply(vector) {
@@ -435,6 +463,8 @@ class Vector {
         this.y *= vector.y;
         if (this.hasOwnProperty('z'))
             this.z *= vector.z;
+        if (this.hasOwnProperty('w'))
+            this.w *= vector.w;
         return this;
     }
     multiplyScaledVector(vector, scalar) {
@@ -442,6 +472,8 @@ class Vector {
         this.y *= vector.y * scalar;
         if (this.hasOwnProperty('z'))
             this.z *= vector.z * scalar;
+        if (this.hasOwnProperty('z'))
+            this.w *= vector.w * scalar;
         return this;
     }
     scale(scalar) {
@@ -449,6 +481,8 @@ class Vector {
         this.y *= scalar;
         if (this.hasOwnProperty('z'))
             this.z *= scalar;
+        if (this.hasOwnProperty('w'))
+            this.w *= scalar;
         return this;
     }
     divide(vector) {
@@ -456,6 +490,8 @@ class Vector {
         this.y /= vector.y;
         if (this.hasOwnProperty('z'))
             this.z /= vector.z;
+        if (this.hasOwnProperty('w'))
+            this.w /= vector.w;
         return this;
     }
     divideScaledVector(vector, scalar) {
@@ -463,6 +499,8 @@ class Vector {
         this.y /= vector.y * scalar;
         if (this.hasOwnProperty('z'))
             this.z /= vector.z * scalar;
+        if (this.hasOwnProperty('w'))
+            this.w /= vector.w * scalar;
         return this;
     }
     divideScalar(scalar) {
@@ -470,6 +508,8 @@ class Vector {
         this.y /= scalar;
         if (this.hasOwnProperty('z'))
             this.z /= scalar;
+        if (this.hasOwnProperty('w'))
+            this.w /= scalar;
         return this;
     }
     halve() {
@@ -477,6 +517,8 @@ class Vector {
         this.y *= 0.5;
         if (this.hasOwnProperty('z'))
             this.z *= 0.5;
+        if (this.hasOwnProperty('w'))
+            this.w *= 0.5;
         return this;
     }
     max(vector) {
@@ -484,6 +526,8 @@ class Vector {
         this.y = Math.max(this.y, vector.y);
         if (this.hasOwnProperty('z'))
             this.z = Math.max(this.z, vector.z);
+        if (this.hasOwnProperty('w'))
+            this.w = Math.max(this.w, vector.w);
         return this;
     }
     min(vector) {
@@ -491,6 +535,8 @@ class Vector {
         this.y = Math.min(this.y, vector.y);
         if (this.hasOwnProperty('z'))
             this.z = Math.min(this.z, vector.z);
+        if (this.hasOwnProperty('w'))
+            this.w = Math.min(this.w, vector.w);
         return this;
     }
     maxScalar(scalar) {
@@ -498,6 +544,8 @@ class Vector {
         this.y = Math.max(this.y, scalar);
         if (this.hasOwnProperty('z'))
             this.z = Math.max(this.z, scalar);
+        if (this.hasOwnProperty('w'))
+            this.w = Math.max(this.w, scalar);
         return this;
     }
     minScalar(scalar) {
@@ -505,6 +553,8 @@ class Vector {
         this.y = Math.min(this.y, scalar);
         if (this.hasOwnProperty('z'))
             this.z = Math.min(this.z, scalar);
+        if (this.hasOwnProperty('w'))
+            this.w = Math.min(this.w, scalar);
         return this;
     }
     normalize() {
@@ -520,6 +570,8 @@ class Vector {
             this.y = Math.abs(this.y);
         if (this.hasOwnProperty('z') && (!axis || axis === 'z'))
             this.z = Math.abs(this.z);
+        if (this.hasOwnProperty('w') && (!axis || axis === 'w'))
+            this.w = Math.abs(this.w);
         return this;
     }
     opposite(axis) {
@@ -529,10 +581,15 @@ class Vector {
             this.y = -this.y;
         if (this.hasOwnProperty('z') && (!axis || axis === 'z'))
             this.z = -this.z;
+        if (this.hasOwnProperty('w') && (!axis || axis === 'w'))
+            this.w = -this.w;
         return this;
     }
     dotProduct(vector) {
-        return this.x * vector.x + this.y * vector.y + (this.hasOwnProperty('z') ? this.z * vector.z : 0);
+        return this.x * vector.x +
+            this.y * vector.y +
+            (this.hasOwnProperty('z') ? this.z * vector.z : 0) +
+            (this.hasOwnProperty('w') ? this.w * vector.w : 0);
     }
 }
 
@@ -748,6 +805,41 @@ class Vector3 extends Vector {
         this.y = z * v.x - x * v.z;
         this.z = x * v.y - y * v.x;
         return this;
+    }
+}
+
+class Quaternion extends Vector {
+    constructor(x, y, z, w) {
+        super();
+        this.x = 0.0;
+        this.y = 0.0;
+        this.z = 0.0;
+        this.w = 0.0;
+        this.setScalar(x, y, z, w);
+    }
+    conjugate() {
+        this.x = -this.x;
+        this.y = -this.y;
+        this.z = -this.z;
+        return this;
+    }
+    multiply(q) {
+        const qax = this.x, qay = this.y, qaz = this.z, qaw = this.w;
+        const qbx = q.x, qby = q.y, qbz = q.z, qbw = q.w;
+        this.x = qax * qbw + qaw * qbx + qay * qbz - qaz * qby;
+        this.y = qay * qbw + qaw * qby + qaz * qbx - qax * qbz;
+        this.z = qaz * qbw + qaw * qbz + qax * qby - qay * qbx;
+        this.w = qaw * qbw - qax * qbx - qay * qby - qaz * qbz;
+        return this;
+    }
+    multiplyByVector(v) {
+        const qx = this.x, qy = this.y, qz = this.z, qw = this.w;
+        const vx = v.x, vy = v.y, vz = v.z;
+        this.x = qw * vx + qy * vz - qz * vy;
+        this.y = qw * vy + qz * vx - qx * vz;
+        this.z = qw * vz + qx * vy - qy * vx;
+        this.w = -qx * vx - qy * vy - qz * vz;
+        return this.v;
     }
 }
 
@@ -990,6 +1082,7 @@ exports.Matrix3x3 = Matrix3x3;
 exports.Matrix4x3 = Matrix4x3;
 exports.Matrix4x4 = Matrix4x4;
 exports.NumArray = NumArray;
+exports.Quaternion = Quaternion;
 exports.Random = Random;
 exports.Rectangle = Rectangle;
 exports.Time = Time;

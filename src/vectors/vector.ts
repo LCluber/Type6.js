@@ -3,6 +3,7 @@ export interface Vector {
   'x': number;
   'y': number;
   'z'?: number;
+  'w'?: number;
   [key: string]: any;
 }
 
@@ -12,11 +13,17 @@ export class Vector {
 
   }
 
-  public setScalar(x? : number | null, y?: number | null, z?: number | null): any {
+  public setScalar( x?: number | null, 
+                    y?: number | null, 
+                    z?: number | null,
+                    w?: number | null
+                  ): any {
     this.x = x ?? this.x;
     this.y = y ?? this.y;
     if (this.hasOwnProperty('z'))
       this.z = z ?? this.z;
+    if (this.hasOwnProperty('w'))
+      this.w = w ?? this.w;
 
     return this;
   }
@@ -29,6 +36,8 @@ export class Vector {
     this.y = array[ offset + 1 ] ?? this.y;
     if (this.hasOwnProperty('z'))
       this.z = array[offset + 2] ?? this.z;
+    if (this.hasOwnProperty('w'))
+      this.w = array[offset + 3] ?? this.w;
 
     return this;
   }
@@ -38,6 +47,8 @@ export class Vector {
     this.y = vector.y ?? this.y;
     if (this.hasOwnProperty('z'))
       this.z = vector.z ?? this.z;
+    if (this.hasOwnProperty('w'))
+      this.w = vector.w ?? this.w;
 
     return this;
   }
@@ -46,6 +57,7 @@ export class Vector {
     return (   this.x >= 0 
             && this.y >= 0 
             && (!this.hasOwnProperty('z') || this.z as number >= 0 )
+            && (!this.hasOwnProperty('w') || this.w as number >= 0 )
            ) ? true : false;
   }
 
@@ -54,6 +66,7 @@ export class Vector {
     return (   this.x === scalar 
             && this.y === scalar 
             && (!this.hasOwnProperty('z') || this.z as number === scalar )
+            && (!this.hasOwnProperty('w') || this.w as number === scalar )
            ) ? true : false;
   }
 
@@ -62,6 +75,7 @@ export class Vector {
     return (   this.x === 0 
             && this.y === 0 
             && (!this.hasOwnProperty('z') || this.z as number === 0 )
+            && (!this.hasOwnProperty('w') || this.w as number === 0 )
            ) ? true : false;
   }
 
@@ -70,10 +84,12 @@ export class Vector {
   }
 
   public toString(): string {
-    let z = ')';
+    let z = '', w = '';
     if (this.hasOwnProperty('z'))
       z = `; z = ${this.z})`;
-    return `(x = ${this.x}; y = ${this.y}${z}`;
+    if (this.hasOwnProperty('w'))
+      w = `; w = ${this.w})`;
+    return `(x = ${this.x}; y = ${this.y}${z}${w})`;
   }
 
   public origin(): any {
@@ -81,6 +97,8 @@ export class Vector {
     this.y = 0.0;
     if (this.hasOwnProperty('z'))
       this.z = 0.0;
+    if (this.hasOwnProperty('w'))
+      this.w = 0.0;
 
     return this;
   }
@@ -90,7 +108,10 @@ export class Vector {
   }
 
   private getSquaredMagnitude(): number {
-    return this.x ** 2 + this.y ** 2 + (this.hasOwnProperty('z') ? (this.z as number) ** 2 : 0);
+    return  this.x ** 2 + 
+            this.y ** 2 + 
+            (this.hasOwnProperty('z') ? (this.z as number) ** 2 : 0) +
+            (this.hasOwnProperty('w') ? (this.w as number) ** 2 : 0);
   }
 
   public getDistance(vector: any, square: boolean = false): number {
@@ -105,6 +126,8 @@ export class Vector {
     this.y += vector.y;
     if (this.hasOwnProperty('z'))
       (this.z as number) += vector.z;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) += vector.w;
     
     return this;
   }
@@ -114,6 +137,8 @@ export class Vector {
     this.y += vector.y * scalar;
     if (this.hasOwnProperty('z'))
       (this.z as number) += vector.z * scalar;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) += vector.w * scalar;
 
     return this;
   }
@@ -123,7 +148,9 @@ export class Vector {
     this.y += scalar;
     if (this.hasOwnProperty('z'))
       (this.z as number) += scalar;
-    
+    if (this.hasOwnProperty('w'))
+      (this.w as number) += scalar;
+
     return this;
   }
 
@@ -132,6 +159,8 @@ export class Vector {
     this.y -= vector.y;
     if (this.hasOwnProperty('z'))
       (this.z as number) -= vector.z;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) -= vector.w;
     
     return this;
   }
@@ -141,6 +170,8 @@ export class Vector {
     this.y -= vector.y * scalar;
     if (this.hasOwnProperty('z'))
       (this.z as number) -= vector.z * scalar;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) -= vector.w * scalar;
 
     return this;
   }
@@ -150,6 +181,8 @@ export class Vector {
     this.y -= scalar;
     if (this.hasOwnProperty('z'))
       (this.z as number) -= scalar;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) -= scalar;
     
     return this;
   }
@@ -160,6 +193,8 @@ export class Vector {
     this.y *= vector.y;
     if (this.hasOwnProperty('z'))
       (this.z as number) *= vector.z;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) *= vector.w;
     
     return this;
   }
@@ -169,6 +204,8 @@ export class Vector {
     this.y *= vector.y * scalar;
     if (this.hasOwnProperty('z'))
       (this.z as number) *= vector.z * scalar;
+    if (this.hasOwnProperty('z'))
+      (this.w as number) *= vector.w * scalar;
 
     return this;
   }
@@ -178,6 +215,8 @@ export class Vector {
     this.y *= scalar;
     if (this.hasOwnProperty('z'))
       (this.z as number) *= scalar;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) *= scalar;
     
     return this; 
   }
@@ -187,6 +226,8 @@ export class Vector {
     this.y /= vector.y;
     if (this.hasOwnProperty('z'))
       (this.z as number) /= vector.z;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) /= vector.w;
     
     return this;
   }
@@ -196,6 +237,8 @@ export class Vector {
     this.y /= vector.y * scalar;
     if (this.hasOwnProperty('z'))
       (this.z as number) /= vector.z * scalar;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) /= vector.w * scalar;
 
     return this;
   }
@@ -205,6 +248,8 @@ export class Vector {
     this.y /= scalar;
     if (this.hasOwnProperty('z'))
       (this.z as number) /= scalar;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) /= scalar;
     
     return this;
   }
@@ -214,6 +259,8 @@ export class Vector {
     this.y *= 0.5;
     if (this.hasOwnProperty('z'))
       (this.z as number) *= 0.5;
+    if (this.hasOwnProperty('w'))
+      (this.w as number) *= 0.5;
     
     return this;
   }
@@ -223,6 +270,8 @@ export class Vector {
     this.y = Math.max( this.y, vector.y );
     if (this.hasOwnProperty('z'))
       this.z = Math.max( this.z as number, vector.z );
+    if (this.hasOwnProperty('w'))
+      this.w = Math.max( this.w as number, vector.w );
     
     return this;
   }
@@ -232,6 +281,8 @@ export class Vector {
     this.y = Math.min( this.y, vector.y );
     if (this.hasOwnProperty('z'))
       this.z = Math.min( this.z as number, vector.z );
+    if (this.hasOwnProperty('w'))
+      this.w = Math.min( this.w as number, vector.w );
     
     return this;
   }
@@ -241,6 +292,8 @@ export class Vector {
     this.y = Math.max( this.y, scalar );
     if (this.hasOwnProperty('z'))
       this.z = Math.max( this.z as number, scalar );
+    if (this.hasOwnProperty('w'))
+      this.w = Math.max( this.w as number, scalar );
     
     return this;
   }
@@ -250,6 +303,8 @@ export class Vector {
     this.y = Math.min( this.y, scalar );
     if (this.hasOwnProperty('z'))
       this.z = Math.min( this.z as number, scalar );
+    if (this.hasOwnProperty('w'))
+      this.w = Math.min( this.w as number, scalar );
     
     return this;
   }
@@ -259,34 +314,41 @@ export class Vector {
     if( length && length != 1)
       this.scale(1/length);
 
-    return this
+    return this;
   }
 
-  public absolute(axis?: 'x' | 'y' | 'z'): any {
+  public absolute(axis?: 'x' | 'y' | 'z' | 'w'): any {
     if (!axis || axis === 'x')
       this.x = Math.abs(this.x);
     if (!axis || axis === 'y')
       this.y = Math.abs(this.y);
     if (this.hasOwnProperty('z') && (!axis || axis === 'z'))
       this.z = Math.abs(this.z as number);
+    if (this.hasOwnProperty('w') && (!axis || axis === 'w'))
+      this.w = Math.abs(this.w as number);
        
-    return this
+    return this;
   }
 
-  public opposite(axis?: 'x' | 'y' | 'z'): any {
+  public opposite(axis?: 'x' | 'y' | 'z' | 'w'): any {
     if (!axis || axis === 'x')
       this.x = -this.x;
     if (!axis || axis === 'y')
       this.y = -this.y;
     if (this.hasOwnProperty('z') && (!axis || axis === 'z'))
       this.z = -(this.z as number);
+    if (this.hasOwnProperty('w') && (!axis || axis === 'w'))
+      this.w = -(this.w as number);
        
-    return this
+    return this;
     
   }
 
   public dotProduct(vector: any): number { //scalar product
-    return this.x * vector.x + this.y * vector.y + (this.hasOwnProperty('z') ? (this.z as number) * vector.z : 0);
+    return  this.x * vector.x + 
+            this.y * vector.y + 
+            (this.hasOwnProperty('z') ? (this.z as number) * vector.z : 0) + 
+            (this.hasOwnProperty('w') ? (this.w as number) * vector.w : 0);
   }
 
 };
