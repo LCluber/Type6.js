@@ -23,6 +23,10 @@
  *
  * https://github.com/LCluber/Type6.js
  */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 class Utils {
     static round(x, decimals) {
         decimals = Math.pow(10, decimals);
@@ -980,4 +984,16 @@ class Matrix4x4 {
     }
 }
 
-export { Bezier, Circle, Matrix3x3, Matrix4x3, Matrix4x4, NumArray, Random, Rectangle, Time, Trigonometry, Utils, Vector2, Vector3 };
+exports.Bezier = Bezier;
+exports.Circle = Circle;
+exports.Matrix3x3 = Matrix3x3;
+exports.Matrix4x3 = Matrix4x3;
+exports.Matrix4x4 = Matrix4x4;
+exports.NumArray = NumArray;
+exports.Random = Random;
+exports.Rectangle = Rectangle;
+exports.Time = Time;
+exports.Trigonometry = Trigonometry;
+exports.Utils = Utils;
+exports.Vector2 = Vector2;
+exports.Vector3 = Vector3;

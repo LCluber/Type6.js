@@ -1,3 +1,45 @@
+Version 3.0.0 (May 18th 2021)
+-----------------------------
+ * Vector class:
+    * Fix Vector opposite method
+    * improved performances
+ * Vector2 class:
+    * Add setScalar(), setArray(), isEqualTo(), setRadian(), setDegree(), setMinAxis(), setMaxAxis() methods
+    * Delete set(), clone(), setFromArray() and setFromAngle() methods
+    * opposite() and absolute() methods now accept an axis name as parameter to set only this axis.
+ * Vector3 class:
+    * Add setScalar(), setArray() and isEqualTo() method
+    * Delete set(), setFromArray() and clone() methods
+ * Circle class:
+    * First parameter of set() method and constructor is now Radius.
+    * Delete set(), setPositionXY() and setPositionFromVector() methods 
+    * Add setPosition(), setRadius() and setDiameter() methods
+ * Rectangle class:
+    * First parameters of constructor are now width and height.
+    * delete setPositionXY(), setPositionX(), setPositionFromVector() and setPositionY() methods
+    * delete set(), setSizeXY(), setSizeX(), setSizeFromVector() and setSizeY() methods
+
+Version 2.2.0 (September 06th 2020)
+-----------------------------
+ * Export Type6 as CommonJS module
+ * Update Typescript to version 4
+ * Automated Unit tests with Jest
+
+Version 2.1.1 (August 30th 2020)
+-----------------------------
+ * Smaller package size
+ * Vector Classes refactor
+
+Version 2.1.0 (Augulst 29th 2020)
+-----------------------------
+ * Vector2 and Vector3 classes: 
+    * delete setFromArray() method
+
+Version 2.0.1 (May 13th 2020)
+-----------------------------
+ * Matrix4x3 class:
+    * fix lookAtRH() method in 
+
 Version 2.0.0 (May 09th 2020)
 -----------------------------
  * New Matrix3x3 class

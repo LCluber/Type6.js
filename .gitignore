@@ -1,9 +1,6 @@
 
 node_modules/
-website/sass/build/
 build/
-.sass-cache/
+dev/jest/coverage/
 .tscache/
 npm-debug.log
-firebase-debug.log
-.firebase

@@ -8,7 +8,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "allowSyntheticDefaultImports": true,
@@ -19,7 +19,7 @@
     "declaration":true,
     "declarationDir":"build/es6/",
     "outDir":"build/es6/",
-    "rootDir":"src/ts/"
+    "rootDir":"src/"
   },
   "exclude": [
     "node_modules"

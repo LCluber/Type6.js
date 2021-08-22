@@ -1,7 +1,17 @@
+[![License: MIT](https://img.shields.io/npm/l/@lcluber/type6js.svg)](https://opensource.org/licenses/MIT)
+[![npm version](https://badge.fury.io/js/%40lcluber%2Ftype6js.svg)](https://www.npmjs.com/package/@lcluber/type6js)
+[![minified size](https://img.shields.io/bundlephobia/min/@lcluber/type6js)](https://www.npmjs.com/package/@lcluber/type6js)
+
 ## Synopsis
 
 [Type6.js](http://type6js.lcluber.com) is an open source mathematics library written in TypeScript.
 Vectors, matrices, trigonometry, bezier curves, lerp, random distribution and so on.
+
+- No dependency
+- Very lightweight
+- Thoroughly tested
+- Works in browsers and Node.js
+- Old browsers support (IE9)
 
 ## Motivation
 
@@ -9,22 +19,21 @@ The main purpose of this library is to provide a comprehensive tool for all proj
 
 ## Installation
 
+### NPM
+
 ```bash
 $ npm install @lcluber/type6js
 ```
-Or download it **[here](http://type6js.lcluber.com/#download)**.
 
-## Demo
+### Yarn
 
-See a basic example **[here](http://type6js.lcluber.com/#example)**.
+```bash
+$ yarn add @lcluber/type6js
+```
 
 ## API Reference
 
-Read the documentation **[here](http://type6js.lcluber.com/doc/)**.
-
-## Tests
-
-No tests to run yet
+Read the documentation **[here](http://type6js.lcluber.com/installation.html)**.
 
 ## Contributors
 

@@ -39,46 +39,38 @@ export declare class Circle {
     private _radius;
     private _diameter;
     readonly shape: 'circle';
-    constructor(positionX: number, positionY: number, radius: number);
+    constructor(radius: number, positionX: number, positionY: number);
     set radius(radius: number);
     get radius(): number;
     set diameter(diameter: number);
     get diameter(): number;
     clone(): Circle;
     copy(circle: Circle): Circle;
-    set(positionX: number, positionY: number, radius: number): Circle;
-    setPositionXY(positionX: number, positionY: number): Circle;
-    setPositionFromVector(position: Vector2): Circle;
+    setPosition(positionX: number, positionY: number): this;
+    setRadius(radius: number): this;
+    setDiameter(diameter: number): this;
     scale(scalar: number): Circle;
     isIn(v: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
 }
 
+
 export declare class Rectangle {
     position: Vector2;
-    topLeftCorner: Vector2;
-    bottomRightCorner: Vector2;
+    topLeftCorner: Vector;
+    bottomRightCorner: Vector;
     size: Vector2;
     halfSize: Vector2;
     readonly shape: 'aabb';
-    constructor(positionX: number, positionY: number, sizeX: number, sizeY: number);
+    constructor(width: number, height: number, positionX: number, positionY: number);
     clone(): Rectangle;
     copy(rectangle: Rectangle): Rectangle;
-    set(positionX: number, positionY: number, sizeX: number, sizeY: number): Rectangle;
-    setPositionX(x: number): Rectangle;
-    setPositionY(y: number): Rectangle;
-    private setPosition;
-    setPositionXY(positionX: number, positionY: number): Rectangle;
-    setPositionFromVector(position: Vector2): Rectangle;
-    setSizeX(width: number): Rectangle;
-    setSizeY(height: number): Rectangle;
-    private setSize;
-    setSizeXY(width: number, height: number): Rectangle;
-    setSizeFromVector(size: Vector2): Rectangle;
-    private setCorners;
-    private setHalfSize;
+    setPosition(positionX: number, positionY: number): void;
+    setSize(width: number, height: number): void;
     isIn(vector: Vector2): boolean;
     draw(context: CanvasRenderingContext2D, fillColor: string, strokeColor: string, strokeWidth: number): void;
+    private setCorners;
+    private setHalfSize;
 }
 
 export declare class Matrix3x3 {
@@ -131,6 +123,20 @@ export declare class Matrix4x4 {
     multiply(matrix4x4: Matrix4x4): Matrix4x4;
     perspective(fovy: number, aspect: number, znear: number, zfar: number): Matrix4x4;
     orthographic(left: number, right: number, top: number, bottom: number, near: number, far: number): Matrix4x4;
+}
+
+export declare class Quaternion {
+    angle: number;
+    vector: Vector3;
+    private vCv1;
+    private vCv2;
+    private v;
+    constructor(angle: number, vector: Vector3);
+    toString(): string;
+    copy(q: Quaternion): Quaternion;
+    conjugate(): Quaternion;
+    multiply(q: Quaternion): Quaternion;
+    multiplyVector(vector: Vector3): Vector3;
 }
 export declare class Random {
     static float(min: number, max: number): number;
@@ -188,9 +194,6 @@ export declare class Trigonometry {
 
 
 
-
-export declare type AxisNames2d = 'x' | 'y';
-export declare type AxisNames3d = AxisNames2d & 'z';
 export declare class Utils {
     static round(x: number, decimals: number): number;
     static floor(x: number, decimals: number): number;
@@ -207,93 +210,74 @@ export declare class Utils {
     static isIn(x: number, min: number, max: number): boolean;
     static isOut(x: number, min: number, max: number): boolean;
 }
+export interface Vector {
+    'x': number;
+    'y': number;
+    'z'?: number;
+    [key: string]: any;
+}
+export declare class Vector {
+    constructor();
+    setScalar(x?: number | null, y?: number | null, z?: number | null): any;
+    setArray(array: number[], offset?: number): any;
+    copy(vector: Vector): any;
+    isPositive(): boolean;
+    isEqualTo(scalar: number): boolean;
+    isOrigin(): boolean;
+    toArray(): number[];
+    toString(): string;
+    origin(): any;
+    getMagnitude(square?: boolean): number;
+    private getSquaredMagnitude;
+    getDistance(vector: any, square?: boolean): number;
+    add(vector: any): any;
+    addScaledVector(vector: any, scalar: number): any;
+    addScalar(scalar: number): any;
+    subtract(vector: any): any;
+    subtractScaledVector(vector: any, scalar: number): any;
+    subtractScalar(scalar: number): any;
+    multiply(vector: any): any;
+    multiplyScaledVector(vector: any, scalar: number): any;
+    scale(scalar: number): any;
+    divide(vector: any): any;
+    divideScaledVector(vector: any, scalar: number): any;
+    divideScalar(scalar: number): any;
+    halve(): any;
+    max(vector: any): any;
+    min(vector: any): any;
+    maxScalar(scalar: number): any;
+    minScalar(scalar: number): any;
+    normalize(): any;
+    absolute(axis?: 'x' | 'y' | 'z'): any;
+    opposite(axis?: 'x' | 'y' | 'z'): any;
+    dotProduct(vector: any): number;
+}
 
 
-export declare class Vector2 {
+export declare class Vector2 extends Vector {
     x: number;
     y: number;
     constructor(x?: number, y?: number);
-    isOrigin(): boolean;
-    isPositive(): boolean;
-    setFromArray(array: number[], offset?: number): Vector2;
-    toArray(): number[];
-    toString(): string;
-    set(x: number, y: number): Vector2;
+    setRadian(angle: number): Vector2;
+    setDegree(angle: number): Vector2;
+    setMinAxis(scalar: number): Vector2;
+    setMaxAxis(scalar: number): Vector2;
+    setOppositeAxis(axis: 'x' | 'y', value: number): Vector2;
     clone(): Vector2;
-    copy(v: Vector2): Vector2;
-    origin(): Vector2;
-    setFromAngle(angle: number): Vector2;
-    getAngle(): number;
-    getMagnitude(square?: boolean): number;
-    private getSquaredMagnitude;
-    getDistance(v: Vector2, square?: boolean): number;
+    getAngle(): number | false;
     quadraticBezier(p0: Vector2, p1: Vector2, p2: Vector2, t: number): Vector2;
     cubicBezier(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: number): Vector2;
-    add(v: Vector2): Vector2;
-    addScalar(scalar: number): Vector2;
-    addScaledVector(v: Vector2, scalar: number): Vector2;
-    subtract(v: Vector2): Vector2;
-    subtractScalar(scalar: number): Vector2;
-    subtractScaledVector(v: Vector2, scalar: number): Vector2;
-    scale(value: number): Vector2;
-    multiply(v: Vector2): Vector2;
-    multiplyScaledVector(v: Vector2, scalar: number): Vector2;
-    divide(v: Vector2): Vector2;
-    divideScaledVector(v: Vector2, scalar: number): Vector2;
-    halve(): Vector2;
-    max(v: Vector2): Vector2;
-    min(v: Vector2): Vector2;
-    maxScalar(scalar: number): Vector2;
-    minScalar(scalar: number): Vector2;
-    getMaxAxis(): AxisNames2d;
-    getMinAxis(): AxisNames2d;
-    setOppositeAxis(axis: AxisNames2d, value: number): Vector2;
-    normalize(): Vector2;
-    absolute(): Vector2;
-    opposite(): Vector2;
+    getMaxAxis(): 'x' | 'y';
+    getMinAxis(): 'x' | 'y';
     clamp(rectangle: Rectangle): Vector2;
     lerp(min: Vector2, max: Vector2, amount: number): Vector2;
-    dotProduct(v: Vector2): number;
 }
-export interface Vector3 {
-    [key: string]: any;
-}
-export declare class Vector3 {
+
+export declare class Vector3 extends Vector {
     x: number;
     y: number;
     z: number;
     constructor(x?: number, y?: number, z?: number);
-    isOrigin(): boolean;
-    isPositive(): boolean;
-    setFromArray(array: number[], offset?: number): Vector3;
-    toArray(): number[];
-    toString(): string;
-    set(x: number, y: number, z: number): Vector3;
     clone(): Vector3;
-    copy(v: Vector3): Vector3;
-    origin(): Vector3;
-    getMagnitude(square?: boolean): number;
-    private getSquaredMagnitude;
-    getDistance(v: Vector3, square?: boolean): number;
-    add(v: Vector3): Vector3;
-    addScalar(scalar: number): Vector3;
-    addScaledVector(v: Vector3, scalar: number): Vector3;
-    subtract(v: Vector3): Vector3;
-    subtractScalar(scalar: number): Vector3;
-    subtractScaledVector(v: Vector3, scalar: number): Vector3;
-    scale(value: number): Vector3;
-    multiply(v: Vector3): Vector3;
-    multiplyScaledVector(v: Vector3, scalar: number): Vector3;
-    divide(v: Vector3): Vector3;
-    divideScaledVector(v: Vector3, scalar: number): Vector3;
-    halve(): Vector3;
-    max(v: Vector3): Vector3;
-    min(v: Vector3): Vector3;
-    maxScalar(scalar: number): Vector3;
-    minScalar(scalar: number): Vector3;
-    normalize(): Vector3;
-    absolute(): Vector3;
-    opposite(): Vector3;
-    dotProduct(v: Vector3): number;
     cross(v: Vector3): Vector3;
 }
