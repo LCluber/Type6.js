@@ -1,14 +1,9 @@
 module.exports = function(grunt){
 
-  require('time-grunt')(grunt);
-
   var projectName = 'Type6';
   var projectNameLC = projectName.toLowerCase();
 
-
-  var srcDir          = 'src/';
   var compiledSrcDir  = 'build/';
-  var compiledES5Dir  = compiledSrcDir + 'es5/';
   var compiledES6Dir  = compiledSrcDir + 'es6/';
   var distDir         = 'dist/';
 
@@ -69,10 +64,8 @@ module.exports = function(grunt){
     }
   });
 
-  grunt.loadNpmTasks( 'grunt-contrib-clean' );
   grunt.loadNpmTasks( 'grunt-contrib-concat' );
   grunt.loadNpmTasks( 'grunt-strip-code' );
-  grunt.loadNpmTasks( 'grunt-tslint' );
 
   grunt.registerTask( 'lib',
                       'build the library in the dist/ folder',
